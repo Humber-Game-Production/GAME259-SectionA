@@ -13,6 +13,12 @@ class AGAME259AGameMode : public AGameModeBase
 
 public:
 	AGAME259AGameMode();
+
+	virtual void BeginPlay() override;
+	virtual void Tick(const float deltaTime) override;
+	void EndRound();
+
+	FTimerHandle timerHandle;
 };
 
 
