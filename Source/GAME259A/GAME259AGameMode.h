@@ -16,7 +16,18 @@ public:
 
 	virtual void BeginPlay() override;
 	virtual void Tick(const float deltaTime) override;
+	
+	UFUNCTION()
 	void EndRound();
+
+	UFUNCTION()
+	void SubtractTime();
+
+	UPROPERTY(EditAnywhere, Category = "Game Rules")
+	float timerTime;
+
+	UPROPERTY(EditAnywhere, Category = "Game Rules")
+	FString timeLeft;
 
 	FTimerHandle timerHandle;
 };
