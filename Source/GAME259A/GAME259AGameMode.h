@@ -21,6 +21,9 @@ public:
 	void EndRound();
 
 	UFUNCTION()
+	void Reset();
+
+	UFUNCTION()
 	void SubtractTime();
 
 	UPROPERTY(EditAnywhere, Category = "Game Rules")
@@ -28,6 +31,12 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Game Rules")
 	FString timeLeft;
+
+	UPROPERTY(EditAnywhere, Category = "Game Rules")
+	int maxRounds;
+
+	UPROPERTY(EditAnywhere, Category = "Game Rules")
+	int currentRound;
 
 	FTimerHandle timerHandle;
 };

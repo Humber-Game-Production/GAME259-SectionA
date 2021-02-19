@@ -20,6 +20,8 @@ AGAME259AGameMode::AGAME259AGameMode()
 	PrimaryActorTick.SetTickFunctionEnable(true);
 
 	timerTime = 5.f;
+	maxRounds = 5;
+	currentRound = maxRounds;
 }
 
 void AGAME259AGameMode::BeginPlay() {
@@ -39,14 +41,39 @@ void AGAME259AGameMode::Tick(const float deltaTime) {
 	}
 }
 
+//Resets all the actors in the rounds
+//Current only debug messages and a timer reset
+void AGAME259AGameMode::Reset() {
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Flags respawn."));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Players respawn."));
+	GetWorldTimerManager().SetTimer(timerHandle, this, &AGAME259AGameMode::EndRound, timerTime);
+}
+
 void AGAME259AGameMode::EndRound() {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Round over."));
+	//Displays the round that just finished
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Round " + FString::FromInt(currentRound) + " over" );
+
+	//Reduces the amount of rounds left
+	currentRound--;
+
+	//Prints out how many rounds are left
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::FromInt(currentRound) + " rounds remaining");
+
+	//Checks to see if a win condition is met
+	if (currentRound == 0) {
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Game ends."));
+	}
+	else
+	{
+		//Intermission? (pause)
+
+		Reset();
+	}
+
 }
 
 void AGAME259AGameMode::SubtractTime() {
 	if (GetWorldTimerManager().TimerExists(timerHandle)) {
 		GetWorldTimerManager().SetTimer(timerHandle, this, &AGAME259AGameMode::EndRound, GetWorldTimerManager().GetTimerRemaining(timerHandle) - 1);
 	}
-
-	
 }
