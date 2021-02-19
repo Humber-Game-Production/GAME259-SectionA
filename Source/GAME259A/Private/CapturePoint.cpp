@@ -11,7 +11,6 @@ ACapturePoint::ACapturePoint()
 	captureCollisionComp = CreateDefaultSubobject<USphereComponent>(TEXT("CaptureComp"));
 	captureCollisionComp->InitSphereRadius(40.0f);
 	captureCollisionComp->BodyInstance.SetCollisionProfileName("WorldDynamic");
-	captureCollisionComp->OnComponentBeginOverlap.AddDynamic(this, &ACapturePoint::OnHit);
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 	RootComponent = captureCollisionComp;
@@ -23,6 +22,7 @@ void ACapturePoint::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	captureCollisionComp->OnComponentBeginOverlap.AddDynamic(this, &ACapturePoint::OnHit);
 }
 
 // Called every frame
