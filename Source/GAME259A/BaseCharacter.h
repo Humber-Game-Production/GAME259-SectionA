@@ -67,6 +67,19 @@ protected:
 	void MoveRight(float Axis);
 	UFUNCTION(Category = "Movement")
 	void MoveForward(float Axis);
+
+	//Abilities
+	UFUNCTION(Category = "Abilities")
+	void UseAbilityOne();
+	UFUNCTION(Category = "Abilities")
+	void UseAbilityTwo();
+
+	//Combat Actions
+	UFUNCTION(Category = "Combat")
+	void UseMeleeAttack();
+	UFUNCTION(Category = "Combat")
+	void UseRangedAttack();
+
 	UFUNCTION(Category = "Death")
 	void Death();
 	UFUNCTION(Category = "Death")

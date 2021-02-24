@@ -52,6 +52,28 @@ void ABaseCharacter::MoveForward(float Axis)
 	//Fill in when the character controller is finished.
 }
 
+void ABaseCharacter::UseAbilityOne()
+{
+	//TODO
+	//Fill in when the ability class is finished.
+}
+
+void ABaseCharacter::UseAbilityTwo()
+{
+	//TODO
+	//Fill in when the ability class is finished.
+}
+
+void ABaseCharacter::UseMeleeAttack()
+{
+	//TODO (Combat)
+}
+
+void ABaseCharacter::UseRangedAttack()
+{
+	//TODO (Combat)
+}
+
 void ABaseCharacter::Death()
 {
 	//Rag doll if the player is dead.
@@ -85,4 +107,17 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	//TODO
 	//Fill this in with character input *IF* we plan on doing input inside this class instead of a seperate one.
+
+	check(PlayerInputComponent);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+
+	PlayerInputComponent->BindAxis("MoveForward", this, &ABaseCharacter::MoveForward);
+	PlayerInputComponent->BindAxis("MoveRight", this, &ABaseCharacter::MoveRight);
+
+	//Binding ability and attacks
+	PlayerInputComponent->BindAction("AbilityOne", IE_Pressed, this, &ABaseCharacter::UseAbilityOne);
+	PlayerInputComponent->BindAction("AbilityTwo", IE_Pressed, this, &ABaseCharacter::UseAbilityTwo);
+	PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, this, &ABaseCharacter::UseMeleeAttack);
+	PlayerInputComponent->BindAction("RangedAttack", IE_Pressed, this, &ABaseCharacter::UseRangedAttack);
 }
