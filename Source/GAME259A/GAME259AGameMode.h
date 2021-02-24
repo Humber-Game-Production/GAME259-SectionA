@@ -13,6 +13,32 @@ class AGAME259AGameMode : public AGameModeBase
 
 public:
 	AGAME259AGameMode();
+
+	virtual void BeginPlay() override;
+	virtual void Tick(const float deltaTime) override;
+	
+	UFUNCTION()
+	void EndRound();
+
+	UFUNCTION()
+	void Reset();
+
+	UFUNCTION()
+	void SubtractTime();
+
+	UPROPERTY(EditAnywhere, Category = "Game Rules")
+	float timerTime;
+
+	UPROPERTY(EditAnywhere, Category = "Game Rules")
+	FString timeLeft;
+
+	UPROPERTY(EditAnywhere, Category = "Game Rules")
+	int maxRounds;
+
+	UPROPERTY(EditAnywhere, Category = "Game Rules")
+	int currentRound;
+
+	FTimerHandle timerHandle;
 };
 
 
