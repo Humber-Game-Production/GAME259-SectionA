@@ -2,6 +2,7 @@
 
 
 #include "CapturePoint.h"
+#include "Team.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SphereComponent.h"
 
@@ -41,18 +42,26 @@ void ACapturePoint::OnHit(UPrimitiveComponent* OverlappedComponent,
 {
 	if ((OtherActor != NULL) && (OtherActor != this) && (OtherComp != NULL))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("CapPoint Enetered"));
+		UE_LOG(LogTemp, Warning, TEXT("CapPoint Entered"));
 		flagsCaptured++;
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Flags captured: " + FString::FromInt(flagsCaptured));
 		CheckForFlagConstruction();
+		AddPoints();
 	}
 }
 
 void ACapturePoint::CheckForFlagConstruction()
 {
 	if (MainFlagCreator == true) {
+		UE_LOG(LogTemp, Warning, TEXT("This is the main flag spot"));
 		if (flagsCaptured >= 6) {
 			//generate main flag here
 		}
 	}
+}
+
+void ACapturePoint::AddPoints()
+{
+	//Add points from team
 }
 
