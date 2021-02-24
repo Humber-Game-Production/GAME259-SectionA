@@ -23,6 +23,10 @@ void UArcadePhysicsComponent::BeginPlay()
 	
 }
 
+void UArcadePhysicsComponent::MoveByCurve_Implementation(UCurveFloat* Curve, FVector Direction)
+{
+}
+
 // Called every frame
 void UArcadePhysicsComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {

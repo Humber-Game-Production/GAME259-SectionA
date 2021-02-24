@@ -5,11 +5,12 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Curves/CurveFloat.h"
+#include "GameFramework/MovementComponent.h"
 #include "ArcadePhysicsComponent.generated.h"
 
 
 UCLASS( Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class GAME259A_API UArcadePhysicsComponent : public UActorComponent
+class GAME259A_API UArcadePhysicsComponent : public UMovementComponent
 {
 	GENERATED_BODY()
 
@@ -36,6 +37,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Curves")
 		UCurveFloat* ThrowCurve;
+
+	UFUNCTION(BlueprintNativeEvent)
+		void MoveByCurve(UCurveFloat* Curve, FVector Direction);
 
 public:	
 	// Called every frame
