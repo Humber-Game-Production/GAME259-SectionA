@@ -41,6 +41,8 @@ public:
 
 	UFUNCTION()
 		void CheckForFlagConstruction();
+	UFUNCTION()
+		void AddPoints();
 
 
 };
