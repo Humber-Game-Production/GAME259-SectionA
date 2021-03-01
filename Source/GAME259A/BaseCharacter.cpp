@@ -1,4 +1,6 @@
 #include "BaseCharacter.h"
+#include "Kismet/KismetMathLibrary.h"
+
 
 // Sets default values
 ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1.0f),
@@ -41,15 +43,30 @@ void ABaseCharacter::BeginPlay()
 //Called when the player is supposed to move left (Axis = -1) or right (Axis = 1).
 void ABaseCharacter::MoveRight(float Axis)
 {
-	//TODO
-	//Fill in when the character controller is finished.
+	FVector right = GetActorRightVector();
+
+	if (Axis < 0) right *= -1;
+
+	if (UKismetMathLibrary::Abs(Axis > 0.5)) Sprint(right);
+
+	else Walk(right);
+
 }
 
+
+void ABaseCharacter::Walk(FVector Direction) {
+
+	AddMovementInput(Direction, CurrentMoveSpeed);
+}
+
+void ABaseCharacter::Sprint(FVector Direction) {
+
+AddMovementInput(Direction, CurrentMoveSpeed * SprintMultiplier);
+}
 //Called when the player is supposed to move forward (Axis = 1) or backward (Axis = -1).
 void ABaseCharacter::MoveForward(float Axis)
 {
-	//TODO
-	//Fill in when the character controller is finished.
+	
 }
 
 void ABaseCharacter::UseAbilityOne()
