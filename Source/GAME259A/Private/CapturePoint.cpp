@@ -2,7 +2,9 @@
 
 
 #include "CapturePoint.h"
-#include "Team.h"
+
+#include "CTFPlayerState.h"
+#include "GAME259A/GameMode/Team.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SphereComponent.h"
 
@@ -40,13 +42,19 @@ void ACapturePoint::OnHit(UPrimitiveComponent* OverlappedComponent,
 	bool bFromSweep,
 	const FHitResult& SweepResult)
 {
-	if ((OtherActor != NULL) && (OtherActor != this) && (OtherComp != NULL))
+	APawn* playerC = Cast<APawn>(OtherActor);
+	
+	ACTFPlayerState* player = playerC->GetPlayerState<ACTFPlayerState>();
+	
+	if (player && (OtherActor != this) && (OtherComp != NULL))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("CapPoint Entered"));
 		flagsCaptured++;
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Flags captured: " + FString::FromInt(flagsCaptured));
 		CheckForFlagConstruction();
-		AddPoints();
+
+		//PlaceHolder value until the Flags are connected to the players
+		AddPoints(50, player);
 	}
 }
 
@@ -60,8 +68,9 @@ void ACapturePoint::CheckForFlagConstruction()
 	}
 }
 
-void ACapturePoint::AddPoints()
+void ACapturePoint::AddPoints(int32 points, ACTFPlayerState* player)
 {
 	//Add points from team
+	player->AddScore(points);
 }
 

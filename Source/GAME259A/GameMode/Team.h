@@ -4,17 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GAME259A/GameMode/TeamIdentifier.h"
 #include "Team.generated.h"
 
 /**
  * 
  */
-UENUM()
-enum class PlayerType
-{
-	Human = 0 UMETA(DisplayName = "Human"),
-	Alien = 1 UMETA(DisplayName = "Alien")
-};
+
+class ABaseCharacter;
+class ACTFPlayerState;
 
 UCLASS(BlueprintType)
 class GAME259A_API ATeam : public AActor
@@ -24,13 +22,12 @@ class GAME259A_API ATeam : public AActor
 public:
 
 	ATeam();
-
 	
-	UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Category = "Team | Player")
-	PlayerType playerType;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Team | Player")
+	TSubclassOf<ABaseCharacter> playerType;
 	
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Team | Player")
-	TArray<AActor*> players;
+	TArray<ACTFPlayerState*> players;
 
 	UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Category = "Team | Places")
 	TArray<AActor*> respawnPoints;
@@ -44,13 +41,14 @@ public:
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Team | Info")
 	int32 miniFlagsColllected;
 
-
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Team | Info")
+	ETeamIdentifier teamID;
 	
 	UFUNCTION(BlueprintCallable)
-	void AddPlayer(AActor* player_);
+	void AddPlayer(ACTFPlayerState* player_);
 
 	UFUNCTION(BlueprintCallable)
-	void RemovePlayer(AActor* player_);
+	void RemovePlayer(ACTFPlayerState* player_);
 
 	UFUNCTION(BlueprintCallable)
 	void AddPoints(int32 value);
@@ -60,5 +58,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SpawnPlayer(AActor* player);
+
+private:
+	HIDE_ACTOR_TRANSFORM_FUNCTIONS();
 	
 };

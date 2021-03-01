@@ -39,6 +39,7 @@ public:
 	UPROPERTY(EditAnywhere)
 	UCapsuleComponent* Capsule;
 
-
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int32 pointValue;
 
 };

@@ -2,21 +2,25 @@
 
 
 #include "Team.h"
+#include "GAME259A/BaseCharacter.h"
+#include "GAME259A/Public/CTFPlayerState.h"
 
 ATeam::ATeam()
 {
-	playerType = PlayerType::Human;
+	teamID = ETeamIdentifier::Human;
 	capturePoint = nullptr;
 	points = 0;
 	miniFlagsColllected = 0;
 }
 
-void ATeam::AddPlayer(AActor* player_)
+void ATeam::AddPlayer(ACTFPlayerState* player_)
 {
+	player_->SetTeam(teamID);
 	players.Add(player_);
+	
 }
 
-void ATeam::RemovePlayer(AActor* player_)
+void ATeam::RemovePlayer(ACTFPlayerState* player_)
 {
 	players.Remove(player_);
 }

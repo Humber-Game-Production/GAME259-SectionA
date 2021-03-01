@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "CapturePoint.generated.h"
 
+class ACTFPlayerState;
+
 UCLASS()
 class GAME259A_API ACapturePoint : public AActor
 {
@@ -40,9 +42,9 @@ public:
 		const FHitResult& SweepResult);
 
 	UFUNCTION()
-		void CheckForFlagConstruction();
+	void CheckForFlagConstruction();
 	UFUNCTION()
-		void AddPoints();
+	void AddPoints(int32 points, ACTFPlayerState* player);
 
 
 };

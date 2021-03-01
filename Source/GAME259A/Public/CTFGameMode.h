@@ -16,6 +16,8 @@ public:
 
 	virtual void BeginPlay() override;
 	virtual void Tick(const float deltaTime) override;
+	virtual void PostLogin(APlayerController* NewPlayer) override;
+	virtual void Logout(AController* Exiting) override;
 
 	UFUNCTION()
 		void EndRound();

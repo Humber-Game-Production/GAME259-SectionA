@@ -6,6 +6,9 @@
 #include "UObject/ConstructorHelpers.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "TimerManager.h"
+#include "GAME259A/GameMode/CTFGameState.h"
+#include "GAME259A/Public/CTFPlayerState.h"
+#include "GAME259A/GameMode/TeamIdentifier.h"
 
 ACTFGameMode::ACTFGameMode()
 {
@@ -16,6 +19,9 @@ ACTFGameMode::ACTFGameMode()
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
 
+	GameStateClass = ACTFGameState::StaticClass();
+	PlayerStateClass = ACTFPlayerState::StaticClass();
+	
 	//make sure GM can tick
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.SetTickFunctionEnable(true);
@@ -46,10 +52,24 @@ void ACTFGameMode::Tick(const float deltaTime)
 	}
 }
 
+void ACTFGameMode::PostLogin(APlayerController* NewPlayer)
+{
+	Super::PostLogin(NewPlayer);
+
+	
+}
+
+void ACTFGameMode::Logout(AController* Exiting)
+{
+	Super::Logout(Exiting);
+
+	Cast<ACTFGameState>(GameStateClass)->PlayerLeft(Exiting);
+}
+
 void ACTFGameMode::EndRound() {
 	//Displays the round that just finished
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Round " + FString::FromInt(currentRound) + " over");
-
+	
 	//Reduces the amount of rounds left
 	currentRound--;
 

@@ -4,6 +4,7 @@
 #include "Flag.h"
 #include "Components/ShapeComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "GAME259A/Public/CTFPlayerState.h"
 
 // Sets default values
 AFlag::AFlag()
@@ -45,6 +46,5 @@ void AFlag::OnCapsuleOBeginOverlap_Implementation(UPrimitiveComponent* Overlappe
 		//attach the flag to the socket "FlagHolder" on the character mesh
 		this->AttachToComponent(PlayerMesh, FAttachmentTransformRules::SnapToTargetIncludingScale, (TEXT("FlagHolder")));
 	}
-	
 }
 
