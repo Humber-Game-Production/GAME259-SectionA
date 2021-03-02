@@ -46,6 +46,7 @@ void ABaseCharacter::MoveRight(float Axis)
 	FVector right = GetActorRightVector();
 
 	if (Axis < 0) right *= -1;
+	if (Axis == 0) right *= 0;
 
 	if (UKismetMathLibrary::Abs(Axis > 0.5)) Sprint(right);
 
@@ -66,7 +67,14 @@ AddMovementInput(Direction, CurrentMoveSpeed * SprintMultiplier);
 //Called when the player is supposed to move forward (Axis = 1) or backward (Axis = -1).
 void ABaseCharacter::MoveForward(float Axis)
 {
-	
+	FVector forward = GetActorForwardVector();
+
+	if (Axis < 0) forward *= -1;
+	if (Axis == 0) forward *= 0;
+
+	if (UKismetMathLibrary::Abs(Axis > 0.5)) Sprint(forward);
+
+	else Walk(forward);
 }
 
 void ABaseCharacter::UseAbilityOne()
