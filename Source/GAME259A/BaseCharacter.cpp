@@ -14,8 +14,8 @@ ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(
 	//Set collision capsule.
 	GetCapsuleComponent()->InitCapsuleSize(42.0f, 96.0f);
 
-	//Set this so the character turns to look in the direction they are moving.
-	GetCharacterMovement()->bOrientRotationToMovement = true;
+	//Set this so the character does not turn to look in the direction they are moving.
+	GetCharacterMovement()->bOrientRotationToMovement = false;
 	//Set how fast they turn to look in the direction they are moving.
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 540.0f, 0.0f);
 	//Set how fast the character jumps.
@@ -145,4 +145,9 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("AbilityTwo", IE_Pressed, this, &ABaseCharacter::UseAbilityTwo);
 	PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, this, &ABaseCharacter::UseMeleeAttack);
 	PlayerInputComponent->BindAction("RangedAttack", IE_Pressed, this, &ABaseCharacter::UseRangedAttack);
+
+	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
+	//PlayerInputComponent->BindAxis("TurnRate", this, &ABaseCharacter::TurnAtRate);
+	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
+	//PlayerInputComponent->BindAxis("LookUpRate", this, &ABaseCharacter::LookUpAtRate);
 }
