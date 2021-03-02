@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GAME259A/GameMode/TeamIdentifier.h"
 #include "CapturePoint.generated.h"
 
 class ACTFPlayerState;
@@ -20,8 +21,13 @@ class GAME259A_API ACapturePoint : public AActor
 	int flagsCaptured;
 	UPROPERTY(EditAnywhere)
 	bool MainFlagCreator;
+
 	
 public:	
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	ETeamIdentifier teamID;
+
 	// Sets default values for this actor's properties
 	ACapturePoint();
 

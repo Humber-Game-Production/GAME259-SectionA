@@ -32,16 +32,16 @@ public:
 	UFUNCTION()
 		bool WinCheck();
 
-	UPROPERTY(EditAnywhere, Category = "Game Rules")
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Game Rules")
 		float timerTime;
 
-	UPROPERTY(EditAnywhere, Category = "Game Rules")
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Game Rules")
 		FString timeLeft;
 
-	UPROPERTY(EditAnywhere, Category = "Game Rules")
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Game Rules")
 		int maxRounds;
 
-	UPROPERTY(EditAnywhere, Category = "Game Rules")
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Game Rules")
 		int currentRound;
 
 	//Place holder for team1 points

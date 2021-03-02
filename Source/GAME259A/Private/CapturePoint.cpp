@@ -17,7 +17,7 @@ ACapturePoint::ACapturePoint()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 	RootComponent = captureCollisionComp;
-
+	teamID = ETeamIdentifier::None;
 }
 
 // Called when the game starts or when spawned
@@ -44,9 +44,17 @@ void ACapturePoint::OnHit(UPrimitiveComponent* OverlappedComponent,
 {
 	APawn* playerC = Cast<APawn>(OtherActor);
 	
+	ETeamIdentifier* playersTeam = nullptr;
 	ACTFPlayerState* player = playerC->GetPlayerState<ACTFPlayerState>();
-	
-	if (player && (OtherActor != this) && (OtherComp != NULL))
+
+	//If the other actor has a ACTFPlayerState then we're able to do a check for their team
+	if(player)
+	{
+		playersTeam = &player->teamID;	
+	}
+
+	//If the cap point's team matches the player's team then we do the point logic
+	if ((*playersTeam == teamID) && (OtherActor != this) && (OtherComp != NULL))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("CapPoint Entered"));
 		flagsCaptured++;

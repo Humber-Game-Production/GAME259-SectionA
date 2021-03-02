@@ -13,6 +13,7 @@
 
 class ABaseCharacter;
 class ACTFPlayerState;
+class ACapturePoint;
 
 UCLASS(BlueprintType)
 class GAME259A_API ATeam : public AActor
@@ -33,7 +34,7 @@ public:
 	TArray<AActor*> respawnPoints;
 
 	UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Category = "Team | Places")
-	AActor* capturePoint;
+	ACapturePoint* capturePoint;
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Team | Info")
 	int32 points;
@@ -43,6 +44,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Team | Info")
 	ETeamIdentifier teamID;
+
+	UFUNCTION()
+	virtual void BeginPlay() override;
 	
 	UFUNCTION(BlueprintCallable)
 	void AddPlayer(ACTFPlayerState* player_);

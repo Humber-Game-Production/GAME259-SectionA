@@ -4,6 +4,7 @@
 #include "Team.h"
 #include "GAME259A/BaseCharacter.h"
 #include "GAME259A/Public/CTFPlayerState.h"
+#include "GAME259A/Public/CapturePoint.h"
 
 ATeam::ATeam()
 {
@@ -11,6 +12,17 @@ ATeam::ATeam()
 	capturePoint = nullptr;
 	points = 0;
 	miniFlagsColllected = 0;
+}
+
+void ATeam::BeginPlay()
+{
+	if(capturePoint)
+	{
+		capturePoint->teamID = teamID;
+	} else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Team %d's capture point is nullptr"), teamID);
+	}
 }
 
 void ATeam::AddPlayer(ACTFPlayerState* player_)
