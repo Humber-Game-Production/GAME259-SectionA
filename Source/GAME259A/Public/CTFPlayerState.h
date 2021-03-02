@@ -21,7 +21,7 @@ public:
 
 	ACTFPlayerState();
 	
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	ETeamIdentifier teamID;
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)

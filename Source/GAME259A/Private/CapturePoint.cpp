@@ -44,17 +44,17 @@ void ACapturePoint::OnHit(UPrimitiveComponent* OverlappedComponent,
 {
 	APawn* playerC = Cast<APawn>(OtherActor);
 	
-	ETeamIdentifier* playersTeam = nullptr;
+	ETeamIdentifier playersTeam = ETeamIdentifier::None;
 	ACTFPlayerState* player = playerC->GetPlayerState<ACTFPlayerState>();
 
 	//If the other actor has a ACTFPlayerState then we're able to do a check for their team
 	if(player)
 	{
-		playersTeam = &player->teamID;	
+		playersTeam = player->teamID;	
 	}
 
 	//If the cap point's team matches the player's team then we do the point logic
-	if ((*playersTeam == teamID) && (OtherActor != this) && (OtherComp != NULL))
+	if ((playersTeam == teamID) && (player != nullptr) && (OtherActor != this) && (OtherComp != NULL))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("CapPoint Entered"));
 		flagsCaptured++;

@@ -40,6 +40,7 @@ void ATeam::RemovePlayer(ACTFPlayerState* player_)
 void ATeam::AddPoints(int32 value)
 {
 	points += value;
+	UE_LOG(LogTemp, Warning, TEXT("Team %d has %d points"), teamID, points);
 }
 
 void ATeam::SpawnPlayers()

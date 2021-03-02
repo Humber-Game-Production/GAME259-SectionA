@@ -48,7 +48,7 @@ void ACTFGameMode::Tick(const float deltaTime)
 	//Add timer to screen
 	if (GetWorldTimerManager().TimerExists(timerHandle) && GetWorldTimerManager().IsTimerPaused(timerHandle) == false) {
 		timeLeft = FString::SanitizeFloat(GetWorldTimerManager().GetTimerRemaining(timerHandle));
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, timeLeft);
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, timeLeft);
 	}
 }
 
