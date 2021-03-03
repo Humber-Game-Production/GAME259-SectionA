@@ -9,9 +9,24 @@
 /**
  * 
  */
+USTRUCT()
+struct FPlayerInfo {
+
+    GENERATED_USTRUCT_BODY()
+    FString MyPlayerName;
+    FString MyPlayerCharacterName;
+	FString MyPlayerStatus;
+};
+
 UCLASS()
 class GAME259A_API ALobbyPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
+public:
+
+	ALobbyPlayerController();
+private:
+	FPlayerInfo* PlayerSettings;
 	
 };
