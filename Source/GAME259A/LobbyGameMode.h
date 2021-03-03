@@ -24,8 +24,9 @@ public:
 private:
 	int MapID;
 	int TimeID;
-	//LobbyGameMode* lobbyGameMode;
-	//Texture2D* MapDisplay;
-	//std::string MapNameDisplay;
-	//std::string MapTimeDisplay;
+	ALobbyGameMode* lobbyGameMode;
+	/*PlayerInfo connectedPlayers[6];
+	Texture2D* MapDisplay;*/
+	FString MapTimeDisplay;
+	FString MapNameDisplay;
 };
