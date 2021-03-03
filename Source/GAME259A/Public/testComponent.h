@@ -4,19 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "BaseAbilityClass.generated.h"
+#include "testComponent.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class GAME259A_API UBaseAbilityClass : public UActorComponent
+class GAME259A_API UtestComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UBaseAbilityClass();
+	UtestComponent();
 
-	
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -24,18 +23,9 @@ protected:
 public:
 
 	UFUNCTION(BlueprintNativeEvent)
-	void ActivateAbility(FVector Location_, float CoolDown_);
+		void testFunction(FVector location, float number);
 
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		float CoolDown;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		float LastUsed;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		float Damage;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		FVector location;
 };
