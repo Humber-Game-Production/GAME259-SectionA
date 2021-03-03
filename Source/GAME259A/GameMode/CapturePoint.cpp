@@ -44,25 +44,28 @@ void ACapturePoint::OnHit(UPrimitiveComponent* OverlappedComponent,
 {
 	APawn* playerC = Cast<APawn>(OtherActor);
 	
-	ETeamIdentifier playersTeam = ETeamIdentifier::None;
-	ACTFPlayerState* player = playerC->GetPlayerState<ACTFPlayerState>();
 
-	//If the other actor has a ACTFPlayerState then we're able to do a check for their team
-	if(player)
+	if(playerC)
 	{
-		playersTeam = player->teamID;	
-	}
+		ACTFPlayerState* player = playerC->GetPlayerState<ACTFPlayerState>();
 
-	//If the cap point's team matches the player's team then we do the point logic
-	if ((playersTeam == teamID) && (player != nullptr) && (OtherActor != this) && (OtherComp != NULL))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("CapPoint Entered"));
-		flagsCaptured++;
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Flags captured: " + FString::FromInt(flagsCaptured));
-		CheckForFlagConstruction();
+		//If the other actor has a ACTFPlayerState then we're able to do a check for their team
+		if(player)
+		{
+			const ETeamIdentifier playersTeam = player->teamID;	
 
-		//PlaceHolder value until the Flags are connected to the players
-		AddPoints(50, player);
+			//If the cap point's team matches the player's team then we do the point logic
+			if ((playersTeam == teamID) && (OtherActor != this) && (OtherComp != NULL))
+			{
+				UE_LOG(LogTemp, Warning, TEXT("CapPoint Entered"));
+				flagsCaptured++;
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Flags captured: " + FString::FromInt(flagsCaptured));
+				CheckForFlagConstruction();
+
+				//PlaceHolder value until the Flags are connected to the players
+				AddPoints(50, player);
+			}
+		}
 	}
 }
 
