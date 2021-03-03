@@ -71,7 +71,9 @@ protected:
 	UFUNCTION(Category = "Movement", BlueprintCallable)
 	void Walk(FVector Direction);
 	UFUNCTION(Category = "Movement", BlueprintCallable)
-	void Sprint(FVector Direction);
+	void Sprint();
+	UFUNCTION(Category = "Movement", BlueprintCallable)
+	void StopSprinting();
 
 	//Abilities
 	UFUNCTION(Category = "Abilities")
