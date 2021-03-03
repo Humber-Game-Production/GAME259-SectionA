@@ -39,6 +39,8 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "EventDispatchers")
 	FAddScoreToTeam teamScoreDelegate;
 
+
+	
 	UFUNCTION()
 	void SetTeam(ETeamIdentifier team);
 	

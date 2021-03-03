@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "PickUpAndDrop.h"
+#include "GAME259A/GameMode/PickUpAndDrop.h"
 
 #include "GAME259ACharacter.generated.h"
 

@@ -4,7 +4,7 @@
 #include "Team.h"
 #include "GAME259A/BaseCharacter.h"
 #include "GAME259A/Public/CTFPlayerState.h"
-#include "GAME259A/Public/CapturePoint.h"
+#include "GAME259A/GameMode/CapturePoint.h"
 
 ATeam::ATeam()
 {
