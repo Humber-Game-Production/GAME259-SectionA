@@ -20,10 +20,12 @@ class GAME259A_API ACTFPlayerState : public APlayerState
 public:
 
 	ACTFPlayerState();
-	
+
+	//Identifier for what team the player is on
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	ETeamIdentifier teamID;
 
+	//How many points this player has earned
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	int32 pointsEarned;
 
@@ -35,15 +37,16 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	int32 flagsCaptured;
-	
+
+	//This delegate is called whenever this player scores for their team
 	UPROPERTY(BlueprintAssignable, Category = "EventDispatchers")
 	FAddScoreToTeam teamScoreDelegate;
 
-
-	
+	//Sets the player's team
 	UFUNCTION()
 	void SetTeam(ETeamIdentifier team);
-	
+
+	//Adds score to the player's team using teamScoreDelegate
 	UFUNCTION()
 	void AddScore(int32 amountOfPoints);
 	

@@ -21,19 +21,25 @@ public:
 	ACTFGameState();
 
 	virtual void BeginPlay() override;
-	
+
+	//Map of teams
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	TMap<ETeamIdentifier, ATeam*> listOfTeams;
-	
+
+	//Adds a CTFPlayerState to the specified team
 	UFUNCTION()
 	void ChooseTeam(ETeamIdentifier team, ACTFPlayerState* player);
 
+	//This should be called whenever a player leaves a team or the server
+	//@TODO: Implement this code
 	UFUNCTION()
 	void PlayerLeft(AController* player);
-	
+
+	//Adds points to the specified team
 	UFUNCTION()
 	void AddPoints(ETeamIdentifier team, int32 points);
-	
+
+	//Initializes the team's variables
 	UFUNCTION()
 	void InitTeams();
 };

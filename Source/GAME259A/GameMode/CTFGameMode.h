@@ -20,37 +20,41 @@ public:
 	virtual void Logout(AController* Exiting) override;
 
 	UFUNCTION()
-		void EndRound();
+	void EndRound();
 
 	UFUNCTION()
-		void RoundReset();
+	void RoundReset();
 
 	UFUNCTION()
-		void SubtractTime();
+	void SubtractTime();
 
 	//Change later to return a team
 	UFUNCTION()
-		bool WinCheck();
+	bool WinCheck();
 
+	//Time left in the current round(float)
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Game Rules")
-		float timerTime;
+	float timerTime;
 
+	//Time left in the current round(FString)
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Game Rules")
-		FString timeLeft;
+	FString timeLeft;
 
+	//Total amount of rounds
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Game Rules")
-		int maxRounds;
+	int maxRounds;
 
+	//Current round number
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Game Rules")
-		int currentRound;
+	int currentRound;
 
 	//Place holder for team1 points
 	UPROPERTY(EditAnywhere)
-		int team1Points;
+	int team1Points;
 
 	//Place holder for team2 points
 	UPROPERTY(EditAnywhere)
-		int team2Points;
+	int team2Points;
 
 	FTimerHandle timerHandle;
 };

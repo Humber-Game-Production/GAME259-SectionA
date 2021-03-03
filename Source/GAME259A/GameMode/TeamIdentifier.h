@@ -7,7 +7,7 @@
 #include "TeamIdentifier.generated.h"
 
 /**
- * 
+ * Identifiers for the teams
  */
 UENUM(BlueprintType)
 enum class ETeamIdentifier : uint8
