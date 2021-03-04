@@ -7,7 +7,7 @@
 #include "BaseAbilityClass.generated.h"
 
 
-UCLASS( ClassGroup=(Custom), Blueprintable, meta=(BlueprintSpawnableComponent) )
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class GAME259A_API UBaseAbilityClass : public UActorComponent
 {
 	GENERATED_BODY()
@@ -21,11 +21,13 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+public:
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable,Category = "Abilities")
-		void ActivateAbility(FVector Location_, float CoolDown_);
-	virtual void ActivateAbility_Implementation(FVector Location_, float CoolDown_);
+	UFUNCTION(BlueprintNativeEvent)
+	void ActivateAbility(FVector Location_, float CoolDown_, FRotator Rotation_);
 
+	UFUNCTION(BlueprintCallable)
+		void UseAbility(FVector Location_, float CoolDown_, FRotator Rotation_);
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
