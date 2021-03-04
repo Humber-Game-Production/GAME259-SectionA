@@ -1,7 +1,9 @@
 #include "BaseCharacter.h"
+#include "Kismet/KismetMathLibrary.h"
+
 
 // Sets default values
-ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1.0f),
+ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
 									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed)
 {
 	//Set the character to not rotate when the mouse is moved, only the camera is rotated.
@@ -12,13 +14,14 @@ ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(
 	//Set collision capsule.
 	GetCapsuleComponent()->InitCapsuleSize(42.0f, 96.0f);
 
-	//Set this so the character turns to look in the direction they are moving.
-	GetCharacterMovement()->bOrientRotationToMovement = true;
+	//Set this so the character does not turn to look in the direction they are moving.
+	GetCharacterMovement()->bOrientRotationToMovement = false;
 	//Set how fast they turn to look in the direction they are moving.
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 540.0f, 0.0f);
 	//Set how fast the character jumps.
 	GetCharacterMovement()->JumpZVelocity = JumpVelocity;
 	GetCharacterMovement()->AirControl = 0.2f;
+	GetCharacterMovement()->MaxWalkSpeed = MaxWalkSpeed;
 
 	//Setup camera arm. This controls how far away the camera is from the character.
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
@@ -41,15 +44,51 @@ void ABaseCharacter::BeginPlay()
 //Called when the player is supposed to move left (Axis = -1) or right (Axis = 1).
 void ABaseCharacter::MoveRight(float Axis)
 {
-	//TODO
-	//Fill in when the character controller is finished.
+	//FVector right = GetActorRightVector();
+
+	//if (Axis < 0) right *= -1;
+	//if (Axis == 0) right *= 0;
+	if (!bIsSprinting)
+	{
+		Axis = Axis * 1/SprintMultiplier;
+	}
+	AddMovementInput(GetActorRightVector(), Axis);
+	//Walk(right);
+
 }
+
+
+void ABaseCharacter::Walk(FVector Direction) {
+
+	AddMovementInput(Direction, CurrentMoveSpeed);
+}
+
+void ABaseCharacter::Sprint() {
+	//CurrentMoveSpeed = MaxWalkSpeed * SprintMultiplier;
+	//GetCharacterMovement()->MaxWalkSpeed = CurrentMoveSpeed;
+	bIsSprinting = true;
+}
+
+void ABaseCharacter::StopSprinting()
+{
+//	CurrentMoveSpeed = MaxWalkSpeed;
+	//GetCharacterMovement()->MaxWalkSpeed = CurrentMoveSpeed;
+	bIsSprinting = false;
+}
+
 
 //Called when the player is supposed to move forward (Axis = 1) or backward (Axis = -1).
 void ABaseCharacter::MoveForward(float Axis)
 {
-	//TODO
-	//Fill in when the character controller is finished.
+	//FVector forward = GetActorForwardVector();
+	//if (Axis < 0) forward *= -1;
+	//if (Axis == 0) forward *= 0;
+	if (!bIsSprinting)
+	{
+		Axis = Axis * 1 / SprintMultiplier;
+	}
+	AddMovementInput(GetActorForwardVector(), Axis);
+	//Walk(forward);
 }
 
 void ABaseCharacter::UseAbilityOne()
@@ -111,6 +150,8 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	check(PlayerInputComponent);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &ABaseCharacter::Sprint);
+	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &ABaseCharacter::StopSprinting);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &ABaseCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ABaseCharacter::MoveRight);
@@ -120,4 +161,9 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("AbilityTwo", IE_Pressed, this, &ABaseCharacter::UseAbilityTwo);
 	PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, this, &ABaseCharacter::UseMeleeAttack);
 	PlayerInputComponent->BindAction("RangedAttack", IE_Pressed, this, &ABaseCharacter::UseRangedAttack);
+
+	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
+	//PlayerInputComponent->BindAxis("TurnRate", this, &ABaseCharacter::TurnAtRate);
+	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
+	//PlayerInputComponent->BindAxis("LookUpRate", this, &ABaseCharacter::LookUpAtRate);
 }
