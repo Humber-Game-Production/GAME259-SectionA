@@ -24,8 +24,10 @@ protected:
 public:
 
 	UFUNCTION(BlueprintNativeEvent)
-	void ActivateAbility(FVector Location_, float CoolDown_);
+	void ActivateAbility(FVector Location_, float CoolDown_, FRotator Rotation_);
 
+	UFUNCTION(BlueprintCallable)
+		void UseAbility(FVector Location_, float CoolDown_, FRotator Rotation_);
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
