@@ -68,6 +68,13 @@ protected:
 	UFUNCTION(Category = "Movement")
 	void MoveForward(float Axis);
 
+	UFUNCTION(Category = "Movement", BlueprintCallable)
+	void Walk(FVector Direction);
+	UFUNCTION(Category = "Movement", BlueprintCallable)
+	void Sprint();
+	UFUNCTION(Category = "Movement", BlueprintCallable)
+	void StopSprinting();
+
 	//Abilities
 	UFUNCTION(Category = "Abilities")
 	void UseAbilityOne();
@@ -84,6 +91,8 @@ protected:
 	void Death();
 	UFUNCTION(Category = "Death")
 	void Respawn();
+
+	
 
 public:	
 	// Called every frame
