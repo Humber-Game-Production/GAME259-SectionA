@@ -25,8 +25,13 @@ void UBaseAbilityClass::BeginPlay()
 }
 
 
-void UBaseAbilityClass::ActivateAbility_Implementation(FVector Location_, float CoolDown_)
+void UBaseAbilityClass::ActivateAbility_Implementation(FVector Location_, float CoolDown_, FRotator Rotation_)
 {
+}
+
+void UBaseAbilityClass::UseAbility(FVector Location_, float CoolDown_, FRotator Rotation_)
+{
+	ActivateAbility(Location_, CoolDown_, Rotation_);
 }
 
 // Called every frame
