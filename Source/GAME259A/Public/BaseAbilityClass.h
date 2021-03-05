@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "CTFPlayerState.h"
 #include "BaseAbilityClass.generated.h"
 
 
@@ -24,10 +25,10 @@ protected:
 public:
 
 	UFUNCTION(BlueprintNativeEvent)
-	void ActivateAbility(FVector Location_, float CoolDown_, FRotator Rotation_);
+	void ActivateAbility(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_);
 
 	UFUNCTION(BlueprintCallable)
-		void UseAbility(FVector Location_, float CoolDown_, FRotator Rotation_);
+		void UseAbility(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_);
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
