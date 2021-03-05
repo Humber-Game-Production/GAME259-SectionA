@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/CapsuleComponent.h"
 #include "PickUpAndDrop.h"
+#include "CTFPlayerState.h"
 
 #include "Flag.generated.h"
 
@@ -23,8 +24,10 @@ protected:
 
 	//Flag pickup when the capsule overlaps with the player(OtherActor)
 	UFUNCTION()
-	void OnCapsuleOBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent,
+	void PickUp_Implementation(UPrimitiveComponent* OverlappedComponent,
 		AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
+	/*UFUNCTION()
+	void Drop_Implementation() override{}*/
 	
 public:	
 	// ( FComponentBeginOverlapSignature, UPrimitiveComponent, OnComponentBeginOverlap, UPrimitiveComponent*, OverlappedComponent, AActor*, OtherActor, UPrimitiveComponent*, OtherComp, int32, OtherBodyIndex, bool, bFromSweep, const FHitResult &, SweepResult)
@@ -42,4 +45,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int32 pointValue;
 
+	UPROPERTY(BlueprintReadOnly)
+	FVector InitLocation;
+	
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	FVector DistanceFromGround;
 };

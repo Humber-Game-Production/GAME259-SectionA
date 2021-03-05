@@ -6,6 +6,8 @@
 #include "Components/StaticMeshComponent.h"
 #include "GAME259A/Public/CTFPlayerState.h"
 
+
+
 // Sets default values
 AFlag::AFlag()
 {
@@ -29,22 +31,31 @@ AFlag::AFlag()
 void AFlag::BeginPlay()
 {
 	Super::BeginPlay();
-	Capsule->OnComponentBeginOverlap.AddDynamic(this, &AFlag::OnCapsuleOBeginOverlap_Implementation);
+	Capsule->OnComponentBeginOverlap.AddDynamic(this, &AFlag::PickUp_Implementation);
+	InitLocation = GetActorLocation();
 }
 
-void AFlag::OnCapsuleOBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent,
+void AFlag::PickUp_Implementation(UPrimitiveComponent* OverlappedComponent,
 	AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	//checks if the OtherActor also has the Interaface, 
-	IPickUpAndDrop* OverlapOccurred = Cast<IPickUpAndDrop>(OtherActor);
+	//checks if the OtherActor is a pawn
+	APawn* isPawn = Cast<APawn>(OtherActor);
 
-	//if it does not, wont do this
-	if (OverlapOccurred)
-	{
-		USceneComponent* PlayerMesh = OtherActor->FindComponentByClass<USkeletalMeshComponent>();
+	if (isPawn) {
+		//if it is, it checks if it has a playerState
+		ACTFPlayerState* hasPlayerState = isPawn->GetPlayerState<ACTFPlayerState>();
 
-		//attach the flag to the socket "FlagHolder" on the character mesh
-		this->AttachToComponent(PlayerMesh, FAttachmentTransformRules::SnapToTargetIncludingScale, (TEXT("FlagHolder")));
+		//if it does, attach flag
+		if (hasPlayerState)	{
+			USceneComponent* PlayerMesh = OtherActor->FindComponentByClass<USkeletalMeshComponent>();
+
+			//attach the flag to the socket "FlagHolder" on the character mesh
+			this->AttachToComponent(PlayerMesh, FAttachmentTransformRules::SnapToTargetIncludingScale, (TEXT("FlagHolder")));
+		}
+		
 	}
 }
+
+
+
 
