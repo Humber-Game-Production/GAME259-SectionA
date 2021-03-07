@@ -26,6 +26,11 @@ void ACapturePoint::BeginPlay()
 	Super::BeginPlay();
 	
 	captureCollisionComp->OnComponentBeginOverlap.AddDynamic(this, &ACapturePoint::OnHit);
+	if (mainFlag != NULL)
+	{
+		//sets flag to be off the game field until it is generated
+		mainFlag->SetActorRelativeLocation(FVector(0, -1000, 0));
+	}
 }
 
 // Called every frame
@@ -55,7 +60,7 @@ void ACapturePoint::OnHit(UPrimitiveComponent* OverlappedComponent,
 			const ETeamIdentifier playersTeam = player->teamID;	
 
 			//If the cap point's team matches the player's team then we do the point logic
-			if ((playersTeam == teamID) && (OtherActor != this) && (OtherComp != NULL))
+			if ((playersTeam == teamID) || (teamID == ETeamIdentifier::None) && (OtherActor != this) && (OtherComp != NULL))
 			{
 				UE_LOG(LogTemp, Warning, TEXT("CapPoint Entered"));
 				flagsCaptured++;
@@ -73,8 +78,10 @@ void ACapturePoint::CheckForFlagConstruction()
 {
 	if (MainFlagCreator == true) {
 		UE_LOG(LogTemp, Warning, TEXT("This is the main flag spot"));
-		if (flagsCaptured >= 6) {
-			//generate main flag here
+		if (flagsCaptured == 6) {
+
+			mainFlag->SetActorRelativeLocation(FVector(this->GetActorLocation()));
+			//main flag spawns on top of capture point
 		}
 	}
 }

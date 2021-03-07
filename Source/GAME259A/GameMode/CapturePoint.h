@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Flag.h"
 #include "GAME259A/GameMode/TeamIdentifier.h"
 #include "CapturePoint.generated.h"
 
@@ -21,6 +22,9 @@ class GAME259A_API ACapturePoint : public AActor
 	int flagsCaptured;
 	UPROPERTY(EditAnywhere)
 	bool MainFlagCreator;
+
+	UPROPERTY(EditAnywhere)
+	class AActor* mainFlag;
 
 	
 public:	
