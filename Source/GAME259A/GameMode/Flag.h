@@ -10,7 +10,7 @@
 
 #include "Flag.generated.h"
 
-UCLASS()
+UCLASS(BlueprintType)
 class GAME259A_API AFlag : public AActor, public IPickUpAndDrop
 {
 	GENERATED_BODY()
@@ -36,7 +36,7 @@ public:
 	UPROPERTY()
 	USceneComponent* Root;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UStaticMeshComponent* Mesh;
 
 	UPROPERTY(EditAnywhere)
