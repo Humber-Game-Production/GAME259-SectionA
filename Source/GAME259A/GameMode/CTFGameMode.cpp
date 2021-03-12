@@ -8,6 +8,7 @@
 #include "TimerManager.h"
 #include "GAME259A/GameMode/CTFGameState.h"
 #include "GAME259A/Public/CTFPlayerState.h"
+#include "GameFramework/HUD.h"
 #include "GAME259A/GameMode/TeamIdentifier.h"
 
 ACTFGameMode::ACTFGameMode()
@@ -17,6 +18,12 @@ ACTFGameMode::ACTFGameMode()
 	if (PlayerPawnBPClass.Class != NULL)
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
+	}
+
+	static ConstructorHelpers::FClassFinder<AHUD> gameHudClass(TEXT("/Game/Game_BP/GameMode/BP_CTFHUD"));
+	if(gameHudClass.Class != NULL)
+	{
+		HUDClass =  gameHudClass.Class; //gameHudClass.Class;
 	}
 
 	GameStateClass = ACTFGameState::StaticClass();

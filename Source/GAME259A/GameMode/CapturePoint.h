@@ -10,7 +10,7 @@
 
 class ACTFPlayerState;
 
-UCLASS()
+UCLASS(Blueprintable)
 class GAME259A_API ACapturePoint : public AActor
 {
 	GENERATED_BODY()

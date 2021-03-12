@@ -6,7 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "CTFGameMode.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class GAME259A_API ACTFGameMode : public AGameModeBase
 {
 	GENERATED_BODY()

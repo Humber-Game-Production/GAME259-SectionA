@@ -23,6 +23,7 @@ void ATeam::BeginPlay()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Team %d's capture point is nullptr"), teamID);
 	}
+	SpawnPlayers();
 }
 
 void ATeam::AddPlayer(ACTFPlayerState* player_)
@@ -45,10 +46,14 @@ void ATeam::AddPoints(int32 value)
 
 void ATeam::SpawnPlayers()
 {
-	
+	UE_LOG(LogTemp, Warning, TEXT("Spawning all players"));
+	for(int i = 0; i < players.Num(); i++)
+	{
+		players[i]->GetPawn()->SetActorLocation(respawnPoints[i]->GetActorLocation(), false, nullptr, ETeleportType::ResetPhysics);
+	}
 }
 
 void ATeam::SpawnPlayer(AActor* player)
 {
-	
+	player->SetActorLocation(respawnPoints[0]->GetActorLocation(), false, nullptr, ETeleportType::ResetPhysics);
 }
