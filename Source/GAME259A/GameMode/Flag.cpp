@@ -5,14 +5,14 @@
 #include "Components/ShapeComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "GAME259A/Public/CTFPlayerState.h"
-
+#include "Kismet/GameplayStatics.h"
 
 
 // Sets default values
 AFlag::AFlag()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+ 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it. Not needed rn
+	//PrimaryActorTick.bCanEverTick = true;
 	
 	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 	RootComponent = Root;
@@ -22,8 +22,6 @@ AFlag::AFlag()
 
 	Capsule = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule"));
 	Capsule->SetupAttachment(Root);
-
-	//Capsule->OnComponentBeginOverlap.AddDynamic(this, &AFlag::OnCapsuleOBeginOverlap_Implementation);
 	
 }
 
@@ -48,9 +46,13 @@ void AFlag::PickUp_Implementation(UPrimitiveComponent* OverlappedComponent,
 		//if it does, attach flag
 		if (hasPlayerState)	{
 			USceneComponent* PlayerMesh = OtherActor->FindComponentByClass<USkeletalMeshComponent>();
-
+			
+			
 			//attach the flag to the socket "FlagHolder" on the character mesh
 			this->AttachToComponent(PlayerMesh, FAttachmentTransformRules::SnapToTargetIncludingScale, (TEXT("FlagHolder")));
+
+			//Enables input so we can test the drop (drop is in blueprints for now)
+			this->EnableInput(UGameplayStatics::GetPlayerController(this, 0));
 		}
 		
 	}
