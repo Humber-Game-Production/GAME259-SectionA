@@ -4,7 +4,7 @@
 #include "Flag.h"
 #include "Components/ShapeComponent.h"
 #include "Components/StaticMeshComponent.h"
-#include "GAME259A/Public/CTFPlayerState.h"
+
 #include "Kismet/GameplayStatics.h"
 
 
@@ -38,21 +38,23 @@ void AFlag::PickUp_Implementation(UPrimitiveComponent* OverlappedComponent,
 {
 	//checks if the OtherActor is a pawn
 	APawn* isPawn = Cast<APawn>(OtherActor);
-
 	if (isPawn) {
 		//if it is, it checks if it has a playerState
 		ACTFPlayerState* hasPlayerState = isPawn->GetPlayerState<ACTFPlayerState>();
 
-		//if it does, attach flag
-		if (hasPlayerState)	{
+		//if it does and player CAN pickup flag, pickup
+		if (hasPlayerState && hasPlayerState->GetCanPickupFlag()) {
 			USceneComponent* PlayerMesh = OtherActor->FindComponentByClass<USkeletalMeshComponent>();
-			
 			
 			//attach the flag to the socket "FlagHolder" on the character mesh
 			this->AttachToComponent(PlayerMesh, FAttachmentTransformRules::SnapToTargetIncludingScale, (TEXT("FlagHolder")));
 
 			//Enables input so we can test the drop (drop is in blueprints for now)
 			this->EnableInput(UGameplayStatics::GetPlayerController(this, 0));
+
+			hasPlayerState->SetFlagHeld(this);
+			//player can only have 1 flag
+			hasPlayerState->SetCanPickupFlag(false);
 		}
 		
 	}

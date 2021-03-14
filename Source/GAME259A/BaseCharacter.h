@@ -92,7 +92,9 @@ protected:
 	UFUNCTION(Category = "Death")
 	void Respawn();
 
-	
+	//For testing death, set to true in BeginPlay -- Added by Declan
+	UPROPERTY()
+	bool isAlive;
 
 public:	
 	// Called every frame

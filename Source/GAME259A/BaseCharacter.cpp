@@ -1,10 +1,12 @@
 #include "BaseCharacter.h"
 #include "Kismet/KismetMathLibrary.h"
 
+#include "CTFPlayerState.h"
+
 
 // Sets default values
 ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
-									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed)
+									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), isAlive(true)
 {
 	//Set the character to not rotate when the mouse is moved, only the camera is rotated.
  	bUseControllerRotationPitch = false;
@@ -39,6 +41,7 @@ ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	
 }
 
 //Called when the player is supposed to move left (Axis = -1) or right (Axis = 1).
@@ -120,6 +123,13 @@ void ABaseCharacter::Death()
 
 	FTimerHandle UnusedTimerHandle;
 	GetWorldTimerManager().SetTimer(UnusedTimerHandle, this, &ABaseCharacter::Respawn, RespawnTime, false);
+
+	//Below code is added by Declan from GameMode Team
+	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+	ctfPlayerState->Death();
+	//Makes it so that player cannot pickup flag when dead
+	ctfPlayerState->SetCanPickupFlag(false);
+	
 }
 
 void ABaseCharacter::Respawn()
@@ -131,11 +141,18 @@ void ABaseCharacter::Respawn()
 void ABaseCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	if (CurrentHealth <= 0)
-	{
-		bIsDead = true;
-		Death();
+	
+	
+	//isAlive = true by default
+	if (isAlive) {
+		//Start dying - COMMENT THIS OUT IF YOU DON'T WANT CHARACTER TO DIE RANDOMLY AFTER A FEW SECONDS
+		CurrentHealth = CurrentHealth - 0.125f;
+		//when he loses all HP
+		if (CurrentHealth <= 0) {
+			bIsDead = true;
+			isAlive = false;
+			Death();
+		}
 	}
 }
 

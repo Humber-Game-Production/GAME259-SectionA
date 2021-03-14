@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerState.h"
 #include "GAME259A/GameMode/TeamIdentifier.h"
+#include "GAME259A/GameMode/Flag.h"
+
 #include "CTFPlayerState.generated.h"
 
 UDELEGATE()
@@ -46,12 +48,31 @@ public:
 	UFUNCTION()
 	void SetTeam(ETeamIdentifier team);
 
+	UFUNCTION()
+	void SetFlagHeld(AFlag* FlagHeld_);
+	
+	UFUNCTION(BlueprintCallable)
+	void SetCanPickupFlag(bool PlayerCanPickupFlag_);
+
+	UFUNCTION(BlueprintCallable)
+	bool GetCanPickupFlag() const;
+	
 	//Adds score to the player's team using teamScoreDelegate
 	UFUNCTION()
 	void AddScore(int32 amountOfPoints);
 	
 	UFUNCTION()
 	void ResetStats();
-	
+
+	UFUNCTION()
+	void Death();
+
+protected:
+	UPROPERTY()
+	AFlag* FlagHeld;
+
+	//Player should only pickup flags if they are Alive and have no other flags
+	UPROPERTY(BlueprintReadWrite)
+	bool PlayerCanPickupFlag;
 };
 
