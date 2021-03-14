@@ -5,9 +5,9 @@
 #include "Components/ShapeComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "GAME259A/Public/CTFPlayerState.h"
-
 #include "Kismet/GameplayStatics.h"
-
+#include "Engine/World.h"
+#include "DrawDebugHelpers.h"
 
 // Sets default values
 AFlag::AFlag()
@@ -50,9 +50,6 @@ void AFlag::PickUp_Implementation(UPrimitiveComponent* OverlappedComponent,
 			//attach the flag to the socket "FlagHolder" on the character mesh
 			this->AttachToComponent(PlayerMesh, FAttachmentTransformRules::SnapToTargetIncludingScale, (TEXT("FlagHolder")));
 
-			//Enables input so we can test the drop (drop is in blueprints for now)
-			this->EnableInput(UGameplayStatics::GetPlayerController(this, 0));
-
 			hasPlayerState->SetFlagHeld(this);
 			//player can only have 1 flag
 			hasPlayerState->SetCanPickupFlag(false);
@@ -61,6 +58,26 @@ void AFlag::PickUp_Implementation(UPrimitiveComponent* OverlappedComponent,
 	}
 }
 
-
+void AFlag::Drop_Implementation()	{
+	//print message
+	if(GEngine)	GEngine->UEngine::AddOnScreenDebugMessage(0, 2.0f, FColor::Blue, TEXT("Flag Dropped"));
+	this->DetachFromActor(FDetachmentTransformRules(EDetachmentRule::KeepWorld,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,false));
+	FHitResult Hit;
+	const FVector Start = this->GetActorLocation();
+	FVector End = Start - FVector(0.0f, 0.0f, 2500.0f);
+	FCollisionQueryParams TraceParams;
+	TraceParams.AddIgnoredActor(this);
+	GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
+	DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 10.0f, 0, 2.0f);
+	
+	if(Hit.IsValidBlockingHit())	{
+		FVector NewLocation(Hit.ImpactPoint + DistanceFromGround);
+		this->SetActorLocation(NewLocation, false);
+	}
+	else	{
+		this->SetActorLocation(InitLocation, false);
+	}
+	
+}
 
 

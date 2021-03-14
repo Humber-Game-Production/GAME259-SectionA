@@ -6,7 +6,7 @@
 
 // Sets default values
 ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
-									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), isAlive(true)
+									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed)
 {
 	//Set the character to not rotate when the mouse is moved, only the camera is rotated.
  	bUseControllerRotationPitch = false;
@@ -126,10 +126,7 @@ void ABaseCharacter::Death()
 
 	//Below code is added by Declan from GameMode Team
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-	ctfPlayerState->Death();
-	//Makes it so that player cannot pickup flag when dead
-	ctfPlayerState->SetCanPickupFlag(false);
-	
+	ctfPlayerState->Death();	
 }
 
 void ABaseCharacter::Respawn()
@@ -143,14 +140,13 @@ void ABaseCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	
 	
-	//isAlive = true by default
-	if (isAlive) {
+	//bIsDead = false by default
+	if (!bIsDead) {
 		//Start dying - COMMENT THIS OUT IF YOU DON'T WANT CHARACTER TO DIE RANDOMLY AFTER A FEW SECONDS
-		//CurrentHealth = CurrentHealth - 0.125f;
+		CurrentHealth = CurrentHealth - 0.125f;
 		//when he loses all HP
 		if (CurrentHealth <= 0) {
 			bIsDead = true;
-			isAlive = false;
 			Death();
 		}
 	}

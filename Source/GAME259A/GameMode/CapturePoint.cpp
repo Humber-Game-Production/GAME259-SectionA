@@ -68,19 +68,15 @@ void ACapturePoint::OnHit(UPrimitiveComponent* OverlappedComponent,
 					if (player->FlagHeld->pointValue < 50) {
 						AddPoints(player->FlagHeld->pointValue, player);
 						player->FlagHeld->InitLocation = FVector(0, -1000, 0);
-						IPickUpAndDrop* isFlag = Cast<IPickUpAndDrop>(player->FlagHeld);
-						isFlag->Execute_Drop(player->FlagHeld);
-						//player->SetCanPickupFlag(true);
-
+						player->PlayerDropFlag();
 					}
-					if ((player->FlagHeld->pointValue >= 50) && (MainFlagCreator == true)) {
+					else if ((player->FlagHeld->pointValue >= 50) && (MainFlagCreator == true)) {
 						flagsCaptured++;
 						GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Flags captured: " + FString::FromInt(flagsCaptured));
 						CheckForFlagConstruction();
 						AddPoints(player->FlagHeld->pointValue, player);
 						player->FlagHeld->InitLocation = FVector(0, -1000, 0);
-						IPickUpAndDrop* isFlag = Cast<IPickUpAndDrop>(player->FlagHeld);
-						isFlag->Execute_Drop(player->FlagHeld);
+						player->PlayerDropFlag();
 					}
 				}
 				UE_LOG(LogTemp, Warning, TEXT("CapPoint Entered"));

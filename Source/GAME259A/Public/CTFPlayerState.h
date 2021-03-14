@@ -67,6 +67,11 @@ public:
 	UFUNCTION()
 	void ResetStats();
 
+	//Player drops flag intentionally. Will re-enable flag pickup
+	UFUNCTION()
+	void PlayerDropFlag();
+
+	//Player will die and drop flag. Player cannot pickup new flags when dead.
 	UFUNCTION()
 	void Death();
 

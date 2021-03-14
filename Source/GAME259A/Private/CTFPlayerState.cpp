@@ -28,6 +28,15 @@ void ACTFPlayerState::ResetStats()
 	flagsCaptured = 0;
 }
 
+void ACTFPlayerState::PlayerDropFlag()	{
+	IPickUpAndDrop* hasFlag = Cast<IPickUpAndDrop>(FlagHeld);
+	if(hasFlag)	{
+		hasFlag->Execute_Drop(FlagHeld);
+		PlayerCanPickupFlag = true;
+		FlagHeld = nullptr;
+	}
+}
+
 void ACTFPlayerState::SetTeam(ETeamIdentifier team)
 {
 	teamID = team;
@@ -46,11 +55,6 @@ bool ACTFPlayerState::GetCanPickupFlag() const	{
 }
 
 void ACTFPlayerState::Death()	{
-
-	IPickUpAndDrop* isFlag = Cast<IPickUpAndDrop>(FlagHeld);
-	if(isFlag)	{
-		isFlag->Execute_Drop(FlagHeld);
-		PlayerCanPickupFlag = false;
-		FlagHeld = nullptr;
-	}
+	PlayerDropFlag();
+	PlayerCanPickupFlag = false;
 }
