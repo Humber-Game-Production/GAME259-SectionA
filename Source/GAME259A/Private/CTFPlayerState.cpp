@@ -51,5 +51,6 @@ void ACTFPlayerState::Death()	{
 	if(isFlag)	{
 		isFlag->Execute_Drop(FlagHeld);
 		PlayerCanPickupFlag = false;
+		FlagHeld = nullptr;
 	}
 }

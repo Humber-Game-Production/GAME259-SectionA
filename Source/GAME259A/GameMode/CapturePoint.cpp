@@ -30,6 +30,8 @@ void ACapturePoint::BeginPlay()
 	{
 		//sets flag to be off the game field until it is generated
 		mainFlag->SetActorRelativeLocation(FVector(0, -1000, 0));
+		AFlag* flagMain = Cast<AFlag>(mainFlag);
+		flagMain->InitLocation = flagMain->GetActorLocation();
 	}
 }
 
@@ -62,13 +64,26 @@ void ACapturePoint::OnHit(UPrimitiveComponent* OverlappedComponent,
 			//If the cap point's team matches the player's team then we do the point logic
 			if ((playersTeam == teamID) || (teamID == ETeamIdentifier::None) && (OtherActor != this) && (OtherComp != NULL))
 			{
-				UE_LOG(LogTemp, Warning, TEXT("CapPoint Entered"));
-				flagsCaptured++;
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Flags captured: " + FString::FromInt(flagsCaptured));
-				CheckForFlagConstruction();
+				if (player->FlagHeld != nullptr) {
+					if (player->FlagHeld->pointValue < 50) {
+						AddPoints(player->FlagHeld->pointValue, player);
+						player->FlagHeld->InitLocation = FVector(0, -1000, 0);
+						IPickUpAndDrop* isFlag = Cast<IPickUpAndDrop>(player->FlagHeld);
+						isFlag->Execute_Drop(player->FlagHeld);
+						//player->SetCanPickupFlag(true);
 
-				//PlaceHolder value until the Flags are connected to the players
-				AddPoints(50, player);
+					}
+					if ((player->FlagHeld->pointValue >= 50) && (MainFlagCreator == true)) {
+						flagsCaptured++;
+						GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Flags captured: " + FString::FromInt(flagsCaptured));
+						CheckForFlagConstruction();
+						AddPoints(player->FlagHeld->pointValue, player);
+						player->FlagHeld->InitLocation = FVector(0, -1000, 0);
+						IPickUpAndDrop* isFlag = Cast<IPickUpAndDrop>(player->FlagHeld);
+						isFlag->Execute_Drop(player->FlagHeld);
+					}
+				}
+				UE_LOG(LogTemp, Warning, TEXT("CapPoint Entered"));
 			}
 		}
 	}
@@ -82,6 +97,7 @@ void ACapturePoint::CheckForFlagConstruction()
 
 			mainFlag->SetActorRelativeLocation(FVector(this->GetActorLocation()));
 			//main flag spawns on top of capture point
+			//mainFlag->SetActorEnableCollision(false);
 		}
 	}
 }
@@ -90,5 +106,13 @@ void ACapturePoint::AddPoints(int32 points, ACTFPlayerState* player)
 {
 	//Add points from team
 	player->AddScore(points);
+}
+
+void ACapturePoint::RoundReset()
+{
+	flagsCaptured = 0;
+	if ((MainFlagCreator == true) && (mainFlag != NULL)) {
+		mainFlag->SetActorRelativeLocation(FVector(0, -1000, 0));
+	}
 }
 

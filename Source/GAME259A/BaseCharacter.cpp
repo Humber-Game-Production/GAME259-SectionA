@@ -146,7 +146,7 @@ void ABaseCharacter::Tick(float DeltaTime)
 	//isAlive = true by default
 	if (isAlive) {
 		//Start dying - COMMENT THIS OUT IF YOU DON'T WANT CHARACTER TO DIE RANDOMLY AFTER A FEW SECONDS
-		CurrentHealth = CurrentHealth - 0.125f;
+		//CurrentHealth = CurrentHealth - 0.125f;
 		//when he loses all HP
 		if (CurrentHealth <= 0) {
 			bIsDead = true;

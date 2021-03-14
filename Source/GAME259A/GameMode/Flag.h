@@ -6,7 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/CapsuleComponent.h"
 #include "PickUpAndDrop.h"
-#include "GAME259A/Public/CTFPlayerState.h"
+
 
 #include "Flag.generated.h"
 

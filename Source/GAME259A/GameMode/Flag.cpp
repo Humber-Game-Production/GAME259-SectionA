@@ -4,6 +4,7 @@
 #include "Flag.h"
 #include "Components/ShapeComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "GAME259A/Public/CTFPlayerState.h"
 
 #include "Kismet/GameplayStatics.h"
 

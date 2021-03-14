@@ -40,6 +40,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	int32 flagsCaptured;
 
+	UPROPERTY()
+	AFlag* FlagHeld;
+
 	//This delegate is called whenever this player scores for their team
 	UPROPERTY(BlueprintAssignable, Category = "EventDispatchers")
 	FAddScoreToTeam teamScoreDelegate;
@@ -68,8 +71,7 @@ public:
 	void Death();
 
 protected:
-	UPROPERTY()
-	AFlag* FlagHeld;
+	
 
 	//Player should only pickup flags if they are Alive and have no other flags
 	UPROPERTY(BlueprintReadWrite)

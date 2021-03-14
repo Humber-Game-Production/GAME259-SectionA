@@ -55,6 +55,8 @@ public:
 	void CheckForFlagConstruction();
 	UFUNCTION()
 	void AddPoints(int32 points, ACTFPlayerState* player);
+	UFUNCTION()
+	void RoundReset();
 
 
 };
