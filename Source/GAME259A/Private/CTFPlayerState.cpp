@@ -29,13 +29,9 @@ void ACTFPlayerState::ResetStats()
 }
 
 void ACTFPlayerState::PlayerDropFlag()	{
-	IPickUpAndDrop* hasFlag = Cast<IPickUpAndDrop>(FlagHeld);
-	if(hasFlag)	{
-		hasFlag->Execute_Drop(FlagHeld);
-		AMainFlag* MainFlag = Cast<AMainFlag>(hasFlag);
-		if(MainFlag){
-			
-		}
+	if(FlagHeld)
+	{
+		FlagHeld->Execute_Drop(FlagHeld);
 		PlayerCanPickupFlag = true;
 		FlagHeld = nullptr;
 	}
@@ -58,7 +54,7 @@ bool ACTFPlayerState::GetCanPickupFlag() const	{
 	return PlayerCanPickupFlag;
 }
 
-void ACTFPlayerState::Death()	{
+void ACTFPlayerState::OnDeath()	{
 	PlayerDropFlag();
 	PlayerCanPickupFlag = false;
 }

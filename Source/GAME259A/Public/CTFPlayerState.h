@@ -73,7 +73,7 @@ public:
 
 	//Player will die and drop flag. Player cannot pickup new flags when dead.
 	UFUNCTION()
-	void Death();
+	void OnDeath();
 
 protected:
 

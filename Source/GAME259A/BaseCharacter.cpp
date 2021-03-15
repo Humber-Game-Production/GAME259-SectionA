@@ -126,7 +126,7 @@ void ABaseCharacter::Death()
 
 	//Below code is added by Declan from GameMode Team
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-	ctfPlayerState->Death();	
+	ctfPlayerState->OnDeath();	
 }
 
 void ABaseCharacter::Respawn()
