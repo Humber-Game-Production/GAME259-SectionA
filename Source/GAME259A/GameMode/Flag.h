@@ -9,17 +9,32 @@
 #include "TeamIdentifier.h"
 #include "Flag.generated.h"
 
+USTRUCT(BlueprintType)
+struct FUColourPair
+{
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FLinearColor baseColour = FLinearColor::Gray;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FLinearColor emissiveColour = FLinearColor::Gray;
+};
+
 UCLASS(BlueprintType)
 class GAME259A_API AFlag : public AActor, public IPickUpAndDrop
 {
 	GENERATED_BODY()
 	
-public:	
+public:
 	// Sets default values for this actor's properties
 	AFlag();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UFUNCTION(BlueprintCallable)
+	void ChangeColour();
 
 	//Flag pickup when the capsule overlaps with the player(OtherActor)
 	UFUNCTION()
@@ -30,11 +45,11 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	ETeamIdentifier owningTeam;
-	
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UMaterialInstanceDynamic* matInstance;
 public:	
-	// ( FComponentBeginOverlapSignature, UPrimitiveComponent, OnComponentBeginOverlap, UPrimitiveComponent*, OverlappedComponent, AActor*, OtherActor, UPrimitiveComponent*, OtherComp, int32, OtherBodyIndex, bool, bFromSweep, const FHitResult &, SweepResult)
-
-
+	
 	UPROPERTY()
 	USceneComponent* Root;
 
@@ -52,4 +67,12 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	FVector DistanceFromGround;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FUColourPair noTeamColour;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FUColourPair humanTeamColour;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FUColourPair alienTeamColour;
+	
 };

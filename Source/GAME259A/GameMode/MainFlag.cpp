@@ -37,4 +37,5 @@ void AMainFlag::Drop_Implementation()
 
 void AMainFlag::ReserveFlag(){
 	owningTeam = ETeamIdentifier::None;
+	AFlag::ChangeColour();
 }

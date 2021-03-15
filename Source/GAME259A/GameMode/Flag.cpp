@@ -26,6 +26,30 @@ AFlag::AFlag()
 	
 }
 
+void AFlag::ChangeColour()
+{
+	if(matInstance)
+	{
+		switch(owningTeam)
+		{
+		case ETeamIdentifier::None:
+			matInstance->SetVectorParameterValue(FName("Color"), noTeamColour.baseColour);
+			matInstance->SetVectorParameterValue(FName("Ecolor"), noTeamColour.emissiveColour);
+			break;
+		case ETeamIdentifier::Human:
+			matInstance->SetVectorParameterValue(FName("Color"), humanTeamColour.baseColour);
+			matInstance->SetVectorParameterValue(FName("Ecolor"), humanTeamColour.emissiveColour);
+			break;
+		case ETeamIdentifier::Alien:
+			matInstance->SetVectorParameterValue(FName("Color"), alienTeamColour.baseColour);
+			matInstance->SetVectorParameterValue(FName("Ecolor"), alienTeamColour.emissiveColour);
+			break;
+		default:
+			break;
+		}
+	}
+}
+
 // Called when the game starts or when spawned
 void AFlag::BeginPlay()
 {
@@ -48,6 +72,7 @@ void AFlag::PickUp_Implementation(UPrimitiveComponent* OverlappedComponent,
 			USceneComponent* PlayerMesh = OtherActor->FindComponentByClass<USkeletalMeshComponent>();
 
 			owningTeam = hasPlayerState->teamID;
+			ChangeColour();
 			
 			//attach the flag to the socket "FlagHolder" on the character mesh
 			this->AttachToComponent(PlayerMesh, FAttachmentTransformRules::SnapToTargetIncludingScale, (TEXT("FlagHolder")));
