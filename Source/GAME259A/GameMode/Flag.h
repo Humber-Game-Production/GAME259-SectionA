@@ -7,7 +7,6 @@
 #include "Components/CapsuleComponent.h"
 #include "PickUpAndDrop.h"
 
-
 #include "Flag.generated.h"
 
 UCLASS(BlueprintType)

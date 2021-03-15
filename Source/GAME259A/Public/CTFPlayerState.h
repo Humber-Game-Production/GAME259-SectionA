@@ -76,7 +76,6 @@ public:
 	void Death();
 
 protected:
-	
 
 	//Player should only pickup flags if they are Alive and have no other flags
 	UPROPERTY(BlueprintReadWrite)

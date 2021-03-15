@@ -2,7 +2,7 @@
 
 
 #include "CTFPlayerState.h"
-//#include "GAME259A/GameMode/PickUpAndDrop.h"
+#include "GAME259A/GameMode/MainFlag.h"
 
 ACTFPlayerState::ACTFPlayerState(): teamID(ETeamIdentifier::Human), pointsEarned(0), kills(0), deaths(0),
 flagsCaptured(0), FlagHeld(nullptr), PlayerCanPickupFlag(true)
@@ -32,6 +32,10 @@ void ACTFPlayerState::PlayerDropFlag()	{
 	IPickUpAndDrop* hasFlag = Cast<IPickUpAndDrop>(FlagHeld);
 	if(hasFlag)	{
 		hasFlag->Execute_Drop(FlagHeld);
+		AMainFlag* MainFlag = Cast<AMainFlag>(hasFlag);
+		if(MainFlag){
+			
+		}
 		PlayerCanPickupFlag = true;
 		FlagHeld = nullptr;
 	}
