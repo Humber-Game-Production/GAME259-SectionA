@@ -55,6 +55,9 @@ protected:
 
 	float RespawnTime;					//The amount of time required for the character to respawn.
 
+	//Jump timer handle
+	FTimerHandle JumpTimer;
+
 	//Handle to manage the respawn timer.
 	FTimerHandle RespawnTimerHandle;
 
@@ -77,6 +80,8 @@ protected:
 	void Sprint();
 	UFUNCTION(Category = "Movement", BlueprintCallable)
 	void StopSprinting();
+	UFUNCTION(Category = "Movement", BlueprintCallable)
+	void StartJump();
 
 	//Abilities
 	UFUNCTION(Category = "Abilities")

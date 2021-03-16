@@ -1,10 +1,11 @@
 #include "BaseCharacter.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "TimerManager.h"
 
 
 // Sets default values
 ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
-									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed)
+									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), JumpVelocity(500.0f)
 {
 	//Set the character to not rotate when the mouse is moved, only the camera is rotated.
  	bUseControllerRotationPitch = false;
@@ -74,6 +75,11 @@ void ABaseCharacter::StopSprinting()
 //	CurrentMoveSpeed = MaxWalkSpeed;
 	//GetCharacterMovement()->MaxWalkSpeed = CurrentMoveSpeed;
 	bIsSprinting = false;
+}
+
+void ABaseCharacter::StartJump()
+{
+	//SetTimer(&JumpTimer, this, &ACharacter::Jump, 0.0f, false, 0.02);
 }
 
 
