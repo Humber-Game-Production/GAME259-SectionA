@@ -75,7 +75,7 @@ public:
 
 	//Spawns a single player on this team
 	UFUNCTION(BlueprintCallable)
-	void SpawnPlayer(AActor* player);
+	void SpawnPlayer(APawn* pawn);
 
 private:
 	HIDE_ACTOR_TRANSFORM_FUNCTIONS();

@@ -49,7 +49,7 @@ protected:
 	bool bIsSlowed;						//True if the character is slowed via crowd control.
 	UPROPERTY(BlueprintReadOnly, Category = "CCStatus")
 	bool bIsStunned;					//True if the character is stunned via crowd control.
-
+	UPROPERTY(BlueprintReadWrite, Category = "Death")
 	float RespawnTime;					//The amount of time required for the character to respawn.
 
 	//Handle to manage the respawn timer.

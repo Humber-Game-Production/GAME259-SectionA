@@ -6,6 +6,8 @@
 #include "GameFramework/GameModeBase.h"
 #include "CTFGameMode.generated.h"
 
+class ACTFGameState;
+
 UCLASS(Blueprintable)
 class GAME259A_API ACTFGameMode : public AGameModeBase
 {
@@ -24,9 +26,6 @@ public:
 
 	UFUNCTION()
 	void RoundReset();
-
-	UFUNCTION()
-	void SubtractTime();
 
 	//Change later to return a team
 	UFUNCTION()
@@ -48,13 +47,12 @@ public:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Game Rules")
 	int currentRound;
 
-	//Place holder for team1 points
-	UPROPERTY(EditAnywhere)
-	int team1Points;
 
-	//Place holder for team2 points
-	UPROPERTY(EditAnywhere)
-	int team2Points;
+	const int* humanPoints;
+	const int* alienPoints;
 
 	FTimerHandle timerHandle;
+
+	UPROPERTY(BlueprintReadWrite)
+	ACTFGameState* ctfGameState;
 };

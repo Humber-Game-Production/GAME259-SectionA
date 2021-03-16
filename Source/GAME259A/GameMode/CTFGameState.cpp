@@ -5,6 +5,7 @@
 #include "TimerManager.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 #include "GAME259A/Public/CTFPlayerState.h"
+#include "CTFGameMode.h"
 
 ACTFGameState::ACTFGameState()
 {
@@ -59,6 +60,10 @@ void ACTFGameState::InitTeams()
 		listOfTeams.Add(currentTeam->teamID, currentTeam);
 	}
 
+	Cast<ACTFGameMode>(AuthorityGameMode)->ctfGameState = this;
+	Cast<ACTFGameMode>(AuthorityGameMode)->humanPoints = &listOfTeams[ETeamIdentifier::Human]->points;
+	Cast<ACTFGameMode>(AuthorityGameMode)->alienPoints = &listOfTeams[ETeamIdentifier::Alien]->points;
+	
 	for(int i = 0; i < PlayerArray.Num(); i++)
 	{
 		if(i % 2 == 0)

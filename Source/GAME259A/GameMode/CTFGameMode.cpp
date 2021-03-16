@@ -33,11 +33,12 @@ ACTFGameMode::ACTFGameMode()
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.SetTickFunctionEnable(true);
 
-	team1Points = 26;
-	team2Points = 16;
-	timerTime = 5.f;
+	humanPoints = nullptr;// &ctfGameState->listOfTeams[ETeamIdentifier::Human]->points;
+	alienPoints = nullptr;// &ctfGameState->listOfTeams[ETeamIdentifier::Alien]->points;
+	
+	timerTime = 20.0f;
 	maxRounds = 5;
-	currentRound = maxRounds;
+	currentRound = 1;
 }
 
 void ACTFGameMode::BeginPlay()
@@ -78,13 +79,13 @@ void ACTFGameMode::EndRound() {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Round " + FString::FromInt(currentRound) + " over");
 	
 	//Reduces the amount of rounds left
-	currentRound--;
+	currentRound++;
 
 	//Prints out how many rounds are left
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::FromInt(currentRound) + " rounds remaining");
 
 	//Checks to see if a win condition is met
-	if (currentRound == 0) {
+	if (currentRound >= maxRounds) {
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Game ends."));
 	}
 	else
@@ -92,7 +93,7 @@ void ACTFGameMode::EndRound() {
 		//Intermission? (pause)
 		if (WinCheck())
 		{
-			if (team1Points > team2Points)
+			if (*humanPoints > *alienPoints)
 			{
 				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Magenta, TEXT("Team1 wins"));
 			}
@@ -108,44 +109,47 @@ void ACTFGameMode::EndRound() {
 //Current only debug messages and a timer reset
 void ACTFGameMode::RoundReset() {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Flags respawn."));
+
+	for (auto team : ctfGameState->listOfTeams)
+	{
+		team.Value->SpawnPlayers();
+	}
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Players respawn."));
 	GetWorldTimerManager().SetTimer(timerHandle, this, &ACTFGameMode::EndRound, timerTime);
 }
 
-
-void ACTFGameMode::SubtractTime() {
-	if (GetWorldTimerManager().TimerExists(timerHandle)) {
-		GetWorldTimerManager().SetTimer(timerHandle, this, &ACTFGameMode::EndRound, GetWorldTimerManager().GetTimerRemaining(timerHandle) - 1);
-	}
-}
 
 //Will return winning team later for now it is just checking to see if there is a winner
 bool ACTFGameMode::WinCheck()
 {
 	switch (currentRound)
 	{
-	case(2): if (team1Points - team2Points > 18)
-	{
-		return true;
-	}
-		   else if (team2Points - team1Points > 18)
-	{
-		return true;
-	}
-		   else
+		case(2): 
+		if (*humanPoints - *alienPoints > 18)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *humanPoints, *alienPoints);
+			return true;
+		}
+		else if (*alienPoints - *humanPoints > 18)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *humanPoints, *alienPoints);
+			return true;
+		}
 		break;
-	case(1): if (team1Points - team2Points > 9)
-	{
-		return true;
-	}
-		   else if (team2Points - team1Points > 9)
-	{
-		return true;
-	}
-		   else
+		case(1): 
+		if (*humanPoints - *alienPoints > 9)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *humanPoints, *alienPoints);
+			return true;
+		}
+		else if (*alienPoints - *humanPoints > 9)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *humanPoints, *alienPoints);
+			return true;
+		}
 		break;
-	case(0): return true;
-	default: break;
+		default: 
+		break;
 	}
 	return false;
 }

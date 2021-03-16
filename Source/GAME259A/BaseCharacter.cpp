@@ -1,12 +1,12 @@
 #include "BaseCharacter.h"
 #include "Kismet/KismetMathLibrary.h"
-
+#include "GAME259A/GameMode/CTFGameState.h"
 #include "CTFPlayerState.h"
 
 
 // Sets default values
 ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
-									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed)
+									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), RespawnTime(3.0f)
 {
 	//Set the character to not rotate when the mouse is moved, only the camera is rotated.
  	bUseControllerRotationPitch = false;
@@ -126,12 +126,23 @@ void ABaseCharacter::Death()
 
 	//Below code is added by Declan from GameMode Team
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-	ctfPlayerState->OnDeath();	
+	if(ctfPlayerState)
+	{
+		ctfPlayerState->OnDeath();
+	}
 }
 
 void ABaseCharacter::Respawn()
 {
-	
+	ACTFPlayerState* ctfPlayerState = GetPlayerState<ACTFPlayerState>();
+	if(ctfPlayerState)
+	{
+		if(ACTFGameState* gameState = Cast<ACTFGameState>(GetWorld()->GetGameState()))
+		{
+			gameState->listOfTeams[ctfPlayerState->teamID]->SpawnPlayer(this);
+		}
+	}
+	this->Destroy();
 }
 
 // Called every frame
@@ -143,7 +154,7 @@ void ABaseCharacter::Tick(float DeltaTime)
 	//bIsDead = false by default
 	if (!bIsDead) {
 		//Start dying - COMMENT THIS OUT IF YOU DON'T WANT CHARACTER TO DIE RANDOMLY AFTER A FEW SECONDS
-		//CurrentHealth = CurrentHealth - 0.125f;
+
 		//when he loses all HP
 		if (CurrentHealth <= 0) {
 			bIsDead = true;
@@ -179,4 +190,7 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	//PlayerInputComponent->BindAxis("TurnRate", this, &ABaseCharacter::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	//PlayerInputComponent->BindAxis("LookUpRate", this, &ABaseCharacter::LookUpAtRate);
+
+
+	PlayerInputComponent->BindAction("KillBind", IE_Pressed, this, &ABaseCharacter::Death);
 }

@@ -49,11 +49,22 @@ void ATeam::SpawnPlayers()
 	UE_LOG(LogTemp, Warning, TEXT("Spawning all players"));
 	for(int i = 0; i < players.Num(); i++)
 	{
-		players[i]->GetPawn()->SetActorLocation(respawnPoints[i]->GetActorLocation(), false, nullptr, ETeleportType::ResetPhysics);
+		SpawnPlayer(players[i]->GetPawn());
 	}
 }
 
-void ATeam::SpawnPlayer(AActor* player)
+void ATeam::SpawnPlayer(APawn* pawn)
 {
-	player->SetActorLocation(respawnPoints[0]->GetActorLocation(), false, nullptr, ETeleportType::ResetPhysics);
+	const FVector location = respawnPoints[0]->GetActorLocation();
+	const FRotator rotation = respawnPoints[0]->GetActorRotation();
+	
+	AActor* player = GetWorld()->SpawnActor(playerType, &location, &rotation);
+	APawn* newPawn = Cast<APawn>(player);
+	AController* controller = pawn->GetController();
+	
+	controller->UnPossess();
+	newPawn->SetPlayerState(pawn->GetPlayerState());
+	controller->Possess(newPawn);
+
+	newPawn->GetPlayerState<ACTFPlayerState>()->SetCanPickupFlag(true);
 }
