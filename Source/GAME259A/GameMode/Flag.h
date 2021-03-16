@@ -29,6 +29,8 @@ public:
 	// Sets default values for this actor's properties
 	AFlag();
 
+	UFUNCTION()
+	virtual void Capture();
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -38,10 +40,11 @@ protected:
 
 	//Flag pickup when the capsule overlaps with the player(OtherActor)
 	UFUNCTION()
-	void PickUp_Implementation(UPrimitiveComponent* OverlappedComponent,
+	virtual void PickUp_Implementation(UPrimitiveComponent* OverlappedComponent,
 		AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 	UFUNCTION()
-	void Drop_Implementation() override;
+	virtual void Drop_Implementation() override;
+
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	ETeamIdentifier owningTeam;

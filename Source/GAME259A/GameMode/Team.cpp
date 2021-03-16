@@ -49,7 +49,10 @@ void ATeam::SpawnPlayers()
 	UE_LOG(LogTemp, Warning, TEXT("Spawning all players"));
 	for(int i = 0; i < players.Num(); i++)
 	{
+		APawn* pawn = players[i]->GetPawn();
+		players[i]->OnDeath();
 		SpawnPlayer(players[i]->GetPawn());
+		pawn->Destroy();
 	}
 }
 

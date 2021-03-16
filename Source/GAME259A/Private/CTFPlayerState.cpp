@@ -37,6 +37,17 @@ void ACTFPlayerState::PlayerDropFlag()	{
 	}
 }
 
+void ACTFPlayerState::CaptureFlag()
+{
+	if(FlagHeld)
+	{
+		AddScore(FlagHeld->pointValue);
+		FlagHeld->Capture();
+		PlayerCanPickupFlag = true;
+		FlagHeld = nullptr;
+	}
+}
+
 void ACTFPlayerState::SetTeam(ETeamIdentifier team)
 {
 	teamID = team;

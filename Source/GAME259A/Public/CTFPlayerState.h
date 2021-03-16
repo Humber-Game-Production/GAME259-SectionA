@@ -71,6 +71,9 @@ public:
 	UFUNCTION()
 	void PlayerDropFlag();
 
+	UFUNCTION()
+	void CaptureFlag();
+
 	//Player will die and drop flag. Player cannot pickup new flags when dead.
 	UFUNCTION()
 	void OnDeath();

@@ -35,6 +35,12 @@ void AMainFlag::Drop_Implementation()
 	
 }
 
+void AMainFlag::Capture()
+{
+	AFlag::Capture();
+	this->Destroy();
+}
+
 void AMainFlag::ReserveFlag(){
 	owningTeam = ETeamIdentifier::None;
 	AFlag::ChangeColour();

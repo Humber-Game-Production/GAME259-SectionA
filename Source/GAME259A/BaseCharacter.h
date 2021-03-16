@@ -80,7 +80,9 @@ protected:
 	void UseAbilityOne();
 	UFUNCTION(Category = "Abilities")
 	void UseAbilityTwo();
-
+	UFUNCTION()
+	void DropFlag();
+	
 	//Combat Actions
 	UFUNCTION(Category = "Combat")
 	void UseMeleeAttack();

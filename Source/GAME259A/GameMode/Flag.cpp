@@ -108,4 +108,9 @@ void AFlag::Drop_Implementation()	{
 	
 }
 
+void AFlag::Capture()
+{
+	Drop_Implementation();
+}
+
 

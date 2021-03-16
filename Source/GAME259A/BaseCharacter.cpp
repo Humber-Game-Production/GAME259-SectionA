@@ -106,6 +106,15 @@ void ABaseCharacter::UseAbilityTwo()
 	//Fill in when the ability class is finished.
 }
 
+void ABaseCharacter::DropFlag()
+{
+	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+	if(ctfPlayerState)
+	{
+		ctfPlayerState->PlayerDropFlag();
+	}
+}
+
 void ABaseCharacter::UseMeleeAttack()
 {
 	//TODO (Combat)
@@ -191,6 +200,7 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	//PlayerInputComponent->BindAxis("LookUpRate", this, &ABaseCharacter::LookUpAtRate);
 
-
+	//Made by GameMode team
 	PlayerInputComponent->BindAction("KillBind", IE_Pressed, this, &ABaseCharacter::Death);
+	PlayerInputComponent->BindAction("DropFlag", IE_Pressed, this, &ABaseCharacter::DropFlag);
 }
