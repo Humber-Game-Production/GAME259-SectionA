@@ -1,7 +1,5 @@
 #include "BaseCharacter.h"
 #include "Kismet/KismetMathLibrary.h"
-#include "TimerManager.h"
-
 
 // Sets default values
 ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
@@ -80,6 +78,7 @@ void ABaseCharacter::StopSprinting()
 void ABaseCharacter::StartJump()
 {
 	//SetTimer(&JumpTimer, this, &ACharacter::Jump, 0.0f, false, 0.02);
+	GetWorld()->GetTimerManager().SetTimer(JumpTimer, this, &ACharacter::Jump, 0.5f, false);
 }
 
 
@@ -165,7 +164,7 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	//Fill this in with character input *IF* we plan on doing input inside this class instead of a seperate one.
 
 	check(PlayerInputComponent);
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ABaseCharacter::StartJump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &ABaseCharacter::Sprint);
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &ABaseCharacter::StopSprinting);
