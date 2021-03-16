@@ -106,6 +106,8 @@ void ABaseCharacter::UseAbilityTwo()
 void ABaseCharacter::UseMeleeAttack()
 {
 	//TODO (Combat)
+	bIsSwinging = true;
+	
 }
 
 void ABaseCharacter::UseRangedAttack()
@@ -116,10 +118,10 @@ void ABaseCharacter::UseRangedAttack()
 void ABaseCharacter::Death()
 {
 	//Rag doll if the player is dead.
-	GetMesh()->SetSimulatePhysics(true);
+	GetMesh()->SetAllBodiesSimulatePhysics(true);
 
-	FTimerHandle UnusedTimerHandle;
-	GetWorldTimerManager().SetTimer(UnusedTimerHandle, this, &ABaseCharacter::Respawn, RespawnTime, false);
+	//FTimerHandle UnusedTimerHandle;
+	//GetWorldTimerManager().SetTimer(UnusedTimerHandle, this, &ABaseCharacter::Respawn, RespawnTime, false);
 }
 
 void ABaseCharacter::Respawn()
@@ -132,10 +134,19 @@ void ABaseCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (CurrentHealth <= 0)
+	if (!bIsDead)
 	{
-		bIsDead = true;
-		Death();
+		if (CurrentHealth <= 0)
+		{
+			bIsDead = true;
+			Death();
+			
+		}
+	}
+
+	if (bIsSwinging)
+	{
+		bIsSwinging = false;
 	}
 }
 

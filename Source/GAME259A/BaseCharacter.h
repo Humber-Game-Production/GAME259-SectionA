@@ -50,6 +50,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "CCStatus")
 	bool bIsStunned;					//True if the character is stunned via crowd control.
 
+	UPROPERTY(BlueprintReadWrite, Category = "AnimControl")
+	bool bIsSwinging;					//True if the player just input to melee attack.
+
 	float RespawnTime;					//The amount of time required for the character to respawn.
 
 	//Handle to manage the respawn timer.
