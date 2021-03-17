@@ -51,14 +51,8 @@ private:
 	
 	void ResetAbilityCoolDown();
 
-
-
 	UPROPERTY()
 		bool isAiming = true;
-	UPROPERTY()
-		ASplineEndPointActor* EndPoint;
-	UPROPERTY()
-		USplineComponent* PredictionSpline;
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
 		TSubclassOf<AActor> ActorToSpawn;
 
