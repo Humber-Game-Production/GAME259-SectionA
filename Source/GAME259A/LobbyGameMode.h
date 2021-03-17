@@ -21,9 +21,18 @@ public:
 	virtual void Tick(const float deltaTime) override;
 	void ServerUpdateGameOptions(int MapID_, int TimeID_);
 
+	TArray<class APlayerController*> PlayerControllerList;
+	// Overriding the PostLogin function
+	virtual void PostLogin(APlayerController* NewPlayer) override;
+
+
 private:
 	int MapID;
 	int TimeID;
+
+	// Maximum Number of Players needed/allowed during this Match
+	int32 MaxNumPlayers;
+
 	ALobbyGameMode* lobbyGameMode;
 	/*PlayerInfo connectedPlayers[6];
 	Texture2D* MapDisplay;*/

@@ -42,6 +42,8 @@ protected:
 	float MaxHealth;					//The character's maximum health. CurrentHealth will be set to this value on initialization and if the value ever exceeds this.
 	UPROPERTY(BlueprintReadOnly, Category = "Health")
 	float CurrentHealth;				//The character's current health.
+	UPROPERTY(BlueprintReadWrite, Category = "Death")
+	float RespawnTime;					//The amount of time required for the character to respawn.
 	
 	UPROPERTY(BlueprintReadOnly, Category = "CCStatus")
 	bool bIsDead;						//True if the character is dead.
@@ -49,8 +51,12 @@ protected:
 	bool bIsSlowed;						//True if the character is slowed via crowd control.
 	UPROPERTY(BlueprintReadOnly, Category = "CCStatus")
 	bool bIsStunned;					//True if the character is stunned via crowd control.
-	UPROPERTY(BlueprintReadWrite, Category = "Death")
-	float RespawnTime;					//The amount of time required for the character to respawn.
+	UPROPERTY(BlueprintReadWrite, Category = "AnimControl")
+	bool bIsSwinging;					//True if the player just input to melee attack.
+
+
+	//Jump timer handle
+	FTimerHandle JumpTimer;
 
 	//Handle to manage the respawn timer.
 	FTimerHandle RespawnTimerHandle;
@@ -74,6 +80,8 @@ protected:
 	void Sprint();
 	UFUNCTION(Category = "Movement", BlueprintCallable)
 	void StopSprinting();
+	UFUNCTION(Category = "Movement", BlueprintCallable)
+	void StartJump();
 
 	//Abilities
 	UFUNCTION(Category = "Abilities")
@@ -84,9 +92,9 @@ protected:
 	void DropFlag();
 	
 	//Combat Actions
-	UFUNCTION(Category = "Combat")
+	UFUNCTION(Category = "Combat", BlueprintCallable)
 	void UseMeleeAttack();
-	UFUNCTION(Category = "Combat")
+	UFUNCTION(Category = "Combat", BlueprintCallable)
 	void UseRangedAttack();
 
 	UFUNCTION(Category = "Death")

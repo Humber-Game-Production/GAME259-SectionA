@@ -3,10 +3,10 @@
 #include "GAME259A/GameMode/CTFGameState.h"
 #include "CTFPlayerState.h"
 
-
 // Sets default values
 ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
-									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), RespawnTime(3.0f)
+									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), JumpVelocity(500.0f), RespawnTime(3.0f)
+
 {
 	//Set the character to not rotate when the mouse is moved, only the camera is rotated.
  	bUseControllerRotationPitch = false;
@@ -79,6 +79,12 @@ void ABaseCharacter::StopSprinting()
 	bIsSprinting = false;
 }
 
+void ABaseCharacter::StartJump()
+{
+	//SetTimer(&JumpTimer, this, &ACharacter::Jump, 0.0f, false, 0.02);
+	GetWorld()->GetTimerManager().SetTimer(JumpTimer, this, &ACharacter::Jump, 0.5f, false);
+}
+
 
 //Called when the player is supposed to move forward (Axis = 1) or backward (Axis = -1).
 void ABaseCharacter::MoveForward(float Axis)
@@ -118,6 +124,8 @@ void ABaseCharacter::DropFlag()
 void ABaseCharacter::UseMeleeAttack()
 {
 	//TODO (Combat)
+	bIsSwinging = true;
+	
 }
 
 void ABaseCharacter::UseRangedAttack()
@@ -128,7 +136,7 @@ void ABaseCharacter::UseRangedAttack()
 void ABaseCharacter::Death()
 {
 	//Rag doll if the player is dead.
-	GetMesh()->SetSimulatePhysics(true);
+	GetMesh()->SetAllBodiesSimulatePhysics(true);
 
 	FTimerHandle UnusedTimerHandle;
 	GetWorldTimerManager().SetTimer(UnusedTimerHandle, this, &ABaseCharacter::Respawn, RespawnTime, false);
@@ -158,17 +166,20 @@ void ABaseCharacter::Respawn()
 void ABaseCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
-	
-	//bIsDead = false by default
-	if (!bIsDead) {
-		//Start dying - COMMENT THIS OUT IF YOU DON'T WANT CHARACTER TO DIE RANDOMLY AFTER A FEW SECONDS
 
-		//when he loses all HP
-		if (CurrentHealth <= 0) {
+	if (!bIsDead)
+	{
+		if (CurrentHealth <= 0)
+		{
 			bIsDead = true;
 			Death();
+			
 		}
+	}
+
+	if (bIsSwinging)
+	{
+		bIsSwinging = false;
 	}
 }
 
@@ -181,7 +192,7 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	//Fill this in with character input *IF* we plan on doing input inside this class instead of a seperate one.
 
 	check(PlayerInputComponent);
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ABaseCharacter::StartJump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &ABaseCharacter::Sprint);
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &ABaseCharacter::StopSprinting);
@@ -194,7 +205,7 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("AbilityTwo", IE_Pressed, this, &ABaseCharacter::UseAbilityTwo);
 	PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, this, &ABaseCharacter::UseMeleeAttack);
 	PlayerInputComponent->BindAction("RangedAttack", IE_Pressed, this, &ABaseCharacter::UseRangedAttack);
-
+		
 	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 	//PlayerInputComponent->BindAxis("TurnRate", this, &ABaseCharacter::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
