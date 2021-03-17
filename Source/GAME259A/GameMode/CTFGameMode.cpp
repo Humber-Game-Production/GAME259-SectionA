@@ -32,9 +32,6 @@ ACTFGameMode::ACTFGameMode()
 	//make sure GM can tick
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.SetTickFunctionEnable(true);
-
-	humanPoints = nullptr;// &ctfGameState->listOfTeams[ETeamIdentifier::Human]->points;
-	alienPoints = nullptr;// &ctfGameState->listOfTeams[ETeamIdentifier::Alien]->points;
 	
 	timerTime = 20.0f;
 	maxRounds = 5;
@@ -93,7 +90,7 @@ void ACTFGameMode::EndRound() {
 		//Intermission? (pause)
 		if (WinCheck())
 		{
-			if (*humanPoints > *alienPoints)
+			if (teamPoints[ETeamIdentifier::Human] > teamPoints[ETeamIdentifier::Alien])
 			{
 				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Magenta, TEXT("Team1 wins"));
 			}
@@ -122,34 +119,37 @@ void ACTFGameMode::RoundReset() {
 //Will return winning team later for now it is just checking to see if there is a winner
 bool ACTFGameMode::WinCheck()
 {
-	switch (currentRound)
+	if(teamPoints.Num() != 0)
 	{
-		case(2): 
-		if (*humanPoints - *alienPoints > 18)
+		switch (currentRound)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *humanPoints, *alienPoints);
-			return true;
+			case(2): 
+			if (teamPoints[ETeamIdentifier::Human] - teamPoints[ETeamIdentifier::Alien] > 18)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), teamPoints[ETeamIdentifier::Human], teamPoints[ETeamIdentifier::Alien]);
+				return true;
+			}
+			else if (teamPoints[ETeamIdentifier::Alien] - teamPoints[ETeamIdentifier::Human] > 18)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), teamPoints[ETeamIdentifier::Human], teamPoints[ETeamIdentifier::Alien]);
+				return true;
+			}
+			break;
+			case(1): 
+			if (teamPoints[ETeamIdentifier::Human] - teamPoints[ETeamIdentifier::Alien] > 9)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), teamPoints[ETeamIdentifier::Human], teamPoints[ETeamIdentifier::Alien]);
+				return true;
+			}
+			else if (teamPoints[ETeamIdentifier::Alien] - teamPoints[ETeamIdentifier::Human] > 9)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), teamPoints[ETeamIdentifier::Human], teamPoints[ETeamIdentifier::Alien]);
+				return true;
+			}
+			break;
+			default: 
+			break;
 		}
-		else if (*alienPoints - *humanPoints > 18)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *humanPoints, *alienPoints);
-			return true;
-		}
-		break;
-		case(1): 
-		if (*humanPoints - *alienPoints > 9)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *humanPoints, *alienPoints);
-			return true;
-		}
-		else if (*alienPoints - *humanPoints > 9)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *humanPoints, *alienPoints);
-			return true;
-		}
-		break;
-		default: 
-		break;
 	}
 	return false;
 }

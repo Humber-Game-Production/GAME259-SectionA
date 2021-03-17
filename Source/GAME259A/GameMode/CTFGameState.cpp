@@ -58,11 +58,10 @@ void ACTFGameState::InitTeams()
 	{
 		ATeam* currentTeam = Cast<ATeam>(teamsInLevel[i]);
 		listOfTeams.Add(currentTeam->teamID, currentTeam);
+		Cast<ACTFGameMode>(AuthorityGameMode)->teamPoints.Add(currentTeam->teamID, &listOfTeams[currentTeam->teamID]->points);
 	}
 
 	Cast<ACTFGameMode>(AuthorityGameMode)->ctfGameState = this;
-	Cast<ACTFGameMode>(AuthorityGameMode)->humanPoints = &listOfTeams[ETeamIdentifier::Human]->points;
-	Cast<ACTFGameMode>(AuthorityGameMode)->alienPoints = &listOfTeams[ETeamIdentifier::Alien]->points;
 	
 	for(int i = 0; i < PlayerArray.Num(); i++)
 	{

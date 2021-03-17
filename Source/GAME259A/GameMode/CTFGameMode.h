@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "TeamIdentifier.h"
 #include "CTFGameMode.generated.h"
 
 class ACTFGameState;
@@ -47,9 +48,8 @@ public:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Game Rules")
 	int currentRound;
 
+	TMap<ETeamIdentifier, const int*> teamPoints;
 
-	const int* humanPoints;
-	const int* alienPoints;
 
 	FTimerHandle timerHandle;
 
