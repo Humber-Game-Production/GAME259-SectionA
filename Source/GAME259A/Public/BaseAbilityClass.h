@@ -25,10 +25,10 @@ protected:
 public:
 
 	UFUNCTION(BlueprintNativeEvent)
-	void ActivateAbility(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_, float Damage_);
+	void ActivateAbility(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_, float Damage_, FVector Velocity_);
 
 	UFUNCTION(BlueprintCallable)
-		void UseAbility(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_ ,float Damage_);
+		void UseAbility(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_ ,float Damage_, FVector Velocity_);
 
 
 public:	
