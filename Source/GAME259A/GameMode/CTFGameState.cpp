@@ -18,7 +18,10 @@ void ACTFGameState::BeginPlay()
 
 	//This needs to be changed later, delays Team initialization so that network and actors can be synced
 	//Needs to be deterministic instead of after 3 seconds.
-	GetWorldTimerManager().SetTimer(timer, this, &ACTFGameState::InitTeams, 1.0f);
+	if(HasAuthority())
+	{
+		GetWorldTimerManager().SetTimer(timer, this, &ACTFGameState::InitTeams, 1.0f);
+	}
 }
 
 
@@ -60,6 +63,7 @@ void ACTFGameState::InitTeams()
 		listOfTeams.Add(currentTeam->teamID, currentTeam);
 		Cast<ACTFGameMode>(AuthorityGameMode)->teamPoints.Add(currentTeam->teamID, &listOfTeams[currentTeam->teamID]->points);
 	}
+
 
 	Cast<ACTFGameMode>(AuthorityGameMode)->ctfGameState = this;
 	
