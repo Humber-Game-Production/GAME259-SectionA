@@ -13,6 +13,10 @@ ALobbyGameMode::ALobbyGameMode() {
 
 void ALobbyGameMode::BeginPlay() {
 	Super::BeginPlay();
+
+	// 'FCString::Atoi' converts 'FString' to 'int32' and we use the static 'ParseOption' function of the
+// 'UGameplayStatics' Class to get the correct Key from the 'OptionsString'
+	/*MaxNumPlayers = FCString::Atoi(*(UGameplayStatics::ParseOption(OptionsString, "MaxNumPlayers")));*/
 }
 
 void ALobbyGameMode::Tick(const float deltaTime) {
@@ -22,4 +26,9 @@ void ALobbyGameMode::Tick(const float deltaTime) {
 void ALobbyGameMode::ServerUpdateGameOptions(int MapID_, int TimeID_) {
 	MapID = MapID_;
 	TimeID = TimeID_;
+}
+
+void ALobbyGameMode::PostLogin(APlayerController* NewPlayer) {
+	Super::PostLogin(NewPlayer);
+	PlayerControllerList.Add(NewPlayer);
 }

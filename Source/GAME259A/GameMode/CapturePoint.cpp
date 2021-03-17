@@ -7,6 +7,8 @@
 #include "GAME259A/GameMode/Team.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SphereComponent.h"
+#include "MainFlag.h"
+#include "MiniFlag.h"
 
 // Sets default values
 ACapturePoint::ACapturePoint()
@@ -26,6 +28,13 @@ void ACapturePoint::BeginPlay()
 	Super::BeginPlay();
 	
 	captureCollisionComp->OnComponentBeginOverlap.AddDynamic(this, &ACapturePoint::OnHit);
+	if (mainFlag != NULL)
+	{
+		//sets flag to be off the game field until it is generated
+		mainFlag->SetActorRelativeLocation(FVector(0, -100000, 0));
+		AFlag* flagMain = Cast<AFlag>(mainFlag);
+		flagMain->InitLocation = flagMain->GetActorLocation();
+	}
 }
 
 // Called every frame
@@ -54,16 +63,26 @@ void ACapturePoint::OnHit(UPrimitiveComponent* OverlappedComponent,
 		{
 			const ETeamIdentifier playersTeam = player->teamID;	
 
-			//If the cap point's team matches the player's team then we do the point logic
-			if ((playersTeam == teamID) && (OtherActor != this) && (OtherComp != NULL))
+			//If the player's holding a flag
+			if(player->FlagHeld)
 			{
 				UE_LOG(LogTemp, Warning, TEXT("CapPoint Entered"));
-				flagsCaptured++;
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Flags captured: " + FString::FromInt(flagsCaptured));
-				CheckForFlagConstruction();
-
-				//PlaceHolder value until the Flags are connected to the players
-				AddPoints(50, player);
+				//if this is the midpoint and the player's holding a miniflag
+				if(Cast<AMiniFlag>(player->FlagHeld) && (MainFlagCreator == true))
+				{
+					flagsCaptured++;
+					GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Flags captured: " + FString::FromInt(flagsCaptured));
+					CheckForFlagConstruction();
+					player->FlagHeld->InitLocation = FVector(0, -1000, 0);
+					player->CaptureFlag();
+					UE_LOG(LogTemp, Warning, TEXT("MiniFlag number %d captured at Midpoint"), flagsCaptured);
+				} //if the player's holding a main flag, this capture point is part of the same team as the player, and this is not the midPoint
+				else if(Cast<AMainFlag>(player->FlagHeld) && (playersTeam == teamID) && (MainFlagCreator == false))
+				{
+					player->FlagHeld->InitLocation = FVector(0, -1000, 0);
+					player->CaptureFlag();
+					UE_LOG(LogTemp, Warning, TEXT("MainFlag captured at team %d's capture point"), teamID);
+				}
 			}
 		}
 	}
@@ -73,15 +92,23 @@ void ACapturePoint::CheckForFlagConstruction()
 {
 	if (MainFlagCreator == true) {
 		UE_LOG(LogTemp, Warning, TEXT("This is the main flag spot"));
-		if (flagsCaptured >= 6) {
-			//generate main flag here
+		if (flagsCaptured == 6) {
+			
+			if(mainFlag)
+			{
+				mainFlag->SetActorLocation(FVector(this->GetActorLocation()));
+			}
+			//main flag spawns on top of capture point
+			//mainFlag->SetActorEnableCollision(false);
 		}
 	}
 }
 
-void ACapturePoint::AddPoints(int32 points, ACTFPlayerState* player)
+void ACapturePoint::RoundReset()
 {
-	//Add points from team
-	player->AddScore(points);
+	flagsCaptured = 0;
+	if ((MainFlagCreator == true) && (mainFlag != NULL)) {
+		mainFlag->SetActorRelativeLocation(FVector(0, -1000, 0));
+	}
 }
 
