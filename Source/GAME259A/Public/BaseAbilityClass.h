@@ -25,10 +25,12 @@ protected:
 public:
 
 	UFUNCTION(BlueprintNativeEvent)
-	void ActivateAbility(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_);
+	void ActivateAbility(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_, float Damage_);
 
 	UFUNCTION(BlueprintCallable)
-		void UseAbility(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_);
+		void UseAbility(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_ ,float Damage_);
+
+
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;

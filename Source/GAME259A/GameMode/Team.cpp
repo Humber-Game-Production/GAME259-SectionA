@@ -23,6 +23,7 @@ void ATeam::BeginPlay()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Team %d's capture point is nullptr"), teamID);
 	}
+	SpawnPlayers();
 }
 
 void ATeam::AddPlayer(ACTFPlayerState* player_)
@@ -45,10 +46,28 @@ void ATeam::AddPoints(int32 value)
 
 void ATeam::SpawnPlayers()
 {
-	
+	UE_LOG(LogTemp, Warning, TEXT("Spawning all players"));
+	for(int i = 0; i < players.Num(); i++)
+	{
+		APawn* pawn = players[i]->GetPawn();
+		players[i]->OnDeath();
+		SpawnPlayer(players[i]->GetPawn());
+		pawn->Destroy();
+	}
 }
 
-void ATeam::SpawnPlayer(AActor* player)
+void ATeam::SpawnPlayer(APawn* pawn)
 {
+	const FVector location = respawnPoints[0]->GetActorLocation();
+	const FRotator rotation = respawnPoints[0]->GetActorRotation();
 	
+	AActor* player = GetWorld()->SpawnActor(playerType, &location, &rotation);
+	APawn* newPawn = Cast<APawn>(player);
+	AController* controller = pawn->GetController();
+	
+	controller->UnPossess();
+	newPawn->SetPlayerState(pawn->GetPlayerState());
+	controller->Possess(newPawn);
+
+	newPawn->GetPlayerState<ACTFPlayerState>()->SetCanPickupFlag(true);
 }
