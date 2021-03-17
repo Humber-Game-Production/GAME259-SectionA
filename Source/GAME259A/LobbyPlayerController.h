@@ -23,11 +23,11 @@ class GAME259A_API ALobbyPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
-		UPROPERTY(Replicated)
-		int32 OurVariable;
+	//UPROPERTY(Replicated)
+	//int32 OurVariable;
 
-	UFUNCTION(Server, unreliable, WithValidation)
-		void Server_IncreaseVariable();
+	//UFUNCTION(Server, unreliable, WithValidation)
+	//void Server_IncreaseVariable();
 
 public:
 
