@@ -4,8 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "BaseAbilityClass.h"
-#include "SplineEndPointActor.h"
-#include "Components/SplineComponent.h"
 #include "../BaseCharacter.h"
 
 #include "TeleportAbilityComponent.generated.h"
