@@ -1,9 +1,12 @@
 #include "BaseCharacter.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "GAME259A/GameMode/CTFGameState.h"
+#include "CTFPlayerState.h"
 
 // Sets default values
 ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
-									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), JumpVelocity(500.0f)
+									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), JumpVelocity(500.0f), RespawnTime(3.0f)
+
 {
 	//Set the character to not rotate when the mouse is moved, only the camera is rotated.
  	bUseControllerRotationPitch = false;
@@ -38,6 +41,7 @@ ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	
 }
 
 //Called when the player is supposed to move left (Axis = -1) or right (Axis = 1).
@@ -108,6 +112,15 @@ void ABaseCharacter::UseAbilityTwo()
 	//Fill in when the ability class is finished.
 }
 
+void ABaseCharacter::DropFlag()
+{
+	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+	if(ctfPlayerState)
+	{
+		ctfPlayerState->PlayerDropFlag();
+	}
+}
+
 void ABaseCharacter::UseMeleeAttack()
 {
 	//TODO (Combat)
@@ -125,13 +138,28 @@ void ABaseCharacter::Death()
 	//Rag doll if the player is dead.
 	GetMesh()->SetAllBodiesSimulatePhysics(true);
 
-	//FTimerHandle UnusedTimerHandle;
-	//GetWorldTimerManager().SetTimer(UnusedTimerHandle, this, &ABaseCharacter::Respawn, RespawnTime, false);
+	FTimerHandle UnusedTimerHandle;
+	GetWorldTimerManager().SetTimer(UnusedTimerHandle, this, &ABaseCharacter::Respawn, RespawnTime, false);
+
+	//Below code is added by Declan from GameMode Team
+	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+	if(ctfPlayerState)
+	{
+		ctfPlayerState->OnDeath();
+	}
 }
 
 void ABaseCharacter::Respawn()
 {
-	
+	ACTFPlayerState* ctfPlayerState = GetPlayerState<ACTFPlayerState>();
+	if(ctfPlayerState)
+	{
+		if(ACTFGameState* gameState = Cast<ACTFGameState>(GetWorld()->GetGameState()))
+		{
+			gameState->listOfTeams[ctfPlayerState->teamID]->SpawnPlayer(this);
+		}
+	}
+	this->Destroy();
 }
 
 // Called every frame
@@ -177,9 +205,13 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("AbilityTwo", IE_Pressed, this, &ABaseCharacter::UseAbilityTwo);
 	PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, this, &ABaseCharacter::UseMeleeAttack);
 	PlayerInputComponent->BindAction("RangedAttack", IE_Pressed, this, &ABaseCharacter::UseRangedAttack);
-
+		
 	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 	//PlayerInputComponent->BindAxis("TurnRate", this, &ABaseCharacter::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	//PlayerInputComponent->BindAxis("LookUpRate", this, &ABaseCharacter::LookUpAtRate);
+
+	//Made by GameMode team
+	PlayerInputComponent->BindAction("KillBind", IE_Pressed, this, &ABaseCharacter::Death);
+	PlayerInputComponent->BindAction("DropFlag", IE_Pressed, this, &ABaseCharacter::DropFlag);
 }

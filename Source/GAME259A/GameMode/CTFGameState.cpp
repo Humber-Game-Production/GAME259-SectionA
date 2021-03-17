@@ -2,8 +2,10 @@
 
 
 #include "CTFGameState.h"
+#include "TimerManager.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 #include "GAME259A/Public/CTFPlayerState.h"
+#include "CTFGameMode.h"
 
 ACTFGameState::ACTFGameState()
 {
@@ -14,7 +16,12 @@ void ACTFGameState::BeginPlay()
 {
 	Super::BeginPlay();
 
-	InitTeams();
+	//This needs to be changed later, delays Team initialization so that network and actors can be synced
+	//Needs to be deterministic instead of after 3 seconds.
+	if(HasAuthority())
+	{
+		GetWorldTimerManager().SetTimer(timer, this, &ACTFGameState::InitTeams, 1.0f);
+	}
 }
 
 
@@ -45,6 +52,7 @@ void ACTFGameState::AddPoints(ETeamIdentifier team, int32 points)
 
 void ACTFGameState::InitTeams()
 {
+	UE_LOG(LogTemp, Warning, TEXT("Initializing teams"));
 	TArray<AActor*> teamsInLevel;
 
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATeam::StaticClass(), teamsInLevel);
@@ -53,10 +61,25 @@ void ACTFGameState::InitTeams()
 	{
 		ATeam* currentTeam = Cast<ATeam>(teamsInLevel[i]);
 		listOfTeams.Add(currentTeam->teamID, currentTeam);
+		Cast<ACTFGameMode>(AuthorityGameMode)->teamPoints.Add(currentTeam->teamID, &listOfTeams[currentTeam->teamID]->points);
 	}
 
+
+	Cast<ACTFGameMode>(AuthorityGameMode)->ctfGameState = this;
+	
 	for(int i = 0; i < PlayerArray.Num(); i++)
 	{
-		ChooseTeam(ETeamIdentifier::Human, Cast<ACTFPlayerState>(PlayerArray[i]));
+		if(i % 2 == 0)
+		{
+			ChooseTeam(ETeamIdentifier::Human, Cast<ACTFPlayerState>(PlayerArray[i]));
+		} else
+		{
+			ChooseTeam(ETeamIdentifier::Alien, Cast<ACTFPlayerState>(PlayerArray[i]));
+		}
+	}
+
+	for (auto team : listOfTeams)
+	{
+			team.Value->SpawnPlayers();
 	}
 }
