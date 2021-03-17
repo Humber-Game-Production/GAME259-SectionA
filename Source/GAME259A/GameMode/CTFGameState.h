@@ -15,7 +15,7 @@ UCLASS()
 class GAME259A_API ACTFGameState : public AGameStateBase
 {
 	GENERATED_BODY()
-
+	FTimerHandle timer;
 public:
 
 	ACTFGameState();
@@ -40,6 +40,7 @@ public:
 	void AddPoints(ETeamIdentifier team, int32 points);
 
 	//Initializes the team's variables
+	//@TODO: This function needs to be called whenever all players are loaded in
 	UFUNCTION()
 	void InitTeams();
 };

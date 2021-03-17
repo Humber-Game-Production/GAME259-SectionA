@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "GAME259A/GameMode/PickUpAndDrop.h"
+
 
 #include "GAME259ACharacter.generated.h"
 
 
 UCLASS(config=Game)
-class AGAME259ACharacter : public ACharacter, public IPickUpAndDrop
+class AGAME259ACharacter : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -61,11 +61,7 @@ protected:
 	/** Handler for when a touch input stops. */
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
 
-	//Interface implementation
-	UFUNCTION()
-		void OnCapsuleOBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent,
-			AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override{}
-
+	
 
 protected:
 	// APawn interface

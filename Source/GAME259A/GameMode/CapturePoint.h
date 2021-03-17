@@ -4,12 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Flag.h"
 #include "GAME259A/GameMode/TeamIdentifier.h"
 #include "CapturePoint.generated.h"
 
 class ACTFPlayerState;
 
-UCLASS()
+UCLASS(Blueprintable)
 class GAME259A_API ACapturePoint : public AActor
 {
 	GENERATED_BODY()
@@ -21,6 +22,9 @@ class GAME259A_API ACapturePoint : public AActor
 	int flagsCaptured;
 	UPROPERTY(EditAnywhere)
 	bool MainFlagCreator;
+
+	UPROPERTY(EditAnywhere)
+	class AActor* mainFlag;
 
 	
 public:	
@@ -49,8 +53,9 @@ public:
 
 	UFUNCTION()
 	void CheckForFlagConstruction();
+
 	UFUNCTION()
-	void AddPoints(int32 points, ACTFPlayerState* player);
+	void RoundReset();
 
 
 };

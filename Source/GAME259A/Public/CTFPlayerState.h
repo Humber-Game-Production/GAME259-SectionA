@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerState.h"
 #include "GAME259A/GameMode/TeamIdentifier.h"
+#include "GAME259A/GameMode/Flag.h"
+
 #include "CTFPlayerState.generated.h"
 
 UDELEGATE()
@@ -38,6 +40,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	int32 flagsCaptured;
 
+	UPROPERTY()
+	AFlag* FlagHeld;
+
 	//This delegate is called whenever this player scores for their team
 	UPROPERTY(BlueprintAssignable, Category = "EventDispatchers")
 	FAddScoreToTeam teamScoreDelegate;
@@ -46,12 +51,37 @@ public:
 	UFUNCTION()
 	void SetTeam(ETeamIdentifier team);
 
+	UFUNCTION()
+	void SetFlagHeld(AFlag* FlagHeld_);
+	
+	UFUNCTION(BlueprintCallable)
+	void SetCanPickupFlag(bool PlayerCanPickupFlag_);
+
+	UFUNCTION(BlueprintCallable)
+	bool GetCanPickupFlag() const;
+	
 	//Adds score to the player's team using teamScoreDelegate
 	UFUNCTION()
 	void AddScore(int32 amountOfPoints);
 	
 	UFUNCTION()
 	void ResetStats();
-	
+
+	//Player drops flag intentionally. Will re-enable flag pickup
+	UFUNCTION()
+	void PlayerDropFlag();
+
+	UFUNCTION()
+	void CaptureFlag();
+
+	//Player will die and drop flag. Player cannot pickup new flags when dead.
+	UFUNCTION()
+	void OnDeath();
+
+protected:
+
+	//Player should only pickup flags if they are Alive and have no other flags
+	UPROPERTY(BlueprintReadWrite)
+	bool PlayerCanPickupFlag;
 };
 

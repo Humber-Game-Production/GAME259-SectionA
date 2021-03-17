@@ -17,9 +17,9 @@ class GAME259A_API UTeleportAbilityComponent : public UBaseAbilityClass
 {
 	GENERATED_BODY()
 public:
-	//Overides ActivateAbility in BaseAbilityClass
+
 		UFUNCTION(BlueprintCallable)
-			void ActivateAbility_Implementation(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_) override;
+			void SpawnActor(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_);
 
 		UPROPERTY(BlueprintReadWrite, EditAnywhere)
 			UTeleportAbilityComponent* TeleportAbilityRef;
