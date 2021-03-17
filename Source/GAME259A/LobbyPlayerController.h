@@ -23,9 +23,22 @@ class GAME259A_API ALobbyPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
+		UPROPERTY(Replicated)
+		int32 OurVariable;
+
+	UFUNCTION(Server, unreliable, WithValidation)
+		void Server_IncreaseVariable();
+
 public:
 
 	ALobbyPlayerController();
+
+	// Also overriding the BeginPlay function for this example
+	virtual void BeginPlay() override;
+
+	// Function to Increment the Variable
+	void IncreaseVariable();
+
 private:
 	FPlayerInfo* PlayerSettings;
 	
