@@ -92,9 +92,9 @@ protected:
 	void DropFlag();
 	
 	//Combat Actions
-	UFUNCTION(Category = "Combat")
+	UFUNCTION(Category = "Combat", BlueprintCallable)
 	void UseMeleeAttack();
-	UFUNCTION(Category = "Combat")
+	UFUNCTION(Category = "Combat", BlueprintCallable)
 	void UseRangedAttack();
 
 	UFUNCTION(Category = "Death")
