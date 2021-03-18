@@ -99,6 +99,8 @@ protected:
 
 	UFUNCTION(Category = "Death")
 	void Death();
+	UFUNCTION(Category = "Death", BlueprintCallable)
+	void TakeDamage(float damage_);
 	UFUNCTION(Category = "Death")
 	void Respawn();
 
