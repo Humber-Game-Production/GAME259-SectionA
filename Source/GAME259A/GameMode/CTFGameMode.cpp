@@ -8,6 +8,7 @@
 #include "TimerManager.h"
 #include "GAME259A/GameMode/CTFGameState.h"
 #include "GAME259A/Public/CTFPlayerState.h"
+#include "GameFramework/HUD.h"
 #include "GAME259A/GameMode/TeamIdentifier.h"
 
 ACTFGameMode::ACTFGameMode()
@@ -19,18 +20,22 @@ ACTFGameMode::ACTFGameMode()
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
 
+	static ConstructorHelpers::FClassFinder<AHUD> gameHudClass(TEXT("/Game/Game_BP/GameMode/BP_CTFHUD"));
+	if(gameHudClass.Class != NULL)
+	{
+		HUDClass =  gameHudClass.Class; //gameHudClass.Class;
+	}
+
 	GameStateClass = ACTFGameState::StaticClass();
 	PlayerStateClass = ACTFPlayerState::StaticClass();
 	
 	//make sure GM can tick
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.SetTickFunctionEnable(true);
-
-	team1Points = 26;
-	team2Points = 16;
-	timerTime = 5.f;
+	
+	timerTime = 20.0f;
 	maxRounds = 5;
-	currentRound = maxRounds;
+	currentRound = 1;
 }
 
 void ACTFGameMode::BeginPlay()
@@ -71,13 +76,13 @@ void ACTFGameMode::EndRound() {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Round " + FString::FromInt(currentRound) + " over");
 	
 	//Reduces the amount of rounds left
-	currentRound--;
+	currentRound++;
 
 	//Prints out how many rounds are left
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::FromInt(currentRound) + " rounds remaining");
 
 	//Checks to see if a win condition is met
-	if (currentRound == 0) {
+	if (currentRound >= maxRounds) {
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Game ends."));
 	}
 	else
@@ -85,7 +90,7 @@ void ACTFGameMode::EndRound() {
 		//Intermission? (pause)
 		if (WinCheck())
 		{
-			if (team1Points > team2Points)
+			if (teamPoints[ETeamIdentifier::Human] > teamPoints[ETeamIdentifier::Alien])
 			{
 				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Magenta, TEXT("Team1 wins"));
 			}
@@ -101,44 +106,50 @@ void ACTFGameMode::EndRound() {
 //Current only debug messages and a timer reset
 void ACTFGameMode::RoundReset() {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Flags respawn."));
+
+	for (auto team : ctfGameState->listOfTeams)
+	{
+		team.Value->SpawnPlayers();
+	}
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Players respawn."));
 	GetWorldTimerManager().SetTimer(timerHandle, this, &ACTFGameMode::EndRound, timerTime);
 }
 
 
-void ACTFGameMode::SubtractTime() {
-	if (GetWorldTimerManager().TimerExists(timerHandle)) {
-		GetWorldTimerManager().SetTimer(timerHandle, this, &ACTFGameMode::EndRound, GetWorldTimerManager().GetTimerRemaining(timerHandle) - 1);
-	}
-}
-
 //Will return winning team later for now it is just checking to see if there is a winner
 bool ACTFGameMode::WinCheck()
 {
-	switch (currentRound)
+	if(teamPoints.Num() != 0)
 	{
-	case(2): if (team1Points - team2Points > 18)
-	{
-		return true;
-	}
-		   else if (team2Points - team1Points > 18)
-	{
-		return true;
-	}
-		   else
-		break;
-	case(1): if (team1Points - team2Points > 9)
-	{
-		return true;
-	}
-		   else if (team2Points - team1Points > 9)
-	{
-		return true;
-	}
-		   else
-		break;
-	case(0): return true;
-	default: break;
+		switch (currentRound)
+		{
+			case(2): 
+			if (teamPoints[ETeamIdentifier::Human] - teamPoints[ETeamIdentifier::Alien] > 18)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), teamPoints[ETeamIdentifier::Human], teamPoints[ETeamIdentifier::Alien]);
+				return true;
+			}
+			else if (teamPoints[ETeamIdentifier::Alien] - teamPoints[ETeamIdentifier::Human] > 18)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), teamPoints[ETeamIdentifier::Human], teamPoints[ETeamIdentifier::Alien]);
+				return true;
+			}
+			break;
+			case(1): 
+			if (teamPoints[ETeamIdentifier::Human] - teamPoints[ETeamIdentifier::Alien] > 9)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), teamPoints[ETeamIdentifier::Human], teamPoints[ETeamIdentifier::Alien]);
+				return true;
+			}
+			else if (teamPoints[ETeamIdentifier::Alien] - teamPoints[ETeamIdentifier::Human] > 9)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), teamPoints[ETeamIdentifier::Human], teamPoints[ETeamIdentifier::Alien]);
+				return true;
+			}
+			break;
+			default: 
+			break;
+		}
 	}
 	return false;
 }

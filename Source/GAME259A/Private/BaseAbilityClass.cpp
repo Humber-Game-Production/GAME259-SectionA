@@ -25,13 +25,13 @@ void UBaseAbilityClass::BeginPlay()
 }
 
 
-void UBaseAbilityClass::ActivateAbility_Implementation(FVector Location_, float CoolDown_, FRotator Rotation_)
+void UBaseAbilityClass::ActivateAbility_Implementation(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_, float Damage_)
 {
 }
 
-void UBaseAbilityClass::UseAbility(FVector Location_, float CoolDown_, FRotator Rotation_)
+void UBaseAbilityClass::UseAbility(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_, float Damage_)
 {
-	ActivateAbility(Location_, CoolDown_, Rotation_);
+	ActivateAbility(CoolDown_, Transform_, Duration_, Team_,Damage_);
 }
 
 // Called every frame

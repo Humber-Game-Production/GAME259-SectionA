@@ -33,11 +33,11 @@ public:
 	TArray<ACTFPlayerState*> players;
 
 	//Array of respawn points
-	UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Category = "Team | Places")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Team | Places")
 	TArray<AActor*> respawnPoints;
 
 	//The capture point associated with this team
-	UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Category = "Team | Places")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Team | Places")
 	ACapturePoint* capturePoint;
 
 	//Points earned by this team
@@ -51,6 +51,8 @@ public:
 	//Identifier for this team 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Team | Info")
 	ETeamIdentifier teamID;
+
+		
 
 	UFUNCTION()
 	virtual void BeginPlay() override;
@@ -73,7 +75,7 @@ public:
 
 	//Spawns a single player on this team
 	UFUNCTION(BlueprintCallable)
-	void SpawnPlayer(AActor* player);
+	void SpawnPlayer(APawn* pawn);
 
 private:
 	HIDE_ACTOR_TRANSFORM_FUNCTIONS();
