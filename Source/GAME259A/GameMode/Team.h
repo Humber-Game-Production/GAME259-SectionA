@@ -36,6 +36,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Team | Places")
 	TArray<AActor*> respawnPoints;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Team | Places")
+	TArray<AActor*> miniFlagSpawnPoints;
+	
 	//The capture point associated with this team
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Team | Places")
 	ACapturePoint* capturePoint;

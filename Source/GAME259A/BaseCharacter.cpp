@@ -4,8 +4,8 @@
 #include "CTFPlayerState.h"
 
 // Sets default values
-ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
-									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), JumpVelocity(500.0f), RespawnTime(3.0f)
+ABaseCharacter::ABaseCharacter() : MaxWalkSpeed(1200.0f), CurrentMoveSpeed(MaxWalkSpeed), SprintMultiplier(1.5f), bIsSprinting(false), JumpVelocity(500.0f), MaxHealth(100.0f), CurrentHealth(MaxHealth),
+									RespawnTime(3.0f), bIsDead(false), bIsSlowed(false), bIsStunned(false)
 
 {
 	//Set the character to not rotate when the mouse is moved, only the camera is rotated.
@@ -156,7 +156,13 @@ void ABaseCharacter::Respawn()
 	{
 		if(ACTFGameState* gameState = Cast<ACTFGameState>(GetWorld()->GetGameState()))
 		{
-			gameState->listOfTeams[ctfPlayerState->teamID]->SpawnPlayer(this);
+			if(gameState->listOfTeams.Num() != 0)
+			{
+				gameState->listOfTeams[ctfPlayerState->teamID]->SpawnPlayer(this);
+			} else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("No teams found in current level so respawning will not be handled, Try testing in the GameModeTestMap"));
+			}
 		}
 	}
 	this->Destroy();

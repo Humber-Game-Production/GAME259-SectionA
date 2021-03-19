@@ -5,6 +5,8 @@
 #include "GAME259A/BaseCharacter.h"
 #include "GAME259A/Public/CTFPlayerState.h"
 #include "GAME259A/GameMode/CapturePoint.h"
+#include "GameFramework/PlayerStart.h"
+#include "Kismet/GameplayStatics.h"
 
 ATeam::ATeam()
 {
@@ -30,7 +32,6 @@ void ATeam::AddPlayer(ACTFPlayerState* player_)
 {
 	player_->SetTeam(teamID);
 	players.Add(player_);
-	
 }
 
 void ATeam::RemovePlayer(ACTFPlayerState* player_)
@@ -58,16 +59,37 @@ void ATeam::SpawnPlayers()
 
 void ATeam::SpawnPlayer(APawn* pawn)
 {
-	const FVector location = respawnPoints[0]->GetActorLocation();
-	const FRotator rotation = respawnPoints[0]->GetActorRotation();
+	if(HasAuthority())
+	{
+		if(respawnPoints.Num() != 0)
+		{
+			const FVector location = respawnPoints[0]->GetActorLocation();
+			const FRotator rotation = respawnPoints[0]->GetActorRotation();
+		
+			FActorSpawnParameters spawnP;
+			spawnP.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+			AActor* player = GetWorld()->SpawnActor(playerType, &location, &rotation, spawnP);
+			if(player)
+			{
+				APawn* newPawn = Cast<APawn>(player);
+				AController* controller = pawn->GetController();
 	
-	AActor* player = GetWorld()->SpawnActor(playerType, &location, &rotation);
-	APawn* newPawn = Cast<APawn>(player);
-	AController* controller = pawn->GetController();
-	
-	controller->UnPossess();
-	newPawn->SetPlayerState(pawn->GetPlayerState());
-	controller->Possess(newPawn);
+				controller->UnPossess();
+				newPawn->SetPlayerState(controller->GetPlayerState<ACTFPlayerState>());
+				controller->Possess(newPawn);
 
-	newPawn->GetPlayerState<ACTFPlayerState>()->SetCanPickupFlag(true);
+				newPawn->GetPlayerState<ACTFPlayerState>()->SetCanPickupFlag(true);
+			}
+		} else
+		{
+			AActor* playerStart = UGameplayStatics::GetActorOfClass(GetWorld(), APlayerStart::StaticClass());
+
+			const FVector location = playerStart->GetActorLocation();
+			const FRotator rotation = playerStart->GetActorRotation();
+			FActorSpawnParameters spawnP;
+			spawnP.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+			
+			AActor* player = GetWorld()->SpawnActor(playerType, &location, &rotation, spawnP);
+		}
+	}
 }

@@ -11,7 +11,10 @@
 /**
  * 
  */
-UCLASS()
+
+class AFlag;
+
+UCLASS(Blueprintable)
 class GAME259A_API ACTFGameState : public AGameStateBase
 {
 	GENERATED_BODY()
@@ -26,21 +29,20 @@ public:
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	TMap<ETeamIdentifier, ATeam*> listOfTeams;
 
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	TArray<AActor*> flagHolders;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	TArray<AFlag*> activeFlags;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	TArray<ACapturePoint*> capturePoints;
+	
 	//Adds a CTFPlayerState to the specified team
 	UFUNCTION()
 	void ChooseTeam(ETeamIdentifier team, ACTFPlayerState* player);
 
-	//This should be called whenever a player leaves a team or the server
-	//@TODO: Implement this code
-	UFUNCTION()
-	void PlayerLeft(AController* player);
-
 	//Adds points to the specified team
 	UFUNCTION()
 	void AddPoints(ETeamIdentifier team, int32 points);
-
-	//Initializes the team's variables
-	//@TODO: This function needs to be called whenever all players are loaded in
-	UFUNCTION()
-	void InitTeams();
 };

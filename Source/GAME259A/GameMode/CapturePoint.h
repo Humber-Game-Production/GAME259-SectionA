@@ -18,8 +18,13 @@ class GAME259A_API ACapturePoint : public AActor
 	UPROPERTY(VisibleDefaultsOnly)
 	class USphereComponent* captureCollisionComp;
 
+public:	
 	UPROPERTY(EditAnywhere)
-	int flagsCaptured;
+	int32 flagsCaptured;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	int32 requiredFlags;
+	
 	UPROPERTY(EditAnywhere)
 	bool MainFlagCreator;
 
@@ -27,7 +32,7 @@ class GAME259A_API ACapturePoint : public AActor
 	class AActor* mainFlag;
 
 	
-public:	
+
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	ETeamIdentifier teamID;

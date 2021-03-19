@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
+#include "CapturePoint.h"
 #include "GameFramework/GameModeBase.h"
 #include "TeamIdentifier.h"
 #include "CTFGameMode.generated.h"
@@ -22,6 +24,16 @@ public:
 	virtual void PostLogin(APlayerController* NewPlayer) override;
 	virtual void Logout(AController* Exiting) override;
 
+
+
+	UFUNCTION()
+	void BeginFirstRound();
+
+	void InitTeams();
+	
+	UFUNCTION()
+	void SpawnMiniFlag();
+	
 	UFUNCTION()
 	void EndRound();
 
@@ -32,10 +44,24 @@ public:
 	UFUNCTION()
 	bool WinCheck();
 
-	//Time left in the current round(float)
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Game Rules")
-	float timerTime;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Flags")
+	int32 spawnedMiniFlags;
 
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Flags")
+	int32 requiredMiniFlags;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Flags")
+	TSubclassOf<AFlag> miniFlag;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Flags")
+	TSubclassOf<AFlag> mainFlag;
+	
+	//Time left in the current round(float)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Game Rules")
+	float roundTimerTime;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Game Rules")
+	float timeBetweenFlagSpawns;
+	
 	//Time left in the current round(FString)
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Game Rules")
 	FString timeLeft;
@@ -48,11 +74,18 @@ public:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Game Rules")
 	int currentRound;
 
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "CapturePoints")
+	TArray<ACapturePoint*> capturePoints;
+	
 	TMap<ETeamIdentifier, const int*> teamPoints;
 
-
-	FTimerHandle timerHandle;
+	FTimerHandle startGameTimer;
+	FTimerHandle roundTimerHandle;
+	FTimerHandle flagSpawnTimer;
+	
 
 	UPROPERTY(BlueprintReadWrite)
 	ACTFGameState* ctfGameState;
 };
+
+
