@@ -11,6 +11,7 @@
 #include "Components/SphereComponent.h"
 #include "MainFlag.h"
 #include "MiniFlag.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ACapturePoint::ACapturePoint() : requiredFlags(6)
@@ -105,10 +106,13 @@ void ACapturePoint::CheckForFlagConstruction()
 			
 			if(mainFlag)
 			{
+				UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), flagSpawnEffect, this->GetActorLocation());
 				mainFlag->SetActorLocation(FVector(this->GetActorLocation()));
+				mainFlag->SetActorEnableCollision(false);
+				GetWorldTimerManager().SetTimer(mainFlagActiveTimer, this, &ACapturePoint::SetMainFlagActive, flagInactivePeriod);
 			}
 			//main flag spawns on top of capture point
-			//mainFlag->SetActorEnableCollision(false);
+			
 		}
 	}
 }
@@ -126,5 +130,10 @@ void ACapturePoint::RoundReset()
 	{
 		mainFlag->SetActorRelativeLocation(FVector(0, 0, -100000));
 	}
+}
+
+void ACapturePoint::SetMainFlagActive()
+{
+	mainFlag->SetActorEnableCollision(true);
 }
 

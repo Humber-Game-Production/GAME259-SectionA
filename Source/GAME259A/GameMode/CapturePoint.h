@@ -31,8 +31,14 @@ public:
 	UPROPERTY(EditAnywhere)
 	class AActor* mainFlag;
 
-	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		float flagInactivePeriod;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		UParticleSystem* flagSpawnEffect;
+
+	
+	FTimerHandle mainFlagActiveTimer;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	ETeamIdentifier teamID;
@@ -61,6 +67,9 @@ public:
 
 	UFUNCTION()
 	void RoundReset();
+
+	UFUNCTION()
+	void SetMainFlagActive();
 
 
 };
