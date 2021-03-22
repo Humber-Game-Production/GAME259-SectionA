@@ -6,7 +6,8 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "TimerManager.h"
 #include "MiniFlag.h"
-#include "MainFlag.h"
+#include "Team.h"
+#include "CapturePoint.h"
 #include "GAME259A/GameMode/CTFGameState.h"
 #include "GAME259A/Public/CTFPlayerState.h"
 #include "GameFramework/HUD.h"
@@ -17,13 +18,13 @@ ACTFGameMode::ACTFGameMode()
 {
 	// set default pawn class to our Blueprinted character
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/Game_BP/BaseCharacter_BP"));
-	if (PlayerPawnBPClass.Class != NULL)
+	if (PlayerPawnBPClass.Class != nullptr)
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
 
 	static ConstructorHelpers::FClassFinder<AHUD> gameHudClass(TEXT("/Game/Game_BP/GameMode/BP_CTFHUD"));
-	if(gameHudClass.Class != NULL)
+	if(gameHudClass.Class != nullptr)
 	{
 		HUDClass =  gameHudClass.Class; //gameHudClass.Class;
 	}
@@ -32,8 +33,7 @@ ACTFGameMode::ACTFGameMode()
 	PlayerStateClass = ACTFPlayerState::StaticClass();
 	
 	//make sure GM can tick
-	PrimaryActorTick.bCanEverTick = true;
-	PrimaryActorTick.SetTickFunctionEnable(true);
+	PrimaryActorTick.bCanEverTick = false;
 	
 	roundTimerTime = 20.0f;
 	maxRounds = 5;
@@ -66,6 +66,8 @@ void ACTFGameMode::BeginFirstRound()
 
 }
 
+FTimerHandle updateTimerHandle;
+
 void ACTFGameMode::InitTeams()
 {
 	ctfGameState = Cast<ACTFGameState>(GameState);
@@ -85,8 +87,18 @@ void ACTFGameMode::InitTeams()
 	for(int i = 0; i < teamsInLevel.Num(); i++)
 	{
 		ATeam* currentTeam = Cast<ATeam>(teamsInLevel[i]);
-		ctfGameState->listOfTeams.Add(currentTeam->teamID, currentTeam);
-		teamPoints.Add(currentTeam->teamID, &ctfGameState->listOfTeams[currentTeam->teamID]->points);
+		ctfGameState->listOfTeams.Add(currentTeam);
+	}
+
+	ctfGameState->listOfTeams.Sort(
+		[&](const ATeam& team1, const ATeam& team2)
+			{
+				return team1.teamID < team2.teamID;
+			});
+
+	for(int i = 0; i < ctfGameState->listOfTeams.Num(); i++)
+	{
+		teamPoints.Add(&ctfGameState->listOfTeams[i]->points);
 	}
 	
 	for(int i = 0; i < GameState->PlayerArray.Num(); i++)
@@ -102,27 +114,27 @@ void ACTFGameMode::InitTeams()
 
 	for (auto team : ctfGameState->listOfTeams)
 	{
-		team.Value->SpawnPlayers();
+		team->SpawnPlayers();
 	}
+
+	ctfGameState->currentRound = currentRound;
+	ctfGameState->maxRounds = maxRounds;
 
 	GetWorldTimerManager().SetTimer(flagSpawnTimer, this, &ACTFGameMode::SpawnMiniFlag, timeBetweenFlagSpawns, true);
 	GetWorldTimerManager().SetTimer(roundTimerHandle, this, &ACTFGameMode::EndRound, roundTimerTime);
-}
-
-void ACTFGameMode::Tick(const float deltaTime)
-{
-	Super::Tick(deltaTime);
-
-	//Add timer to screen
-	if (GetWorldTimerManager().TimerExists(roundTimerHandle) && GetWorldTimerManager().IsTimerPaused(roundTimerHandle) == false) {
-		timeLeft = FString::SanitizeFloat(GetWorldTimerManager().GetTimerRemaining(roundTimerHandle));
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, timeLeft);
-	}
+	GetWorldTimerManager().SetTimer(updateTimerHandle, this, &ACTFGameMode::UpdateGameStateTime, 1.0f, true);
 }
 
 void ACTFGameMode::PostLogin(APlayerController* NewPlayer)
 {
 	Super::PostLogin(NewPlayer);
+
+	ACTFPlayerState* playerState = NewPlayer->GetPlayerState<ACTFPlayerState>();
+
+	if(playerState)
+	{
+		playerState->teamScoreDelegate.AddDynamic(this, &ACTFGameMode::AddPoints);
+	}
 }
 
 void ACTFGameMode::Logout(AController* Exiting)
@@ -130,9 +142,14 @@ void ACTFGameMode::Logout(AController* Exiting)
 	Super::Logout(Exiting);
 }
 
+void ACTFGameMode::UpdateGameStateTime()
+{
+	ctfGameState->timeLeft = FMath::RoundToInt(GetWorldTimerManager().GetTimerRemaining(roundTimerHandle)); //static_cast<int32>(roundTimerTime;
+}
+
 void ACTFGameMode::SpawnMiniFlag()
 {
-	if((ctfGameState->listOfTeams[ETeamIdentifier::Human]->miniFlagSpawnPoints.Num() != 0) && (ctfGameState->listOfTeams[ETeamIdentifier::Alien]->miniFlagSpawnPoints.Num() != 0))
+	if((GetTeam(ETeamIdentifier::Human)->miniFlagSpawnPoints.Num() != 0) && (GetTeam(ETeamIdentifier::Alien)->miniFlagSpawnPoints.Num() != 0))
 	{
 		if(spawnedMiniFlags < requiredMiniFlags)
 		{
@@ -140,13 +157,13 @@ void ACTFGameMode::SpawnMiniFlag()
 			UE_LOG(LogTemp, Warning, TEXT("Mini flag number %d was spawned"), spawnedMiniFlags);
 			if(spawnedMiniFlags % 2 == 0)
 			{
-				const int randomSpawn = FMath::RandRange(0, ctfGameState->listOfTeams[ETeamIdentifier::Human]->miniFlagSpawnPoints.Num() - 1);
-				FVector spawnPoint = ctfGameState->listOfTeams[ETeamIdentifier::Human]->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
+				const int randomSpawn = FMath::RandRange(0, GetTeam(ETeamIdentifier::Human)->miniFlagSpawnPoints.Num() - 1);
+				FVector spawnPoint = GetTeam(ETeamIdentifier::Human)->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
 				GetWorld()->SpawnActor(miniFlag, &spawnPoint);
 			} else
 			{
-				const int randomSpawn = FMath::RandRange(0, ctfGameState->listOfTeams[ETeamIdentifier::Alien]->miniFlagSpawnPoints.Num() - 1);
-				FVector spawnPoint = ctfGameState->listOfTeams[ETeamIdentifier::Alien]->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
+				const int randomSpawn = FMath::RandRange(0, GetTeam(ETeamIdentifier::Alien)->miniFlagSpawnPoints.Num() - 1);
+				FVector spawnPoint = GetTeam(ETeamIdentifier::Alien)->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
 				GetWorld()->SpawnActor(miniFlag, &spawnPoint);
 			}
 		}
@@ -164,9 +181,11 @@ void ACTFGameMode::SpawnMiniFlag()
 void ACTFGameMode::EndRound() {
 	//Displays the round that just finished
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Round " + FString::FromInt(currentRound) + " over");
+	GetWorldTimerManager().ClearTimer(flagSpawnTimer);
 	
 	//Reduces the amount of rounds left
 	currentRound++;
+	ctfGameState->currentRound = currentRound;
 	
 
 	//Prints out how many rounds are left
@@ -181,7 +200,7 @@ void ACTFGameMode::EndRound() {
 		//Intermission? (pause)
 		if (WinCheck())
 		{
-			if (teamPoints[ETeamIdentifier::Human] > teamPoints[ETeamIdentifier::Alien])
+			if (teamPoints[static_cast<int32>(ETeamIdentifier::Human)] > teamPoints[static_cast<int32>(ETeamIdentifier::Alien)])
 			{
 				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Magenta, TEXT("Team1 wins"));
 			}
@@ -202,14 +221,13 @@ void ACTFGameMode::EndRound() {
 void ACTFGameMode::RoundReset() {
 
 	spawnedMiniFlags = 0;
-	GetWorldTimerManager().ClearTimer(flagSpawnTimer);
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Flags respawn."));
 
 
 	
 	for (auto team : ctfGameState->listOfTeams)
 	{
-		team.Value->SpawnPlayers();
+		team->SpawnPlayers();
 	}
 
 	for(auto capPoint: capturePoints)
@@ -218,7 +236,7 @@ void ACTFGameMode::RoundReset() {
 	}
 	
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Players respawn."));
-	GetWorldTimerManager().SetTimer(roundTimerHandle, this, &ACTFGameMode::EndRound, roundTimerTime);
+	GetWorldTimerManager().SetTimer(flagSpawnTimer, this, &ACTFGameMode::SpawnMiniFlag, timeBetweenFlagSpawns, true);
 	GetWorldTimerManager().SetTimer(roundTimerHandle, this, &ACTFGameMode::EndRound, roundTimerTime);
 }
 
@@ -231,26 +249,26 @@ bool ACTFGameMode::WinCheck()
 		switch (currentRound)
 		{
 			case(2): 
-			if (teamPoints[ETeamIdentifier::Human] - teamPoints[ETeamIdentifier::Alien] > 18)
+			if (*teamPoints[static_cast<int32>(ETeamIdentifier::Human)] - *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)] > 18)
 			{
-				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), teamPoints[ETeamIdentifier::Human], teamPoints[ETeamIdentifier::Alien]);
+				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *teamPoints[static_cast<int32>(ETeamIdentifier::Human)], *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)]);
 				return true;
 			}
-			else if (teamPoints[ETeamIdentifier::Alien] - teamPoints[ETeamIdentifier::Human] > 18)
+			else if (*teamPoints[static_cast<int32>(ETeamIdentifier::Alien)] - *teamPoints[static_cast<int32>(ETeamIdentifier::Human)] > 18)
 			{
-				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), teamPoints[ETeamIdentifier::Human], teamPoints[ETeamIdentifier::Alien]);
+				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *teamPoints[static_cast<int32>(ETeamIdentifier::Human)], *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)]);
 				return true;
 			}
 			break;
 			case(1): 
-			if (teamPoints[ETeamIdentifier::Human] - teamPoints[ETeamIdentifier::Alien] > 9)
+			if (*teamPoints[static_cast<int32>(ETeamIdentifier::Human)] - *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)] > 9)
 			{
-				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), teamPoints[ETeamIdentifier::Human], teamPoints[ETeamIdentifier::Alien]);
+				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *teamPoints[static_cast<int32>(ETeamIdentifier::Human)], *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)]);
 				return true;
 			}
-			else if (teamPoints[ETeamIdentifier::Alien] - teamPoints[ETeamIdentifier::Human] > 9)
+			else if (*teamPoints[static_cast<int32>(ETeamIdentifier::Alien)] - *teamPoints[static_cast<int32>(ETeamIdentifier::Human)] > 9)
 			{
-				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), teamPoints[ETeamIdentifier::Human], teamPoints[ETeamIdentifier::Alien]);
+				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *teamPoints[static_cast<int32>(ETeamIdentifier::Human)], *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)]);
 				return true;
 			}
 			break;
@@ -259,4 +277,32 @@ bool ACTFGameMode::WinCheck()
 		}
 	}
 	return false;
+}
+
+ATeam* ACTFGameMode::GetTeam(ETeamIdentifier team) const
+{
+	for(int i = 0; i < ctfGameState->listOfTeams.Num(); i++)
+	{
+		if(ctfGameState->listOfTeams[i]->teamID == team)
+		{
+			return ctfGameState->listOfTeams[i];
+		}
+	}
+	return nullptr;
+}
+
+void ACTFGameMode::AddPoints_Implementation(ETeamIdentifier team, int32 value)
+{
+	GetTeam(team)->AddPoints(value);
+}
+
+void ACTFGameMode::SpawnAllPlayersOnTeam_Implementation(ETeamIdentifier team)
+{
+	
+}
+
+
+void ACTFGameMode::SpawnPlayer_Implementation(APawn* pawn)
+{
+	
 }

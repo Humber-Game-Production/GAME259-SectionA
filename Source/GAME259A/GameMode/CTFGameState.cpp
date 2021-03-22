@@ -2,14 +2,15 @@
 
 
 #include "CTFGameState.h"
-#include "TimerManager.h"
+#include "GAME259A/GameMode/Team.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 #include "GAME259A/Public/CTFPlayerState.h"
-#include "CTFGameMode.h"
+#include "Net/UnrealNetwork.h"
 
 ACTFGameState::ACTFGameState()
 {
-	
+	bReplicates = true;
+
 }
 
 void ACTFGameState::BeginPlay()
@@ -18,23 +19,29 @@ void ACTFGameState::BeginPlay()
 
 }
 
+void ACTFGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME( ACTFGameState, listOfTeams);
+	DOREPLIFETIME( ACTFGameState, flagHolders);
+	DOREPLIFETIME( ACTFGameState, activeFlags);
+	DOREPLIFETIME( ACTFGameState, capturePoints);
+	DOREPLIFETIME( ACTFGameState, timeLeft);
+	DOREPLIFETIME( ACTFGameState, currentRound);
+	DOREPLIFETIME( ACTFGameState, maxRounds);
+}
 
 
 void ACTFGameState::ChooseTeam(ETeamIdentifier team, ACTFPlayerState* player)
 {
-	if(listOfTeams.Contains(team))
-	{
-		listOfTeams[team]->AddPlayer(player);
-		UE_LOG(LogTemp, Warning, TEXT("PlayerController %d Added to team %d"), player->GetUniqueID(), team);
-	}
-	
-	Cast<ACTFPlayerState>(player)->teamScoreDelegate.AddDynamic(this, &ACTFGameState::AddPoints);
+	listOfTeams[static_cast<int32>(team)]->AddPlayer(player);
+	UE_LOG(LogTemp, Warning, TEXT("PlayerController %d Added to team %d"), player->GetUniqueID(), team);
+
+	//Cast<ACTFPlayerState>(player)->teamScoreDelegate.AddDynamic(this, &ACTFGameState::AddPoints);
 }
 
 void ACTFGameState::AddPoints(ETeamIdentifier team, int32 points)
 {
-	if(listOfTeams.Contains(team))
-	{
-		listOfTeams[team]->AddPoints(points);
-	}
+	listOfTeams[static_cast<int32>(team)]->AddPoints(points);
 }

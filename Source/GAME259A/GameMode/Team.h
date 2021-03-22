@@ -44,12 +44,12 @@ public:
 	ACapturePoint* capturePoint;
 
 	//Points earned by this team
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Team | Info")
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere, Category = "Team | Info")
 	int32 points;
 
 	//How many miniflags this team has collected
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Team | Info")
-	int32 miniFlagsColllected;
+	int32 miniFlagsCollected;
 
 	//Identifier for this team 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Team | Info")
@@ -59,6 +59,8 @@ public:
 
 	UFUNCTION()
 	virtual void BeginPlay() override;
+
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	//Adds a player to this team
 	UFUNCTION(BlueprintCallable)

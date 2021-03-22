@@ -7,13 +7,16 @@
 #include "GAME259A/GameMode/CapturePoint.h"
 #include "GameFramework/PlayerStart.h"
 #include "Kismet/GameplayStatics.h"
+#include "Net/UnrealNetwork.h"
 
 ATeam::ATeam()
 {
 	teamID = ETeamIdentifier::Human;
 	capturePoint = nullptr;
 	points = 0;
-	miniFlagsColllected = 0;
+	miniFlagsCollected = 0;
+	bReplicates = true;
+	bAlwaysRelevant = true;
 }
 
 void ATeam::BeginPlay()
@@ -26,6 +29,13 @@ void ATeam::BeginPlay()
 		UE_LOG(LogTemp, Warning, TEXT("Team %d's capture point is nullptr"), teamID);
 	}
 	SpawnPlayers();
+}
+
+void ATeam::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME( ATeam, points );
 }
 
 void ATeam::AddPlayer(ACTFPlayerState* player_)

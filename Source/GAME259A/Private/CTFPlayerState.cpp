@@ -2,12 +2,27 @@
 
 
 #include "CTFPlayerState.h"
-#include "GAME259A/GameMode/MainFlag.h"
+#include "GAME259A/GameMode/Flag.h"
+#include "Net/UnrealNetwork.h"
 
 ACTFPlayerState::ACTFPlayerState(): teamID(ETeamIdentifier::Human), pointsEarned(0), kills(0), deaths(0),
-flagsCaptured(0), FlagHeld(nullptr), PlayerCanPickupFlag(true)
+                                    flagsCaptured(0), FlagHeld(nullptr), PlayerCanPickupFlag(true)
 {
 
+}
+
+void ACTFPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	
+	DOREPLIFETIME( ACTFPlayerState, teamID);
+	DOREPLIFETIME( ACTFPlayerState, pointsEarned);
+	DOREPLIFETIME( ACTFPlayerState, kills);
+	DOREPLIFETIME( ACTFPlayerState, deaths);
+	DOREPLIFETIME( ACTFPlayerState, flagsCaptured);
+	DOREPLIFETIME( ACTFPlayerState, FlagHeld);
+	DOREPLIFETIME( ACTFPlayerState, PlayerCanPickupFlag);
 }
 
 void ACTFPlayerState::AddScore(int32 amountOfPoints)

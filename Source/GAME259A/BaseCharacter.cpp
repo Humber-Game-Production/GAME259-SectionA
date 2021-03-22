@@ -1,6 +1,7 @@
 #include "BaseCharacter.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "GAME259A/GameMode/CTFGameState.h"
+#include "GameMode/Team.h"
 #include "CTFPlayerState.h"
 
 // Sets default values
@@ -158,7 +159,7 @@ void ABaseCharacter::Respawn()
 		{
 			if(gameState->listOfTeams.Num() != 0)
 			{
-				gameState->listOfTeams[ctfPlayerState->teamID]->SpawnPlayer(this);
+				gameState->listOfTeams[static_cast<int32>(ctfPlayerState->teamID)]->SpawnPlayer(this);
 			} else
 			{
 				UE_LOG(LogTemp, Warning, TEXT("No teams found in current level so respawning will not be handled, Try testing in the GameModeTestMap"));

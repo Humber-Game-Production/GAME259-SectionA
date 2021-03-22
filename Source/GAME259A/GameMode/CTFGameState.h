@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameStateBase.h"
-#include "GAME259A/GameMode/Team.h"
 #include "GAME259A/GameMode/TeamIdentifier.h"
 #include "CTFGameState.generated.h"
 
@@ -13,6 +12,9 @@
  */
 
 class AFlag;
+class ATeam;
+class ACapturePoint;
+class ACTFPlayerState;
 
 UCLASS(Blueprintable)
 class GAME259A_API ACTFGameState : public AGameStateBase
@@ -25,18 +27,30 @@ public:
 
 	virtual void BeginPlay() override;
 
-	//Map of teams
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	TMap<ETeamIdentifier, ATeam*> listOfTeams;
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	//Map of teams
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
+	TArray<ATeam*> listOfTeams;
+
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
 	TArray<AActor*> flagHolders;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
 	TArray<AFlag*> activeFlags;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
 	TArray<ACapturePoint*> capturePoints;
+
+	UPROPERTY(Replicated, BlueprintReadOnly, VisibleAnywhere)
+	int32 timeLeft;
+
+	UPROPERTY(Replicated, BlueprintReadOnly, VisibleAnywhere)
+	int32 currentRound;
+	UPROPERTY(Replicated, BlueprintReadOnly, VisibleAnywhere)
+	int32 maxRounds;
+
+
 	
 	//Adds a CTFPlayerState to the specified team
 	UFUNCTION()

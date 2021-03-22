@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerState.h"
 #include "GAME259A/GameMode/TeamIdentifier.h"
-#include "GAME259A/GameMode/Flag.h"
 
 #include "CTFPlayerState.generated.h"
 
@@ -16,6 +15,9 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FAddScoreToTeam, ETeamIdentifier, T
 /**
  * 
  */
+ 
+ class AFlag;
+ 
 UCLASS(Blueprintable)
 class GAME259A_API ACTFPlayerState : public APlayerState
 {
@@ -25,24 +27,26 @@ public:
 
 	ACTFPlayerState();
 
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 	//Identifier for what team the player is on
-	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	UPROPERTY(Replicated, BlueprintReadOnly, EditAnywhere)
 	ETeamIdentifier teamID;
 
 	//How many points this player has earned
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
 	int32 pointsEarned;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
 	int32 kills;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
 	int32 deaths;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
 	int32 flagsCaptured;
 
-	UPROPERTY()
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
 	AFlag* FlagHeld;
 
 	//This delegate is called whenever this player scores for their team
@@ -83,7 +87,7 @@ public:
 protected:
 
 	//Player should only pickup flags if they are Alive and have no other flags
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(Replicated, BlueprintReadWrite)
 	bool PlayerCanPickupFlag;
 };
 
