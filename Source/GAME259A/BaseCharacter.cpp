@@ -4,7 +4,7 @@
 #include "CTFPlayerState.h"
 
 // Sets default values
-ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
+ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), bIsThrowing(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
 									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), JumpVelocity(500.0f), RespawnTime(3.0f)
 
 {
@@ -79,12 +79,21 @@ void ABaseCharacter::StopSprinting()
 	bIsSprinting = false;
 }
 
+//Called when the "Jump" input is pressed. 
 void ABaseCharacter::StartJump()
 {
-	//SetTimer(&JumpTimer, this, &ACharacter::Jump, 0.0f, false, 0.02);
-	GetWorld()->GetTimerManager().SetTimer(JumpTimer, this, &ACharacter::Jump, 0.5f, false);
+	//If the character is grounded and is not already about to jump, set isJumping to true for animation, then call jump on a timer and reset isJumping back to false.
+	if (!GetCharacterMovement()->IsFalling() && !GetWorld()->GetTimerManager().IsTimerActive(JumpTimer))
+	{
+		bIsJumping = true;
+		GetWorld()->GetTimerManager().SetTimer(JumpTimer, [this]()
+			{
+				Jump();
+				bIsJumping = false;
+			},
+			0.5f, false);
+	}
 }
-
 
 //Called when the player is supposed to move forward (Axis = 1) or backward (Axis = -1).
 void ABaseCharacter::MoveForward(float Axis)
@@ -104,6 +113,17 @@ void ABaseCharacter::UseAbilityOne()
 {
 	//TODO
 	//Fill in when the ability class is finished.
+
+	bIsThrowing = true;
+
+	if (bIsThrowing)
+	{
+		GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, [this]()
+			{
+				bIsThrowing = false;
+			},
+			1.0f, false);
+	}
 }
 
 void ABaseCharacter::UseAbilityTwo()
@@ -173,13 +193,7 @@ void ABaseCharacter::Tick(float DeltaTime)
 		{
 			bIsDead = true;
 			Death();
-			
 		}
-	}
-
-	if (bIsSwinging)
-	{
-		bIsSwinging = false;
 	}
 }
 

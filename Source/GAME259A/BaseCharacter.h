@@ -36,7 +36,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	bool bIsSprinting;					//True if the character is sprinting.
 	UPROPERTY(BlueprintReadOnly, Category = "Movement")
-	float JumpVelocity;
+	bool bIsJumping;					//True if the character is jumping.
+	UPROPERTY(BlueprintReadOnly, Category = "Movement")
+	float JumpVelocity;					//The velocity at which the character will jump.
 
 	UPROPERTY(BlueprintReadOnly, Category = "Health")
 	float MaxHealth;					//The character's maximum health. CurrentHealth will be set to this value on initialization and if the value ever exceeds this.
@@ -53,13 +55,15 @@ protected:
 	bool bIsStunned;					//True if the character is stunned via crowd control.
 	UPROPERTY(BlueprintReadWrite, Category = "AnimControl")
 	bool bIsSwinging;					//True if the player just input to melee attack.
-
+	UPROPERTY(BlueprintReadWrite, Category = "AnimControl")
+	bool bIsThrowing;					//True if the player just input to melee attack.
 
 	//Jump timer handle
 	FTimerHandle JumpTimer;
-
 	//Handle to manage the respawn timer.
 	FTimerHandle RespawnTimerHandle;
+	//Handle to manage the throwing animation timer.
+	FTimerHandle ThrowingTimer;
 
 	//**THIS IS COMMENTED OUT UNTIL ABILITY BASE CLASS IS MADE**
 	//UPROPERTY(BlueprintReadWrite, Category = "Abilities")
