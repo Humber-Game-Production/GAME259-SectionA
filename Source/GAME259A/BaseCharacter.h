@@ -53,7 +53,8 @@ protected:
 	bool bIsStunned;					//True if the character is stunned via crowd control.
 	UPROPERTY(BlueprintReadWrite, Category = "AnimControl")
 	bool bIsSwinging;					//True if the player just input to melee attack.
-
+	UPROPERTY(BlueprintReadWrite, Category = "AnimControl")
+	bool bIsDrawingBow;
 
 	//Jump timer handle
 	FTimerHandle JumpTimer;
@@ -96,7 +97,7 @@ protected:
 	void UseMeleeAttack();
 	UFUNCTION(Category = "Combat", BlueprintCallable)
 	void UseRangedAttack();
-
+		
 	UFUNCTION(Category = "Death")
 	void Death();
 	UFUNCTION(Category = "Death", BlueprintCallable)
