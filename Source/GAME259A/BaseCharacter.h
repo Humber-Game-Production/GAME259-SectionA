@@ -40,7 +40,7 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "Health")
 	float MaxHealth;					//The character's maximum health. CurrentHealth will be set to this value on initialization and if the value ever exceeds this.
-	UPROPERTY(BlueprintReadOnly, Category = "Health")
+	UPROPERTY(BlueprintReadWrite, Category = "Health")
 	float CurrentHealth;				//The character's current health.
 	UPROPERTY(BlueprintReadWrite, Category = "Death")
 	float RespawnTime;					//The amount of time required for the character to respawn.
@@ -98,7 +98,7 @@ protected:
 	UFUNCTION(Category = "Combat", BlueprintCallable)
 	void UseRangedAttack();
 		
-	UFUNCTION(Category = "Death")
+	UFUNCTION(Category = "Death", BlueprintCallable)
 	void Death();
 	UFUNCTION(Category = "Death", BlueprintCallable)
 	void TakeDamage(float damage_);
