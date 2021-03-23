@@ -4,8 +4,13 @@
 #include "CTFPlayerState.h"
 
 // Sets default values
+<<<<<<< HEAD
 ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), bIsThrowing(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
 									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), JumpVelocity(500.0f), RespawnTime(3.0f)
+=======
+ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
+									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), JumpVelocity(500.0f), RespawnTime(3.0f), SlowMultiplier(0.5f)
+>>>>>>> 6f5d7954b9c7aa2242de3303f4de55bfe06ed94f
 
 {
 	//Set the character to not rotate when the mouse is moved, only the camera is rotated.
@@ -51,6 +56,9 @@ void ABaseCharacter::MoveRight(float Axis)
 
 	//if (Axis < 0) right *= -1;
 	//if (Axis == 0) right *= 0;
+	if (bIsSlowed) {
+		Axis = Axis * SlowMultiplier;
+	}
 	if (!bIsSprinting)
 	{
 		Axis = Axis * 1/SprintMultiplier;
@@ -82,6 +90,7 @@ void ABaseCharacter::StopSprinting()
 //Called when the "Jump" input is pressed. 
 void ABaseCharacter::StartJump()
 {
+<<<<<<< HEAD
 	//If the character is grounded and is not already about to jump, set isJumping to true for animation, then call jump on a timer and reset isJumping back to false.
 	if (!GetCharacterMovement()->IsFalling() && !GetWorld()->GetTimerManager().IsTimerActive(JumpTimer))
 	{
@@ -93,6 +102,10 @@ void ABaseCharacter::StartJump()
 			},
 			0.5f, false);
 	}
+=======
+	//SetTimer(&JumpTimer, this, &ACharacter::Jump, 0.0f, false, 0.02);
+	GetWorld()->GetTimerManager().SetTimer(JumpTimer, this, &ACharacter::Jump, 0.2f, false);
+>>>>>>> 6f5d7954b9c7aa2242de3303f4de55bfe06ed94f
 }
 
 //Called when the player is supposed to move forward (Axis = 1) or backward (Axis = -1).
@@ -101,6 +114,9 @@ void ABaseCharacter::MoveForward(float Axis)
 	//FVector forward = GetActorForwardVector();
 	//if (Axis < 0) forward *= -1;
 	//if (Axis == 0) forward *= 0;
+	if (bIsSlowed) {
+		Axis = Axis * SlowMultiplier;
+	}
 	if (!bIsSprinting)
 	{
 		Axis = Axis * 1 / SprintMultiplier;
@@ -151,6 +167,18 @@ void ABaseCharacter::UseMeleeAttack()
 void ABaseCharacter::UseRangedAttack()
 {
 	//TODO (Combat)
+}
+
+void ABaseCharacter::Slow()
+{
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Slowed"));
+	bIsSlowed = true;
+}
+
+void ABaseCharacter::UnSlow()
+{
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("UnSlowed"));
+	bIsSlowed = false;
 }
 
 void ABaseCharacter::Death()

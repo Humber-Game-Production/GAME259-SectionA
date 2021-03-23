@@ -52,6 +52,8 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "CCStatus")
 	bool bIsSlowed;						//True if the character is slowed via crowd control.
 	UPROPERTY(BlueprintReadOnly, Category = "CCStatus")
+	float SlowMultiplier;				//The multiplier by which a character is slowed
+	UPROPERTY(BlueprintReadOnly, Category = "CCStatus")
 	bool bIsStunned;					//True if the character is stunned via crowd control.
 	UPROPERTY(BlueprintReadWrite, Category = "AnimControl")
 	bool bIsSwinging;					//True if the player just input to melee attack.
@@ -113,5 +115,10 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	UFUNCTION(Category = "Movement", BlueprintCallable)
+	void Slow();
+	UFUNCTION(Category = "Movement", BlueprintCallable)
+	void UnSlow();
 
 };
