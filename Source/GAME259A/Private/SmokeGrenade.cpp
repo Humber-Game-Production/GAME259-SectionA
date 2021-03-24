@@ -53,7 +53,7 @@ void ASmokeGrenade::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, 
 void ASmokeGrenade::OnEndSmokeTimerFinish()
 {
 	SmokeParticle->DeactivateSystem();
-	GetWorld()->GetTimerManager().SetTimer(DeleteTimer, this, &ASmokeGrenade::OnDeleteTimerFinish, 2f, 0.0f);
+	GetWorld()->GetTimerManager().SetTimer(DeleteTimer, this, &ASmokeGrenade::OnDeleteTimerFinish, 2.0f, 0.0f);
 }
 
 //Delete grenade.

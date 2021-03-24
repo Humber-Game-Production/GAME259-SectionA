@@ -143,6 +143,7 @@ void ABaseCharacter::UseAbilityOne()
 	}
 }
 
+
 void ABaseCharacter::UseAbilityTwo()
 {
 	//TODO
