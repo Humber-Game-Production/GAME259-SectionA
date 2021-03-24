@@ -199,6 +199,21 @@ void ABaseCharacter::Death()
 	}
 }
 
+void ABaseCharacter::TakeDamage(float damage_)
+{
+	//Reduce CurrentHealth by damage
+	CurrentHealth -= damage_;
+	//If b isn't dead
+	if (!bIsDead) {
+		//Check if health is under 0
+		if (CurrentHealth <= 0) {
+			//Call Death Function and set dead to true
+			bIsDead = true;
+			Death();
+		}
+	}
+}
+
 void ABaseCharacter::Respawn()
 {
 	ACTFPlayerState* ctfPlayerState = GetPlayerState<ACTFPlayerState>();
@@ -219,13 +234,9 @@ void ABaseCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (!bIsDead)
+	if (bIsSwinging)
 	{
-		if (CurrentHealth <= 0)
-		{
-			bIsDead = true;
-			Death();
-		}
+		bIsSwinging = false;
 	}
 }
 
