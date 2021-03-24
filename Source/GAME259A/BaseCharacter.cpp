@@ -189,6 +189,7 @@ void ABaseCharacter::Death()
 	GetMesh()->SetAllBodiesSimulatePhysics(true);
 
 	FTimerHandle UnusedTimerHandle;
+
 	GetWorldTimerManager().SetTimer(UnusedTimerHandle, this, &ABaseCharacter::Respawn, RespawnTime, false);
 
 	//Below code is added by Declan from GameMode Team
