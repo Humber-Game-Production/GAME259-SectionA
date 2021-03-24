@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "CTFPlayerState.h"
-#include "TeleportAbilityActor.h"
 #include "BaseAbilityClass.generated.h"
 
 
@@ -29,7 +28,7 @@ public:
 	//void ActivateAbility(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_, float Damage_, FVector Velocity_);
 
 	UFUNCTION(BlueprintCallable)
-		void UseAbility(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_, float Damage_, FVector Velocity_);
+		void UseAbility(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_, float Damage_, FVector Velocity_, AActor* Spawner_);
 
 public:
 	// Called every frame

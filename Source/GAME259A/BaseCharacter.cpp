@@ -119,9 +119,9 @@ void ABaseCharacter::SetThrow()
 {
 	location = FTransform(GetActorLocation() + GetActorForwardVector() * 100.0f);
 	if(ACTFPlayerState* StateOfPlayer = GetPlayerState<ACTFPlayerState>())
-		TeleportAbility->UseAbility(3.0f, location, 0.0f, StateOfPlayer->teamID, 0.0f, ThirdPersonCamera->GetForwardVector() * 1500.0f);
+		TeleportAbility->UseAbility(3.0f, location, 0.0f, StateOfPlayer->teamID, 0.0f, ThirdPersonCamera->GetForwardVector() * 6000.0f, this);
 	else 
-		TeleportAbility->UseAbility(3.0f, location, 0.0f, ETeamIdentifier::None, 0.0f, ThirdPersonCamera->GetForwardVector() * 1500.0f);
+		TeleportAbility->UseAbility(3.0f, location, 0.0f, ETeamIdentifier::None, 0.0f, ThirdPersonCamera->GetForwardVector() * 6000.0f, this);
 	
 	bIsThrowing = false;
 }

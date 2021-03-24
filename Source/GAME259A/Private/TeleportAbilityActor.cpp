@@ -15,24 +15,14 @@ ATeleportAbilityActor::ATeleportAbilityActor()
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	RootComponent = Mesh;
 
-	//setting up Projectile stuff
-	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));
-	ProjectileMovement->SetUpdatedComponent(Mesh);
-
-	ProjectileMovement->bInitialVelocityInLocalSpace = true;
-	ProjectileMovement->bShouldBounce = true;
-	ProjectileMovement->bSweepCollision = true;
-	ProjectileMovement->bSimulationEnabled = true;
-	ProjectileMovement->bEditableWhenInherited = true;
-	ProjectileMovement->ProjectileGravityScale = 1.0f;
-	ProjectileMovement->bAutoActivate = true;
-	ProjectileMovement->SetVelocityInLocalSpace(FVector(1500, 1500, 1500));
+	Mesh->SetSimulatePhysics(true);
+	Mesh->SetNotifyRigidBodyCollision(true);
 }
 // Called when the game starts or when spawned
 void ATeleportAbilityActor::BeginPlay()
 {
 	Super::BeginPlay();
-
+	Mesh->OnComponentHit.AddDynamic(this, &ATeleportAbilityActor::OnCompHit);
 	//BaseCharacter = GetOwner();
 	//ThrowInDirection();
 	
@@ -44,13 +34,20 @@ void ATeleportAbilityActor::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void ATeleportAbilityActor::SetLocation(FVector Location_, AActor* BaseCharacter_)
+void ATeleportAbilityActor::SetSpawner(AActor* BaseCharacter_)
 {
-	//BaseCharacter_->SetActorLocation(Location_, false, nullptr, ETeleportType::TeleportPhysics);
-	this->Destroy();
+	BaseCharacter = BaseCharacter_;
 }
+
 //sets objects velocity
 
+void ATeleportAbilityActor::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I Hit: %s"), *OtherActor->GetName()));
 
+	BaseCharacter->SetActorLocation(GetActorLocation() + (Hit.Normal * 120));
+	this->Destroy();
+
+}
 
 
