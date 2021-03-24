@@ -14,6 +14,11 @@ void UTeleportAbilityComponent::SpawnActor(float CoolDown_, FTransform Transform
 	GetWorld()->SpawnActor<AActor>(ActorToSpawn, Transform_.GetLocation(), Transform_.Rotator(), spawnParams);
 }
 
+void UTeleportAbilityComponent::BeginPlay()
+{
+	Super::BeginPlay();
+}
+
 FVector UTeleportAbilityComponent::GetVelocity(FVector Velocity_)
 {
 	Velocity_ = Vel;

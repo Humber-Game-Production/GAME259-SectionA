@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-#include "../Public/TeleportAbilityActor.h"
 #include "BaseAbilityClass.h"
+#include "../Public/TeleportAbilityActor.h"
 #include "Kismet/GameplayStatics.h"
 
 
@@ -17,7 +17,7 @@ UBaseAbilityClass::UBaseAbilityClass()
 void UBaseAbilityClass::BeginPlay()
 {
 	//UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATeleportAbilityActor::StaticClass(), FoundActors);
-
+	Super::BeginPlay();
 }
 
 void UBaseAbilityClass::UseAbility(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_, float Damage_, FVector Velocity_, AActor* Spawner_)
@@ -38,6 +38,7 @@ void UBaseAbilityClass::UseAbility(float CoolDown_, FTransform Transform_, float
 
 void UBaseAbilityClass::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
 

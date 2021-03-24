@@ -19,6 +19,9 @@ public:
 		UFUNCTION(BlueprintCallable)
 			void SpawnActor(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_, FVector Velocity_);
 
+		UFUNCTION()
+		virtual void BeginPlay() override;
+
 		//UFUNCTION()
 			//void ActivateAbility_Implementation(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_, float Damage_, FVector Velocity_) override;
 
