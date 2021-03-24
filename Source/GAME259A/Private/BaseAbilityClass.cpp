@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
-
+#include "../Public/TeleportAbilityActor.h"
 #include "BaseAbilityClass.h"
+#include "Kismet/GameplayStatics.h"
+
 
 // Sets default values for this component's properties
 UBaseAbilityClass::UBaseAbilityClass()
@@ -13,32 +14,30 @@ UBaseAbilityClass::UBaseAbilityClass()
 	// ...
 }
 
-
-
-// Called when the game starts
 void UBaseAbilityClass::BeginPlay()
 {
-	Super::BeginPlay();
+	//UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATeleportAbilityActor::StaticClass(), FoundActors);
 
-	// ...
-	
 }
 
-
-void UBaseAbilityClass::ActivateAbility_Implementation(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_, float Damage_)
+void UBaseAbilityClass::UseAbility(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_, float Damage_, FVector Velocity_, AActor* Spawner_)
 {
+	//!= NULL && Transform_.GetLocation() != NULL && Transform_.Rotator
+	//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, FString::Printf(TEXT("Called Ability %f"), Transform_.GetLocation().ToString()));
+
+	FVector location = Transform_.GetLocation();
+	FRotator Rotation = Transform_.Rotator();
+	AActor* AbilityActor;
+	if (GetWorld()) {
+		AbilityActor = GetWorld()->SpawnActor<AActor>(ActorToSpawn, location, Rotation);
+		AbilityActor->FindComponentByClass<UStaticMeshComponent>()->AddImpulse(Velocity_);
+		if(Cast<ATeleportAbilityActor>(AbilityActor))
+			Cast<ATeleportAbilityActor>(AbilityActor)->SetSpawner(Spawner_);
+	}
 }
 
-void UBaseAbilityClass::UseAbility(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_, float Damage_)
-{
-	ActivateAbility(CoolDown_, Transform_, Duration_, Team_,Damage_);
-}
-
-// Called every frame
 void UBaseAbilityClass::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
 }
+
 

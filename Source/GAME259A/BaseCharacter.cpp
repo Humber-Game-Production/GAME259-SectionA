@@ -4,9 +4,8 @@
 #include "CTFPlayerState.h"
 
 // Sets default values
-ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
-									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), JumpVelocity(500.0f), RespawnTime(3.0f)
-
+ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), bIsThrowing(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
+									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), JumpVelocity(500.0f), RespawnTime(3.0f), SlowMultiplier(0.5f)
 {
 	//Set the character to not rotate when the mouse is moved, only the camera is rotated.
  	bUseControllerRotationPitch = false;
@@ -35,13 +34,15 @@ ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(
 	ThirdPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("ThirdPersonCamera"));
 	ThirdPersonCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	ThirdPersonCamera->bUsePawnControlRotation = false;
+
+	TeleportAbility = CreateDefaultSubobject<UBaseAbilityClass>(TEXT("TeleportAbility"));
 }
 
 // Called when the game starts or when spawned
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 //Called when the player is supposed to move left (Axis = -1) or right (Axis = 1).
@@ -51,6 +52,9 @@ void ABaseCharacter::MoveRight(float Axis)
 
 	//if (Axis < 0) right *= -1;
 	//if (Axis == 0) right *= 0;
+	if (bIsSlowed) {
+		Axis = Axis * SlowMultiplier;
+	}
 	if (!bIsSprinting)
 	{
 		Axis = Axis * 1/SprintMultiplier;
@@ -79,12 +83,20 @@ void ABaseCharacter::StopSprinting()
 	bIsSprinting = false;
 }
 
+//Called when the "Jump" input is pressed. 
 void ABaseCharacter::StartJump()
 {
-	//SetTimer(&JumpTimer, this, &ACharacter::Jump, 0.0f, false, 0.02);
-	GetWorld()->GetTimerManager().SetTimer(JumpTimer, this, &ACharacter::Jump, 0.5f, false);
+	if (!GetCharacterMovement()->IsFalling() && !GetWorld()->GetTimerManager().IsTimerActive(JumpTimer))
+	{
+		bIsJumping = true;
+		GetWorld()->GetTimerManager().SetTimer(JumpTimer, [this]()
+			{
+				Jump();
+				bIsJumping = false;
+			},
+			0.5f, false);
+	}
 }
-
 
 //Called when the player is supposed to move forward (Axis = 1) or backward (Axis = -1).
 void ABaseCharacter::MoveForward(float Axis)
@@ -92,6 +104,9 @@ void ABaseCharacter::MoveForward(float Axis)
 	//FVector forward = GetActorForwardVector();
 	//if (Axis < 0) forward *= -1;
 	//if (Axis == 0) forward *= 0;
+	if (bIsSlowed) {
+		Axis = Axis * SlowMultiplier;
+	}
 	if (!bIsSprinting)
 	{
 		Axis = Axis * 1 / SprintMultiplier;
@@ -100,11 +115,34 @@ void ABaseCharacter::MoveForward(float Axis)
 	//Walk(forward);
 }
 
+void ABaseCharacter::SetThrow()
+{
+	location = FTransform(GetActorLocation() + GetActorForwardVector() * 100.0f);
+	if(ACTFPlayerState* StateOfPlayer = GetPlayerState<ACTFPlayerState>())
+		TeleportAbility->UseAbility(3.0f, location, 0.0f, StateOfPlayer->teamID, 0.0f, ThirdPersonCamera->GetForwardVector() * 6000.0f, this);
+	else 
+		TeleportAbility->UseAbility(3.0f, location, 0.0f, ETeamIdentifier::None, 0.0f, ThirdPersonCamera->GetForwardVector() * 6000.0f, this);
+	
+	bIsThrowing = false;
+}
+
 void ABaseCharacter::UseAbilityOne()
 {
 	//TODO
 	//Fill in when the ability class is finished.
+	
+	//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, FString::Printf(TEXT("Can Use Ability In %f"), ForwardVector.X));
+
+	bIsThrowing = true;
+	
+	if (bIsThrowing)
+	{
+		GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, this, &ABaseCharacter::SetThrow,
+
+			1.0f, false);
+	}
 }
+
 
 void ABaseCharacter::UseAbilityTwo()
 {
@@ -131,6 +169,18 @@ void ABaseCharacter::UseMeleeAttack()
 void ABaseCharacter::UseRangedAttack()
 {
 	//TODO (Combat)
+}
+
+void ABaseCharacter::Slow()
+{
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Slowed"));
+	bIsSlowed = true;
+}
+
+void ABaseCharacter::UnSlow()
+{
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("UnSlowed"));
+	bIsSlowed = false;
 }
 
 void ABaseCharacter::Death()
@@ -162,6 +212,8 @@ void ABaseCharacter::Respawn()
 	this->Destroy();
 }
 
+
+
 // Called every frame
 void ABaseCharacter::Tick(float DeltaTime)
 {
@@ -173,13 +225,7 @@ void ABaseCharacter::Tick(float DeltaTime)
 		{
 			bIsDead = true;
 			Death();
-			
 		}
-	}
-
-	if (bIsSwinging)
-	{
-		bIsSwinging = false;
 	}
 }
 
