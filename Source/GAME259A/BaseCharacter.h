@@ -113,18 +113,18 @@ protected:
 	void UseMeleeAttack();
 	UFUNCTION(Category = "Combat", BlueprintCallable)
 	void UseRangedAttack();
-		
-	UFUNCTION(Category = "Death", BlueprintCallable)
-	void Death();
+
 	UFUNCTION(Category = "Death", BlueprintCallable)
 	void TakeDamage(float damage_);
-	UFUNCTION(Category = "Death")
+	UFUNCTION(NetMulticast, Reliable, Category = "Death", BlueprintCallable)
+	void Death();
+	UFUNCTION(NetMulticast, Reliable, Category = "Death", BlueprintCallable)
 	void Respawn();
 
 	UFUNCTION()
-		void SetThrowAbilityOne();
+	void SetThrowAbilityOne();
 	UFUNCTION()
-		void SetThrowAbilityTwo();
+	void SetThrowAbilityTwo();
 
 
 public:	

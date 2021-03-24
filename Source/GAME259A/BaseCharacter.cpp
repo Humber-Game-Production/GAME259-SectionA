@@ -1,6 +1,7 @@
 #include "BaseCharacter.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "GAME259A/GameMode/CTFGameState.h"
+#include "GameMode/Team.h"
 #include "CTFPlayerState.h"
 
 // Sets default values
@@ -37,6 +38,8 @@ ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(
 
 	TeleportAbility = CreateDefaultSubobject<UBaseAbilityClass>(TEXT("TeleportAbility"));
 	SecondAbility = CreateDefaultSubobject<UBaseAbilityClass>(TEXT("SecondAbility"));
+
+	bReplicates = true;
 }
 
 // Called when the game starts or when spawned
@@ -201,7 +204,7 @@ void ABaseCharacter::UnSlow()
 	bIsSlowed = false;
 }
 
-void ABaseCharacter::Death()
+void ABaseCharacter::Death_Implementation()
 {
 	//Rag doll if the player is dead.
 	GetMesh()->SetAllBodiesSimulatePhysics(true);
@@ -233,17 +236,13 @@ void ABaseCharacter::TakeDamage(float damage_)
 	}
 }
 
-void ABaseCharacter::Respawn()
+void ABaseCharacter::Respawn_Implementation()
 {
 	ACTFPlayerState* ctfPlayerState = GetPlayerState<ACTFPlayerState>();
 	if(ctfPlayerState)
 	{
-		if(ACTFGameState* gameState = Cast<ACTFGameState>(GetWorld()->GetGameState()))
-		{
-			gameState->listOfTeams[ctfPlayerState->teamID]->SpawnPlayer(this);
-		}
+		ctfPlayerState->OnRespawn();
 	}
-	this->Destroy();
 }
 
 
