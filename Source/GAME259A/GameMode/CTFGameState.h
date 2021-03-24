@@ -59,4 +59,7 @@ public:
 	//Adds points to the specified team
 	UFUNCTION()
 	void AddPoints(ETeamIdentifier team, int32 points);
+
+	UFUNCTION()
+	ATeam* GetTeam(ETeamIdentifier team) const;
 };

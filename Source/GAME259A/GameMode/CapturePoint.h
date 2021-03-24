@@ -32,10 +32,10 @@ public:
 	class AActor* mainFlag;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		float flagInactivePeriod;
+	float flagInactivePeriod;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		UParticleSystem* flagSpawnEffect;
+	UParticleSystem* flagSpawnEffect;
 
 	
 	FTimerHandle mainFlagActiveTimer;

@@ -36,6 +36,9 @@ ABaseCharacter::ABaseCharacter() : MaxWalkSpeed(1200.0f), CurrentMoveSpeed(MaxWa
 	ThirdPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("ThirdPersonCamera"));
 	ThirdPersonCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	ThirdPersonCamera->bUsePawnControlRotation = false;
+	
+	bReplicates = true;
+	
 }
 
 // Called when the game starts or when spawned
@@ -134,7 +137,7 @@ void ABaseCharacter::UseRangedAttack()
 	//TODO (Combat)
 }
 
-void ABaseCharacter::Death()
+void ABaseCharacter::Death_Implementation()
 {
 	//Rag doll if the player is dead.
 	GetMesh()->SetAllBodiesSimulatePhysics(true);
@@ -150,23 +153,13 @@ void ABaseCharacter::Death()
 	}
 }
 
-void ABaseCharacter::Respawn()
+void ABaseCharacter::Respawn_Implementation()
 {
 	ACTFPlayerState* ctfPlayerState = GetPlayerState<ACTFPlayerState>();
 	if(ctfPlayerState)
 	{
-		if(ACTFGameState* gameState = Cast<ACTFGameState>(GetWorld()->GetGameState()))
-		{
-			if(gameState->listOfTeams.Num() != 0)
-			{
-				gameState->listOfTeams[static_cast<int32>(ctfPlayerState->teamID)]->SpawnPlayer(this);
-			} else
-			{
-				UE_LOG(LogTemp, Warning, TEXT("No teams found in current level so respawning will not be handled, Try testing in the GameModeTestMap"));
-			}
-		}
+		ctfPlayerState->OnRespawn();
 	}
-	this->Destroy();
 }
 
 // Called every frame

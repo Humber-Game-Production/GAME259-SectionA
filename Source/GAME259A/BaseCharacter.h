@@ -97,9 +97,9 @@ protected:
 	UFUNCTION(Category = "Combat", BlueprintCallable)
 	void UseRangedAttack();
 
-	UFUNCTION(Category = "Death")
+	UFUNCTION(NetMulticast, Reliable, Category = "Death")
 	void Death();
-	UFUNCTION(Category = "Death")
+	UFUNCTION(NetMulticast, Reliable, Category = "Death")
 	void Respawn();
 
 

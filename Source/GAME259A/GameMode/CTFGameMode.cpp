@@ -34,7 +34,6 @@ ACTFGameMode::ACTFGameMode()
 	
 	//make sure GM can tick
 	PrimaryActorTick.bCanEverTick = false;
-	
 	roundTimerTime = 20.0f;
 	maxRounds = 5;
 	currentRound = 1;
@@ -56,7 +55,7 @@ void ACTFGameMode::BeginPlay()
 	{
 		capturePoints.Add(Cast<ACapturePoint>(foundActors[i]));
 	}
-
+	
 	GetWorldTimerManager().SetTimer(startGameTimer, this, &ACTFGameMode::BeginFirstRound, 4.0f);
 }
 
@@ -114,7 +113,7 @@ void ACTFGameMode::InitTeams()
 
 	for (auto team : ctfGameState->listOfTeams)
 	{
-		team->SpawnPlayers();
+		SpawnAllPlayersOnTeam(team->teamID);
 	}
 
 	ctfGameState->currentRound = currentRound;
@@ -149,7 +148,10 @@ void ACTFGameMode::UpdateGameStateTime()
 
 void ACTFGameMode::SpawnMiniFlag()
 {
-	if((GetTeam(ETeamIdentifier::Human)->miniFlagSpawnPoints.Num() != 0) && (GetTeam(ETeamIdentifier::Alien)->miniFlagSpawnPoints.Num() != 0))
+	ATeam* humanTeam = ctfGameState->GetTeam(ETeamIdentifier::Human);
+	ATeam* alienTeam = ctfGameState->GetTeam(ETeamIdentifier::Alien);
+	
+	if((humanTeam->miniFlagSpawnPoints.Num() != 0) && (alienTeam->miniFlagSpawnPoints.Num() != 0))
 	{
 		if(spawnedMiniFlags < requiredMiniFlags)
 		{
@@ -157,13 +159,13 @@ void ACTFGameMode::SpawnMiniFlag()
 			UE_LOG(LogTemp, Warning, TEXT("Mini flag number %d was spawned"), spawnedMiniFlags);
 			if(spawnedMiniFlags % 2 == 0)
 			{
-				const int randomSpawn = FMath::RandRange(0, GetTeam(ETeamIdentifier::Human)->miniFlagSpawnPoints.Num() - 1);
-				FVector spawnPoint = GetTeam(ETeamIdentifier::Human)->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
+				const int randomSpawn = FMath::RandRange(0, humanTeam->miniFlagSpawnPoints.Num() - 1);
+				FVector spawnPoint = humanTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
 				GetWorld()->SpawnActor(miniFlag, &spawnPoint);
 			} else
 			{
-				const int randomSpawn = FMath::RandRange(0, GetTeam(ETeamIdentifier::Alien)->miniFlagSpawnPoints.Num() - 1);
-				FVector spawnPoint = GetTeam(ETeamIdentifier::Alien)->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
+				const int randomSpawn = FMath::RandRange(0, alienTeam->miniFlagSpawnPoints.Num() - 1);
+				FVector spawnPoint = alienTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
 				GetWorld()->SpawnActor(miniFlag, &spawnPoint);
 			}
 		}
@@ -227,7 +229,7 @@ void ACTFGameMode::RoundReset() {
 	
 	for (auto team : ctfGameState->listOfTeams)
 	{
-		team->SpawnPlayers();
+		SpawnAllPlayersOnTeam(team->teamID);
 	}
 
 	for(auto capPoint: capturePoints)
@@ -279,30 +281,23 @@ bool ACTFGameMode::WinCheck()
 	return false;
 }
 
-ATeam* ACTFGameMode::GetTeam(ETeamIdentifier team) const
-{
-	for(int i = 0; i < ctfGameState->listOfTeams.Num(); i++)
-	{
-		if(ctfGameState->listOfTeams[i]->teamID == team)
-		{
-			return ctfGameState->listOfTeams[i];
-		}
-	}
-	return nullptr;
-}
 
 void ACTFGameMode::AddPoints_Implementation(ETeamIdentifier team, int32 value)
 {
-	GetTeam(team)->AddPoints(value);
+	ctfGameState->GetTeam(team)->AddPoints(value);
 }
 
-void ACTFGameMode::SpawnAllPlayersOnTeam_Implementation(ETeamIdentifier team)
+void ACTFGameMode::SpawnAllPlayersOnTeam(ETeamIdentifier team)
 {
-	
-}
-
-
-void ACTFGameMode::SpawnPlayer_Implementation(APawn* pawn)
-{
-	
+	ATeam* teamToSpawn = ctfGameState->GetTeam(team);
+	if(teamToSpawn)
+	{
+		for(int i = 0; i < teamToSpawn->players.Num(); i++)
+		{
+			teamToSpawn->players[i]->OnRespawn();
+		}
+	} else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("SpawnAllPlayersOnTeam function in the gamemode could not find team %d"), static_cast<int32>(team));
+	}
 }

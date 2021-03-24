@@ -12,6 +12,7 @@ class ACTFGameState;
 class ATeam;
 class ACapturePoint;
 class AFlag;
+class ACTFPlayerState;
 
 UCLASS(Blueprintable)
 class GAME259A_API ACTFGameMode : public AGameModeBase
@@ -27,43 +28,35 @@ public:
 	
 
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void BeginFirstRound();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void InitTeams();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void UpdateGameStateTime();
 	
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void SpawnMiniFlag();
 	
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void EndRound();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void RoundReset();
 
 	//Change later to return a team
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	bool WinCheck();
-
-	UFUNCTION()
-	ATeam* GetTeam(ETeamIdentifier team) const;
 
 	//Adds points to this team
 	UFUNCTION(Server, Reliable, BlueprintCallable)
     void AddPoints(ETeamIdentifier team, int32 value);
 
 	//Spawns all the players on this team
-	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
+	UFUNCTION(BlueprintCallable)
     void SpawnAllPlayersOnTeam(ETeamIdentifier team);
-
-	//Spawns a single player on this team
-	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
-    void SpawnPlayer(APawn* pawn);
-
 	
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Flags")
 	int32 spawnedMiniFlags;
