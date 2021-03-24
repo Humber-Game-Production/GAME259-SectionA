@@ -3,9 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "TeleportAbilityActor.h"
 #include "BaseAbilityClass.h"
-#include "../BaseCharacter.h"
-
 #include "TeleportAbilityComponent.generated.h"
 
 
@@ -17,11 +16,11 @@ class GAME259A_API UTeleportAbilityComponent : public UBaseAbilityClass
 {
 	GENERATED_BODY()
 public:
-
-
-
 		UFUNCTION(BlueprintCallable)
 			void SpawnActor(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_, FVector Velocity_);
+
+		//UFUNCTION()
+			//void ActivateAbility_Implementation(float CoolDown_, FTransform Transform_, float Duration_, ETeamIdentifier Team_, float Damage_, FVector Velocity_) override;
 
 		UFUNCTION(BlueprintCallable, Category = "Throwing")
 			FVector GetVelocity(FVector Velocity_);
@@ -31,27 +30,31 @@ public:
 
 		UFUNCTION(BlueprintCallable)
 			void StartCoolDown(float CoolDown_);
-
-		UPROPERTY(BlueprintReadWrite, EditAnywhere)
-			UTeleportAbilityComponent* TeleportAbilityRef;
+		
 		UPROPERTY(BlueprintReadOnly)
 			bool CanUseAbility;
+
+		UPROPERTY(BlueprintReadOnly)
+			float AbilityCoolDownRemaining;
 
 		UPROPERTY()
 			FVector Vel;
 
+
+		virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+		float MaxCoolDown;
 protected:
 	UTeleportAbilityComponent();
 private:
 
 	FTimerHandle AbilityTimerHandle;
-	float AbilityCoolDownRemaining;
+	
 	
 	void ResetAbilityCoolDown();
 
 	UPROPERTY()
 		bool isAiming = true;
-	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
-		TSubclassOf<AActor> ActorToSpawn;
+
 
 };

@@ -34,13 +34,15 @@ ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(
 	ThirdPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("ThirdPersonCamera"));
 	ThirdPersonCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	ThirdPersonCamera->bUsePawnControlRotation = false;
+
+	TeleportAbility = CreateDefaultSubobject<UBaseAbilityClass>(TEXT("TeleportAbility"));
 }
 
 // Called when the game starts or when spawned
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 //Called when the player is supposed to move left (Axis = -1) or right (Axis = 1).
@@ -113,19 +115,30 @@ void ABaseCharacter::MoveForward(float Axis)
 	//Walk(forward);
 }
 
+void ABaseCharacter::SetThrow()
+{
+	location = FTransform(GetActorLocation() + GetActorForwardVector() * 100.0f);
+	if(ACTFPlayerState* StateOfPlayer = GetPlayerState<ACTFPlayerState>())
+		TeleportAbility->UseAbility(3.0f, location, 0.0f, StateOfPlayer->teamID, 0.0f, ThirdPersonCamera->GetForwardVector() * 1500.0f);
+	else 
+		TeleportAbility->UseAbility(3.0f, location, 0.0f, ETeamIdentifier::None, 0.0f, ThirdPersonCamera->GetForwardVector() * 1500.0f);
+	
+	bIsThrowing = false;
+}
+
 void ABaseCharacter::UseAbilityOne()
 {
 	//TODO
 	//Fill in when the ability class is finished.
+	
+	//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, FString::Printf(TEXT("Can Use Ability In %f"), ForwardVector.X));
 
 	bIsThrowing = true;
-
+	
 	if (bIsThrowing)
 	{
-		GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, [this]()
-			{
-				bIsThrowing = false;
-			},
+		GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, this, &ABaseCharacter::SetThrow,
+
 			1.0f, false);
 	}
 }
@@ -197,6 +210,8 @@ void ABaseCharacter::Respawn()
 	}
 	this->Destroy();
 }
+
+
 
 // Called every frame
 void ABaseCharacter::Tick(float DeltaTime)

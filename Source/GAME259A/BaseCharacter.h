@@ -9,6 +9,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "TimerManager.h"
+#include "Public/BaseAbilityClass.h"
 
 #include "BaseCharacter.generated.h"
 
@@ -60,6 +61,13 @@ protected:
 	UPROPERTY(BlueprintReadWrite, Category = "AnimControl")
 	bool bIsThrowing;					//True if the player just input to melee attack.
 
+	UPROPERTY(EditAnywhere, Category = "Abilities")
+		UBaseAbilityClass* TeleportAbility;
+	UPROPERTY()
+		FTransform location;
+
+
+
 	//Jump timer handle
 	FTimerHandle JumpTimer;
 	//Handle to manage the respawn timer.
@@ -108,7 +116,8 @@ protected:
 	UFUNCTION(Category = "Death")
 	void Respawn();
 
-
+	UFUNCTION()
+		void SetThrow();
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
