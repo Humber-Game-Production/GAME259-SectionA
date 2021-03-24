@@ -30,7 +30,8 @@ void UBaseAbilityClass::UseAbility(float CoolDown_, FTransform Transform_, float
 	AActor* AbilityActor;
 	if (GetWorld()) {
 		AbilityActor = GetWorld()->SpawnActor<AActor>(ActorToSpawn, location, Rotation);
-		AbilityActor->FindComponentByClass<UStaticMeshComponent>()->AddImpulse(Velocity_);
+		//AbilityActor->FindComponentByClass<UStaticMeshComponent>()->AddImpulse(Velocity_);
+		AbilityActor->FindComponentByClass<UStaticMeshComponent>()->SetPhysicsLinearVelocity(Velocity_);
 		if(Cast<ATeleportAbilityActor>(AbilityActor))
 			Cast<ATeleportAbilityActor>(AbilityActor)->SetSpawner(Spawner_);
 	}

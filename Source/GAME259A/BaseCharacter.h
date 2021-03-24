@@ -65,6 +65,8 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Abilities")
 	UBaseAbilityClass* TeleportAbility;
+	UPROPERTY(EditAnywhere, Category = "Abilities")
+	UBaseAbilityClass* SecondAbility;
 	UPROPERTY()
 	FTransform location;
 
@@ -120,7 +122,9 @@ protected:
 	void Respawn();
 
 	UFUNCTION()
-		void SetThrow();
+		void SetThrowAbilityOne();
+	UFUNCTION()
+		void SetThrowAbilityTwo();
 
 
 public:	

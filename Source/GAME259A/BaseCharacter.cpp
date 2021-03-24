@@ -5,7 +5,7 @@
 
 // Sets default values
 ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), bIsThrowing(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
-									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), JumpVelocity(500.0f), RespawnTime(3.0f), SlowMultiplier(0.5f)
+									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), JumpVelocity(500.0f), RespawnTime(3.0f), SlowMultiplier(0.25f)
 {
 	//Set the character to not rotate when the mouse is moved, only the camera is rotated.
  	bUseControllerRotationPitch = false;
@@ -36,6 +36,7 @@ ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(
 	ThirdPersonCamera->bUsePawnControlRotation = false;
 
 	TeleportAbility = CreateDefaultSubobject<UBaseAbilityClass>(TEXT("TeleportAbility"));
+	SecondAbility = CreateDefaultSubobject<UBaseAbilityClass>(TEXT("SecondAbility"));
 }
 
 // Called when the game starts or when spawned
@@ -115,7 +116,7 @@ void ABaseCharacter::MoveForward(float Axis)
 	//Walk(forward);
 }
 
-void ABaseCharacter::SetThrow()
+void ABaseCharacter::SetThrowAbilityOne()
 {
 	location = FTransform(GetActorLocation() + GetActorForwardVector() * 100.0f);
 	if(ACTFPlayerState* StateOfPlayer = GetPlayerState<ACTFPlayerState>())
@@ -128,19 +129,28 @@ void ABaseCharacter::SetThrow()
 
 void ABaseCharacter::UseAbilityOne()
 {
-	//TODO
-	//Fill in when the ability class is finished.
-	
+
 	//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, FString::Printf(TEXT("Can Use Ability In %f"), ForwardVector.X));
 
 	bIsThrowing = true;
 	
 	if (bIsThrowing)
 	{
-		GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, this, &ABaseCharacter::SetThrow,
+		GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, this, &ABaseCharacter::SetThrowAbilityOne,
 
 			1.0f, false);
 	}
+}
+
+void ABaseCharacter::SetThrowAbilityTwo()
+{
+	location = FTransform(GetActorLocation() + GetActorForwardVector() * 100.0f);
+	if (ACTFPlayerState * StateOfPlayer = GetPlayerState<ACTFPlayerState>())
+		SecondAbility->UseAbility(3.0f, location, 0.0f, StateOfPlayer->teamID, 0.0f, ThirdPersonCamera->GetForwardVector() * 1000.0f, this);
+	else
+		SecondAbility->UseAbility(3.0f, location, 0.0f, ETeamIdentifier::None, 0.0f, ThirdPersonCamera->GetForwardVector() * 1000.0f, this);
+
+	bIsThrowing = false;
 }
 
 
@@ -148,6 +158,14 @@ void ABaseCharacter::UseAbilityTwo()
 {
 	//TODO
 	//Fill in when the ability class is finished.
+	bIsThrowing = true;
+
+	if (bIsThrowing)
+	{
+		GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, this, &ABaseCharacter::SetThrowAbilityTwo,
+
+			1.0f, false);
+	}
 }
 
 void ABaseCharacter::DropFlag()
