@@ -143,7 +143,7 @@ void ACTFGameMode::Logout(AController* Exiting)
 
 void ACTFGameMode::UpdateGameStateTime()
 {
-	ctfGameState->timeLeft = FMath::RoundToInt(GetWorldTimerManager().GetTimerRemaining(roundTimerHandle)); //static_cast<int32>(roundTimerTime;
+	ctfGameState->timeLeft = FMath::RoundToInt(GetWorldTimerManager().GetTimerRemaining(roundTimerHandle));
 }
 
 void ACTFGameMode::SpawnMiniFlag()
