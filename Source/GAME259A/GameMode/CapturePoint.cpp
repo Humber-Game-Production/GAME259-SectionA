@@ -3,15 +3,18 @@
 
 #include "CapturePoint.h"
 
+
+#include "CTFGameMode.h"
 #include "CTFPlayerState.h"
 #include "GAME259A/GameMode/Team.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SphereComponent.h"
 #include "MainFlag.h"
 #include "MiniFlag.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
-ACapturePoint::ACapturePoint()
+ACapturePoint::ACapturePoint() : requiredFlags(6)
 {
 	captureCollisionComp = CreateDefaultSubobject<USphereComponent>(TEXT("CaptureComp"));
 	captureCollisionComp->InitSphereRadius(40.0f);
@@ -31,9 +34,17 @@ void ACapturePoint::BeginPlay()
 	if (mainFlag != NULL)
 	{
 		//sets flag to be off the game field until it is generated
-		mainFlag->SetActorRelativeLocation(FVector(0, -100000, 0));
+		mainFlag->SetActorRelativeLocation(FVector(0, 0, -100000));
 		AFlag* flagMain = Cast<AFlag>(mainFlag);
 		flagMain->InitLocation = flagMain->GetActorLocation();
+	}
+
+	if(HasAuthority())
+	{
+		if(ACTFGameMode* ctfGameMode = GetWorld()->GetAuthGameMode<ACTFGameMode>())
+		{
+			requiredFlags = ctfGameMode->requiredMiniFlags;
+		}
 	}
 }
 
@@ -41,7 +52,6 @@ void ACapturePoint::BeginPlay()
 void ACapturePoint::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void ACapturePoint::OnHit(UPrimitiveComponent* OverlappedComponent,
@@ -92,14 +102,17 @@ void ACapturePoint::CheckForFlagConstruction()
 {
 	if (MainFlagCreator == true) {
 		UE_LOG(LogTemp, Warning, TEXT("This is the main flag spot"));
-		if (flagsCaptured == 6) {
+		if (flagsCaptured >= requiredFlags) {
 			
 			if(mainFlag)
 			{
+				UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), flagSpawnEffect, this->GetActorLocation());
 				mainFlag->SetActorLocation(FVector(this->GetActorLocation()));
+				mainFlag->SetActorEnableCollision(false);
+				GetWorldTimerManager().SetTimer(mainFlagActiveTimer, this, &ACapturePoint::SetMainFlagActive, flagInactivePeriod);
 			}
 			//main flag spawns on top of capture point
-			//mainFlag->SetActorEnableCollision(false);
+			
 		}
 	}
 }
@@ -107,8 +120,20 @@ void ACapturePoint::CheckForFlagConstruction()
 void ACapturePoint::RoundReset()
 {
 	flagsCaptured = 0;
-	if ((MainFlagCreator == true) && (mainFlag != NULL)) {
-		mainFlag->SetActorRelativeLocation(FVector(0, -1000, 0));
+	
+	if(MainFlagCreator && !IsValid(mainFlag))
+	{
+		FVector spawnPoint(0, 0, -100000);
+		GetWorld()->SpawnActor(AMainFlag::StaticClass(), &spawnPoint);
 	}
+	else if (MainFlagCreator && (mainFlag != nullptr))
+	{
+		mainFlag->SetActorRelativeLocation(FVector(0, 0, -100000));
+	}
+}
+
+void ACapturePoint::SetMainFlagActive()
+{
+	mainFlag->SetActorEnableCollision(true);
 }
 
