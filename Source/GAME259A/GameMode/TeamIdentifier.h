@@ -12,7 +12,7 @@
 UENUM(BlueprintType)
 enum class ETeamIdentifier : uint8
 {
-	None  = 0 UMETA(DisplayName = "None"),
-	Human = 1 UMETA(DisplayName = "Human"),
-	Alien = 2 UMETA(DisplayName = "Alien"),
+	Human = 0 UMETA(DisplayName = "Human"),
+	Alien = 1 UMETA(DisplayName = "Alien"),
+	None  = 3 UMETA(DisplayName = "None")
 };
