@@ -2,6 +2,7 @@
 
 
 #include "TeleportAbilityActor.h"
+#include "GameFramework/Character.h"
 #include "Components/StaticMeshComponent.h"
 
 // Sets default values
@@ -44,10 +45,17 @@ void ATeleportAbilityActor::SetSpawner(AActor* BaseCharacter_)
 void ATeleportAbilityActor::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I Hit: %s"), *OtherActor->GetName()));
+	if (this) {
+		if(BaseCharacter) BaseCharacter->TeleportTo(GetActorLocation() + (Hit.Normal * 120), BaseCharacter->GetActorRotation());
 
-	BaseCharacter->SetActorLocation(GetActorLocation() + (Hit.Normal * 120));
-	this->Destroy();
+		if (Mesh != NULL)
+		{
+			Mesh->UnregisterComponent();
+			Mesh->DestroyComponent(true);
+		}
 
+		MarkPendingKill();
+	}
 }
 
 
