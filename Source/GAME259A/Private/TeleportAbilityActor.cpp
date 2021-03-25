@@ -3,6 +3,7 @@
 
 #include "TeleportAbilityActor.h"
 #include "GameFramework/Character.h"
+#include "Net/UnrealNetwork.h"
 #include "Components/StaticMeshComponent.h"
 
 // Sets default values
@@ -29,6 +30,12 @@ void ATeleportAbilityActor::BeginPlay()
 	
 }
 
+void ATeleportAbilityActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME(ATeleportAbilityActor, BaseCharacter);
+}
+
 // Called every frame
 void ATeleportAbilityActor::Tick(float DeltaTime)
 {
@@ -46,8 +53,10 @@ void ATeleportAbilityActor::OnCompHit(UPrimitiveComponent* HitComp, AActor* Othe
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I Hit: %s"), *OtherActor->GetName()));
 	if (this) {
-		if(BaseCharacter) BaseCharacter->TeleportTo(GetActorLocation() + (Hit.Normal * 120), BaseCharacter->GetActorRotation());
+		if(BaseCharacter) BaseCharacter->TeleportTo(GetActorLocation() + (Hit.ImpactNormal * 500), BaseCharacter->GetActorRotation(), false, true);
 
+		//UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), SpawnEffect, BaseCharacter->GetActorLocation(), BaseCharacter->GetActorRotation());
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), SpawnEffect, Mesh->GetComponentLocation(), BaseCharacter->GetActorRotation());
 		if (Mesh != NULL)
 		{
 			Mesh->UnregisterComponent();

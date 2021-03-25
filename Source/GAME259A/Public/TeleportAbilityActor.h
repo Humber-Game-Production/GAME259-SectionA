@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
+#include "NiagaraFunctionLibrary.h"
 #include "TeleportAbilityActor.generated.h"
 
 UCLASS()
@@ -21,6 +22,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -33,7 +35,11 @@ public:
 	UPROPERTY(BluePrintReadWrite, EditAnywhere)
 		UStaticMeshComponent* Mesh;
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere)
+		UNiagaraSystem* SpawnEffect;
+
+	UPROPERTY(Replicated)
 		AActor* BaseCharacter;
 
+	
 };
