@@ -5,13 +5,13 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GAME259A/GameMode/TeamIdentifier.h"
+#include "GAME259A/BaseCharacter.h"
 #include "Team.generated.h"
 
 /**
  * 
  */
 
-class ABaseCharacter;
 class ACTFPlayerState;
 class ACapturePoint;
 
@@ -25,37 +25,42 @@ public:
 	ATeam();
 
 	//The type of BaseCharacter class that's being used for this team
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Team | Player")
+	UPROPERTY(Replicated, BlueprintReadWrite, EditAnywhere, Category = "Team | Player")
 	TSubclassOf<ABaseCharacter> playerType;
 
 	//Array of playerStates on this team
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Team | Player")
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere, Category = "Team | Player")
 	TArray<ACTFPlayerState*> players;
 
 	//Array of respawn points
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Team | Places")
+	UPROPERTY(Replicated, BlueprintReadWrite, EditAnywhere, Category = "Team | Places")
 	TArray<AActor*> respawnPoints;
 
+	UPROPERTY(Replicated, BlueprintReadWrite, EditAnywhere, Category = "Team | Places")
+	TArray<AActor*> miniFlagSpawnPoints;
+	
 	//The capture point associated with this team
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Team | Places")
+	UPROPERTY(Replicated, BlueprintReadWrite, EditAnywhere, Category = "Team | Places")
 	ACapturePoint* capturePoint;
 
 	//Points earned by this team
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Team | Info")
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere, Category = "Team | Info")
 	int32 points;
 
 	//How many miniflags this team has collected
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Team | Info")
-	int32 miniFlagsColllected;
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere, Category = "Team | Info")
+	int32 miniFlagsCollected;
 
 	//Identifier for this team 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Team | Info")
+	UPROPERTY(Replicated, BlueprintReadWrite, EditAnywhere, Category = "Team | Info")
 	ETeamIdentifier teamID;
 
 		
 
 	UFUNCTION()
 	virtual void BeginPlay() override;
+
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	//Adds a player to this team
 	UFUNCTION(BlueprintCallable)
@@ -68,14 +73,6 @@ public:
 	//Adds points to this team
 	UFUNCTION(BlueprintCallable)
 	void AddPoints(int32 value);
-
-	//Spawns all the players on this team
-	UFUNCTION(BlueprintCallable)
-	void SpawnPlayers();
-
-	//Spawns a single player on this team
-	UFUNCTION(BlueprintCallable)
-	void SpawnPlayer(APawn* pawn);
 
 private:
 	HIDE_ACTOR_TRANSFORM_FUNCTIONS();

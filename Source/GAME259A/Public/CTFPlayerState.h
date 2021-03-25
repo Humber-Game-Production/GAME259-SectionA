@@ -5,15 +5,23 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerState.h"
 #include "GAME259A/GameMode/TeamIdentifier.h"
-#include "GAME259A/GameMode/Flag.h"
 
 #include "CTFPlayerState.generated.h"
 
 UDELEGATE()
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FAddScoreToTeam, ETeamIdentifier, Team, int32, Score);
+
+class ACTFPlayerState;
+
+UDELEGATE()
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRespawnPlayer, ETeamIdentifier, Team, ACTFPlayerState*, Player);
+
 /**
  * 
  */
+ 
+ class AFlag;
+ 
 UCLASS(Blueprintable)
 class GAME259A_API ACTFPlayerState : public APlayerState
 {
@@ -23,29 +31,34 @@ public:
 
 	ACTFPlayerState();
 
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 	//Identifier for what team the player is on
-	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	UPROPERTY(Replicated, BlueprintReadOnly, EditAnywhere)
 	ETeamIdentifier teamID;
 
 	//How many points this player has earned
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
 	int32 pointsEarned;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
 	int32 kills;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
 	int32 deaths;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
 	int32 flagsCaptured;
 
-	UPROPERTY()
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
 	AFlag* FlagHeld;
 
 	//This delegate is called whenever this player scores for their team
-	UPROPERTY(BlueprintAssignable, Category = "EventDispatchers")
+	UPROPERTY(Replicated, BlueprintAssignable, Category = "EventDispatchers")
 	FAddScoreToTeam teamScoreDelegate;
+
+	UPROPERTY(Replicated, BlueprintAssignable, Category = "EventDispatchers")
+	FRespawnPlayer respawnPlayerDelegate;
 
 	//Sets the player's team
 	UFUNCTION()
@@ -68,20 +81,23 @@ public:
 	void ResetStats();
 
 	//Player drops flag intentionally. Will re-enable flag pickup
-	UFUNCTION()
+	UFUNCTION(NetMulticast, reliable)
 	void PlayerDropFlag();
 
-	UFUNCTION()
+	UFUNCTION(NetMulticast, Reliable)
 	void CaptureFlag();
 
 	//Player will die and drop flag. Player cannot pickup new flags when dead.
-	UFUNCTION()
+	UFUNCTION(NetMulticast, Reliable)
 	void OnDeath();
+
+	UFUNCTION(Server, Reliable)
+	void OnRespawn();
 
 protected:
 
 	//Player should only pickup flags if they are Alive and have no other flags
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(Replicated, BlueprintReadWrite)
 	bool PlayerCanPickupFlag;
 };
 
