@@ -4,14 +4,19 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameStateBase.h"
-#include "GAME259A/GameMode/Team.h"
 #include "GAME259A/GameMode/TeamIdentifier.h"
 #include "CTFGameState.generated.h"
 
 /**
  * 
  */
-UCLASS()
+
+class AFlag;
+class ATeam;
+class ACapturePoint;
+class ACTFPlayerState;
+
+UCLASS(Blueprintable)
 class GAME259A_API ACTFGameState : public AGameStateBase
 {
 	GENERATED_BODY()
@@ -22,25 +27,39 @@ public:
 
 	virtual void BeginPlay() override;
 
-	//Map of teams
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	TMap<ETeamIdentifier, ATeam*> listOfTeams;
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
+	//Map of teams
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
+	TArray<ATeam*> listOfTeams;
+
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
+	TArray<AActor*> flagHolders;
+
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
+	TArray<AFlag*> activeFlags;
+
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
+	TArray<ACapturePoint*> capturePoints;
+
+	UPROPERTY(Replicated, BlueprintReadOnly, VisibleAnywhere)
+	int32 timeLeft;
+
+	UPROPERTY(Replicated, BlueprintReadOnly, VisibleAnywhere)
+	int32 currentRound;
+	UPROPERTY(Replicated, BlueprintReadOnly, VisibleAnywhere)
+	int32 maxRounds;
+
+
+	
 	//Adds a CTFPlayerState to the specified team
 	UFUNCTION()
 	void ChooseTeam(ETeamIdentifier team, ACTFPlayerState* player);
-
-	//This should be called whenever a player leaves a team or the server
-	//@TODO: Implement this code
-	UFUNCTION()
-	void PlayerLeft(AController* player);
 
 	//Adds points to the specified team
 	UFUNCTION()
 	void AddPoints(ETeamIdentifier team, int32 points);
 
-	//Initializes the team's variables
-	//@TODO: This function needs to be called whenever all players are loaded in
 	UFUNCTION()
-	void InitTeams();
+	ATeam* GetTeam(ETeamIdentifier team) const;
 };

@@ -18,16 +18,27 @@ class GAME259A_API ACapturePoint : public AActor
 	UPROPERTY(VisibleDefaultsOnly)
 	class USphereComponent* captureCollisionComp;
 
+public:	
 	UPROPERTY(EditAnywhere)
-	int flagsCaptured;
+	int32 flagsCaptured;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	int32 requiredFlags;
+	
 	UPROPERTY(EditAnywhere)
 	bool MainFlagCreator;
 
 	UPROPERTY(EditAnywhere)
 	class AActor* mainFlag;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float flagInactivePeriod;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UParticleSystem* flagSpawnEffect;
+
 	
-public:	
+	FTimerHandle mainFlagActiveTimer;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	ETeamIdentifier teamID;
@@ -56,6 +67,9 @@ public:
 
 	UFUNCTION()
 	void RoundReset();
+
+	UFUNCTION()
+	void SetMainFlagActive();
 
 
 };
