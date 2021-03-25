@@ -1,6 +1,7 @@
 #include "BaseCharacter.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "GAME259A/GameMode/CTFGameState.h"
+#include "GameMode/Team.h"
 #include "CTFPlayerState.h"
 
 // Sets default values
@@ -37,6 +38,8 @@ ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(
 
 	TeleportAbility = CreateDefaultSubobject<UBaseAbilityClass>(TEXT("TeleportAbility"));
 	SecondAbility = CreateDefaultSubobject<UBaseAbilityClass>(TEXT("SecondAbility"));
+
+	bReplicates = true;
 }
 
 // Called when the game starts or when spawned
@@ -201,12 +204,13 @@ void ABaseCharacter::UnSlow()
 	bIsSlowed = false;
 }
 
-void ABaseCharacter::Death()
+void ABaseCharacter::Death_Implementation()
 {
 	//Rag doll if the player is dead.
 	GetMesh()->SetAllBodiesSimulatePhysics(true);
 
 	FTimerHandle UnusedTimerHandle;
+
 	GetWorldTimerManager().SetTimer(UnusedTimerHandle, this, &ABaseCharacter::Respawn, RespawnTime, false);
 
 	//Below code is added by Declan from GameMode Team
@@ -217,17 +221,28 @@ void ABaseCharacter::Death()
 	}
 }
 
-void ABaseCharacter::Respawn()
+void ABaseCharacter::TakeDamage(float damage_)
+{
+	//Reduce CurrentHealth by damage
+	CurrentHealth -= damage_;
+	//If b isn't dead
+	if (!bIsDead) {
+		//Check if health is under 0
+		if (CurrentHealth <= 0) {
+			//Call Death Function and set dead to true
+			bIsDead = true;
+			Death();
+		}
+	}
+}
+
+void ABaseCharacter::Respawn_Implementation()
 {
 	ACTFPlayerState* ctfPlayerState = GetPlayerState<ACTFPlayerState>();
 	if(ctfPlayerState)
 	{
-		if(ACTFGameState* gameState = Cast<ACTFGameState>(GetWorld()->GetGameState()))
-		{
-			gameState->listOfTeams[ctfPlayerState->teamID]->SpawnPlayer(this);
-		}
+		ctfPlayerState->OnRespawn();
 	}
-	this->Destroy();
 }
 
 
@@ -237,13 +252,9 @@ void ABaseCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (!bIsDead)
+	if (bIsSwinging)
 	{
-		if (CurrentHealth <= 0)
-		{
-			bIsDead = true;
-			Death();
-		}
+		bIsSwinging = false;
 	}
 }
 

@@ -43,7 +43,7 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "Health")
 	float MaxHealth;					//The character's maximum health. CurrentHealth will be set to this value on initialization and if the value ever exceeds this.
-	UPROPERTY(BlueprintReadOnly, Category = "Health")
+	UPROPERTY(BlueprintReadWrite, Category = "Health")
 	float CurrentHealth;				//The character's current health.
 	UPROPERTY(BlueprintReadWrite, Category = "Death")
 	float RespawnTime;					//The amount of time required for the character to respawn.
@@ -60,14 +60,15 @@ protected:
 	bool bIsSwinging;					//True if the player just input to melee attack.
 	UPROPERTY(BlueprintReadWrite, Category = "AnimControl")
 	bool bIsThrowing;					//True if the player just input to melee attack.
+	UPROPERTY(BlueprintReadWrite, Category = "AnimControl")
+	bool bIsDrawingBow;					//True if the player just input to melee attack.
 
 	UPROPERTY(EditAnywhere, Category = "Abilities")
-		UBaseAbilityClass* TeleportAbility;
+	UBaseAbilityClass* TeleportAbility;
 	UPROPERTY(EditAnywhere, Category = "Abilities")
-		UBaseAbilityClass* SecondAbility;
+	UBaseAbilityClass* SecondAbility;
 	UPROPERTY()
-		FTransform location;
-
+	FTransform location;
 
 
 	//Jump timer handle
@@ -113,15 +114,17 @@ protected:
 	UFUNCTION(Category = "Combat", BlueprintCallable)
 	void UseRangedAttack();
 
-	UFUNCTION(Category = "Death")
+	UFUNCTION(Category = "Death", BlueprintCallable)
+	void TakeDamage(float damage_);
+	UFUNCTION(NetMulticast, Reliable, Category = "Death", BlueprintCallable)
 	void Death();
-	UFUNCTION(Category = "Death")
+	UFUNCTION(NetMulticast, Reliable, Category = "Death", BlueprintCallable)
 	void Respawn();
 
 	UFUNCTION()
-		void SetThrowAbilityOne();
+	void SetThrowAbilityOne();
 	UFUNCTION()
-		void SetThrowAbilityTwo();
+	void SetThrowAbilityTwo();
 
 
 public:	
