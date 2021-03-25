@@ -23,6 +23,7 @@ AFlag::AFlag()
 
 	Capsule = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule"));
 	Capsule->SetupAttachment(Root);
+
 	
 }
 
@@ -56,6 +57,7 @@ void AFlag::BeginPlay()
 	Super::BeginPlay();
 	Capsule->OnComponentBeginOverlap.AddDynamic(this, &AFlag::PickUp_Implementation);
 	InitLocation = GetActorLocation();
+	UGameplayStatics::SpawnEmitterAttached(FlagFX, Root, (TEXT("ParticleAttachment")), this->GetActorLocation(), this->GetActorRotation(), EAttachLocation::SnapToTarget);
 }
 
 void AFlag::PickUp_Implementation(UPrimitiveComponent* OverlappedComponent,

@@ -38,7 +38,11 @@ void AMainFlag::Drop_Implementation()
 void AMainFlag::Capture()
 {
 	AFlag::Capture();
-	this->Destroy();
+	this->SetActorLocation(FVector(0, 0, -100000));
+	this->InitLocation = this->GetActorLocation();
+	owningTeam = ETeamIdentifier::None;
+	AFlag::ChangeColour();
+
 }
 
 void AMainFlag::ReserveFlag(){
