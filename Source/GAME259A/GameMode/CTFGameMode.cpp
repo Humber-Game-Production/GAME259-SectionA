@@ -205,10 +205,12 @@ void ACTFGameMode::EndRound() {
 			if (teamPoints[static_cast<int32>(ETeamIdentifier::Human)] > teamPoints[static_cast<int32>(ETeamIdentifier::Alien)])
 			{
 				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Magenta, TEXT("Team1 wins"));
+				EndGame();
 			}
 			else
 			{
 				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Magenta, TEXT("Team2 wins"));
+				EndGame();
 			}
 		}
 		else
@@ -232,7 +234,7 @@ void ACTFGameMode::RoundReset() {
 		SpawnAllPlayersOnTeam(team->teamID);
 	}
 
-	for(auto capPoint: capturePoints)
+	for(auto capPoint : capturePoints)
 	{
 		capPoint->RoundReset();
 	}
@@ -279,6 +281,21 @@ bool ACTFGameMode::WinCheck()
 		}
 	}
 	return false;
+}
+
+void ACTFGameMode::EndGame() {
+	//on screen debug for testing purposes
+	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("GAME ENDED!"));
+	
+	/*clear teams
+	reset teams list back to empty
+	possibly set identifiers to NULL?*/
+	ctfGameState->GetTeam(ETeamIdentifier::Alien)->players.Empty();
+	ctfGameState->GetTeam(ETeamIdentifier::Human)->players.Empty();
+	
+	/*open lobby level -- sent players back to main menu/lobby
+	using base map as placeholder for now.*/
+	UGameplayStatics::OpenLevel(GetWorld(), "L_Adventure_DAOC");
 }
 
 

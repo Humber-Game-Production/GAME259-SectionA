@@ -50,6 +50,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool WinCheck();
 
+	UFUNCTION(BlueprintCallable)
+	void EndGame();
+
 	//Adds points to this team
 	UFUNCTION(Server, Reliable, BlueprintCallable)
     void AddPoints(ETeamIdentifier team, int32 value);
