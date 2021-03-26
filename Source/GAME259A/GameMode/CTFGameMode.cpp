@@ -40,13 +40,14 @@ ACTFGameMode::ACTFGameMode()
 	timeBetweenFlagSpawns = 10.0f;
 	requiredMiniFlags = 6;
 	miniFlag = AMiniFlag::StaticClass();
+	maxPoints = 0;
 }
 
 void ACTFGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-
+	maxPoints = (miniFlag.GetDefaultObject()->pointValue * requiredMiniFlags) + mainFlag.GetDefaultObject()->pointValue;
 
 	TArray<AActor*> foundActors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACapturePoint::StaticClass(), foundActors);
@@ -193,31 +194,19 @@ void ACTFGameMode::EndRound() {
 	//Prints out how many rounds are left
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::FromInt(currentRound) + " rounds remaining");
 
-	//Checks to see if a win condition is met
-	if (currentRound >= maxRounds) {
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Game ends."));
-	}
-	else
+	ETeamIdentifier winner = WinCheck();
+	
+	//Checks to see if there is a winner. Prints out winner if it exists.
+	if (winner == ETeamIdentifier::None)
 	{
-		//Intermission? (pause)
-		if (WinCheck())
-		{
-			if (teamPoints[static_cast<int32>(ETeamIdentifier::Human)] > teamPoints[static_cast<int32>(ETeamIdentifier::Alien)])
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Magenta, TEXT("Team1 wins"));
-				EndGame();
-			}
-			else
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Magenta, TEXT("Team2 wins"));
-				EndGame();
-			}
-		}
-		else
-		{
-			RoundReset();
-		}
+		RoundReset();
 	}
+	else if (winner == ETeamIdentifier::Human)
+	{
+		UE_LOG(LogTemp, Display, TEXT("Humans win"));
+	}
+	else 
+		UE_LOG(LogTemp, Display, TEXT("Aliens win"));
 }
 
 //Resets all the actors in the rounds
@@ -245,42 +234,21 @@ void ACTFGameMode::RoundReset() {
 }
 
 
-//Will return winning team later for now it is just checking to see if there is a winner
-bool ACTFGameMode::WinCheck()
+//Returns winning team for end of the game or mercy rule if applicable (returns none if mercy rule is not met)
+//Does not calculate if their is a tie at the end. The winner will just be aliens.
+ETeamIdentifier ACTFGameMode::WinCheck()
 {
 	if(teamPoints.Num() != 0)
 	{
-		switch (currentRound)
+		if (abs(*teamPoints[static_cast<int32>(ETeamIdentifier::Human)] - *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)]) > ((maxRounds - currentRound) * maxPoints) || maxRounds == currentRound)
 		{
-			case(2): 
-			if (*teamPoints[static_cast<int32>(ETeamIdentifier::Human)] - *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)] > 18)
-			{
-				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *teamPoints[static_cast<int32>(ETeamIdentifier::Human)], *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)]);
-				return true;
-			}
-			else if (*teamPoints[static_cast<int32>(ETeamIdentifier::Alien)] - *teamPoints[static_cast<int32>(ETeamIdentifier::Human)] > 18)
-			{
-				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *teamPoints[static_cast<int32>(ETeamIdentifier::Human)], *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)]);
-				return true;
-			}
-			break;
-			case(1): 
-			if (*teamPoints[static_cast<int32>(ETeamIdentifier::Human)] - *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)] > 9)
-			{
-				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *teamPoints[static_cast<int32>(ETeamIdentifier::Human)], *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)]);
-				return true;
-			}
-			else if (*teamPoints[static_cast<int32>(ETeamIdentifier::Alien)] - *teamPoints[static_cast<int32>(ETeamIdentifier::Human)] > 9)
-			{
-				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *teamPoints[static_cast<int32>(ETeamIdentifier::Human)], *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)]);
-				return true;
-			}
-			break;
-			default: 
-			break;
+			return *teamPoints[static_cast<int32>(ETeamIdentifier::Human)] > *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)] ? ETeamIdentifier::Human : ETeamIdentifier::Alien;
 		}
+		else
+			return ETeamIdentifier::None;
 	}
-	return false;
+	else
+		return ETeamIdentifier::None;
 }
 
 void ACTFGameMode::EndGame() {
