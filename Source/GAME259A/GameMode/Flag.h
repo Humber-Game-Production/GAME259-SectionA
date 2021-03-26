@@ -72,6 +72,9 @@ public:
 	FVector DistanceFromGround;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UParticleSystem* FlagFX;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FUColourPair noTeamColour;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FUColourPair humanTeamColour;

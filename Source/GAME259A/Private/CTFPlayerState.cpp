@@ -2,13 +2,17 @@
 
 
 #include "CTFPlayerState.h"
+#include "GAME259A/GameMode/Team.h"
+#include "GAME259A/GameMode/CTFGameState.h"
 #include "GAME259A/GameMode/Flag.h"
+#include "GameFramework/PlayerStart.h"
+#include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
 
 ACTFPlayerState::ACTFPlayerState(): teamID(ETeamIdentifier::Human), pointsEarned(0), kills(0), deaths(0),
                                     flagsCaptured(0), FlagHeld(nullptr), PlayerCanPickupFlag(true)
 {
-
+	bReplicates = true;
 }
 
 void ACTFPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -23,13 +27,9 @@ void ACTFPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 	DOREPLIFETIME( ACTFPlayerState, flagsCaptured);
 	DOREPLIFETIME( ACTFPlayerState, FlagHeld);
 	DOREPLIFETIME( ACTFPlayerState, PlayerCanPickupFlag);
-}
-
-void ACTFPlayerState::AddScore(int32 amountOfPoints)
-{
-	pointsEarned += amountOfPoints;
-	teamScoreDelegate.Broadcast(teamID, amountOfPoints);
-	UE_LOG(LogTemp, Warning, TEXT("%d points added to team %d"), amountOfPoints, teamID);
+	DOREPLIFETIME( ACTFPlayerState, teamScoreDelegate);
+	DOREPLIFETIME( ACTFPlayerState, respawnPlayerDelegate);
+	
 }
 
 void ACTFPlayerState::ResetStats()
@@ -43,16 +43,17 @@ void ACTFPlayerState::ResetStats()
 	flagsCaptured = 0;
 }
 
-void ACTFPlayerState::PlayerDropFlag()	{
+void ACTFPlayerState::PlayerDropFlag_Implementation()
+{
+	PlayerCanPickupFlag = true;
 	if(FlagHeld)
 	{
 		FlagHeld->Execute_Drop(FlagHeld);
-		PlayerCanPickupFlag = true;
 		FlagHeld = nullptr;
 	}
 }
 
-void ACTFPlayerState::CaptureFlag()
+void ACTFPlayerState::CaptureFlag_Implementation()
 {
 	if(FlagHeld)
 	{
@@ -61,6 +62,12 @@ void ACTFPlayerState::CaptureFlag()
 		PlayerCanPickupFlag = true;
 		FlagHeld = nullptr;
 	}
+}
+
+void ACTFPlayerState::OnDeath_Implementation()
+{
+	PlayerDropFlag();
+	PlayerCanPickupFlag = false;
 }
 
 void ACTFPlayerState::SetTeam(ETeamIdentifier team)
@@ -80,7 +87,78 @@ bool ACTFPlayerState::GetCanPickupFlag() const	{
 	return PlayerCanPickupFlag;
 }
 
-void ACTFPlayerState::OnDeath()	{
-	PlayerDropFlag();
-	PlayerCanPickupFlag = false;
+void ACTFPlayerState::AddScore(int32 amountOfPoints)
+{
+	pointsEarned += amountOfPoints;
+	teamScoreDelegate.Broadcast(teamID, amountOfPoints);
+	UE_LOG(LogTemp, Warning, TEXT("%d points added to team %d"), amountOfPoints, teamID);
+}
+
+void ACTFPlayerState::OnRespawn_Implementation()
+{
+	SetCanPickupFlag(true);
+	respawnPlayerDelegate.Broadcast(teamID, this);
+	UE_LOG(LogTemp, Warning, TEXT("Respawn player delegate should have played"));
+
+	APawn* originalPawn = GetPawn();
+	
+	
+	if(ACTFGameState* gameState = GetWorld()->GetGameState<ACTFGameState>())
+	{
+		const ATeam* playersTeam = gameState->GetTeam(teamID);
+
+		//if this team exists
+		if(playersTeam)
+		{
+			//if this team has respawn points setup
+			if(playersTeam->respawnPoints.Num() != 0)
+			{
+				//setup location, rotation and parameters for spawns
+				const FVector location = playersTeam->respawnPoints[0]->GetActorLocation();
+				const FRotator rotation = playersTeam->respawnPoints[0]->GetActorRotation();
+				const FTransform trans(rotation, location);
+				FActorSpawnParameters spawnP;
+				spawnP.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+			
+				//Spawn the new playerActor and get its pawn
+				AActor* playerActor = GetWorld()->SpawnActor(playersTeam->playerType, &location, &rotation, spawnP);
+				APawn* newPawn = Cast<APawn>(playerActor);
+				//
+				//Get the original playerController and detach it from its pawn
+				AController* controller = originalPawn->GetController();
+				controller->UnPossess();
+				//attach the playerState and playerController to the new pawn
+				newPawn->SetPlayerState(controller->GetPlayerState<ACTFPlayerState>());
+				controller->Possess(newPawn);
+			
+				//Destroy original pawn
+				originalPawn->Destroy();
+
+				//Exit function
+                return;
+			}
+			UE_LOG(LogTemp, Warning, TEXT("Respawn points were not set up, using default playerStart to spawn players"));
+		}
+	}
+	//use the default playerStart to spawn the player if there are no teams/no respawn points setup
+	AActor* playerStart = UGameplayStatics::GetActorOfClass(GetWorld(), APlayerStart::StaticClass());
+
+	const FVector location = playerStart->GetActorLocation();
+	const FRotator rotation = playerStart->GetActorRotation();
+	FActorSpawnParameters spawnP;
+	spawnP.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+	//spawn the playerActor and get its pawn
+	AActor* playerActor = GetWorld()->SpawnActor(GetWorld()->GetAuthGameMode()->DefaultPawnClass, &location, &rotation, spawnP);
+	APawn* newPawn = Cast<APawn>(playerActor);
+
+	//Get the original playerController and detach it from its pawn
+	AController* controller = originalPawn->GetController();
+	controller->UnPossess();
+	//attach the playerState and playerController to the new pawn
+	newPawn->SetPlayerState(controller->GetPlayerState<ACTFPlayerState>());
+	controller->Possess(newPawn);
+			
+	//Destroy original pawn
+	originalPawn->Destroy();
 }

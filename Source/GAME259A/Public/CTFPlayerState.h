@@ -11,6 +11,10 @@
 UDELEGATE()
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FAddScoreToTeam, ETeamIdentifier, Team, int32, Score);
 
+class ACTFPlayerState;
+
+UDELEGATE()
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRespawnPlayer, ETeamIdentifier, Team, ACTFPlayerState*, Player);
 
 /**
  * 
@@ -50,8 +54,11 @@ public:
 	AFlag* FlagHeld;
 
 	//This delegate is called whenever this player scores for their team
-	UPROPERTY(BlueprintAssignable, Category = "EventDispatchers")
+	UPROPERTY(Replicated, BlueprintAssignable, Category = "EventDispatchers")
 	FAddScoreToTeam teamScoreDelegate;
+
+	UPROPERTY(Replicated, BlueprintAssignable, Category = "EventDispatchers")
+	FRespawnPlayer respawnPlayerDelegate;
 
 	//Sets the player's team
 	UFUNCTION()
@@ -74,15 +81,18 @@ public:
 	void ResetStats();
 
 	//Player drops flag intentionally. Will re-enable flag pickup
-	UFUNCTION()
+	UFUNCTION(NetMulticast, reliable)
 	void PlayerDropFlag();
 
-	UFUNCTION()
+	UFUNCTION(NetMulticast, Reliable)
 	void CaptureFlag();
 
 	//Player will die and drop flag. Player cannot pickup new flags when dead.
-	UFUNCTION()
+	UFUNCTION(NetMulticast, Reliable)
 	void OnDeath();
+
+	UFUNCTION(Server, Reliable)
+	void OnRespawn();
 
 protected:
 

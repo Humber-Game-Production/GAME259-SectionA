@@ -34,7 +34,6 @@ ACTFGameMode::ACTFGameMode()
 	
 	//make sure GM can tick
 	PrimaryActorTick.bCanEverTick = false;
-	
 	roundTimerTime = 20.0f;
 	maxRounds = 5;
 	currentRound = 1;
@@ -56,7 +55,7 @@ void ACTFGameMode::BeginPlay()
 	{
 		capturePoints.Add(Cast<ACapturePoint>(foundActors[i]));
 	}
-
+	
 	GetWorldTimerManager().SetTimer(startGameTimer, this, &ACTFGameMode::BeginFirstRound, 4.0f);
 }
 
@@ -114,7 +113,7 @@ void ACTFGameMode::InitTeams()
 
 	for (auto team : ctfGameState->listOfTeams)
 	{
-		team->SpawnPlayers();
+		SpawnAllPlayersOnTeam(team->teamID);
 	}
 
 	ctfGameState->currentRound = currentRound;
@@ -144,12 +143,15 @@ void ACTFGameMode::Logout(AController* Exiting)
 
 void ACTFGameMode::UpdateGameStateTime()
 {
-	ctfGameState->timeLeft = FMath::RoundToInt(GetWorldTimerManager().GetTimerRemaining(roundTimerHandle)); //static_cast<int32>(roundTimerTime;
+	ctfGameState->timeLeft = FMath::RoundToInt(GetWorldTimerManager().GetTimerRemaining(roundTimerHandle));
 }
 
 void ACTFGameMode::SpawnMiniFlag()
 {
-	if((GetTeam(ETeamIdentifier::Human)->miniFlagSpawnPoints.Num() != 0) && (GetTeam(ETeamIdentifier::Alien)->miniFlagSpawnPoints.Num() != 0))
+	ATeam* humanTeam = ctfGameState->GetTeam(ETeamIdentifier::Human);
+	ATeam* alienTeam = ctfGameState->GetTeam(ETeamIdentifier::Alien);
+	
+	if((humanTeam->miniFlagSpawnPoints.Num() != 0) && (alienTeam->miniFlagSpawnPoints.Num() != 0))
 	{
 		if(spawnedMiniFlags < requiredMiniFlags)
 		{
@@ -157,13 +159,13 @@ void ACTFGameMode::SpawnMiniFlag()
 			UE_LOG(LogTemp, Warning, TEXT("Mini flag number %d was spawned"), spawnedMiniFlags);
 			if(spawnedMiniFlags % 2 == 0)
 			{
-				const int randomSpawn = FMath::RandRange(0, GetTeam(ETeamIdentifier::Human)->miniFlagSpawnPoints.Num() - 1);
-				FVector spawnPoint = GetTeam(ETeamIdentifier::Human)->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
+				const int randomSpawn = FMath::RandRange(0, humanTeam->miniFlagSpawnPoints.Num() - 1);
+				FVector spawnPoint = humanTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
 				GetWorld()->SpawnActor(miniFlag, &spawnPoint);
 			} else
 			{
-				const int randomSpawn = FMath::RandRange(0, GetTeam(ETeamIdentifier::Alien)->miniFlagSpawnPoints.Num() - 1);
-				FVector spawnPoint = GetTeam(ETeamIdentifier::Alien)->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
+				const int randomSpawn = FMath::RandRange(0, alienTeam->miniFlagSpawnPoints.Num() - 1);
+				FVector spawnPoint = alienTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
 				GetWorld()->SpawnActor(miniFlag, &spawnPoint);
 			}
 		}
@@ -203,10 +205,12 @@ void ACTFGameMode::EndRound() {
 			if (teamPoints[static_cast<int32>(ETeamIdentifier::Human)] > teamPoints[static_cast<int32>(ETeamIdentifier::Alien)])
 			{
 				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Magenta, TEXT("Team1 wins"));
+				EndGame();
 			}
 			else
 			{
 				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Magenta, TEXT("Team2 wins"));
+				EndGame();
 			}
 		}
 		else
@@ -227,10 +231,10 @@ void ACTFGameMode::RoundReset() {
 	
 	for (auto team : ctfGameState->listOfTeams)
 	{
-		team->SpawnPlayers();
+		SpawnAllPlayersOnTeam(team->teamID);
 	}
 
-	for(auto capPoint: capturePoints)
+	for(auto capPoint : capturePoints)
 	{
 		capPoint->RoundReset();
 	}
@@ -279,30 +283,36 @@ bool ACTFGameMode::WinCheck()
 	return false;
 }
 
-ATeam* ACTFGameMode::GetTeam(ETeamIdentifier team) const
-{
-	for(int i = 0; i < ctfGameState->listOfTeams.Num(); i++)
-	{
-		if(ctfGameState->listOfTeams[i]->teamID == team)
-		{
-			return ctfGameState->listOfTeams[i];
-		}
-	}
-	return nullptr;
+void ACTFGameMode::EndGame() {
+	/*on screen debug message*/
+	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("GAME ENDED!"));
+
+	/*clear teams
+	reset teams list back to empty*/
+	ctfGameState->GetTeam(ETeamIdentifier::Alien)->players.Empty();
+	ctfGameState->GetTeam(ETeamIdentifier::Human)->players.Empty();
+
+	/*open lobby level use base map as placeholder for now*/
+	UGameplayStatics::OpenLevel(GetWorld(), "Maps/FinalMaps/L_Adventure_DAOC");
 }
+
 
 void ACTFGameMode::AddPoints_Implementation(ETeamIdentifier team, int32 value)
 {
-	GetTeam(team)->AddPoints(value);
+	ctfGameState->GetTeam(team)->AddPoints(value);
 }
 
-void ACTFGameMode::SpawnAllPlayersOnTeam_Implementation(ETeamIdentifier team)
+void ACTFGameMode::SpawnAllPlayersOnTeam(ETeamIdentifier team)
 {
-	
-}
-
-
-void ACTFGameMode::SpawnPlayer_Implementation(APawn* pawn)
-{
-	
+	ATeam* teamToSpawn = ctfGameState->GetTeam(team);
+	if(teamToSpawn)
+	{
+		for(int i = 0; i < teamToSpawn->players.Num(); i++)
+		{
+			teamToSpawn->players[i]->OnRespawn();
+		}
+	} else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("SpawnAllPlayersOnTeam function in the gamemode could not find team %d"), static_cast<int32>(team));
+	}
 }

@@ -38,10 +38,21 @@ void ACTFGameState::ChooseTeam(ETeamIdentifier team, ACTFPlayerState* player)
 	listOfTeams[static_cast<int32>(team)]->AddPlayer(player);
 	UE_LOG(LogTemp, Warning, TEXT("PlayerController %d Added to team %d"), player->GetUniqueID(), team);
 
-	//Cast<ACTFPlayerState>(player)->teamScoreDelegate.AddDynamic(this, &ACTFGameState::AddPoints);
 }
 
 void ACTFGameState::AddPoints(ETeamIdentifier team, int32 points)
 {
 	listOfTeams[static_cast<int32>(team)]->AddPoints(points);
+}
+
+ATeam* ACTFGameState::GetTeam(ETeamIdentifier team) const
+{
+	for(int i = 0; i < listOfTeams.Num(); i++)
+	{
+		if(listOfTeams[i]->teamID == team)
+		{
+			return listOfTeams[i];
+		}
+	}
+	return nullptr;
 }
