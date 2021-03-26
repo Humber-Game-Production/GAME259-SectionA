@@ -37,6 +37,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UParticleSystem* flagSpawnEffect;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UParticleSystem* teamWinEffect;
+
 	
 	FTimerHandle mainFlagActiveTimer;
 

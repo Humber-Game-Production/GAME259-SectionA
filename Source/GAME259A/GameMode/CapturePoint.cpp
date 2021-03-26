@@ -91,7 +91,15 @@ void ACapturePoint::OnHit(UPrimitiveComponent* OverlappedComponent,
 				{
 					player->FlagHeld->InitLocation = FVector(0, -1000, 0);
 					player->CaptureFlag();
+					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), teamWinEffect, this->GetActorLocation());
 					UE_LOG(LogTemp, Warning, TEXT("MainFlag captured at team %d's capture point"), teamID);
+					if (HasAuthority())
+					{
+						if (ACTFGameMode* ctfGameMode = GetWorld()->GetAuthGameMode<ACTFGameMode>())
+						{
+							ctfGameMode->RoundReset();
+						}
+					}
 				}
 			}
 		}
