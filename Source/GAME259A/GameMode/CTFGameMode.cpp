@@ -293,7 +293,7 @@ void ACTFGameMode::EndGame() {
 	ctfGameState->GetTeam(ETeamIdentifier::Human)->players.Empty();
 
 	/*open lobby level use base map as placeholder for now*/
-	UGameplayStatics::OpenLevel(GetWorld(), "L_Adventure_DAOC");
+	UGameplayStatics::OpenLevel(GetWorld(), "Maps/FinalMaps/L_Adventure_DAOC");
 }
 
 
