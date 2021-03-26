@@ -48,7 +48,10 @@ public:
 
 	//Change later to return a team
 	UFUNCTION(BlueprintCallable)
-	bool WinCheck();
+	ETeamIdentifier WinCheck();
+
+	UFUNCTION(BlueprintCallable)
+	void EndGame();
 
 	//Adds points to this team
 	UFUNCTION(Server, Reliable, BlueprintCallable)
@@ -88,6 +91,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Game Rules")
 	int currentRound;
 
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Game Rules")
+	int32 maxPoints;
+	
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "CapturePoints")
 	TArray<ACapturePoint*> capturePoints;
 
