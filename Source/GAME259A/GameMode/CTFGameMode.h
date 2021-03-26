@@ -45,9 +45,9 @@ public:
 	UFUNCTION()
 	void RoundReset();
 
-	//Change later to return a team
+	//Returns winning team
 	UFUNCTION()
-	bool WinCheck();
+	ETeamIdentifier WinCheck();
 
 	UFUNCTION()
 	ATeam* GetTeam(ETeamIdentifier team) const;
@@ -94,6 +94,9 @@ public:
 	//Current round number
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Game Rules")
 	int currentRound;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Game Rules")
+	int32 maxPoints;
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "CapturePoints")
 	TArray<ACapturePoint*> capturePoints;
