@@ -2,33 +2,92 @@
 
 
 #include "LobbyGameMode.h"
+#include "LobbyPlayerController.h"
+#include "NetworkPlayerState.h"
 
-ALobbyGameMode::ALobbyGameMode() {
-	MapID = 0;
-	TimeID = 0;
-	lobbyGameMode = nullptr;
-	MapNameDisplay = "Area 1";
-	MapTimeDisplay = "10:00";
-}
-
-void ALobbyGameMode::BeginPlay() {
-	Super::BeginPlay();
-
-	// 'FCString::Atoi' converts 'FString' to 'int32' and we use the static 'ParseOption' function of the
-// 'UGameplayStatics' Class to get the correct Key from the 'OptionsString'
-	/*MaxNumPlayers = FCString::Atoi(*(UGameplayStatics::ParseOption(OptionsString, "MaxNumPlayers")));*/
-}
-
-void ALobbyGameMode::Tick(const float deltaTime) {
-	Super::Tick(deltaTime);
-}
-
-void ALobbyGameMode::ServerUpdateGameOptions(int MapID_, int TimeID_) {
-	MapID = MapID_;
-	TimeID = TimeID_;
-}
-
-void ALobbyGameMode::PostLogin(APlayerController* NewPlayer) {
+void ALobbyGameMode::PostLogin(APlayerController* NewPlayer)
+{
 	Super::PostLogin(NewPlayer);
-	PlayerControllerList.Add(NewPlayer);
+
+	ALobbyPlayerController* JoiningPlayer = Cast<ALobbyPlayerController>(NewPlayer);
+
+	//if the joining player is a lobby player controller, add him to a list of connected Players
+	if (JoiningPlayer)
+		ConnectedPlayers.Add(JoiningPlayer);
+}
+
+void ALobbyGameMode::Logout(AController* ExitingPlayer)
+{
+	Super::Logout(ExitingPlayer);
+
+	//update the ConnectedPlayers Array and the PlayerList in the lobby whenever a player leaves
+	ALobbyPlayerController* LobbyPlayerController = Cast<ALobbyPlayerController>(ExitingPlayer);
+	if (LobbyPlayerController)
+	{
+		ConnectedPlayers.Remove(LobbyPlayerController);
+		UpdatePlayerList();
+	}
+
+}
+
+void ALobbyGameMode::ProdcastChatMessage(const FText& ChatMessage)
+{
+	//call all the connected players and pass in the chat message
+	for (ALobbyPlayerController* Player : ConnectedPlayers)
+		Player->Client_ReceiveChatMessage(ChatMessage);
+}
+
+void ALobbyGameMode::KickPlayer(int32 PlayerIndex)
+{
+	//call the player to make him destroy his session and leave game
+	ConnectedPlayers[PlayerIndex]->Client_GotKicked();
+}
+
+void ALobbyGameMode::UpdatePlayerList()
+{
+	//Epmty the PlayerInfo Array to re-populate it
+	PlayerInfoArray.Empty();
+
+	//get all the player info from all the connected players
+	for (ALobbyPlayerController* Player : ConnectedPlayers)
+	{
+		//temporary LobbyPlayerInfo var to hold the player info
+		FLobbyPlayerInfo TempLobbyPlayerInfo;
+
+		ANetworkPlayerState* NetworkedPlayerState = Cast<ANetworkPlayerState>(Player->PlayerState);
+		if (NetworkedPlayerState)
+			TempLobbyPlayerInfo.bPlayerReadyState = NetworkedPlayerState->bIsReady;
+		else
+			TempLobbyPlayerInfo.bPlayerReadyState = false;
+
+		//TempLobbyPlayerInfo.PlayerName = Player->PlayerState->PlayerName;
+		PlayerInfoArray.Add(TempLobbyPlayerInfo);
+	}
+
+	//call all the players to make them update and pass in the player info array
+	for (ALobbyPlayerController* Player : ConnectedPlayers)
+		Player->Client_UpdatePlayerList(PlayerInfoArray);
+}
+
+void ALobbyGameMode::StartGameFromLobby()
+{
+	GetWorld()->ServerTravel(GameMapName);
+}
+
+bool ALobbyGameMode::IsAllPlayerReady() const
+{
+	for (ALobbyPlayerController* Player : ConnectedPlayers)
+	{
+		ANetworkPlayerState* NetworkedPlayerState = Cast<ANetworkPlayerState>(Player->PlayerState);
+		if (NetworkedPlayerState)
+			if (!NetworkedPlayerState->bIsReady)
+				return false;
+	}
+	return true;
+}
+
+
+void ALobbyGameMode::PlayerRequestUpdate()
+{
+	UpdatePlayerList();
 }
