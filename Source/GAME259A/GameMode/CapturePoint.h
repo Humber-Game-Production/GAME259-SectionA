@@ -18,11 +18,13 @@ class GAME259A_API ACapturePoint : public AActor
 	UPROPERTY(VisibleDefaultsOnly)
 	class USphereComponent* captureCollisionComp;
 
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 public:	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(Replicated, EditAnywhere)
 	int32 flagsCaptured;
 
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	UPROPERTY(Replicated, BlueprintReadOnly, VisibleAnywhere)
 	int32 requiredFlags;
 	
 	UPROPERTY(EditAnywhere)
@@ -31,7 +33,7 @@ public:
 	UPROPERTY(EditAnywhere)
 	class AActor* mainFlag;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Replicated, BlueprintReadWrite, EditAnywhere)
 	float flagInactivePeriod;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -43,7 +45,7 @@ public:
 	
 	FTimerHandle mainFlagActiveTimer;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Replicated, BlueprintReadWrite, EditAnywhere)
 	ETeamIdentifier teamID;
 
 	// Sets default values for this actor's properties
@@ -57,7 +59,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION()
+	UFUNCTION(Server, Reliable)
 	void OnHit(UPrimitiveComponent* OverlappedComponent,
 		AActor* OtherActor,
 		UPrimitiveComponent* OtherComp,
@@ -68,7 +70,7 @@ public:
 	UFUNCTION()
 	void CheckForFlagConstruction();
 
-	UFUNCTION()
+	UFUNCTION(NetMulticast, Reliable)
 	void RoundReset();
 
 	UFUNCTION()
