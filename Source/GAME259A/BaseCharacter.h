@@ -40,6 +40,10 @@ protected:
 	bool bIsJumping;					//True if the character is jumping.
 	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	float JumpVelocity;					//The velocity at which the character will jump.
+	UPROPERTY(EditAnywhere, Category = "Throwing")
+	float TeleportThrowLength;
+	UPROPERTY(EditAnywhere, Category = "Throwing")
+	float TeleportThrowHeight;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Health")
 	float MaxHealth;					//The character's maximum health. CurrentHealth will be set to this value on initialization and if the value ever exceeds this.

@@ -6,7 +6,7 @@
 
 // Sets default values
 ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), bIsSprinting(false), bIsThrowing(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
-									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), JumpVelocity(500.0f), RespawnTime(3.0f), SlowMultiplier(0.25f)
+									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), JumpVelocity(500.0f), RespawnTime(3.0f), SlowMultiplier(0.25f),TeleportThrowHeight(500.0f),TeleportThrowLength(1200.0f)
 {
 	//Set the character to not rotate when the mouse is moved, only the camera is rotated.
  	bUseControllerRotationPitch = false;
@@ -121,11 +121,13 @@ void ABaseCharacter::MoveForward(float Axis)
 
 void ABaseCharacter::SetThrowAbilityOne_Implementation()
 {
-	location = FTransform(GetActorLocation() + GetActorForwardVector() * 100.0f);
+	FVector tmpLoc = FVector(GetActorLocation().X , GetActorLocation().Y, GetActorLocation().Z + 100);
+	location = FTransform(tmpLoc + GetActorRightVector() * 40.0f);
+	FVector ThrowDistance = ThirdPersonCamera->GetForwardVector() * TeleportThrowLength + ThirdPersonCamera->GetUpVector() * TeleportThrowHeight;
 	if(ACTFPlayerState* StateOfPlayer = GetPlayerState<ACTFPlayerState>())
-		TeleportAbility->UseAbility(3.0f, location, 0.0f, StateOfPlayer->teamID, 0.0f, ThirdPersonCamera->GetForwardVector() * 6000.0f, this);
+		TeleportAbility->UseAbility(3.0f, location, 0.0f, StateOfPlayer->teamID, 0.0f, ThrowDistance, this);
 	else 
-		TeleportAbility->UseAbility(3.0f, location, 0.0f, ETeamIdentifier::None, 0.0f, ThirdPersonCamera->GetForwardVector() * 6000.0f, this);
+		TeleportAbility->UseAbility(3.0f, location, 0.0f, ETeamIdentifier::None, 0.0f, ThrowDistance, this);
 	
 	bIsThrowing = false;
 }
