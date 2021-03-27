@@ -81,4 +81,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FUColourPair alienTeamColour;
 	
+protected:
+	UPROPERTY()
+	bool isHeld;
 };

@@ -81,10 +81,10 @@ public:
 	void ResetStats();
 
 	//Player drops flag intentionally. Will re-enable flag pickup
-	UFUNCTION(NetMulticast, reliable)
+	UFUNCTION(Server, reliable)
 	void PlayerDropFlag();
 
-	UFUNCTION(NetMulticast, Reliable)
+	UFUNCTION(Server, Reliable)
 	void CaptureFlag();
 
 	//Player will die and drop flag. Player cannot pickup new flags when dead.

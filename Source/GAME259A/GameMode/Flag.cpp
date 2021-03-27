@@ -10,7 +10,7 @@
 #include "DrawDebugHelpers.h"
 
 // Sets default values
-AFlag::AFlag()
+AFlag::AFlag() : isHeld(false)
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it. Not needed rn
 	//PrimaryActorTick.bCanEverTick = true;
@@ -70,7 +70,8 @@ void AFlag::PickUp_Implementation(UPrimitiveComponent* OverlappedComponent,
 		ACTFPlayerState* hasPlayerState = isPawn->GetPlayerState<ACTFPlayerState>();
 
 		//if it does and player CAN pickup flag, pickup
-		if (hasPlayerState && hasPlayerState->GetCanPickupFlag()) {
+		if (hasPlayerState && hasPlayerState->GetCanPickupFlag() && isHeld==false) {
+			isHeld = true;
 			USceneComponent* PlayerMesh = OtherActor->FindComponentByClass<USkeletalMeshComponent>();
 
 			owningTeam = hasPlayerState->teamID;
@@ -107,7 +108,7 @@ void AFlag::Drop_Implementation()	{
 	else	{
 		this->SetActorLocation(InitLocation, false);
 	}
-	
+	isHeld = false;
 }
 
 void AFlag::Capture()
