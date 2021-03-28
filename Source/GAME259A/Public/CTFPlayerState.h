@@ -94,6 +94,19 @@ public:
 	UFUNCTION(Server, Reliable)
 	void OnRespawn();
 
+	//Following is code to set the players animation state.
+	UPROPERTY(BlueprintReadOnly, Replicated, Category = "Movement")
+	bool bIsSprinting;					//True if the character is sprinting.
+	UPROPERTY(BlueprintReadOnly, Replicated, Category = "Movement")
+	bool bIsJumping;					//True if the character is jumping.
+
+	UPROPERTY(BlueprintReadWrite, Replicated, Category = "AnimControl")
+	bool bIsSwinging;					//True if the player just input to melee attack.
+	UPROPERTY(BlueprintReadWrite, Replicated, Category = "AnimControl")
+	bool bIsThrowing;					//True if the player just input to melee attack.
+	UPROPERTY(BlueprintReadWrite, Replicated, Category = "AnimControl")
+	bool bIsDrawingBow;					//True if the player just input to melee attack.
+
 protected:
 
 	//Player should only pickup flags if they are Alive and have no other flags

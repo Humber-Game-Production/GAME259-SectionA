@@ -11,6 +11,7 @@
 #include "TimerManager.h"
 #include "Public/BaseAbilityClass.h"
 
+
 #include "BaseCharacter.generated.h"
 
 UCLASS()
@@ -21,6 +22,9 @@ class GAME259A_API ABaseCharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ABaseCharacter();
+
+	
+	//virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
@@ -34,10 +38,7 @@ protected:
 	float CurrentMoveSpeed;				//The character's current speed at which they can walk. This can change.
 	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	float SprintMultiplier;				//The multiplier for the character's speed when sprinting.
-	UPROPERTY(BlueprintReadOnly, Category = "Movement")
-	bool bIsSprinting;					//True if the character is sprinting.
-	UPROPERTY(BlueprintReadOnly, Category = "Movement")
-	bool bIsJumping;					//True if the character is jumping.
+	
 	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	float JumpVelocity;					//The velocity at which the character will jump.
 	UPROPERTY(EditAnywhere, Category = "Throwing")
@@ -60,12 +61,7 @@ protected:
 	float SlowMultiplier;				//The multiplier by which a character is slowed
 	UPROPERTY(BlueprintReadOnly, Category = "CCStatus")
 	bool bIsStunned;					//True if the character is stunned via crowd control.
-	UPROPERTY(BlueprintReadWrite, Category = "AnimControl")
-	bool bIsSwinging;					//True if the player just input to melee attack.
-	UPROPERTY(BlueprintReadWrite, Category = "AnimControl")
-	bool bIsThrowing;					//True if the player just input to melee attack.
-	UPROPERTY(BlueprintReadWrite, Category = "AnimControl")
-	bool bIsDrawingBow;					//True if the player just input to melee attack.
+	
 
 	UPROPERTY(EditAnywhere, Category = "Abilities")
 	UBaseAbilityClass* TeleportAbility;
@@ -74,7 +70,9 @@ protected:
 	UPROPERTY()
 	FTransform location;
 
-
+	UPROPERTY(BlueprintReadWrite, Category = "AnimControl")
+	bool bIsSwinging;					//True if the player just input to melee attack.
+	
 	//Jump timer handle
 	FTimerHandle JumpTimer;
 	//Handle to manage the respawn timer.
@@ -130,7 +128,27 @@ protected:
 	UFUNCTION(Server, Reliable)
 	void SetThrowAbilityTwo();
 
+	//Functions to send animation booleans to server.
+	UFUNCTION(Server, Reliable)
+	void SetIsSprinting(bool bIsSprinting);
+	UFUNCTION(Server, Reliable)
+	void SetIsJumping(bool bIsJumping);
+	UFUNCTION(Server, Reliable)
+	void SetIsSwinging(bool bIsSwinging_);
+	UFUNCTION(Server, Reliable)
+	void SetIsThrowing(bool bIsThrowing);
+	UFUNCTION(Server, Reliable)
+	void SetIsDrawingBow(bool bIsDrawingBow);
 
+	//UPROPERTY(BlueprintReadOnly, Replicated, Category = "Movement")
+	//bool bIsSprinting;					//True if the character is sprinting.
+	//UPROPERTY(BlueprintReadOnly, Replicated, Category = "Movement")
+	//bool bIsJumping;					//True if the character is jumping.
+	
+	//UPROPERTY(BlueprintReadWrite, Replicated, Category = "AnimControl")
+	//bool bIsThrowing;					//True if the player just input to melee attack.
+	//UPROPERTY(BlueprintReadWrite, Replicated, Category = "AnimControl")
+	//bool bIsDrawingBow;					//True if the player just input to melee attack.
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -142,5 +160,4 @@ public:
 	void Slow();
 	UFUNCTION(Category = "Movement", BlueprintCallable)
 	void UnSlow();
-
 };
