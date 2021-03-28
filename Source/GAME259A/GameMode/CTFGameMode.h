@@ -19,6 +19,10 @@ class GAME259A_API ACTFGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
+protected:
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	bool isGameStarted;
+
 public:
 	ACTFGameMode();
 

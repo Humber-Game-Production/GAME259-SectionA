@@ -13,6 +13,7 @@ ACTFPlayerState::ACTFPlayerState(): teamID(ETeamIdentifier::Human), pointsEarned
                                     flagsCaptured(0), FlagHeld(nullptr), PlayerCanPickupFlag(true)
 {
 	bReplicates = true;
+	bNetLoadOnClient = true;
 }
 
 void ACTFPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -57,6 +58,7 @@ void ACTFPlayerState::CaptureFlag_Implementation()
 {
 	if(FlagHeld)
 	{
+		flagsCaptured++;
 		AddScore(FlagHeld->pointValue);
 		FlagHeld->Capture();
 		PlayerCanPickupFlag = true;
@@ -64,8 +66,16 @@ void ACTFPlayerState::CaptureFlag_Implementation()
 	}
 }
 
-void ACTFPlayerState::OnDeath_Implementation()
+void ACTFPlayerState::OnDeath_Implementation(ACharacter* character, float respawnTime)
 {
+	deaths++;
+	//Rag doll if the player is dead.
+	character->GetMesh()->SetAllBodiesSimulatePhysics(true);
+
+	FTimerHandle UnusedTimerHandle;
+
+	GetWorldTimerManager().SetTimer(UnusedTimerHandle, this, &ACTFPlayerState::OnRespawn, respawnTime, false);
+	
 	PlayerDropFlag();
 	PlayerCanPickupFlag = false;
 }
@@ -123,13 +133,14 @@ void ACTFPlayerState::OnRespawn_Implementation()
 				//Spawn the new playerActor and get its pawn
 				AActor* playerActor = GetWorld()->SpawnActor(playersTeam->playerType, &location, &rotation, spawnP);
 				APawn* newPawn = Cast<APawn>(playerActor);
-				//
+				
 				//Get the original playerController and detach it from its pawn
 				AController* controller = originalPawn->GetController();
 				controller->UnPossess();
 				//attach the playerState and playerController to the new pawn
 				newPawn->SetPlayerState(controller->GetPlayerState<ACTFPlayerState>());
 				controller->Possess(newPawn);
+				
 			
 				//Destroy original pawn
 				originalPawn->Destroy();

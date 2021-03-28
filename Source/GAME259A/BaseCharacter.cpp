@@ -206,18 +206,11 @@ void ABaseCharacter::UnSlow()
 
 void ABaseCharacter::Death_Implementation()
 {
-	//Rag doll if the player is dead.
-	GetMesh()->SetAllBodiesSimulatePhysics(true);
-
-	FTimerHandle UnusedTimerHandle;
-
-	GetWorldTimerManager().SetTimer(UnusedTimerHandle, this, &ABaseCharacter::Respawn, RespawnTime, false);
-
 	//Below code is added by Declan from GameMode Team
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	if(ctfPlayerState)
 	{
-		ctfPlayerState->OnDeath();
+		ctfPlayerState->OnDeath(this, RespawnTime);
 	}
 }
 

@@ -116,9 +116,9 @@ protected:
 
 	UFUNCTION(Category = "Death", BlueprintCallable)
 	void TakeDamage(float damage_);
-	UFUNCTION(NetMulticast, Reliable, Category = "Death", BlueprintCallable)
+	UFUNCTION(Server, Reliable, Category = "Death", BlueprintCallable)
 	void Death();
-	UFUNCTION(NetMulticast, Reliable, Category = "Death", BlueprintCallable)
+	UFUNCTION(Server, Reliable, Category = "Death", BlueprintCallable)
 	void Respawn();
 
 	UFUNCTION()

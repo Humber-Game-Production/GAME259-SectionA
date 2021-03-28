@@ -41,6 +41,7 @@ ACTFGameMode::ACTFGameMode()
 	requiredMiniFlags = 6;
 	miniFlag = AMiniFlag::StaticClass();
 	maxPoints = 0;
+	isGameStarted = false;
 }
 
 void ACTFGameMode::BeginPlay()
@@ -71,7 +72,7 @@ FTimerHandle updateTimerHandle;
 void ACTFGameMode::InitTeams()
 {
 	ctfGameState = Cast<ACTFGameState>(GameState);
-	
+	isGameStarted = true;
 	UE_LOG(LogTemp, Warning, TEXT("Initializing teams"));
 	TArray<AActor*> teamsInLevel;
 
@@ -130,10 +131,21 @@ void ACTFGameMode::PostLogin(APlayerController* NewPlayer)
 	Super::PostLogin(NewPlayer);
 
 	ACTFPlayerState* playerState = NewPlayer->GetPlayerState<ACTFPlayerState>();
-
 	if(playerState)
 	{
 		playerState->teamScoreDelegate.AddDynamic(this, &ACTFGameMode::AddPoints);
+
+		if(isGameStarted)
+		{
+			if(ctfGameState->GetTeam(ETeamIdentifier::Human)->players.Num() <= ctfGameState->GetTeam(ETeamIdentifier::Alien)->players.Num())
+			{
+				ctfGameState->ChooseTeam(ETeamIdentifier::Human, playerState);
+            }
+			else
+            {
+				ctfGameState->ChooseTeam(ETeamIdentifier::Alien, playerState);
+            }
+		}
 	}
 }
 
@@ -185,6 +197,7 @@ void ACTFGameMode::EndRound() {
 	//Displays the round that just finished
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Round " + FString::FromInt(currentRound) + " over");
 	GetWorldTimerManager().ClearTimer(flagSpawnTimer);
+	GetWorldTimerManager().ClearTimer(roundTimerHandle);
 	
 	//Reduces the amount of rounds left
 	currentRound++;

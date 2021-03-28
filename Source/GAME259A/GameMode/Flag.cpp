@@ -8,6 +8,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
 #include "DrawDebugHelpers.h"
+#include "Net/UnrealNetwork.h"
 
 // Sets default values
 AFlag::AFlag() : isHeld(false)
@@ -27,7 +28,15 @@ AFlag::AFlag() : isHeld(false)
 	
 }
 
-void AFlag::ChangeColour()
+void AFlag::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME( AFlag, owningTeam);
+	DOREPLIFETIME( AFlag, isHeld);
+}
+
+void AFlag::ChangeColour_Implementation()
 {
 	if(matInstance)
 	{

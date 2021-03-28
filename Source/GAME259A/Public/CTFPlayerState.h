@@ -89,7 +89,7 @@ public:
 
 	//Player will die and drop flag. Player cannot pickup new flags when dead.
 	UFUNCTION(NetMulticast, Reliable)
-	void OnDeath();
+	void OnDeath(ACharacter* character, float respawnTime);
 
 	UFUNCTION(Server, Reliable)
 	void OnRespawn();
