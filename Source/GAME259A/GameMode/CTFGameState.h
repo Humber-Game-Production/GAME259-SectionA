@@ -32,12 +32,12 @@ public:
 	//Map of teams
 	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
 	TArray<ATeam*> listOfTeams;
-
+	//@TODO: implement flagHolders
 	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
 	TArray<AActor*> flagHolders;
 
 	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
-	TArray<AActor*> activeFlags;
+	TArray<AFlag*> activeFlags;
 
 	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
 	TArray<ACapturePoint*> capturePoints;

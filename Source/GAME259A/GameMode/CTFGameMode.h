@@ -97,9 +97,6 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Game Rules")
 	int32 maxPoints;
-	
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "CapturePoints")
-	TArray<ACapturePoint*> capturePoints;
 
 	TArray<const int*> teamPoints;
 

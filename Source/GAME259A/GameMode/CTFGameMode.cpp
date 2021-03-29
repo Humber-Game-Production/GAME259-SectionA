@@ -49,13 +49,14 @@ void ACTFGameMode::BeginPlay()
 	Super::BeginPlay();
 
 	maxPoints = (miniFlag.GetDefaultObject()->pointValue * requiredMiniFlags) + mainFlag.GetDefaultObject()->pointValue;
-
+	ctfGameState = Cast<ACTFGameState>(GameState);
 	TArray<AActor*> foundActors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACapturePoint::StaticClass(), foundActors);
 
 	for(int i = 0; i < foundActors.Num(); i++)
 	{
-		capturePoints.Add(Cast<ACapturePoint>(foundActors[i]));
+		ACapturePoint* cp = Cast<ACapturePoint>(foundActors[i]);
+		ctfGameState->capturePoints.Add(cp);
 	}
 	
 	GetWorldTimerManager().SetTimer(startGameTimer, this, &ACTFGameMode::BeginFirstRound, 4.0f);
@@ -71,7 +72,7 @@ FTimerHandle updateTimerHandle;
 
 void ACTFGameMode::InitTeams()
 {
-	ctfGameState = Cast<ACTFGameState>(GameState);
+	
 	isGameStarted = true;
 	UE_LOG(LogTemp, Warning, TEXT("Initializing teams"));
 	TArray<AActor*> teamsInLevel;
@@ -174,12 +175,14 @@ void ACTFGameMode::SpawnMiniFlag()
 			{
 				const int randomSpawn = FMath::RandRange(0, humanTeam->miniFlagSpawnPoints.Num() - 1);
 				FVector spawnPoint = humanTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
-				ctfGameState->activeFlags.Add(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
+				AFlag* flag = Cast<AFlag>(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
+				ctfGameState->activeFlags.Add(flag);
 			} else
 			{
 				const int randomSpawn = FMath::RandRange(0, alienTeam->miniFlagSpawnPoints.Num() - 1);
 				FVector spawnPoint = alienTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
-				ctfGameState->activeFlags.Add(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
+				AFlag* flag = Cast<AFlag>(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
+				ctfGameState->activeFlags.Add(flag);
 			}
 		}
 		else
@@ -231,7 +234,10 @@ void ACTFGameMode::RoundReset() {
 
 	for (int i = 0; i < ctfGameState->activeFlags.Num(); i++)
 	{
-		GetWorld()->DestroyActor(ctfGameState->activeFlags[i]);
+		if(IsValid(ctfGameState->activeFlags[i]))
+		{
+			GetWorld()->DestroyActor(ctfGameState->activeFlags[i]);
+		}
 	}
 	ctfGameState->activeFlags.Empty();
 	
@@ -240,7 +246,7 @@ void ACTFGameMode::RoundReset() {
 		SpawnAllPlayersOnTeam(team->teamID);
 	}
 
-	for(auto capPoint : capturePoints)
+	for(auto capPoint : ctfGameState->capturePoints)
 	{
 		capPoint->RoundReset();
 	}
