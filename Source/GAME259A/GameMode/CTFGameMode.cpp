@@ -174,12 +174,12 @@ void ACTFGameMode::SpawnMiniFlag()
 			{
 				const int randomSpawn = FMath::RandRange(0, humanTeam->miniFlagSpawnPoints.Num() - 1);
 				FVector spawnPoint = humanTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
-				GetWorld()->SpawnActor(miniFlag, &spawnPoint);
+				ctfGameState->activeFlags.Add(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
 			} else
 			{
 				const int randomSpawn = FMath::RandRange(0, alienTeam->miniFlagSpawnPoints.Num() - 1);
 				FVector spawnPoint = alienTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
-				GetWorld()->SpawnActor(miniFlag, &spawnPoint);
+				ctfGameState->activeFlags.Add(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
 			}
 		}
 		else
@@ -229,7 +229,11 @@ void ACTFGameMode::RoundReset() {
 	spawnedMiniFlags = 0;
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Flags respawn."));
 
-
+	for (int i = 0; i < ctfGameState->activeFlags.Num(); i++)
+	{
+		GetWorld()->DestroyActor(ctfGameState->activeFlags[i]);
+	}
+	ctfGameState->activeFlags.Empty();
 	
 	for (auto team : ctfGameState->listOfTeams)
 	{

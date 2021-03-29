@@ -37,7 +37,7 @@ public:
 	TArray<AActor*> flagHolders;
 
 	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
-	TArray<AFlag*> activeFlags;
+	TArray<AActor*> activeFlags;
 
 	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
 	TArray<ACapturePoint*> capturePoints;
