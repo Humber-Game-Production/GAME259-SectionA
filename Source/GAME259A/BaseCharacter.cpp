@@ -73,9 +73,11 @@ void ABaseCharacter::MoveRight(float Axis)
 	if (bIsSlowed) {
 		Axis = Axis * SlowMultiplier;
 	}
-	if (!ctfPlayerState->bIsSprinting)
-	{
-		Axis = Axis * 1/SprintMultiplier;
+	if (ctfPlayerState != nullptr) {
+		if (!ctfPlayerState->bIsSprinting)
+		{
+			Axis = Axis * 1 / SprintMultiplier;
+		}
 	}
 	AddMovementInput(GetActorRightVector(), Axis);
 	//Walk(right);
@@ -136,9 +138,11 @@ void ABaseCharacter::MoveForward(float Axis)
 	if (bIsSlowed) {
 		Axis = Axis * SlowMultiplier;
 	}
-	if (!ctfPlayerState->bIsSprinting)
-	{
-		Axis = Axis * 1 / SprintMultiplier;
+	if (ctfPlayerState != nullptr) {
+		if (!ctfPlayerState->bIsSprinting)
+		{
+			Axis = Axis * 1 / SprintMultiplier;
+		}
 	}
 	AddMovementInput(GetActorForwardVector(), Axis);
 	//Walk(forward);
