@@ -2,11 +2,20 @@
 
 
 #include "MainFlag.h"
+
+
+#include "CTFGameMode.h"
+#include "GameplayDebuggerTypes.h"
 #include "GAME259A/Public/CTFPlayerState.h"
 
 
 
 FTimerHandle FlagReserveTimer;
+
+AMainFlag::AMainFlag()
+{
+	bAlwaysRelevant = true;
+}
 
 void AMainFlag::PickUp_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
@@ -37,15 +46,23 @@ void AMainFlag::Drop_Implementation()
 
 void AMainFlag::Capture()
 {
-	AFlag::Capture();
+	Execute_Drop(this);
 	this->SetActorLocation(FVector(0, 0, -100000));
 	this->InitLocation = this->GetActorLocation();
 	owningTeam = ETeamIdentifier::None;
 	AFlag::ChangeColour();
+	if(HasAuthority())
+	{
+		if(ACTFGameMode* gameMode = GetWorld()->GetAuthGameMode<ACTFGameMode>())
+		{
+			gameMode->EndRound();
+		}
+	}
 
 }
 
-void AMainFlag::ReserveFlag(){
+void AMainFlag::ReserveFlag_Implementation()
+{
 	owningTeam = ETeamIdentifier::None;
 	AFlag::ChangeColour();
 }

@@ -16,5 +16,7 @@ class GAME259A_API AMiniFlag : public AFlag
 
 protected:
 
+
+	virtual void Drop_Implementation() override;
 	virtual void Capture() override;
 };
