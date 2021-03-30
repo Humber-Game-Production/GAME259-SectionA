@@ -41,5 +41,6 @@ public:
 	UPROPERTY(Replicated)
 		AActor* BaseCharacter;
 
-	
+	UPROPERTY(EditAnywhere)
+		USphereComponent* SphereCollider;
 };

@@ -40,20 +40,23 @@ ACTFGameMode::ACTFGameMode()
 	timeBetweenFlagSpawns = 10.0f;
 	requiredMiniFlags = 6;
 	miniFlag = AMiniFlag::StaticClass();
+	maxPoints = 0;
+	isGameStarted = false;
 }
 
 void ACTFGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-
-
+	maxPoints = (miniFlag.GetDefaultObject()->pointValue * requiredMiniFlags) + mainFlag.GetDefaultObject()->pointValue;
+	ctfGameState = Cast<ACTFGameState>(GameState);
 	TArray<AActor*> foundActors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACapturePoint::StaticClass(), foundActors);
 
 	for(int i = 0; i < foundActors.Num(); i++)
 	{
-		capturePoints.Add(Cast<ACapturePoint>(foundActors[i]));
+		ACapturePoint* cp = Cast<ACapturePoint>(foundActors[i]);
+		ctfGameState->capturePoints.Add(cp);
 	}
 	
 	GetWorldTimerManager().SetTimer(startGameTimer, this, &ACTFGameMode::BeginFirstRound, 4.0f);
@@ -69,8 +72,8 @@ FTimerHandle updateTimerHandle;
 
 void ACTFGameMode::InitTeams()
 {
-	ctfGameState = Cast<ACTFGameState>(GameState);
 	
+	isGameStarted = true;
 	UE_LOG(LogTemp, Warning, TEXT("Initializing teams"));
 	TArray<AActor*> teamsInLevel;
 
@@ -129,10 +132,21 @@ void ACTFGameMode::PostLogin(APlayerController* NewPlayer)
 	Super::PostLogin(NewPlayer);
 
 	ACTFPlayerState* playerState = NewPlayer->GetPlayerState<ACTFPlayerState>();
-
 	if(playerState)
 	{
 		playerState->teamScoreDelegate.AddDynamic(this, &ACTFGameMode::AddPoints);
+
+		if(isGameStarted)
+		{
+			if(ctfGameState->GetTeam(ETeamIdentifier::Human)->players.Num() <= ctfGameState->GetTeam(ETeamIdentifier::Alien)->players.Num())
+			{
+				ctfGameState->ChooseTeam(ETeamIdentifier::Human, playerState);
+            }
+			else
+            {
+				ctfGameState->ChooseTeam(ETeamIdentifier::Alien, playerState);
+            }
+		}
 	}
 }
 
@@ -161,12 +175,14 @@ void ACTFGameMode::SpawnMiniFlag()
 			{
 				const int randomSpawn = FMath::RandRange(0, humanTeam->miniFlagSpawnPoints.Num() - 1);
 				FVector spawnPoint = humanTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
-				GetWorld()->SpawnActor(miniFlag, &spawnPoint);
+				AFlag* flag = Cast<AFlag>(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
+				ctfGameState->activeFlags.Add(flag);
 			} else
 			{
 				const int randomSpawn = FMath::RandRange(0, alienTeam->miniFlagSpawnPoints.Num() - 1);
 				FVector spawnPoint = alienTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
-				GetWorld()->SpawnActor(miniFlag, &spawnPoint);
+				AFlag* flag = Cast<AFlag>(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
+				ctfGameState->activeFlags.Add(flag);
 			}
 		}
 		else
@@ -184,6 +200,7 @@ void ACTFGameMode::EndRound() {
 	//Displays the round that just finished
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Round " + FString::FromInt(currentRound) + " over");
 	GetWorldTimerManager().ClearTimer(flagSpawnTimer);
+	GetWorldTimerManager().ClearTimer(roundTimerHandle);
 	
 	//Reduces the amount of rounds left
 	currentRound++;
@@ -193,29 +210,19 @@ void ACTFGameMode::EndRound() {
 	//Prints out how many rounds are left
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::FromInt(currentRound) + " rounds remaining");
 
-	//Checks to see if a win condition is met
-	if (currentRound >= maxRounds) {
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Game ends."));
-	}
-	else
+	ETeamIdentifier winner = WinCheck();
+	
+	//Checks to see if there is a winner. Prints out winner if it exists.
+	if (winner == ETeamIdentifier::None)
 	{
-		//Intermission? (pause)
-		if (WinCheck())
-		{
-			if (teamPoints[static_cast<int32>(ETeamIdentifier::Human)] > teamPoints[static_cast<int32>(ETeamIdentifier::Alien)])
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Magenta, TEXT("Team1 wins"));
-			}
-			else
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Magenta, TEXT("Team2 wins"));
-			}
-		}
-		else
-		{
-			RoundReset();
-		}
+		RoundReset();
 	}
+	else if (winner == ETeamIdentifier::Human)
+	{
+		UE_LOG(LogTemp, Display, TEXT("Humans win"));
+	}
+	else 
+		UE_LOG(LogTemp, Display, TEXT("Aliens win"));
 }
 
 //Resets all the actors in the rounds
@@ -225,14 +232,21 @@ void ACTFGameMode::RoundReset() {
 	spawnedMiniFlags = 0;
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Flags respawn."));
 
-
+	for (int i = 0; i < ctfGameState->activeFlags.Num(); i++)
+	{
+		if(IsValid(ctfGameState->activeFlags[i]))
+		{
+			GetWorld()->DestroyActor(ctfGameState->activeFlags[i]);
+		}
+	}
+	ctfGameState->activeFlags.Empty();
 	
 	for (auto team : ctfGameState->listOfTeams)
 	{
 		SpawnAllPlayersOnTeam(team->teamID);
 	}
 
-	for(auto capPoint: capturePoints)
+	for(auto capPoint : ctfGameState->capturePoints)
 	{
 		capPoint->RoundReset();
 	}
@@ -243,42 +257,34 @@ void ACTFGameMode::RoundReset() {
 }
 
 
-//Will return winning team later for now it is just checking to see if there is a winner
-bool ACTFGameMode::WinCheck()
+//Returns winning team for end of the game or mercy rule if applicable (returns none if mercy rule is not met)
+//Does not calculate if their is a tie at the end. The winner will just be aliens.
+ETeamIdentifier ACTFGameMode::WinCheck()
 {
 	if(teamPoints.Num() != 0)
 	{
-		switch (currentRound)
+		if (abs(*teamPoints[static_cast<int32>(ETeamIdentifier::Human)] - *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)]) > ((maxRounds - currentRound) * maxPoints) || maxRounds == currentRound)
 		{
-			case(2): 
-			if (*teamPoints[static_cast<int32>(ETeamIdentifier::Human)] - *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)] > 18)
-			{
-				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *teamPoints[static_cast<int32>(ETeamIdentifier::Human)], *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)]);
-				return true;
-			}
-			else if (*teamPoints[static_cast<int32>(ETeamIdentifier::Alien)] - *teamPoints[static_cast<int32>(ETeamIdentifier::Human)] > 18)
-			{
-				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *teamPoints[static_cast<int32>(ETeamIdentifier::Human)], *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)]);
-				return true;
-			}
-			break;
-			case(1): 
-			if (*teamPoints[static_cast<int32>(ETeamIdentifier::Human)] - *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)] > 9)
-			{
-				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *teamPoints[static_cast<int32>(ETeamIdentifier::Human)], *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)]);
-				return true;
-			}
-			else if (*teamPoints[static_cast<int32>(ETeamIdentifier::Alien)] - *teamPoints[static_cast<int32>(ETeamIdentifier::Human)] > 9)
-			{
-				UE_LOG(LogTemp, Warning, TEXT("Mercy Rule, Humans %d, Aliens %d"), *teamPoints[static_cast<int32>(ETeamIdentifier::Human)], *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)]);
-				return true;
-			}
-			break;
-			default: 
-			break;
+			return *teamPoints[static_cast<int32>(ETeamIdentifier::Human)] > *teamPoints[static_cast<int32>(ETeamIdentifier::Alien)] ? ETeamIdentifier::Human : ETeamIdentifier::Alien;
 		}
+		else
+			return ETeamIdentifier::None;
 	}
-	return false;
+	else
+		return ETeamIdentifier::None;
+}
+
+void ACTFGameMode::EndGame() {
+	/*on screen debug message*/
+	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("GAME ENDED!"));
+
+	/*clear teams
+	reset teams list back to empty*/
+	ctfGameState->GetTeam(ETeamIdentifier::Alien)->players.Empty();
+	ctfGameState->GetTeam(ETeamIdentifier::Human)->players.Empty();
+
+	/*open lobby level use base map as placeholder for now*/
+	UGameplayStatics::OpenLevel(GetWorld(), "Maps/FinalMaps/L_Adventure_DAOC");
 }
 
 

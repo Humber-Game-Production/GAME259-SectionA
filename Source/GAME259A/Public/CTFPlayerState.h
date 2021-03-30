@@ -81,18 +81,31 @@ public:
 	void ResetStats();
 
 	//Player drops flag intentionally. Will re-enable flag pickup
-	UFUNCTION(NetMulticast, reliable)
+	UFUNCTION(Server, reliable)
 	void PlayerDropFlag();
 
-	UFUNCTION(NetMulticast, Reliable)
+	UFUNCTION(Server, Reliable)
 	void CaptureFlag();
 
 	//Player will die and drop flag. Player cannot pickup new flags when dead.
 	UFUNCTION(NetMulticast, Reliable)
-	void OnDeath();
+	void OnDeath(ACharacter* character, float respawnTime);
 
 	UFUNCTION(Server, Reliable)
 	void OnRespawn();
+
+	//Following is code to set the players animation state.
+	UPROPERTY(BlueprintReadOnly, Replicated, Category = "Movement")
+	bool bIsSprinting;					//True if the character is sprinting.
+	UPROPERTY(BlueprintReadOnly, Replicated, Category = "Movement")
+	bool bIsJumping;					//True if the character is jumping.
+
+	UPROPERTY(BlueprintReadWrite, Replicated, Category = "AnimControl")
+	bool bIsSwinging;					//True if the player just input to melee attack.
+	UPROPERTY(BlueprintReadWrite, Replicated, Category = "AnimControl")
+	bool bIsThrowing;					//True if the player just input to melee attack.
+	UPROPERTY(BlueprintReadWrite, Replicated, Category = "AnimControl")
+	bool bIsDrawingBow;					//True if the player just input to melee attack.
 
 protected:
 
