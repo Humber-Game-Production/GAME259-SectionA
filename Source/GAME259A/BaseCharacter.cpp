@@ -41,7 +41,6 @@ ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(
 	SecondAbility = CreateDefaultSubobject<UBaseAbilityClass>(TEXT("SecondAbility"));
 
 	bReplicates = true;
-	SetReplicates(true);	
 }
 
 // Called when the game starts or when spawned
