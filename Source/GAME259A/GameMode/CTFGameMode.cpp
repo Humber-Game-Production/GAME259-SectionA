@@ -146,6 +146,8 @@ void ACTFGameMode::PostLogin(APlayerController* NewPlayer)
             {
 				ctfGameState->ChooseTeam(ETeamIdentifier::Alien, playerState);
             }
+
+			playerState->OnRespawn();
 		}
 	}
 }
