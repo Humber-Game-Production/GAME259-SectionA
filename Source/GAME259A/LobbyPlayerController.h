@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
+#include "LobbyGameMode.h"
 #include "GameFramework/PlayerController.h"
 #include "LobbyPlayerController.generated.h"
 
@@ -15,7 +17,7 @@ class GAME259A_API ALobbyPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
-		UPROPERTY(Replicated)
+		UPROPERTY(/*Replicated*/)
 		bool bIsReady;
 
 public:
@@ -86,7 +88,7 @@ public:
 	*	@Param	PlayerInfoArray		the player info array passed in from the server
 	*/
 	UFUNCTION(BlueprintImplementableEvent, Category = "Network|PlayerList")
-		void UpdateUMGPlayerList(const TArray<struct FLobbyPlayerInfo>& PlayerInfoArray);
+		void UpdateUMGPlayerList(const TArray<FLobbyPlayerInfo>& PlayerInfoArray);
 
 
 	/**
