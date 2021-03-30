@@ -208,19 +208,22 @@ void ABaseCharacter::UseMeleeAttack()
 {
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	//TODO (Combat)
-	ctfPlayerState->bIsSwinging = true;
-	SetIsSwinging(ctfPlayerState->bIsSwinging);
-	bIsSwinging = true;
-	if (ctfPlayerState->bIsSwinging == true)
+	if(!ctfPlayerState->bIsSprinting)
 	{
-		GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, [this]()
+		ctfPlayerState->bIsSwinging = true;
+		SetIsSwinging(ctfPlayerState->bIsSwinging);
+		bIsSwinging = true;
+		if (ctfPlayerState->bIsSwinging == true)
 		{
-			ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-			ctfPlayerState->bIsSwinging = false;
-			bIsSwinging = false;
-			SetIsSwinging(ctfPlayerState->bIsSwinging);
-		},
-            1.0f, false);
+			GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, [this]()
+            {
+                ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+                ctfPlayerState->bIsSwinging = false;
+                bIsSwinging = false;
+                SetIsSwinging(ctfPlayerState->bIsSwinging);
+            },
+                1.0f, false);
+		}
 	}
 }
 
