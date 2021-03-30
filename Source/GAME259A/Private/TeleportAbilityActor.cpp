@@ -62,7 +62,7 @@ void ATeleportAbilityActor::OnCompHit(UPrimitiveComponent* HitComp, AActor* Othe
 			BaseCharacter->TeleportTo(GetActorLocation() + (Hit.ImpactNormal * 120), BaseCharacter->GetActorRotation());
 			UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), SpawnEffect, TpLocation, CharacterRotation);
 		}
-		if (Mesh != NULL)
+		if (Mesh)
 		{
 
 			Mesh->UnregisterComponent();

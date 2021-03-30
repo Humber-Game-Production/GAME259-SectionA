@@ -32,40 +32,40 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 	UCameraComponent* ThirdPersonCamera;//The camera that will follow the character.
 
-	UPROPERTY(BlueprintReadOnly, Category = "Movement")
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Movement")
 	float MaxWalkSpeed;					//The maximum speed at which the character can move while not sprinting.
-	UPROPERTY(BlueprintReadOnly, Category = "Movement")
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly, Category = "Movement")
 	float CurrentMoveSpeed;				//The character's current speed at which they can walk. This can change.
-	UPROPERTY(BlueprintReadOnly, Category = "Movement")
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Movement")
 	float SprintMultiplier;				//The multiplier for the character's speed when sprinting.
 	
-	UPROPERTY(BlueprintReadOnly, Category = "Movement")
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Movement")
 	float JumpVelocity;					//The velocity at which the character will jump.
-	UPROPERTY(EditAnywhere, Category = "Throwing")
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Throwing")
 	float TeleportThrowLength;
-	UPROPERTY(EditAnywhere, Category = "Throwing")
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Throwing")
 	float TeleportThrowHeight;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Health")
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Health")
 	float MaxHealth;					//The character's maximum health. CurrentHealth will be set to this value on initialization and if the value ever exceeds this.
-	UPROPERTY(BlueprintReadWrite, Category = "Health")
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Health")
 	float CurrentHealth;				//The character's current health.
-	UPROPERTY(BlueprintReadWrite, Category = "Death")
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Death")
 	float RespawnTime;					//The amount of time required for the character to respawn.
 	
-	UPROPERTY(BlueprintReadOnly, Category = "CCStatus")
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "CCStatus")
 	bool bIsDead;						//True if the character is dead.
-	UPROPERTY(BlueprintReadOnly, Category = "CCStatus")
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "CCStatus")
 	bool bIsSlowed;						//True if the character is slowed via crowd control.
-	UPROPERTY(BlueprintReadOnly, Category = "CCStatus")
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "CCStatus")
 	float SlowMultiplier;				//The multiplier by which a character is slowed
-	UPROPERTY(BlueprintReadOnly, Category = "CCStatus")
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "CCStatus")
 	bool bIsStunned;					//True if the character is stunned via crowd control.
 	
 
-	UPROPERTY(EditAnywhere, Category = "Abilities")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Abilities")
 	UBaseAbilityClass* TeleportAbility;
-	UPROPERTY(EditAnywhere, Category = "Abilities")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Abilities")
 	UBaseAbilityClass* SecondAbility;
 	UPROPERTY()
 	FTransform location;
@@ -118,9 +118,9 @@ protected:
 
 	UFUNCTION(Category = "Death", BlueprintCallable)
 	void TakeDamage(float damage_);
-	UFUNCTION(NetMulticast, Reliable, Category = "Death", BlueprintCallable)
+	UFUNCTION(Server, Reliable, Category = "Death", BlueprintCallable)
 	void Death();
-	UFUNCTION(NetMulticast, Reliable, Category = "Death", BlueprintCallable)
+	UFUNCTION(Server, Reliable, Category = "Death", BlueprintCallable)
 	void Respawn();
 
 	UFUNCTION(Server, Reliable)

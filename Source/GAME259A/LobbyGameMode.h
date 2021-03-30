@@ -9,33 +9,51 @@
 /**
  * 
  */
+
+USTRUCT(BlueprintType)
+struct FLobbyPlayerInfo
+{
+	GENERATED_USTRUCT_BODY()
+
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Lobby Player Info")
+		bool bPlayerReadyState;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Lobby Player Info")
+		FString PlayerName;
+};
+
 UCLASS()
 class GAME259A_API ALobbyGameMode : public AGameModeBase
 {
 public:
 	GENERATED_BODY()
 
-	ALobbyGameMode();
 
-	virtual void BeginPlay() override;
-	virtual void Tick(const float deltaTime) override;
-	void ServerUpdateGameOptions(int MapID_, int TimeID_);
+		TArray<struct FLobbyPlayerInfo> PlayerInfoArray;
 
-	TArray<class APlayerController*> PlayerControllerList;
-	// Overriding the PostLogin function
+	UPROPERTY(EditDefaultsOnly)
+		FString GameMapName;
+
+public:
+
+	TArray<class ALobbyPlayerController*> ConnectedPlayers;
+
+	//called when a new player joins the game
 	virtual void PostLogin(APlayerController* NewPlayer) override;
 
+	virtual void Logout(AController* ExitingPlayer) override;
 
-private:
-	int MapID;
-	int TimeID;
+	//called from player controller when he sends a chat message
+	void ProdcastChatMessage(const FText& ChatMessage);
 
-	// Maximum Number of Players needed/allowed during this Match
-	int32 MaxNumPlayers;
+	//called from the host to kick a player
+	void KickPlayer(int32 PlayerIndex);
 
-	ALobbyGameMode* lobbyGameMode;
-	/*PlayerInfo connectedPlayers[6];
-	Texture2D* MapDisplay;*/
-	FString MapTimeDisplay;
-	FString MapNameDisplay;
+	void PlayerRequestUpdate();
+
+	void UpdatePlayerList();
+
+	void StartGameFromLobby();
+
+	bool IsAllPlayerReady() const;
 };

@@ -6,8 +6,8 @@
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
-ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
-									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), JumpVelocity(500.0f), RespawnTime(3.0f), SlowMultiplier(0.25f),TeleportThrowHeight(500.0f),TeleportThrowLength(1200.0f)
+ABaseCharacter::ABaseCharacter() : MaxWalkSpeed(1200.0f), CurrentMoveSpeed(MaxWalkSpeed), SprintMultiplier(1.5f), JumpVelocity(800.0f), TeleportThrowLength(1200.0f), TeleportThrowHeight(500.0f),
+									MaxHealth(100.0f), CurrentHealth(MaxHealth), RespawnTime(3.0f), bIsDead(false), bIsSlowed(false),SlowMultiplier(0.25f),bIsStunned(false)
 {
 	//Set the character to not rotate when the mouse is moved, only the camera is rotated.
  	bUseControllerRotationPitch = false;
@@ -21,10 +21,8 @@ ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(
 	GetCharacterMovement()->bOrientRotationToMovement = false;
 	//Set how fast they turn to look in the direction they are moving.
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 540.0f, 0.0f);
-	//Set how fast the character jumps.
-	GetCharacterMovement()->JumpZVelocity = JumpVelocity;
-	GetCharacterMovement()->AirControl = 0.2f;
-	GetCharacterMovement()->MaxWalkSpeed = MaxWalkSpeed;
+
+	
 
 	//Setup camera arm. This controls how far away the camera is from the character.
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
@@ -41,25 +39,17 @@ ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(
 	SecondAbility = CreateDefaultSubobject<UBaseAbilityClass>(TEXT("SecondAbility"));
 
 	bReplicates = true;
-	SetReplicates(true);	
 }
-
-//void ABaseCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
-//{
-//	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-//
-//	DOREPLIFETIME(ABaseCharacter, bIsSprinting);
-//	DOREPLIFETIME(ABaseCharacter, bIsJumping);
-//	DOREPLIFETIME(ABaseCharacter, bIsSwinging);
-//	DOREPLIFETIME(ABaseCharacter, bIsThrowing);
-//	DOREPLIFETIME(ABaseCharacter, bIsDrawingBow);
-//}
 
 // Called when the game starts or when spawned
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	//Set how fast the character jumps.
+	GetCharacterMovement()->JumpZVelocity = JumpVelocity;
+	GetCharacterMovement()->MaxWalkSpeed = MaxWalkSpeed;
+	GetCharacterMovement()->AirControl = 0.5f;
 }
 
 //Called when the player is supposed to move left (Axis = -1) or right (Axis = 1).
@@ -118,10 +108,16 @@ void ABaseCharacter::StartJump()
 		SetIsJumping(ctfPlayerState->bIsJumping);
 		GetWorld()->GetTimerManager().SetTimer(JumpTimer, [this]()
 			{
-				ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-				Jump();
-				ctfPlayerState->bIsJumping = false;
-				SetIsJumping(ctfPlayerState->bIsJumping);
+				if(this)
+				{
+					ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+					if(ctfPlayerState)
+					{
+						Jump();
+						ctfPlayerState->bIsJumping = false;
+						SetIsJumping(ctfPlayerState->bIsJumping);
+					}
+				}
 			},
 			0.5f, false);
 	}
@@ -255,17 +251,11 @@ void ABaseCharacter::UnSlow()
 void ABaseCharacter::Death_Implementation()
 {
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-	//Rag doll if the player is dead.
-	GetMesh()->SetAllBodiesSimulatePhysics(true);
-
-	FTimerHandle UnusedTimerHandle;
-
-	GetWorldTimerManager().SetTimer(UnusedTimerHandle, this, &ABaseCharacter::Respawn, RespawnTime, false);
 
 	//Below code is added by Declan from GameMode Team
 	if(ctfPlayerState)
 	{
-		ctfPlayerState->OnDeath();
+		ctfPlayerState->OnDeath(this, RespawnTime);
 	}
 }
 
@@ -343,12 +333,6 @@ void ABaseCharacter::SetIsDrawingBow_Implementation(bool bIsDrawingBow)
 void ABaseCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-
-	//if (ctfPlayerState->bIsSwinging)
-	//{
-	//	ctfPlayerState->bIsSwinging = false;
-	//}
 }
 
 // Called to bind functionality to input
@@ -375,9 +359,7 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("RangedAttack", IE_Pressed, this, &ABaseCharacter::UseRangedAttack);
 		
 	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
-	//PlayerInputComponent->BindAxis("TurnRate", this, &ABaseCharacter::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
-	//PlayerInputComponent->BindAxis("LookUpRate", this, &ABaseCharacter::LookUpAtRate);
 
 	//Made by GameMode team
 	PlayerInputComponent->BindAction("KillBind", IE_Pressed, this, &ABaseCharacter::Death);
