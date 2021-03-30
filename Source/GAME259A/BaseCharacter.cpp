@@ -6,8 +6,8 @@
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
-ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(false), SprintMultiplier(1.5f), MaxHealth(100.0f), MaxWalkSpeed(1200.0f),
-									CurrentHealth(MaxHealth), CurrentMoveSpeed(MaxWalkSpeed), JumpVelocity(500.0f), RespawnTime(3.0f), SlowMultiplier(0.25f),TeleportThrowHeight(500.0f),TeleportThrowLength(1200.0f)
+ABaseCharacter::ABaseCharacter() : MaxWalkSpeed(1200.0f), CurrentMoveSpeed(MaxWalkSpeed), SprintMultiplier(1.5f), JumpVelocity(800.0f), TeleportThrowLength(1200.0f), TeleportThrowHeight(500.0f),
+									MaxHealth(100.0f), CurrentHealth(MaxHealth), RespawnTime(3.0f), bIsDead(false), bIsSlowed(false),SlowMultiplier(0.25f),bIsStunned(false)
 {
 	//Set the character to not rotate when the mouse is moved, only the camera is rotated.
  	bUseControllerRotationPitch = false;
@@ -22,7 +22,7 @@ ABaseCharacter::ABaseCharacter() : bIsDead(false), bIsSlowed(false), bIsStunned(
 	//Set how fast they turn to look in the direction they are moving.
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 540.0f, 0.0f);
 	//Set how fast the character jumps.
-	GetCharacterMovement()->JumpZVelocity = JumpVelocity;
+	
 	GetCharacterMovement()->AirControl = 0.2f;
 	GetCharacterMovement()->MaxWalkSpeed = MaxWalkSpeed;
 
@@ -48,6 +48,7 @@ void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	GetCharacterMovement()->JumpZVelocity = JumpVelocity;
 }
 
 //Called when the player is supposed to move left (Axis = -1) or right (Axis = 1).
