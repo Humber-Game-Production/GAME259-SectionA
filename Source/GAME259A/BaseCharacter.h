@@ -101,9 +101,9 @@ protected:
 	void StartJump();
 
 	//Abilities
-	UFUNCTION(Category = "Abilities")
+	UFUNCTION(Category = "Abilities", Server, Reliable)
 	void UseAbilityOne();
-	UFUNCTION(Category = "Abilities")
+	UFUNCTION(Category = "Abilities", Server, Reliable)
 	void UseAbilityTwo();
 	UFUNCTION()
 	void DropFlag();
@@ -116,14 +116,14 @@ protected:
 
 	UFUNCTION(Category = "Death", BlueprintCallable)
 	void TakeDamage(float damage_);
-	UFUNCTION(NetMulticast, Reliable, Category = "Death", BlueprintCallable)
+	UFUNCTION(Server, Reliable, Category = "Death", BlueprintCallable)
 	void Death();
-	UFUNCTION(NetMulticast, Reliable, Category = "Death", BlueprintCallable)
+	UFUNCTION(Server, Reliable, Category = "Death", BlueprintCallable)
 	void Respawn();
 
-	UFUNCTION()
+	UFUNCTION(Server, Reliable)
 	void SetThrowAbilityOne();
-	UFUNCTION()
+	UFUNCTION(Server, Reliable)
 	void SetThrowAbilityTwo();
 
 

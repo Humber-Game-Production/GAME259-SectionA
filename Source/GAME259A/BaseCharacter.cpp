@@ -119,7 +119,7 @@ void ABaseCharacter::MoveForward(float Axis)
 	//Walk(forward);
 }
 
-void ABaseCharacter::SetThrowAbilityOne()
+void ABaseCharacter::SetThrowAbilityOne_Implementation()
 {
 	location = FTransform(GetActorLocation() + GetActorForwardVector() * 100.0f);
 	if(ACTFPlayerState* StateOfPlayer = GetPlayerState<ACTFPlayerState>())
@@ -130,7 +130,7 @@ void ABaseCharacter::SetThrowAbilityOne()
 	bIsThrowing = false;
 }
 
-void ABaseCharacter::UseAbilityOne()
+void ABaseCharacter::UseAbilityOne_Implementation()
 {
 
 	//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, FString::Printf(TEXT("Can Use Ability In %f"), ForwardVector.X));
@@ -145,7 +145,7 @@ void ABaseCharacter::UseAbilityOne()
 	}
 }
 
-void ABaseCharacter::SetThrowAbilityTwo()
+void ABaseCharacter::SetThrowAbilityTwo_Implementation()
 {
 	location = FTransform(GetActorLocation() + GetActorForwardVector() * 100.0f);
 	if (ACTFPlayerState * StateOfPlayer = GetPlayerState<ACTFPlayerState>())
@@ -157,7 +157,7 @@ void ABaseCharacter::SetThrowAbilityTwo()
 }
 
 
-void ABaseCharacter::UseAbilityTwo()
+void ABaseCharacter::UseAbilityTwo_Implementation()
 {
 	//TODO
 	//Fill in when the ability class is finished.
@@ -206,18 +206,11 @@ void ABaseCharacter::UnSlow()
 
 void ABaseCharacter::Death_Implementation()
 {
-	//Rag doll if the player is dead.
-	GetMesh()->SetAllBodiesSimulatePhysics(true);
-
-	FTimerHandle UnusedTimerHandle;
-
-	GetWorldTimerManager().SetTimer(UnusedTimerHandle, this, &ABaseCharacter::Respawn, RespawnTime, false);
-
 	//Below code is added by Declan from GameMode Team
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	if(ctfPlayerState)
 	{
-		ctfPlayerState->OnDeath();
+		ctfPlayerState->OnDeath(this, RespawnTime);
 	}
 }
 
