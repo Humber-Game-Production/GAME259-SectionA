@@ -63,9 +63,9 @@ protected:
 	UPROPERTY(BlueprintReadWrite, Category = "AnimControl")
 	bool bIsDrawingBow;					//True if the player just input to melee attack.
 
-	UPROPERTY(EditAnywhere, Category = "Abilities")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Abilities")
 	UBaseAbilityClass* TeleportAbility;
-	UPROPERTY(EditAnywhere, Category = "Abilities")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Abilities")
 	UBaseAbilityClass* SecondAbility;
 	UPROPERTY()
 	FTransform location;
