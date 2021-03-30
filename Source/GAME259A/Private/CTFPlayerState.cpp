@@ -31,6 +31,12 @@ void ACTFPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 	DOREPLIFETIME( ACTFPlayerState, teamScoreDelegate);
 	DOREPLIFETIME( ACTFPlayerState, respawnPlayerDelegate);
 	
+	DOREPLIFETIME( ACTFPlayerState, bIsSwinging);
+	DOREPLIFETIME( ACTFPlayerState, bIsSprinting);
+	DOREPLIFETIME( ACTFPlayerState, bIsJumping);
+	DOREPLIFETIME( ACTFPlayerState, bIsThrowing);
+	DOREPLIFETIME( ACTFPlayerState, bIsDrawingBow);
+	
 }
 
 void ACTFPlayerState::ResetStats()
