@@ -59,7 +59,7 @@ void ACTFGameMode::BeginPlay()
 		ctfGameState->capturePoints.Add(cp);
 	}
 	
-	GetWorldTimerManager().SetTimer(startGameTimer, this, &ACTFGameMode::BeginFirstRound, 4.0f);
+	GetWorldTimerManager().SetTimer(startGameTimer, this, &ACTFGameMode::BeginFirstRound, 10.0f);
 }
 
 void ACTFGameMode::BeginFirstRound()
@@ -146,6 +146,8 @@ void ACTFGameMode::PostLogin(APlayerController* NewPlayer)
             {
 				ctfGameState->ChooseTeam(ETeamIdentifier::Alien, playerState);
             }
+
+			playerState->OnRespawn();
 		}
 	}
 }

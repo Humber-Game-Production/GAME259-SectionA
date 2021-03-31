@@ -6,7 +6,7 @@
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
-ABaseCharacter::ABaseCharacter() : MaxWalkSpeed(1200.0f), CurrentMoveSpeed(MaxWalkSpeed), SprintMultiplier(1.5f), JumpVelocity(800.0f), TeleportThrowLength(1200.0f), TeleportThrowHeight(500.0f),
+ABaseCharacter::ABaseCharacter() : MaxWalkSpeed(1200.0f), SprintMultiplier(1.5f), JumpVelocity(800.0f), TeleportThrowLength(1200.0f), TeleportThrowHeight(500.0f),
 									MaxHealth(100.0f), CurrentHealth(MaxHealth), RespawnTime(3.0f), bIsDead(false), bIsSlowed(false),SlowMultiplier(0.25f),bIsStunned(false)
 {
 	//Set the character to not rotate when the mouse is moved, only the camera is rotated.
@@ -21,10 +21,8 @@ ABaseCharacter::ABaseCharacter() : MaxWalkSpeed(1200.0f), CurrentMoveSpeed(MaxWa
 	GetCharacterMovement()->bOrientRotationToMovement = false;
 	//Set how fast they turn to look in the direction they are moving.
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 540.0f, 0.0f);
-	//Set how fast the character jumps.
-	
-	GetCharacterMovement()->AirControl = 0.2f;
-	GetCharacterMovement()->MaxWalkSpeed = MaxWalkSpeed;
+
+	GetCharacterMovement()->AirControl = 0.5f;
 
 	//Setup camera arm. This controls how far away the camera is from the character.
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
@@ -48,7 +46,11 @@ void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	CurrentMoveSpeed = MaxWalkSpeed;
+	//Set how fast the character jumps.
 	GetCharacterMovement()->JumpZVelocity = JumpVelocity;
+	GetCharacterMovement()->MaxWalkSpeed = MaxWalkSpeed;
+
 }
 
 //Called when the player is supposed to move left (Axis = -1) or right (Axis = 1).
@@ -107,12 +109,18 @@ void ABaseCharacter::StartJump()
 		SetIsJumping(ctfPlayerState->bIsJumping);
 		GetWorld()->GetTimerManager().SetTimer(JumpTimer, [this]()
 			{
-				ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-				Jump();
-				ctfPlayerState->bIsJumping = false;
-				SetIsJumping(ctfPlayerState->bIsJumping);
+				if(this)
+				{
+					ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+					if(ctfPlayerState)
+					{
+						Jump();
+						ctfPlayerState->bIsJumping = false;
+						SetIsJumping(ctfPlayerState->bIsJumping);
+					}
+				}
 			},
-			0.5f, false);
+			0.1f, false);
 	}
 }
 
