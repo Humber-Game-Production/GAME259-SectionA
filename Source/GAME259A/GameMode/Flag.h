@@ -29,13 +29,15 @@ public:
 	// Sets default values for this actor's properties
 	AFlag();
 
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 	UFUNCTION()
 	virtual void Capture();
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
 	void ChangeColour();
 
 	//Flag pickup when the capsule overlaps with the player(OtherActor)
@@ -46,7 +48,7 @@ protected:
 	virtual void Drop_Implementation() override;
 
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Replicated, BlueprintReadWrite, EditAnywhere)
 	ETeamIdentifier owningTeam;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -71,6 +73,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	FVector DistanceFromGround;
 
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FUColourPair noTeamColour;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -78,4 +81,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FUColourPair alienTeamColour;
 	
+protected:
+	UPROPERTY(Replicated)
+	bool isHeld;
 };

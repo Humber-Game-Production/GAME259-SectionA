@@ -24,12 +24,11 @@ class GAME259A_API IPickUpAndDrop
 public:
 
 	//call for collision
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void PickUp(UPrimitiveComponent* OverlappedComponent, 
-AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	UFUNCTION(Server, reliable)
+	virtual void PickUp(UPrimitiveComponent* OverlappedComponent, 
+				AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
-	
 	//Drop Flag
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void Drop();
+	UFUNCTION(Server, reliable)
+	virtual void Drop();
 };

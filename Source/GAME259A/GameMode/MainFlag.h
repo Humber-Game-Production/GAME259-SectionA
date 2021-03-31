@@ -19,7 +19,8 @@ public:
 
 protected:
 	//Flag pickup when the capsule overlaps with the player(OtherActor)
-
+	AMainFlag();
+	
 	virtual void PickUp_Implementation(UPrimitiveComponent* OverlappedComponent,
 			AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 
@@ -27,7 +28,7 @@ protected:
 
 	virtual void Capture() override;
 
-	UFUNCTION()
+	UFUNCTION(NetMulticast, Reliable)
 	void ReserveFlag();
 	
 };
