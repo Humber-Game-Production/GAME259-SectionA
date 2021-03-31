@@ -119,7 +119,7 @@ void ABaseCharacter::StartJump()
 					}
 				}
 			},
-			0.5f, false);
+			0.1f, false);
 	}
 }
 
