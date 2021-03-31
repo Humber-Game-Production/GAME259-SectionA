@@ -12,6 +12,7 @@
 #include "MainFlag.h"
 #include "MiniFlag.h"
 #include "Kismet/GameplayStatics.h"
+#include "Net/UnrealNetwork.h"
 
 // Sets default values
 ACapturePoint::ACapturePoint() : requiredFlags(6)
@@ -23,6 +24,9 @@ ACapturePoint::ACapturePoint() : requiredFlags(6)
 	PrimaryActorTick.bCanEverTick = false;
 	RootComponent = captureCollisionComp;
 	teamID = ETeamIdentifier::None;
+
+	//SetReplicates(true);
+	//SetReplicatingMovement(true);
 }
 
 // Called when the game starts or when spawned
@@ -48,13 +52,23 @@ void ACapturePoint::BeginPlay()
 	}
 }
 
+void ACapturePoint::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(ACapturePoint, flagsCaptured);
+	DOREPLIFETIME(ACapturePoint, requiredFlags);
+	DOREPLIFETIME(ACapturePoint, flagInactivePeriod);
+	DOREPLIFETIME(ACapturePoint, teamID);
+}
+
 // Called every frame
 void ACapturePoint::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
 
-void ACapturePoint::OnHit(UPrimitiveComponent* OverlappedComponent,
+void ACapturePoint::OnHit_Implementation(UPrimitiveComponent* OverlappedComponent,
 	AActor* OtherActor,
 	UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex,
@@ -91,7 +105,15 @@ void ACapturePoint::OnHit(UPrimitiveComponent* OverlappedComponent,
 				{
 					player->FlagHeld->InitLocation = FVector(0, -1000, 0);
 					player->CaptureFlag();
+					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), teamWinEffect, this->GetActorLocation());
 					UE_LOG(LogTemp, Warning, TEXT("MainFlag captured at team %d's capture point"), teamID);
+					if (HasAuthority())
+					{
+						if (ACTFGameMode* ctfGameMode = GetWorld()->GetAuthGameMode<ACTFGameMode>())
+						{
+							ctfGameMode->RoundReset();
+						}
+					}
 				}
 			}
 		}
@@ -117,7 +139,7 @@ void ACapturePoint::CheckForFlagConstruction()
 	}
 }
 
-void ACapturePoint::RoundReset()
+void ACapturePoint::RoundReset_Implementation()
 {
 	flagsCaptured = 0;
 	
@@ -131,6 +153,7 @@ void ACapturePoint::RoundReset()
 		mainFlag->SetActorRelativeLocation(FVector(0, 0, -100000));
 	}
 }
+
 
 void ACapturePoint::SetMainFlagActive()
 {
