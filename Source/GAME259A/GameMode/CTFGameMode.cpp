@@ -59,7 +59,7 @@ void ACTFGameMode::BeginPlay()
 		ctfGameState->capturePoints.Add(cp);
 	}
 	
-	GetWorldTimerManager().SetTimer(startGameTimer, this, &ACTFGameMode::BeginFirstRound, 30.0f);
+	GetWorldTimerManager().SetTimer(startGameTimer, this, &ACTFGameMode::BeginFirstRound, 10.0f);
 }
 
 void ACTFGameMode::BeginFirstRound()
