@@ -19,6 +19,10 @@ class GAME259A_API ACTFGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
+protected:
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	bool isGameStarted;
+
 public:
 	ACTFGameMode();
 
@@ -48,7 +52,10 @@ public:
 
 	//Change later to return a team
 	UFUNCTION(BlueprintCallable)
-	bool WinCheck();
+	ETeamIdentifier WinCheck();
+
+	UFUNCTION(BlueprintCallable)
+	void EndGame();
 
 	//Adds points to this team
 	UFUNCTION(Server, Reliable, BlueprintCallable)
@@ -88,8 +95,8 @@ public:
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Game Rules")
 	int currentRound;
 
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "CapturePoints")
-	TArray<ACapturePoint*> capturePoints;
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Game Rules")
+	int32 maxPoints;
 
 	TArray<const int*> teamPoints;
 
