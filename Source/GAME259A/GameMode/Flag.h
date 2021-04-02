@@ -58,8 +58,7 @@ public:
 	UPROPERTY()
 	USceneComponent* Root;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	UStaticMeshComponent* Mesh;
+
 
 	UPROPERTY(EditAnywhere)
 	UCapsuleComponent* Capsule;
