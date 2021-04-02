@@ -58,9 +58,7 @@ public:
 	UPROPERTY()
 	USceneComponent* Root;
 
-
-
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UCapsuleComponent* Capsule;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)

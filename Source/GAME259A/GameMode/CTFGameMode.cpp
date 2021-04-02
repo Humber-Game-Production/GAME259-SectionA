@@ -47,8 +47,9 @@ ACTFGameMode::ACTFGameMode()
 void ACTFGameMode::BeginPlay()
 {
 	Super::BeginPlay();
-
-	maxPoints = (miniFlag.GetDefaultObject()->pointValue * requiredMiniFlags) + mainFlag.GetDefaultObject()->pointValue;
+	if (miniFlag && mainFlag){
+		maxPoints = (miniFlag.GetDefaultObject()->pointValue * requiredMiniFlags) + mainFlag.GetDefaultObject()->pointValue;
+	}
 	ctfGameState = Cast<ACTFGameState>(GameState);
 	TArray<AActor*> foundActors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACapturePoint::StaticClass(), foundActors);

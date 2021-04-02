@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Flag.h"
+#include "MainFlag.h"
 #include "GAME259A/GameMode/TeamIdentifier.h"
 #include "CapturePoint.generated.h"
 
@@ -31,7 +31,7 @@ public:
 	bool MainFlagCreator;
 
 	UPROPERTY(EditAnywhere)
-	class AActor* mainFlag;
+	AMainFlag* mainFlag;
 
 	UPROPERTY(Replicated, BlueprintReadWrite, EditAnywhere)
 	float flagInactivePeriod;
@@ -54,6 +54,8 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+
 
 public:	
 	// Called every frame
