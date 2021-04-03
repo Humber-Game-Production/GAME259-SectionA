@@ -8,9 +8,10 @@
 #include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
 #include "DrawDebugHelpers.h"
+#include "Net/UnrealNetwork.h"
 
 // Sets default values
-AFlag::AFlag()
+AFlag::AFlag() : isHeld(false)
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it. Not needed rn
 	//PrimaryActorTick.bCanEverTick = true;
@@ -23,10 +24,19 @@ AFlag::AFlag()
 
 	Capsule = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule"));
 	Capsule->SetupAttachment(Root);
+
 	
 }
 
-void AFlag::ChangeColour()
+void AFlag::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME( AFlag, owningTeam);
+	DOREPLIFETIME( AFlag, isHeld);
+}
+
+void AFlag::ChangeColour_Implementation()
 {
 	if(matInstance)
 	{
@@ -56,6 +66,7 @@ void AFlag::BeginPlay()
 	Super::BeginPlay();
 	Capsule->OnComponentBeginOverlap.AddDynamic(this, &AFlag::PickUp_Implementation);
 	InitLocation = GetActorLocation();
+	
 }
 
 void AFlag::PickUp_Implementation(UPrimitiveComponent* OverlappedComponent,
@@ -68,7 +79,8 @@ void AFlag::PickUp_Implementation(UPrimitiveComponent* OverlappedComponent,
 		ACTFPlayerState* hasPlayerState = isPawn->GetPlayerState<ACTFPlayerState>();
 
 		//if it does and player CAN pickup flag, pickup
-		if (hasPlayerState && hasPlayerState->GetCanPickupFlag()) {
+		if (hasPlayerState && hasPlayerState->GetCanPickupFlag() && isHeld==false) {
+			isHeld = true;
 			USceneComponent* PlayerMesh = OtherActor->FindComponentByClass<USkeletalMeshComponent>();
 
 			owningTeam = hasPlayerState->teamID;
@@ -105,7 +117,7 @@ void AFlag::Drop_Implementation()	{
 	else	{
 		this->SetActorLocation(InitLocation, false);
 	}
-	
+	isHeld = false;
 }
 
 void AFlag::Capture()
