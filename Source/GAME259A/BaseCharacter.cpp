@@ -14,6 +14,8 @@ AbilityOneCoolDown(8.0f), AbilityTwoCoolDown(12.0f)
  	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationYaw = false;
+	
+	bIsDead = false;
 
 	//Set collision capsule.
 	GetCapsuleComponent()->InitCapsuleSize(42.0f, 96.0f);
@@ -148,28 +150,29 @@ void ABaseCharacter::MoveForward(float Axis)
 
 void ABaseCharacter::SetThrowAbilityOne_Implementation()
 {
-	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+	if (!bIsDead) {
+		ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 
-	FVector tmpLoc = FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 100);
-	location = FTransform(tmpLoc + GetActorRightVector() * 40.0f);
-	FVector ThrowDistance = ThirdPersonCamera->GetForwardVector() * TeleportThrowLength + ThirdPersonCamera->GetUpVector() * TeleportThrowHeight;
-	if (ACTFPlayerState* StateOfPlayer = GetPlayerState<ACTFPlayerState>())
-		TeleportAbility->UseAbility(3.0f, location, 0.0f, StateOfPlayer->teamID, 0.0f, ThrowDistance, this);
-	else
-		TeleportAbility->UseAbility(3.0f, location, 0.0f, ETeamIdentifier::None, 0.0f, ThrowDistance, this);
+		FVector tmpLoc = FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 100);
+		location = FTransform(tmpLoc + GetActorRightVector() * 40.0f);
+		FVector ThrowDistance = ThirdPersonCamera->GetForwardVector() * TeleportThrowLength + ThirdPersonCamera->GetUpVector() * TeleportThrowHeight;
+		if (ACTFPlayerState * StateOfPlayer = GetPlayerState<ACTFPlayerState>())
+			TeleportAbility->UseAbility(3.0f, location, 0.0f, StateOfPlayer->teamID, 0.0f, ThrowDistance, this);
+		else
+			TeleportAbility->UseAbility(3.0f, location, 0.0f, ETeamIdentifier::None, 0.0f, ThrowDistance, this);
 
-	ctfPlayerState->bIsThrowing = false;
-	GetWorld()->GetTimerManager().SetTimer(AbilityOneTimerHandle, [this]()
-		{
-			CanUseAbilityOne = true;
+		ctfPlayerState->bIsThrowing = false;
+		GetWorld()->GetTimerManager().SetTimer(AbilityOneTimerHandle, [this]()
+			{
+				CanUseAbilityOne = true;
 
-		}, AbilityOneCoolDown, false);
-
+			}, AbilityOneCoolDown, false);
+	}
 
 }
 void ABaseCharacter::UseAbilityOne_Implementation()
 {
-	if (CanUseAbilityOne) {
+	if (CanUseAbilityOne && !bIsDead) {
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, FString::Printf(TEXT("Can Use Ability In %f"), ForwardVector.X));
 
@@ -186,25 +189,29 @@ void ABaseCharacter::UseAbilityOne_Implementation()
 
 void ABaseCharacter::SetThrowAbilityTwo_Implementation()
 {
-	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-	location = FTransform(GetActorLocation() + GetActorForwardVector() * 100.0f);
-	if (ACTFPlayerState * StateOfPlayer = GetPlayerState<ACTFPlayerState>())
-		SecondAbility->UseAbility(3.0f, location, 0.0f, StateOfPlayer->teamID, 0.0f, ThirdPersonCamera->GetForwardVector() * 1000.0f, this);
-	else
-		SecondAbility->UseAbility(3.0f, location, 0.0f, ETeamIdentifier::None, 0.0f, ThirdPersonCamera->GetForwardVector() * 1000.0f, this);
+	if (!bIsDead) {
+		if (SecondAbility) {
+			ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+			location = FTransform(GetActorLocation() + GetActorForwardVector() * 100.0f);
+			if (ACTFPlayerState * StateOfPlayer = GetPlayerState<ACTFPlayerState>())
+				SecondAbility->UseAbility(3.0f, location, 0.0f, StateOfPlayer->teamID, 0.0f, ThirdPersonCamera->GetForwardVector() * 1000.0f, this);
+			else
+				SecondAbility->UseAbility(3.0f, location, 0.0f, ETeamIdentifier::None, 0.0f, ThirdPersonCamera->GetForwardVector() * 1000.0f, this);
 
-	ctfPlayerState->bIsThrowing = false;
-	GetWorld()->GetTimerManager().SetTimer(AbilityTwoTimerHandle, [this]()
-		{
-			
-			CanUseAbilityTwo = true;
-		}, AbilityTwoCoolDown, false);
+			ctfPlayerState->bIsThrowing = false;
+			GetWorld()->GetTimerManager().SetTimer(AbilityTwoTimerHandle, [this]()
+				{
+
+					CanUseAbilityTwo = true;
+				}, AbilityTwoCoolDown, false);
+		}
+	}
 }
 
 
 void ABaseCharacter::UseAbilityTwo_Implementation()
 {
-	if (CanUseAbilityTwo) {
+	if (CanUseAbilityTwo && !bIsDead) {
 		ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 		//TODO
 		//Fill in when the ability class is finished.
