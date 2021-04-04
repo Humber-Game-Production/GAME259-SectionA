@@ -112,12 +112,12 @@ void ACTFPlayerState::AddScore(int32 amountOfPoints)
 
 void ACTFPlayerState::OnRespawn_Implementation()
 {
-	SetCanPickupFlag(true);
 	respawnPlayerDelegate.Broadcast(teamID, this);
 	UE_LOG(LogTemp, Warning, TEXT("Respawn player delegate should have played"));
 
 	APawn* originalPawn = GetPawn();
-	
+
+	PlayerDropFlag();
 	
 	if(ACTFGameState* gameState = GetWorld()->GetGameState<ACTFGameState>())
 	{

@@ -173,20 +173,20 @@ void ACTFGameMode::SpawnMiniFlag()
 		if(spawnedMiniFlags < requiredMiniFlags)
 		{
 			spawnedMiniFlags++;
+			FVector spawnPoint;
 			UE_LOG(LogTemp, Warning, TEXT("Mini flag number %d was spawned"), spawnedMiniFlags);
 			if(spawnedMiniFlags % 2 == 0)
 			{
 				const int randomSpawn = FMath::RandRange(0, humanTeam->miniFlagSpawnPoints.Num() - 1);
-				FVector spawnPoint = humanTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
-				AFlag* flag = Cast<AFlag>(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
-				ctfGameState->activeFlags.Add(flag);
+				spawnPoint = humanTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
+
 			} else
 			{
 				const int randomSpawn = FMath::RandRange(0, alienTeam->miniFlagSpawnPoints.Num() - 1);
-				FVector spawnPoint = alienTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
-				AFlag* flag = Cast<AFlag>(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
-				ctfGameState->activeFlags.Add(flag);
+				spawnPoint = alienTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
 			}
+			AFlag* flag = Cast<AFlag>(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
+			ctfGameState->AddMiniFlag(flag);
 		}
 		else
 		{
