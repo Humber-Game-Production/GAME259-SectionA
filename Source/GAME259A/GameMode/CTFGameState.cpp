@@ -59,14 +59,14 @@ ATeam* ACTFGameState::GetTeam(ETeamIdentifier team) const
 	return nullptr;
 }
 
-void ACTFGameState::AddMiniFlag(AFlag* flag)
+void ACTFGameState::AddMiniFlag_Implementation(AFlag* flag)
 {
 	activeFlags.Add(flag);
 	addMiniDelegate.Broadcast(flag);
 }
 
 
-void ACTFGameState::RemoveMiniFlag(AFlag* flag)
+void ACTFGameState::RemoveMiniFlag_Implementation(AFlag* flag)
 {
 	if(activeFlags.Contains(flag))
 	{

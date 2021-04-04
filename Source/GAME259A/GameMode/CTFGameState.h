@@ -70,9 +70,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	ATeam* GetTeam(ETeamIdentifier team) const;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
 	void AddMiniFlag(AFlag* flag);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
 	void RemoveMiniFlag(AFlag* flag);
 };
