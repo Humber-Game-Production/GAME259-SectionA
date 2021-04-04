@@ -104,6 +104,9 @@ void ABaseCharacter::StopSprinting()
 //Called when the "Jump" input is pressed. 
 void ABaseCharacter::StartJump()
 {
+	if (!this) {
+		return;
+	}
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	
 	if (!GetCharacterMovement()->IsFalling() && !GetWorld()->GetTimerManager().IsTimerActive(JumpTimer))
@@ -130,6 +133,9 @@ void ABaseCharacter::StartJump()
 //Called when the player is supposed to move forward (Axis = 1) or backward (Axis = -1).
 void ABaseCharacter::MoveForward(float Axis)
 {
+	if (!this) {
+		return;
+	}
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	
 	//FVector forward = GetActorForwardVector();
@@ -150,6 +156,9 @@ void ABaseCharacter::MoveForward(float Axis)
 
 void ABaseCharacter::SetThrowAbilityOne_Implementation()
 {
+	if (!this) {
+		return;
+	}
 	if (!bIsDead) {
 		ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 
@@ -172,6 +181,9 @@ void ABaseCharacter::SetThrowAbilityOne_Implementation()
 }
 void ABaseCharacter::UseAbilityOne_Implementation()
 {
+	if (!this) {
+		return;
+	}
 	if (CanUseAbilityOne && !bIsDead) {
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, FString::Printf(TEXT("Can Use Ability In %f"), ForwardVector.X));
@@ -189,6 +201,9 @@ void ABaseCharacter::UseAbilityOne_Implementation()
 
 void ABaseCharacter::SetThrowAbilityTwo_Implementation()
 {
+	if (!this) {
+		return;
+	}
 	if (!bIsDead) {
 		if (SecondAbility) {
 			ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
@@ -211,6 +226,9 @@ void ABaseCharacter::SetThrowAbilityTwo_Implementation()
 
 void ABaseCharacter::UseAbilityTwo_Implementation()
 {
+	if (!this) {
+		return;
+	}
 	if (CanUseAbilityTwo && !bIsDead) {
 		ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 		//TODO
@@ -237,6 +255,9 @@ void ABaseCharacter::DropFlag()
 
 void ABaseCharacter::UseMeleeAttack()
 {
+	if (!this) {
+		return;
+	}
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	//TODO (Combat)
 	if(!ctfPlayerState->bIsSprinting)
