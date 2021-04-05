@@ -16,11 +16,17 @@ void AMiniFlag::Drop_Implementation()
 
 void AMiniFlag::Capture()	{
 	AFlag::Capture();
-	if(GetWorld())
+	if(HasAuthority())
 	{
-		if(ACTFGameState* gameState = GetWorld()->GetGameState<ACTFGameState>())
+		if(GetWorld())
 		{
-			gameState->RemoveMiniFlag(this);
+			if(ACTFGameState* gameState = GetWorld()->GetGameState<ACTFGameState>())
+			{
+				if(gameState->activeFlags.Contains(this))
+				{
+					gameState->activeFlags.Remove(this);
+				}
+			}
 		}
 	}
 	this->Destroy();

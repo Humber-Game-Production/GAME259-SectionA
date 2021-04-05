@@ -30,8 +30,7 @@ void ACTFGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 	DOREPLIFETIME( ACTFGameState, timeLeft);
 	DOREPLIFETIME( ACTFGameState, currentRound);
 	DOREPLIFETIME( ACTFGameState, maxRounds);
-	DOREPLIFETIME( ACTFGameState, addMiniDelegate);
-	DOREPLIFETIME( ACTFGameState, removeMiniDelegate);
+	DOREPLIFETIME( ACTFGameState, activeFlagsChangedDelegate);
 }
 
 
@@ -59,18 +58,7 @@ ATeam* ACTFGameState::GetTeam(ETeamIdentifier team) const
 	return nullptr;
 }
 
-void ACTFGameState::AddMiniFlag_Implementation(AFlag* flag)
+void ACTFGameState::OnRep_activeFlags_Implementation()
 {
-	activeFlags.Add(flag);
-	addMiniDelegate.Broadcast(flag);
-}
-
-
-void ACTFGameState::RemoveMiniFlag_Implementation(AFlag* flag)
-{
-	if(activeFlags.Contains(flag))
-	{
-		activeFlags.Remove(flag);
-		removeMiniDelegate.Broadcast(flag);
-	}
+	activeFlagsChangedDelegate.Broadcast(activeFlags);
 }

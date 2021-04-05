@@ -36,6 +36,11 @@ void ACapturePoint::BeginPlay()
 	
 	captureCollisionComp->OnComponentBeginOverlap.AddDynamic(this, &ACapturePoint::OnHit);
 
+	if(mainFlag)
+	{
+		mainFlag->SetActorLocation(GetActorLocation() + FVector(0.0f, 0.0f, 60.0f));
+	}
+	
 	if(HasAuthority())
 	{
 		if(ACTFGameMode* ctfGameMode = GetWorld()->GetAuthGameMode<ACTFGameMode>())
@@ -117,7 +122,7 @@ void ACapturePoint::OnHit_Implementation(UPrimitiveComponent* OverlappedComponen
 	}
 }
 
-void ACapturePoint::CheckForFlagConstruction()
+void ACapturePoint::CheckForFlagConstruction_Implementation()
 {
 	if (MainFlagCreator == true) {
 		UE_LOG(LogTemp, Warning, TEXT("This is the main flag spot"));
@@ -148,16 +153,21 @@ void ACapturePoint::RoundReset_Implementation()
 	}
 	else if (MainFlagCreator && (mainFlag != nullptr))	{
 		
-		mainFlag->SetActorLocation(mainFlag->InitLocation);
+		mainFlag->SetActorLocation(GetActorLocation() + FVector(0.0f, 0.0f, 60.0f));
 	}
 	if(mainFlag)
-	mainFlag->Capsule->SetCollisionResponseToAllChannels(ECR_Ignore);
+	{
+		mainFlag->Capsule->SetCollisionResponseToAllChannels(ECR_Ignore);
+		Cast<USkeletalMeshComponent>(mainFlag->GetComponentByClass(USkeletalMeshComponent::StaticClass()))->SetVisibility(false);
+	}
 	
 }
 
-
-void ACapturePoint::SetMainFlagActive()	{
+void ACapturePoint::SetMainFlagActive_Implementation()	{
 	mainFlag->CompleteMainFlag();
+	mainFlag->SetActorEnableCollision(true);
+	mainFlag->Capsule->SetCollisionResponseToAllChannels(ECR_Overlap);
+	Cast<USkeletalMeshComponent>(mainFlag->GetComponentByClass(USkeletalMeshComponent::StaticClass()))->SetVisibility(true);
 		
 }
 

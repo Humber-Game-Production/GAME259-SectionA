@@ -186,7 +186,7 @@ void ACTFGameMode::SpawnMiniFlag()
 				spawnPoint = alienTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
 			}
 			AFlag* flag = Cast<AFlag>(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
-			ctfGameState->AddMiniFlag(flag);
+			ctfGameState->activeFlags.Add(flag);
 		}
 		else
 		{

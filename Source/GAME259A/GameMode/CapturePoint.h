@@ -69,13 +69,13 @@ public:
 		bool bFromSweep,
 		const FHitResult& SweepResult);
 
-	UFUNCTION()
+	UFUNCTION(NetMulticast, Reliable)
 	void CheckForFlagConstruction();
 
 	UFUNCTION(NetMulticast, Reliable)
 	void RoundReset();
 
-	UFUNCTION()
+	UFUNCTION(NetMulticast, Reliable)
 	void SetMainFlagActive();
 
 
