@@ -21,24 +21,24 @@ void ANetworkPlayerState::BeginPlay()
 void ANetworkPlayerState::ChangePlayerName()
 {
 	//check if this has authority
-	if (Role == ROLE_Authority)
-	{
-		//try to get the NetworkedGameInstance
-		UNetworkGameInstance* NetworkGameInstance = Cast<UNWGameInstance>(GetWorld()->GetGameInstance());
+	//if (Role == ROLE_Authority)
+	//{
+	//	//try to get the NetworkedGameInstance
+	//	UNWGameInstance* NWGameInstance = Cast<UNWGameInstance>(GetWorld()->GetGameInstance());
 
-		//if the game instance is not null, get the player name from it
-		if (NWGameInstance)
-		{
-			FString ActualPlayerName = NWGameInstance->GetPlayerName();
-			//if the string is empty that means we are on steam so no need to change the name
-			if (ActualPlayerName != "")
-				//if we are on lan set the player name to the name we got from game instance
-				SetPlayerName(ActualPlayerName);
-		}
+	//	//if the game instance is not null, get the player name from it
+	//	if (NWGameInstance)
+	//	{
+	//		FString ActualPlayerName = NWGameInstance->GetPlayerName();
+	//		//if the string is empty that means we are on steam so no need to change the name
+	//		if (ActualPlayerName != "")
+	//			//if we are on lan set the player name to the name we got from game instance
+	//			SetPlayerName(ActualPlayerName);
+	//	}
 
-	}
-	else //if the player doesn't have authority call the serverside to call this function again
-		Server_ChangePlayerName();
+	//}
+	//else //if the player doesn't have authority call the serverside to call this function again
+	//	Server_ChangePlayerName();
 }
 
 void ANetworkPlayerState::Server_ChangePlayerName_Implementation()
@@ -51,5 +51,5 @@ void ANetworkPlayerState::Server_ChangePlayerName_Implementation()
 void ANetworkPlayerState::GetLifetimeReplicatedProps(TArray< FLifetimeProperty >& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-	DOREPLIFETIME(ANetworkPlayerState, bIsReady);
+	//DOREPLIFETIME(ANetworkPlayerState, bIsReady);
 }
