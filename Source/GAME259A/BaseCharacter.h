@@ -53,6 +53,16 @@ protected:
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Death")
 	float RespawnTime;					//The amount of time required for the character to respawn.
 	
+	UPROPERTY(BlueprintReadOnly, Category = "Abilities")
+	float AbilityOneCoolDown;
+	UPROPERTY(BlueprintReadOnly, Category = "Abilities")
+	float AbilityTwoCoolDown;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Abilities")
+	bool CanUseAbilityOne;
+	UPROPERTY(BlueprintReadOnly, Category = "Abilities")
+	bool CanUseAbilityTwo;
+
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "CCStatus")
 	bool bIsDead;						//True if the character is dead.
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "CCStatus")
@@ -64,7 +74,7 @@ protected:
 	
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Abilities")
-	UBaseAbilityClass* TeleportAbility;
+	UBaseAbilityClass* TeleportAbility;//
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Abilities")
 	UBaseAbilityClass* SecondAbility;
 	UPROPERTY()
@@ -79,7 +89,11 @@ protected:
 	FTimerHandle RespawnTimerHandle;
 	//Handle to manage the throwing animation timer.
 	FTimerHandle ThrowingTimer;
-
+	//Handle to manage ability cooldowns
+	UPROPERTY(BlueprintReadOnly, Category = "Abilities")
+	FTimerHandle AbilityOneTimerHandle;
+	UPROPERTY(BlueprintReadOnly, Category = "Abilities")
+	FTimerHandle AbilityTwoTimerHandle;
 	//**THIS IS COMMENTED OUT UNTIL ABILITY BASE CLASS IS MADE**
 	//UPROPERTY(BlueprintReadWrite, Category = "Abilities")
 	//TArray<Ability> Abilities; //A list of abilities the character can use. This will be initialized to empty and filled by a blueprint that inherits from this class.
