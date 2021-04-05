@@ -16,6 +16,10 @@ class ATeam;
 class ACapturePoint;
 class ACTFPlayerState;
 
+UDELEGATE()
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFlagDelegate, const TArray<AFlag*>&, flag);
+
+
 UCLASS(Blueprintable)
 class GAME259A_API ACTFGameState : public AGameStateBase
 {
@@ -36,7 +40,7 @@ public:
 	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
 	TArray<AActor*> flagHolders;
 
-	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
+	UPROPERTY(ReplicatedUsing = OnRep_activeFlags, BlueprintReadWrite, VisibleAnywhere)
 	TArray<AFlag*> activeFlags;
 
 	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
@@ -50,16 +54,21 @@ public:
 	UPROPERTY(Replicated, BlueprintReadOnly, VisibleAnywhere)
 	int32 maxRounds;
 
-
+	UPROPERTY(BlueprintAssignable, Replicated)
+	FFlagDelegate activeFlagsChangedDelegate;
 	
 	//Adds a CTFPlayerState to the specified team
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void ChooseTeam(ETeamIdentifier team, ACTFPlayerState* player);
 
 	//Adds points to the specified team
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void AddPoints(ETeamIdentifier team, int32 points);
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	ATeam* GetTeam(ETeamIdentifier team) const;
+
+	UFUNCTION(NetMulticast, Reliable)
+	void OnRep_activeFlags();
+	
 };

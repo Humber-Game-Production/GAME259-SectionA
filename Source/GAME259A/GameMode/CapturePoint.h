@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Flag.h"
+#include "MainFlag.h"
 #include "GAME259A/GameMode/TeamIdentifier.h"
 #include "CapturePoint.generated.h"
 
@@ -31,7 +31,7 @@ public:
 	bool MainFlagCreator;
 
 	UPROPERTY(EditAnywhere)
-	class AActor* mainFlag;
+	AMainFlag* mainFlag;
 
 	UPROPERTY(Replicated, BlueprintReadWrite, EditAnywhere)
 	float flagInactivePeriod;
@@ -55,6 +55,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -67,13 +69,13 @@ public:
 		bool bFromSweep,
 		const FHitResult& SweepResult);
 
-	UFUNCTION()
+	UFUNCTION(NetMulticast, Reliable)
 	void CheckForFlagConstruction();
 
 	UFUNCTION(NetMulticast, Reliable)
 	void RoundReset();
 
-	UFUNCTION()
+	UFUNCTION(NetMulticast, Reliable)
 	void SetMainFlagActive();
 
 

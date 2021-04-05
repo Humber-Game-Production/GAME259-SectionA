@@ -30,6 +30,7 @@ void ACTFGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 	DOREPLIFETIME( ACTFGameState, timeLeft);
 	DOREPLIFETIME( ACTFGameState, currentRound);
 	DOREPLIFETIME( ACTFGameState, maxRounds);
+	DOREPLIFETIME( ACTFGameState, activeFlagsChangedDelegate);
 }
 
 
@@ -55,4 +56,9 @@ ATeam* ACTFGameState::GetTeam(ETeamIdentifier team) const
 		}
 	}
 	return nullptr;
+}
+
+void ACTFGameState::OnRep_activeFlags_Implementation()
+{
+	activeFlagsChangedDelegate.Broadcast(activeFlags);
 }

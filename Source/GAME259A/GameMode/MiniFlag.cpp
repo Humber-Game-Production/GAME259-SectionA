@@ -3,6 +3,9 @@
 
 #include "MiniFlag.h"
 
+#include "CTFGameMode.h"
+#include "CTFGameState.h"
+
 
 void AMiniFlag::Drop_Implementation()
 {
@@ -13,5 +16,18 @@ void AMiniFlag::Drop_Implementation()
 
 void AMiniFlag::Capture()	{
 	AFlag::Capture();
+	if(HasAuthority())
+	{
+		if(GetWorld())
+		{
+			if(ACTFGameState* gameState = GetWorld()->GetGameState<ACTFGameState>())
+			{
+				if(gameState->activeFlags.Contains(this))
+				{
+					gameState->activeFlags.Remove(this);
+				}
+			}
+		}
+	}
 	this->Destroy();
 }

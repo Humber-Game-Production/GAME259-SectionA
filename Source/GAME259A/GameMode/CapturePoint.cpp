@@ -15,7 +15,7 @@
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
-ACapturePoint::ACapturePoint() : requiredFlags(6)
+ACapturePoint::ACapturePoint() : flagsCaptured(0), requiredFlags(6)
 {
 	captureCollisionComp = CreateDefaultSubobject<USphereComponent>(TEXT("CaptureComp"));
 	captureCollisionComp->InitSphereRadius(40.0f);
@@ -35,14 +35,12 @@ void ACapturePoint::BeginPlay()
 	Super::BeginPlay();
 	
 	captureCollisionComp->OnComponentBeginOverlap.AddDynamic(this, &ACapturePoint::OnHit);
-	if (mainFlag != NULL)
-	{
-		//sets flag to be off the game field until it is generated
-		mainFlag->SetActorRelativeLocation(FVector(0, 0, -100000));
-		AFlag* flagMain = Cast<AFlag>(mainFlag);
-		flagMain->InitLocation = flagMain->GetActorLocation();
-	}
 
+	if(mainFlag)
+	{
+		mainFlag->SetActorLocation(GetActorLocation() + FVector(0.0f, 0.0f, 60.0f));
+	}
+	
 	if(HasAuthority())
 	{
 		if(ACTFGameMode* ctfGameMode = GetWorld()->GetAuthGameMode<ACTFGameMode>())
@@ -100,6 +98,10 @@ void ACapturePoint::OnHit_Implementation(UPrimitiveComponent* OverlappedComponen
 					player->FlagHeld->InitLocation = FVector(0, -1000, 0);
 					player->CaptureFlag();
 					UE_LOG(LogTemp, Warning, TEXT("MiniFlag number %d captured at Midpoint"), flagsCaptured);
+					if(mainFlag)	{
+						mainFlag->BuildingMainFlag(flagsCaptured);
+					}
+					
 				} //if the player's holding a main flag, this capture point is part of the same team as the player, and this is not the midPoint
 				else if(Cast<AMainFlag>(player->FlagHeld) && (playersTeam == teamID) && (MainFlagCreator == false))
 				{
@@ -120,7 +122,7 @@ void ACapturePoint::OnHit_Implementation(UPrimitiveComponent* OverlappedComponen
 	}
 }
 
-void ACapturePoint::CheckForFlagConstruction()
+void ACapturePoint::CheckForFlagConstruction_Implementation()
 {
 	if (MainFlagCreator == true) {
 		UE_LOG(LogTemp, Warning, TEXT("This is the main flag spot"));
@@ -129,8 +131,7 @@ void ACapturePoint::CheckForFlagConstruction()
 			if(mainFlag)
 			{
 				UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), flagSpawnEffect, this->GetActorLocation());
-				mainFlag->SetActorLocation(FVector(this->GetActorLocation()));
-				mainFlag->SetActorEnableCollision(false);
+
 				GetWorldTimerManager().SetTimer(mainFlagActiveTimer, this, &ACapturePoint::SetMainFlagActive, flagInactivePeriod);
 			}
 			//main flag spawns on top of capture point
@@ -145,18 +146,28 @@ void ACapturePoint::RoundReset_Implementation()
 	
 	if(MainFlagCreator && !IsValid(mainFlag))
 	{
-		FVector spawnPoint(0, 0, -100000);
-		GetWorld()->SpawnActor(AMainFlag::StaticClass(), &spawnPoint);
+		FVector spawnPoint;
+		spawnPoint = this->GetActorLocation() + FVector(0.0f, 0.0f, 60.0f);
+		mainFlag = Cast<AMainFlag>(GetWorld()->SpawnActor(AMainFlag::StaticClass(), &spawnPoint));
+		
 	}
-	else if (MainFlagCreator && (mainFlag != nullptr))
+	else if (MainFlagCreator && (mainFlag != nullptr))	{
+		
+		mainFlag->SetActorLocation(GetActorLocation() + FVector(0.0f, 0.0f, 60.0f));
+	}
+	if(mainFlag)
 	{
-		mainFlag->SetActorRelativeLocation(FVector(0, 0, -100000));
+		mainFlag->Capsule->SetCollisionResponseToAllChannels(ECR_Ignore);
+		Cast<USkeletalMeshComponent>(mainFlag->GetComponentByClass(USkeletalMeshComponent::StaticClass()))->SetVisibility(false);
 	}
+	
 }
 
-
-void ACapturePoint::SetMainFlagActive()
-{
+void ACapturePoint::SetMainFlagActive_Implementation()	{
+	mainFlag->CompleteMainFlag();
 	mainFlag->SetActorEnableCollision(true);
+	mainFlag->Capsule->SetCollisionResponseToAllChannels(ECR_Overlap);
+	Cast<USkeletalMeshComponent>(mainFlag->GetComponentByClass(USkeletalMeshComponent::StaticClass()))->SetVisibility(true);
+		
 }
 
