@@ -68,6 +68,8 @@ public:
 		int32 OtherBodyIndex,
 		bool bFromSweep,
 		const FHitResult& SweepResult);
+	UFUNCTION(NetMulticast, Reliable)
+	void TestFunction();
 
 	UFUNCTION(NetMulticast, Reliable)
 	void CheckForFlagConstruction();
