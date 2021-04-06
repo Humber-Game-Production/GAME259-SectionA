@@ -66,6 +66,13 @@ void ACapturePoint::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void ACapturePoint::TestFunction_Implementation()	{
+	if(mainFlag)	{
+		mainFlag->BuildingMainFlag(flagsCaptured);
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Flag progress " + FString::FromInt(flagsCaptured));
+	}
+}
+
 void ACapturePoint::OnHit_Implementation(UPrimitiveComponent* OverlappedComponent,
 	AActor* OtherActor,
 	UPrimitiveComponent* OtherComp,
@@ -74,8 +81,6 @@ void ACapturePoint::OnHit_Implementation(UPrimitiveComponent* OverlappedComponen
 	const FHitResult& SweepResult)
 {
 	APawn* playerC = Cast<APawn>(OtherActor);
-	
-
 	if(playerC)
 	{
 		ACTFPlayerState* player = playerC->GetPlayerState<ACTFPlayerState>();
@@ -98,9 +103,9 @@ void ACapturePoint::OnHit_Implementation(UPrimitiveComponent* OverlappedComponen
 					player->FlagHeld->InitLocation = FVector(0, -1000, 0);
 					player->CaptureFlag();
 					UE_LOG(LogTemp, Warning, TEXT("MiniFlag number %d captured at Midpoint"), flagsCaptured);
-					if(mainFlag)	{
-						mainFlag->BuildingMainFlag(flagsCaptured);
-					}
+					
+					//Main Flag building in here
+					TestFunction();
 					
 				} //if the player's holding a main flag, this capture point is part of the same team as the player, and this is not the midPoint
 				else if(Cast<AMainFlag>(player->FlagHeld) && (playersTeam == teamID) && (MainFlagCreator == false))
@@ -165,9 +170,8 @@ void ACapturePoint::RoundReset_Implementation()
 
 void ACapturePoint::SetMainFlagActive_Implementation()	{
 	mainFlag->CompleteMainFlag();
-	mainFlag->SetActorEnableCollision(true);
-	mainFlag->Capsule->SetCollisionResponseToAllChannels(ECR_Overlap);
-	Cast<USkeletalMeshComponent>(mainFlag->GetComponentByClass(USkeletalMeshComponent::StaticClass()))->SetVisibility(true);
-		
+	//mainFlag->SetActorEnableCollision(true);
+	//mainFlag->Capsule->SetCollisionResponseToAllChannels(ECR_Overlap);
+	//Cast<USkeletalMeshComponent>(mainFlag->GetComponentByClass(USkeletalMeshComponent::StaticClass()))->SetVisibility(true);
 }
 
