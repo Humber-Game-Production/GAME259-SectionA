@@ -187,6 +187,7 @@ void ACTFGameMode::SpawnMiniFlag()
 			}
 			AFlag* flag = Cast<AFlag>(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
 			ctfGameState->activeFlags.Add(flag);
+			ctfGameState->activeFlagsChangedDelegate.Broadcast(ctfGameState->activeFlags);
 		}
 		else
 		{
