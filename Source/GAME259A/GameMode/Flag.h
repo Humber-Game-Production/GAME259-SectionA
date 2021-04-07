@@ -79,6 +79,6 @@ public:
 	FUColourPair alienTeamColour;
 	
 protected:
-	UPROPERTY(Replicated)
+	UPROPERTY(Replicated, BlueprintReadWrite)
 	bool isHeld;
 };

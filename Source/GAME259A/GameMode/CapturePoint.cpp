@@ -66,10 +66,14 @@ void ACapturePoint::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void ACapturePoint::OnRep_flagsCaptured()
+{
+	TestFunction();
+}
+
 void ACapturePoint::TestFunction_Implementation()	{
 	if(mainFlag)	{
 		mainFlag->BuildingMainFlag(flagsCaptured);
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Flag progress " + FString::FromInt(flagsCaptured));
 	}
 }
 
@@ -105,7 +109,10 @@ void ACapturePoint::OnHit_Implementation(UPrimitiveComponent* OverlappedComponen
 					UE_LOG(LogTemp, Warning, TEXT("MiniFlag number %d captured at Midpoint"), flagsCaptured);
 					
 					//Main Flag building in here
-					TestFunction();
+					if(HasAuthority())
+					{
+						TestFunction();
+					}
 					
 				} //if the player's holding a main flag, this capture point is part of the same team as the player, and this is not the midPoint
 				else if(Cast<AMainFlag>(player->FlagHeld) && (playersTeam == teamID) && (MainFlagCreator == false))
