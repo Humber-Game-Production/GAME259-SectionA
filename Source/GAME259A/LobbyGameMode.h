@@ -38,6 +38,9 @@ public:
 
 	TArray<class ALobbyPlayerController*> ConnectedPlayers;
 
+	UPROPERTY(BlueprintType);
+	TArray<class ALobbyGameMode*> AllPlayerControllers;
+
 	//called when a new player joins the game
 	virtual void PostLogin(APlayerController* NewPlayer) override;
 
@@ -53,7 +56,11 @@ public:
 
 	void UpdatePlayerList();
 
+	UFUNCTION(BlueprintCallable, Category = "Network|Lobby")
 	void StartGameFromLobby();
 
 	bool IsAllPlayerReady() const;
+
+	UFUNCTION(BlueprintPure, Category = "Network|Lobby")
+		bool CanWeStartGame() const;
 };
