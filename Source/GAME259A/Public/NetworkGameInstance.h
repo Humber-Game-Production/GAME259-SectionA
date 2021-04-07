@@ -4,7 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
+#include "Interfaces/OnlineSessionInterface.h"
+#include "Interfaces/OnlineFriendsInterface.h"
+#include "OnlineSessionSettings.h"
+#include "OnlineSubsystem.h"
+#include "Kismet/GameplayStatics.h"
+#include "../../../Plugins/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/BlueprintDataDefinitions.h"
 #include "NetworkGameInstance.generated.h"
+
 
 #define SETTING_SERVER_NAME FName(TEXT("SERVERNAMEKEY"))
 #define SETTING_SERVER_IS_PROTECTED FName(TEXT("SERVERSERVERISPASSWORDPROTECTEDKEY"))
@@ -44,69 +51,7 @@ struct FCustomBlueprintSessionResult
 };
 
 
-//stolen from Advanced Session Plugin cuz I can't find any other way to put FUniqueNetId in a struct
-USTRUCT(BlueprintType)
-struct FBPUniqueNetId
-{
-	GENERATED_USTRUCT_BODY()
 
-private:
-	bool bUseDirectPointer;
-
-
-public:
-	TSharedPtr<const FUniqueNetId> UniqueNetId;
-	const FUniqueNetId* UniqueNetIdPtr;
-
-	void SetUniqueNetId(const TSharedPtr<const FUniqueNetId>& ID)
-	{
-		bUseDirectPointer = false;
-		UniqueNetIdPtr = nullptr;
-		UniqueNetId = ID;
-	}
-
-	void SetUniqueNetId(const FUniqueNetId* ID)
-	{
-		bUseDirectPointer = true;
-		UniqueNetIdPtr = ID;
-	}
-
-	bool IsValid() const
-	{
-		if (bUseDirectPointer && UniqueNetIdPtr != nullptr)
-		{
-			return true;
-		}
-		else if (UniqueNetId.IsValid())
-		{
-			return true;
-		}
-		else
-			return false;
-
-	}
-
-	const FUniqueNetId* GetUniqueNetId() const
-	{
-		if (bUseDirectPointer && UniqueNetIdPtr != nullptr)
-		{
-			// No longer converting to non const as all functions now pass const UniqueNetIds
-			return /*const_cast<FUniqueNetId*>*/(UniqueNetIdPtr);
-		}
-		else if (UniqueNetId.IsValid())
-		{
-			return UniqueNetId.Get();
-		}
-		else
-			return nullptr;
-	}
-
-	FBPUniqueNetId()
-	{
-		bUseDirectPointer = false;
-		UniqueNetIdPtr = nullptr;
-	}
-};
 
 USTRUCT(BlueprintType)
 struct FSteamFriendInfo
