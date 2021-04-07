@@ -19,6 +19,12 @@ class ACTFPlayerState;
 UDELEGATE()
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFlagDelegate, const TArray<AFlag*>&, flag);
 
+UDELEGATE()
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FTeamDelegate, ETeamIdentifier, team);
+
+UDELEGATE()
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FRoundEventDelegate);
+
 
 UCLASS(Blueprintable)
 class GAME259A_API ACTFGameState : public AGameStateBase
@@ -54,8 +60,17 @@ public:
 	UPROPERTY(Replicated, BlueprintReadOnly, VisibleAnywhere)
 	int32 maxRounds;
 
-	UPROPERTY(BlueprintAssignable, Replicated)
+	UPROPERTY(BlueprintAssignable)
 	FFlagDelegate activeFlagsChangedDelegate;
+
+	UPROPERTY(BlueprintAssignable)
+	FRoundEventDelegate roundEndDelegate;
+
+	UPROPERTY(BlueprintAssignable)
+	FRoundEventDelegate roundStartDelegate;
+
+	UPROPERTY(BlueprintAssignable)
+	FTeamDelegate gameEndDelgate;
 	
 	//Adds a CTFPlayerState to the specified team
 	UFUNCTION(BlueprintCallable)
@@ -67,8 +82,16 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	ATeam* GetTeam(ETeamIdentifier team) const;
-
+	
 	UFUNCTION(NetMulticast, Reliable)
 	void OnRep_activeFlags();
+
+	UFUNCTION(NetMulticast, Reliable)
+	void OnRoundStart();
 	
+	UFUNCTION(NetMulticast, Reliable)
+	void OnRoundEnd();
+
+	UFUNCTION(NetMulticast, Reliable)
+	void OnGameEnd(ETeamIdentifier winningTeam);
 };

@@ -21,7 +21,7 @@ class GAME259A_API ACapturePoint : public AActor
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 public:	
-	UPROPERTY(Replicated, EditAnywhere)
+	UPROPERTY(ReplicatedUsing = OnRep_flagsCaptured, EditAnywhere)
 	int32 flagsCaptured;
 
 	UPROPERTY(Replicated, BlueprintReadOnly, VisibleAnywhere)
@@ -79,6 +79,9 @@ public:
 
 	UFUNCTION(NetMulticast, Reliable)
 	void SetMainFlagActive();
+
+	UFUNCTION()
+	void OnRep_flagsCaptured();
 
 
 };
