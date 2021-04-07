@@ -225,12 +225,16 @@ void ACTFGameMode::EndRound() {
 	else if (winner == ETeamIdentifier::Human)
 	{
 		UE_LOG(LogTemp, Display, TEXT("Humans win"));
+		ctfGameState->OnGameEnd(winner);
+		EndGame();
 	}
 	else
 	{
 		UE_LOG(LogTemp, Display, TEXT("Aliens win"));
+		ctfGameState->OnGameEnd(winner);
+		EndGame();
 	}
-	ctfGameState->OnGameEnd(winner);
+	
 }
 
 //Resets all the actors in the rounds
