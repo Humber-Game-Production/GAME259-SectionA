@@ -6,11 +6,24 @@
 
 #include "LobbyGameMode.h"
 #include "GameFramework/PlayerController.h"
+#include <GAME259A\BaseCharacter.h>
 #include "LobbyPlayerController.generated.h"
 
 /**
  * 
  */
+
+USTRUCT(BlueprintType)
+struct FPlayerInfo
+{
+	GENERATED_USTRUCT_BODY()
+
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Info")
+		FString MyPlayerStatus;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Info")
+		FString MyPlayerName;
+};
 
 UCLASS()
 class GAME259A_API ALobbyPlayerController : public APlayerController
@@ -33,6 +46,9 @@ public:
 	*/
 	UFUNCTION(BlueprintCallable, Category = "Network|Chat")
 		void SendChatMessage(const FText& ChatMessage);
+
+	UFUNCTION(BlueprintCallable, Category = "Network|Character")
+		void AssignSelectedCharacter();
 
 
 	/**
