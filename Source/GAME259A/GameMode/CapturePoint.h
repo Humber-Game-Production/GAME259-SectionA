@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Flag.h"
+#include "MainFlag.h"
 #include "GAME259A/GameMode/TeamIdentifier.h"
 #include "CapturePoint.generated.h"
 
@@ -21,7 +21,7 @@ class GAME259A_API ACapturePoint : public AActor
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 public:	
-	UPROPERTY(Replicated, EditAnywhere)
+	UPROPERTY(ReplicatedUsing = OnRep_flagsCaptured, EditAnywhere)
 	int32 flagsCaptured;
 
 	UPROPERTY(Replicated, BlueprintReadOnly, VisibleAnywhere)
@@ -31,7 +31,7 @@ public:
 	bool MainFlagCreator;
 
 	UPROPERTY(EditAnywhere)
-	class AActor* mainFlag;
+	AMainFlag* mainFlag;
 
 	UPROPERTY(Replicated, BlueprintReadWrite, EditAnywhere)
 	float flagInactivePeriod;
@@ -55,6 +55,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -66,15 +68,20 @@ public:
 		int32 OtherBodyIndex,
 		bool bFromSweep,
 		const FHitResult& SweepResult);
+	UFUNCTION(NetMulticast, Reliable)
+	void TestFunction();
 
-	UFUNCTION()
+	UFUNCTION(NetMulticast, Reliable)
 	void CheckForFlagConstruction();
 
 	UFUNCTION(NetMulticast, Reliable)
 	void RoundReset();
 
-	UFUNCTION()
+	UFUNCTION(NetMulticast, Reliable)
 	void SetMainFlagActive();
+
+	UFUNCTION()
+	void OnRep_flagsCaptured();
 
 
 };
