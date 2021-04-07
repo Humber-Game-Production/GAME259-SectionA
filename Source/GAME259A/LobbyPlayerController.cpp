@@ -26,18 +26,22 @@ void ALobbyPlayerController::BeginPlay()
 void ALobbyPlayerController::SendChatMessage(const FText& ChatMessage)
 {
 	// if this is the server call the game mode to prodcast the Chat Message
-	//if (Role == ROLE_Authority)
-	//{
-	//	ALobbyGameMode* GM = Cast<ALobbyGameMode>(GetWorld()->GetAuthGameMode());
-	//	if (GM)
-	//	{
-	//		//Add the player's name to the Chat Message then send it to the server
-	//		const FText OutChatMessage = FText::FromString(PlayerState->PlayerName + ": " + ChatMessage.ToString());
-	//		GM->ProdcastChatMessage(OutChatMessage);
-	//	}
-	//}
-	//else //else call the serverside function on this
-	//	Server_SendChatMessage(ChatMessage);
+	if (HasAuthority())
+	{
+		ALobbyGameMode* GM = Cast<ALobbyGameMode>(GetWorld()->GetAuthGameMode());
+		if (GM)
+		{
+			//Add the player's name to the Chat Message then send it to the server
+			const FText OutChatMessage = FText::FromString(PlayerState->GetPlayerName() + ": " + ChatMessage.ToString());
+			GM->ProdcastChatMessage(OutChatMessage);
+		}
+	}
+	else //else call the serverside function on this
+		Server_SendChatMessage(ChatMessage);
+}
+
+void ALobbyPlayerController::AssignSelectedCharacter()
+{
 }
 
 
@@ -57,12 +61,12 @@ void ALobbyPlayerController::Client_ReceiveChatMessage_Implementation(const FTex
 void ALobbyPlayerController::KickPlayer(int32 PlayerIndex)
 {
 	//if the player is the host, get the game mode and send it to kick the player from the game
-	/*if (Role == ROLE_Authority)
+	if (HasAuthority())
 	{
 		ALobbyGameMode* GM = Cast<ALobbyGameMode>(GetWorld()->GetAuthGameMode());
 		if (GM)
 			GM->KickPlayer(PlayerIndex);
-	}*/
+	}
 }
 
 //called from the game mode when the player is kicked by the host to make the player destroy his session and leave game
@@ -89,15 +93,15 @@ void ALobbyPlayerController::Client_UpdatePlayerList_Implementation(const TArray
 void ALobbyPlayerController::RequestServerPlayerListUpdate()
 {
 	// if this is the server call the game mode to request info
-	//if (Role == ROLE_Authority)
-	//{
-	//	ALobbyGameMode* GM = Cast<ALobbyGameMode>(GetWorld()->GetAuthGameMode());
+	if (HasAuthority())
+	{
+		ALobbyGameMode* GM = Cast<ALobbyGameMode>(GetWorld()->GetAuthGameMode());
 
-	//	if (GM)
-	//		GM->PlayerRequestUpdate();
-	//}
-	//else //else call the serverside function on this
-	//	Server_RequestServerPlayerListUpdate();
+		if (GM)
+			GM->PlayerRequestUpdate();
+	}
+	else //else call the serverside function on this
+		Server_RequestServerPlayerListUpdate();
 }
 
 
@@ -109,16 +113,16 @@ void ALobbyPlayerController::Server_RequestServerPlayerListUpdate_Implementation
 
 void ALobbyPlayerController::SetIsReadyState(bool NewReadyState)
 {
-	//if (Role == ROLE_Authority)
-	//{
-	//	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, TEXT("RoleAuthority/ server called"));
-	//	ANetworkPlayerState* NetworkedPlayerState = Cast<ANetworkPlayerState>(PlayerState);
-	//	if (NetworkedPlayerState)
-	//		NetworkedPlayerState->bIsReady = NewReadyState;
-	//	RequestServerPlayerListUpdate();
-	//}
-	//else
-	//	Server_SetIsReadyState(NewReadyState);
+	if (HasAuthority())
+	{
+		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, TEXT("RoleAuthority/ server called"));
+		ANetworkPlayerState* NetworkedPlayerState = Cast<ANetworkPlayerState>(PlayerState);
+		if (NetworkedPlayerState)
+			NetworkedPlayerState->bIsReady = NewReadyState;
+		RequestServerPlayerListUpdate();
+	}
+	else
+		Server_SetIsReadyState(NewReadyState);
 
 }
 
@@ -131,22 +135,22 @@ void ALobbyPlayerController::Server_SetIsReadyState_Implementation(bool NewReady
 
 bool ALobbyPlayerController::CanGameStart() const
 {
-	/*if (Role == ROLE_Authority)
+	if (HasAuthority())
 	{
 		ALobbyGameMode* GM = Cast<ALobbyGameMode>(GetWorld()->GetAuthGameMode());
 		if (GM)
 			return GM->IsAllPlayerReady();
-	}*/
+	}
 	return false;
 }
 
 void ALobbyPlayerController::StartGame()
 {
 	//if the player is the host, get the game mode and send it to start the game
-	/*if (Role == ROLE_Authority)
+	if (HasAuthority())
 	{
 		ALobbyGameMode* GM = Cast<ALobbyGameMode>(GetWorld()->GetAuthGameMode());
 		if (GM)
 			GM->StartGameFromLobby();
-	}*/
+	}
 }
