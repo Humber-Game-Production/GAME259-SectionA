@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
 #include "TeamIdentifier.h"
-
 #include "CTFGameMode.generated.h"
 
 class ACTFGameState;

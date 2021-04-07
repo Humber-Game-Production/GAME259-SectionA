@@ -56,3 +56,23 @@ ATeam* ACTFGameState::GetTeam(ETeamIdentifier team) const
 	}
 	return nullptr;
 }
+
+void ACTFGameState::OnGameEnd_Implementation(ETeamIdentifier winningTeam)
+{
+	gameEndDelgate.Broadcast(winningTeam);
+}
+
+void ACTFGameState::OnRoundEnd_Implementation()
+{
+	roundEndDelegate.Broadcast();
+}
+
+void ACTFGameState::OnRoundStart_Implementation()
+{
+	roundStartDelegate.Broadcast();
+}
+
+void ACTFGameState::OnRep_activeFlags_Implementation()
+{
+	activeFlagsChangedDelegate.Broadcast(activeFlags);
+}
