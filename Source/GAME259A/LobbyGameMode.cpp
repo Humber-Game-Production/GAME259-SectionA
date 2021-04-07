@@ -86,6 +86,11 @@ bool ALobbyGameMode::IsAllPlayerReady() const
 	return true;
 }
 
+bool ALobbyGameMode::CanWeStartGame() const
+{
+	return false;
+}
+
 
 void ALobbyGameMode::PlayerRequestUpdate()
 {

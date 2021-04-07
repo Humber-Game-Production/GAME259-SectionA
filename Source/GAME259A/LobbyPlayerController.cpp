@@ -41,6 +41,10 @@ void ALobbyPlayerController::SendChatMessage(const FText& ChatMessage)
 		Server_SendChatMessage(ChatMessage);
 }
 
+void ALobbyPlayerController::AssignSelectedCharacter()
+{
+}
+
 
 void ALobbyPlayerController::Server_SendChatMessage_Implementation(const FText& ChatMessage)
 {
