@@ -25,6 +25,7 @@ void AMiniFlag::Capture()	{
 				if(gameState->activeFlags.Contains(this))
 				{
 					gameState->activeFlags.Remove(this);
+					gameState->activeFlagsChangedDelegate.Broadcast(gameState->activeFlags);
 				}
 			}
 		}

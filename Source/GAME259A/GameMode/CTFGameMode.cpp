@@ -219,14 +219,18 @@ void ACTFGameMode::EndRound() {
 	//Checks to see if there is a winner. Prints out winner if it exists.
 	if (winner == ETeamIdentifier::None)
 	{
+		ctfGameState->OnRoundEnd();
 		RoundReset();
 	}
 	else if (winner == ETeamIdentifier::Human)
 	{
 		UE_LOG(LogTemp, Display, TEXT("Humans win"));
 	}
-	else 
+	else
+	{
 		UE_LOG(LogTemp, Display, TEXT("Aliens win"));
+	}
+	ctfGameState->OnGameEnd(winner);
 }
 
 //Resets all the actors in the rounds
@@ -254,6 +258,8 @@ void ACTFGameMode::RoundReset() {
 	{
 		capPoint->RoundReset();
 	}
+
+	ctfGameState->OnRoundStart();
 	
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Players respawn."));
 	GetWorldTimerManager().SetTimer(flagSpawnTimer, this, &ACTFGameMode::SpawnMiniFlag, timeBetweenFlagSpawns, true);
@@ -281,7 +287,7 @@ ETeamIdentifier ACTFGameMode::WinCheck()
 void ACTFGameMode::EndGame() {
 	/*on screen debug message*/
 	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("GAME ENDED!"));
-
+	
 	/*clear teams
 	reset teams list back to empty*/
 	ctfGameState->GetTeam(ETeamIdentifier::Alien)->players.Empty();
