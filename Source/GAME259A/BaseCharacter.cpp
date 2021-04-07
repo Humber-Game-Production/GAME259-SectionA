@@ -8,8 +8,10 @@
 // Sets default values
 ABaseCharacter::ABaseCharacter() : MaxWalkSpeed(1200.0f), SprintMultiplier(1.5f), JumpVelocity(800.0f), TeleportThrowLength(1200.0f), TeleportThrowHeight(500.0f),
 MaxHealth(100.0f), CurrentHealth(MaxHealth), RespawnTime(3.0f), bIsDead(false), bIsSlowed(false), SlowMultiplier(0.25f), bIsStunned(false), CanUseAbilityOne(true), CanUseAbilityTwo(true),
-AbilityOneCoolDown(8.0f), AbilityTwoCoolDown(12.0f)
+AbilityOneCoolDown(8.0f), AbilityTwoCoolDown(12.0f), bRecentlyLaunched(false)
 {
+	this->Tags.Add(FName("Player"));
+	
 	//Set the character to not rotate when the mouse is moved, only the camera is rotated.
  	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
@@ -21,7 +23,7 @@ AbilityOneCoolDown(8.0f), AbilityTwoCoolDown(12.0f)
 	GetCapsuleComponent()->InitCapsuleSize(42.0f, 96.0f);
 
 	//Set this so the character does not turn to look in the direction they are moving.
-	GetCharacterMovement()->bOrientRotationToMovement = false;
+	GetCharacterMovement()->bOrientRotationToMovement = true;
 	//Set how fast they turn to look in the direction they are moving.
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 540.0f, 0.0f);
 
@@ -73,9 +75,14 @@ void ABaseCharacter::MoveRight(float Axis)
 			Axis = Axis * 1 / SprintMultiplier;
 		}
 	}
-	AddMovementInput(GetActorRightVector(), Axis);
-	//Walk(right);
+	const FRotator Rotation = Controller->GetControlRotation();
+	const FRotator YawRotation(0.0f, Rotation.Yaw, 0.0f);
 
+	const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+	AddMovementInput(Direction, Axis);
+
+	
+	//Walk(right);
 }
 
 
@@ -150,7 +157,11 @@ void ABaseCharacter::MoveForward(float Axis)
 			Axis = Axis * 1 / SprintMultiplier;
 		}
 	}
-	AddMovementInput(GetActorForwardVector(), Axis);
+	const FRotator Rotation = Controller->GetControlRotation();
+	const FRotator YawRotation(0.0f, Rotation.Yaw, 0.0f);
+
+	const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+	AddMovementInput(Direction, Axis);
 	//Walk(forward);
 }
 

@@ -72,6 +72,7 @@ protected:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "CCStatus")
 	bool bIsStunned;					//True if the character is stunned via crowd control.
 	
+	
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Abilities")
 	UBaseAbilityClass* TeleportAbility;//
@@ -174,4 +175,6 @@ public:
 	void Slow();
 	UFUNCTION(Category = "Movement", BlueprintCallable)
 	void UnSlow();
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Movement")
+	bool bRecentlyLaunched;					//True if the character is stunned via crowd control.
 };
