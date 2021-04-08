@@ -41,10 +41,16 @@ protected:
 	
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Movement")
 	float JumpVelocity;					//The velocity at which the character will jump.
+
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Throwing")
 	float TeleportThrowLength;
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Throwing")
 	float TeleportThrowHeight;
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Throwing")
+	float SmokeThrowLength;
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Throwing")
+	float SmokeThrowHeight;
+
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Health")
 	float MaxHealth;					//The character's maximum health. CurrentHealth will be set to this value on initialization and if the value ever exceeds this.
