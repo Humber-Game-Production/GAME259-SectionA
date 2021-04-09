@@ -2,10 +2,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-
+#include "CombatInterface.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "TimerManager.h"
@@ -15,7 +16,7 @@
 #include "BaseCharacter.generated.h"
 
 UCLASS()
-class GAME259A_API ABaseCharacter : public ACharacter
+class GAME259A_API ABaseCharacter : public ACharacter, public ICombatInterface
 {
 	GENERATED_BODY()
 
@@ -23,7 +24,7 @@ public:
 	// Sets default values for this character's properties
 	ABaseCharacter();
 
-	
+
 	//virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 protected:
@@ -87,6 +88,10 @@ protected:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UFUNCTION()
+		virtual void MeleeSwing_Implementation(UPrimitiveComponent* OverlappedComponent,
+			AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 
 	UFUNCTION(Category = "Movement")
 	void MoveRight(float Axis);
@@ -155,6 +160,10 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+
+	UPROPERTY(EditAnywhere)
+		UBoxComponent* MeleeBox;
 
 	UFUNCTION(Category = "Movement", BlueprintCallable)
 	void Slow();

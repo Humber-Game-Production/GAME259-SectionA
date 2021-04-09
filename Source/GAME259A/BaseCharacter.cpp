@@ -14,6 +14,12 @@ ABaseCharacter::ABaseCharacter() : MaxWalkSpeed(1200.0f), SprintMultiplier(1.5f)
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationYaw = false;
 
+	MeleeBox = CreateDefaultSubobject<UBoxComponent>(TEXT("Box"));
+	MeleeBox->SetupAttachment(RootComponent);
+
+	MeleeBox->InitBoxExtent(FVector(200.0f));
+	
+
 	//Set collision capsule.
 	GetCapsuleComponent()->InitCapsuleSize(42.0f, 96.0f);
 
@@ -46,10 +52,29 @@ void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &ABaseCharacter::MeleeSwing_Implementation);
+
 	CurrentMoveSpeed = MaxWalkSpeed;
 	//Set how fast the character jumps.
 	GetCharacterMovement()->JumpZVelocity = JumpVelocity;
 	GetCharacterMovement()->MaxWalkSpeed = MaxWalkSpeed;
+
+}
+
+void ABaseCharacter::MeleeSwing_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult){
+	//checks if the OtherComp is a Box
+
+	UBoxComponent* isBox = Cast<UBoxComponent>(OtherComp);
+	if (isBox) {
+		
+		
+		TakeDamage(25.0f);
+
+		UE_LOG(LogTemp, Warning, TEXT("I just hit something"));
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "i hit something");
+		
+		//if it does and player CAN pickup flag, pickup
+	}
 
 }
 
@@ -214,6 +239,7 @@ void ABaseCharacter::DropFlag()
 
 void ABaseCharacter::UseMeleeAttack()
 {
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "called melee attack");
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	//TODO (Combat)
 	if(!ctfPlayerState->bIsSprinting)
@@ -367,5 +393,6 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	//Made by GameMode team
 	PlayerInputComponent->BindAction("KillBind", IE_Pressed, this, &ABaseCharacter::Death);
+	PlayerInputComponent->BindAction("MeleeSwing", IE_Pressed, this, &ABaseCharacter::UseMeleeAttack);
 	PlayerInputComponent->BindAction("DropFlag", IE_Pressed, this, &ABaseCharacter::DropFlag);
 }
