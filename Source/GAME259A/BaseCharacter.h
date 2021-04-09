@@ -80,7 +80,7 @@ protected:
 	FTimerHandle RespawnTimerHandle;
 	//Handle to manage the throwing animation timer.
 	FTimerHandle ThrowingTimer;
-
+	
 	//**THIS IS COMMENTED OUT UNTIL ABILITY BASE CLASS IS MADE**
 	//UPROPERTY(BlueprintReadWrite, Category = "Abilities")
 	//TArray<Ability> Abilities; //A list of abilities the character can use. This will be initialized to empty and filled by a blueprint that inherits from this class.
@@ -123,7 +123,7 @@ protected:
 
 	UFUNCTION(Category = "Death", BlueprintCallable)
 	void TakeDamage(float damage_);
-	UFUNCTION(Server, Reliable, Category = "Death", BlueprintCallable)
+	UFUNCTION(NetMulticast, Reliable, Category = "Death", BlueprintCallable)
 	void Death();
 	UFUNCTION(Server, Reliable, Category = "Death", BlueprintCallable)
 	void Respawn();

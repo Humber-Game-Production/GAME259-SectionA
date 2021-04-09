@@ -18,7 +18,7 @@ ABaseCharacter::ABaseCharacter() : MaxWalkSpeed(1200.0f), SprintMultiplier(1.5f)
 	MeleeBox->SetupAttachment(RootComponent);
 
 	MeleeBox->InitBoxExtent(FVector(200.0f));
-	
+	MeleeBox->SetCollisionResponseToAllChannels(ECR_Ignore);
 
 	//Set collision capsule.
 	GetCapsuleComponent()->InitCapsuleSize(42.0f, 96.0f);
@@ -63,7 +63,7 @@ void ABaseCharacter::BeginPlay()
 
 void ABaseCharacter::MeleeSwing_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult){
 	//checks if the OtherComp is a Box
-
+	
 	UBoxComponent* isBox = Cast<UBoxComponent>(OtherComp);
 	if (isBox) {
 		AActor* CompActor = OtherComp->GetOwner();
@@ -74,11 +74,12 @@ void ABaseCharacter::MeleeSwing_Implementation(UPrimitiveComponent* OverlappedCo
 			if (CompctfPlayerState != nullptr && ctfPlayerState != nullptr) {
 
 				if (ctfPlayerState->teamID != CompctfPlayerState->teamID) {
+					
 					TakeDamage(25.0f);
 					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Non-Friendly Fire");
 				}
 				else {
-					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Friendly Fire");
+					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, "Friendly Fire");
 				}
 			}
 		}
@@ -246,6 +247,7 @@ void ABaseCharacter::DropFlag()
 
 void ABaseCharacter::UseMeleeAttack()
 {
+	MeleeBox->SetCollisionResponseToAllChannels(ECR_Overlap);
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "called melee attack");
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	//TODO (Combat)
@@ -262,6 +264,8 @@ void ABaseCharacter::UseMeleeAttack()
                 ctfPlayerState->bIsSwinging = false;
                 bIsSwinging = false;
                 SetIsSwinging(ctfPlayerState->bIsSwinging);
+				MeleeBox->SetCollisionResponseToAllChannels(ECR_Ignore);
+				
             },
                 1.0f, false);
 		}
