@@ -66,16 +66,23 @@ void ABaseCharacter::MeleeSwing_Implementation(UPrimitiveComponent* OverlappedCo
 
 	UBoxComponent* isBox = Cast<UBoxComponent>(OtherComp);
 	if (isBox) {
-		
-		
-		TakeDamage(25.0f);
+		AActor* CompActor = OtherComp->GetOwner();
+		ABaseCharacter* isCharacter = Cast<ABaseCharacter>(CompActor);
+		if (isCharacter != nullptr) {
+			ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+			ACTFPlayerState* CompctfPlayerState = isCharacter->GetPlayerState<ACTFPlayerState>();
+			if (CompctfPlayerState != nullptr && ctfPlayerState != nullptr) {
 
-		UE_LOG(LogTemp, Warning, TEXT("I just hit something"));
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "i hit something");
-		
-		//if it does and player CAN pickup flag, pickup
+				if (ctfPlayerState->teamID != CompctfPlayerState->teamID) {
+					TakeDamage(25.0f);
+					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Non-Friendly Fire");
+				}
+				else {
+					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Friendly Fire");
+				}
+			}
+		}
 	}
-
 }
 
 //Called when the player is supposed to move left (Axis = -1) or right (Axis = 1).
