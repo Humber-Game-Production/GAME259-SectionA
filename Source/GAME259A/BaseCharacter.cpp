@@ -63,7 +63,7 @@ void ABaseCharacter::BeginPlay()
 
 void ABaseCharacter::MeleeSwing_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult){
 	//checks if the OtherComp is a Box
-	
+	/*
 	UBoxComponent* isBox = Cast<UBoxComponent>(OtherComp);
 	if (isBox) {
 		AActor* CompActor = OtherComp->GetOwner();
@@ -84,6 +84,7 @@ void ABaseCharacter::MeleeSwing_Implementation(UPrimitiveComponent* OverlappedCo
 			}
 		}
 	}
+	*/
 }
 
 //Called when the player is supposed to move left (Axis = -1) or right (Axis = 1).
