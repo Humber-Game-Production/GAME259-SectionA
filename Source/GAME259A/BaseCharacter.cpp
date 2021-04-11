@@ -252,23 +252,25 @@ void ABaseCharacter::UseMeleeAttack()
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "called melee attack");
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	//TODO (Combat)
-	if(!ctfPlayerState->bIsSprinting)
-	{
-		ctfPlayerState->bIsSwinging = true;
-		SetIsSwinging(ctfPlayerState->bIsSwinging);
-		bIsSwinging = true;
-		if (ctfPlayerState->bIsSwinging == true)
+	if (ctfPlayerState) {
+		if (!ctfPlayerState->bIsSprinting)
 		{
-			GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, [this]()
-            {
-                ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-                ctfPlayerState->bIsSwinging = false;
-                bIsSwinging = false;
-                SetIsSwinging(ctfPlayerState->bIsSwinging);
-				MeleeBox->SetCollisionResponseToAllChannels(ECR_Ignore);
-				
-            },
-                1.0f, false);
+			ctfPlayerState->bIsSwinging = true;
+			SetIsSwinging(ctfPlayerState->bIsSwinging);
+			bIsSwinging = true;
+			if (ctfPlayerState->bIsSwinging == true)
+			{
+				GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, [this]()
+					{
+						ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+						ctfPlayerState->bIsSwinging = false;
+						bIsSwinging = false;
+						SetIsSwinging(ctfPlayerState->bIsSwinging);
+						MeleeBox->SetCollisionResponseToAllChannels(ECR_Ignore);
+
+					},
+					1.0f, false);
+			}
 		}
 	}
 }
