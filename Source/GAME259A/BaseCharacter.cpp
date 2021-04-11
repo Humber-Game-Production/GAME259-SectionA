@@ -98,9 +98,8 @@ void ABaseCharacter::MoveRight(float Axis)
 	if (bIsSlowed) {
 		Axis = Axis * SlowMultiplier;
 	}
-	if (ctfPlayerState != nullptr) {
-		if (!ctfPlayerState->bIsSprinting)
-		{
+	if (ctfPlayerState) {
+		if (!ctfPlayerState->bIsSprinting)	{
 			Axis = Axis * 1 / SprintMultiplier;
 		}
 	}
@@ -119,8 +118,11 @@ void ABaseCharacter::Sprint() {
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	//CurrentMoveSpeed = MaxWalkSpeed * SprintMultiplier;
 	//GetCharacterMovement()->MaxWalkSpeed = CurrentMoveSpeed;
-	ctfPlayerState->bIsSprinting = true;
-	SetIsSprinting(ctfPlayerState->bIsSprinting);
+	if(ctfPlayerState)	{
+		ctfPlayerState->bIsSprinting = true;
+		SetIsSprinting(ctfPlayerState->bIsSprinting);
+	}
+	
 }
 
 void ABaseCharacter::StopSprinting()
@@ -128,33 +130,32 @@ void ABaseCharacter::StopSprinting()
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 //	CurrentMoveSpeed = MaxWalkSpeed;
 	//GetCharacterMovement()->MaxWalkSpeed = CurrentMoveSpeed;
-	ctfPlayerState->bIsSprinting = false;
-	SetIsSprinting(ctfPlayerState->bIsSprinting);
+	if (ctfPlayerState) {
+		ctfPlayerState->bIsSprinting = false;
+		SetIsSprinting(ctfPlayerState->bIsSprinting);
+	}
 }
 
 //Called when the "Jump" input is pressed. 
 void ABaseCharacter::StartJump()
 {
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-	
-	if (!GetCharacterMovement()->IsFalling() && !GetWorld()->GetTimerManager().IsTimerActive(JumpTimer))
-	{
-		ctfPlayerState->bIsJumping = true;
-		SetIsJumping(ctfPlayerState->bIsJumping);
-		GetWorld()->GetTimerManager().SetTimer(JumpTimer, [this]()
-			{
-				if(this)
-				{
-					ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-					if(ctfPlayerState)
-					{
-						Jump();
-						ctfPlayerState->bIsJumping = false;
-						SetIsJumping(ctfPlayerState->bIsJumping);
+	if (ctfPlayerState) {
+		if (!GetCharacterMovement()->IsFalling() && !GetWorld()->GetTimerManager().IsTimerActive(JumpTimer)) {
+			ctfPlayerState->bIsJumping = true;
+			SetIsJumping(ctfPlayerState->bIsJumping);
+			GetWorld()->GetTimerManager().SetTimer(JumpTimer, [this]()	{
+					if (this)	{
+						ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+						if (ctfPlayerState)	{
+							Jump();
+							ctfPlayerState->bIsJumping = false;
+							SetIsJumping(ctfPlayerState->bIsJumping);
+						}
 					}
-				}
-			},
-			0.1f, false);
+				},
+				0.1f, false);
+		}
 	}
 }
 
@@ -179,8 +180,7 @@ void ABaseCharacter::MoveForward(float Axis)
 	//Walk(forward);
 }
 
-void ABaseCharacter::SetThrowAbilityOne_Implementation()
-{
+void ABaseCharacter::SetThrowAbilityOne_Implementation()	{
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	
 	FVector tmpLoc = FVector(GetActorLocation().X , GetActorLocation().Y, GetActorLocation().Z + 100);
@@ -190,22 +190,20 @@ void ABaseCharacter::SetThrowAbilityOne_Implementation()
 		TeleportAbility->UseAbility(3.0f, location, 0.0f, StateOfPlayer->teamID, 0.0f, ThrowDistance, this);
 	else 
 		TeleportAbility->UseAbility(3.0f, location, 0.0f, ETeamIdentifier::None, 0.0f, ThrowDistance, this);
+	if(ctfPlayerState)	{
+		ctfPlayerState->bIsThrowing = false;
+	}
 
-	ctfPlayerState->bIsThrowing = false;
 }
 
-void ABaseCharacter::UseAbilityOne_Implementation()
-{
+void ABaseCharacter::UseAbilityOne_Implementation()	{
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, FString::Printf(TEXT("Can Use Ability In %f"), ForwardVector.X));
+	if (ctfPlayerState)	{
+		ctfPlayerState->bIsThrowing = true;
 
-	ctfPlayerState->bIsThrowing = true;
-	
-	if (ctfPlayerState->bIsThrowing)
-	{
-		GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, this, &ABaseCharacter::SetThrowAbilityOne,
-
-			1.0f, false);
+		// if (ctfPlayerState->bIsThrowing)	{  Declan: this shouldn't be needed? we literally just set it to true.
+		GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, this, &ABaseCharacter::SetThrowAbilityOne, 1.0f, false);
 	}
 }
 
@@ -227,18 +225,16 @@ void ABaseCharacter::UseAbilityTwo_Implementation()
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	//TODO
 	//Fill in when the ability class is finished.
-	ctfPlayerState->bIsThrowing = true;
+	if (ctfPlayerState) {
+		ctfPlayerState->bIsThrowing = true;
 
-	if (ctfPlayerState->bIsThrowing)
-	{
-		GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, this, &ABaseCharacter::SetThrowAbilityTwo,
+		//if (ctfPlayerState->bIsThrowing) Declan: this shouldn't be needed? we literally just set it to true.
 
-			1.0f, false);
+		GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, this, &ABaseCharacter::SetThrowAbilityTwo, 1.0f, false);
 	}
 }
 
-void ABaseCharacter::DropFlag()
-{
+void ABaseCharacter::DropFlag()	{
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	if(ctfPlayerState)
 	{
@@ -260,15 +256,15 @@ void ABaseCharacter::UseMeleeAttack()
 			bIsSwinging = true;
 			if (ctfPlayerState->bIsSwinging == true)
 			{
-				GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, [this]()
-					{
-						ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+				GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, [this]()	{
+					ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+					if (ctfPlayerState) {
 						ctfPlayerState->bIsSwinging = false;
 						bIsSwinging = false;
 						SetIsSwinging(ctfPlayerState->bIsSwinging);
 						MeleeBox->SetCollisionResponseToAllChannels(ECR_Ignore);
-
-					},
+					}
+				},
 					1.0f, false);
 			}
 		}
