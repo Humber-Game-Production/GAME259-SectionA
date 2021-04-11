@@ -6,7 +6,7 @@
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
-ABaseCharacter::ABaseCharacter() : MaxWalkSpeed(1200.0f), SprintMultiplier(1.5f), JumpVelocity(800.0f), TeleportThrowLength(1200.0f), TeleportThrowHeight(500.0f),
+ABaseCharacter::ABaseCharacter() : MaxWalkSpeed(1200.0f), SprintMultiplier(1.5f), JumpVelocity(800.0f), TeleportThrowLength(1200.0f), TeleportThrowHeight(500.0f), SmokeThrowLength(1200.0f), SmokeThrowHeight(500.0f),
 MaxHealth(100.0f), CurrentHealth(MaxHealth), RespawnTime(3.0f), bIsDead(false), bIsSlowed(false), SlowMultiplier(0.25f), bIsStunned(false), CanUseAbilityOne(true), CanUseAbilityTwo(true),
 AbilityOneCoolDown(8.0f), AbilityTwoCoolDown(12.0f), bRecentlyLaunched(false)
 {
@@ -218,9 +218,11 @@ void ABaseCharacter::SetThrowAbilityTwo_Implementation()
 	if (!bIsDead) {
 		if (SecondAbility) {
 			ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-			location = FTransform(GetActorLocation() + GetActorForwardVector() * 100.0f);
+			FVector tmpLoc = FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 100);
+			location = FTransform(tmpLoc + GetActorRightVector() * 40.0f);
+			FVector ThrowDistance = ThirdPersonCamera->GetForwardVector() * SmokeThrowLength + ThirdPersonCamera->GetUpVector() * SmokeThrowHeight;
 			if (ACTFPlayerState * StateOfPlayer = GetPlayerState<ACTFPlayerState>())
-				SecondAbility->UseAbility(3.0f, location, 0.0f, StateOfPlayer->teamID, 0.0f, ThirdPersonCamera->GetForwardVector() * 1000.0f, this);
+				SecondAbility->UseAbility(3.0f, location, 0.0f, StateOfPlayer->teamID, 0.0f, ThrowDistance, this);
 			else
 				SecondAbility->UseAbility(3.0f, location, 0.0f, ETeamIdentifier::None, 0.0f, ThirdPersonCamera->GetForwardVector() * 1000.0f, this);
 
@@ -248,9 +250,8 @@ void ABaseCharacter::UseAbilityTwo_Implementation()
 
 		if (ctfPlayerState->bIsThrowing)
 		{
-			GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, this, &ABaseCharacter::SetThrowAbilityTwo,
-
-				1.0f, false);
+			GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, this, &ABaseCharacter::SetThrowAbilityTwo,1.0f, false);
+			CanUseAbilityTwo = false;
 		}
 	}
 }
