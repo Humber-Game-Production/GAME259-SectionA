@@ -77,6 +77,7 @@ void ACTFPlayerState::OnDeath_Implementation(ACharacter* character, float respaw
 	deaths++;
 	//Rag doll if the player is dead.
 	character->GetMesh()->SetAllBodiesSimulatePhysics(true);
+	character->GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 
 	FTimerHandle UnusedTimerHandle;
 
