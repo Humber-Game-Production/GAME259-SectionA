@@ -7,6 +7,8 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
 #include "NiagaraFunctionLibrary.h"
+#include "Components/AudioComponent.h"
+#include "Sound/SoundCue.h"
 #include "TeleportAbilityActor.generated.h"
 
 UCLASS()
@@ -46,4 +48,9 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		USphereComponent* SphereCollider;
+	UPROPERTY(EditAnywhere, Category = "TeleportSound")
+		class USoundCue* TeleportSound;
+
+private:
+	UAudioComponent* TeleportAudioComponent;
 };
