@@ -4,6 +4,7 @@
 #include "TeleportAbilityActor.h"
 #include "GameFramework/Character.h"
 #include "Net/UnrealNetwork.h"
+#include "Kismet/GameplayStatics.h"
 #include "Components/StaticMeshComponent.h"
 
 // Sets default values
@@ -53,6 +54,7 @@ void ATeleportAbilityActor::SetSpawner(AActor* BaseCharacter_)
 void ATeleportAbilityActor::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	if(GEngine && OtherActor) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I Hit: %s"), *OtherActor->GetName()));
+
 	FRotator CharacterRotation = FRotator(BaseCharacter->GetActorRotation().Pitch, BaseCharacter->GetActorRotation().Yaw, BaseCharacter->GetActorRotation().Roll - 90);
 	FVector CharacterLocation = FVector(BaseCharacter->GetActorLocation().X, BaseCharacter->GetActorLocation().Y, BaseCharacter->GetActorLocation().Z-80);
 	FVector TpLocation = FVector(Mesh->GetComponentLocation().X + (Hit.ImpactNormal.X * 120), Mesh->GetComponentLocation().Y + (Hit.ImpactNormal.Y * 120), Mesh->GetComponentLocation().Z);
@@ -61,6 +63,7 @@ void ATeleportAbilityActor::OnCompHit(UPrimitiveComponent* HitComp, AActor* Othe
 			UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), SpawnEffect, CharacterLocation, CharacterRotation);
 			BaseCharacter->TeleportTo(GetActorLocation() + (Hit.ImpactNormal * 120), BaseCharacter->GetActorRotation());
 			UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), SpawnEffect, TpLocation, CharacterRotation);
+			UGameplayStatics::PlaySoundAtLocation(this,TeleportAbilitySound, TpLocation, CharacterRotation, 2.0f,1.0f,0.0f);
 		}
 		if (Mesh)
 		{

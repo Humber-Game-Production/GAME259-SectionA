@@ -52,5 +52,5 @@ void ANetworkPlayerState::Server_ChangePlayerName_Implementation()
 void ANetworkPlayerState::GetLifetimeReplicatedProps(TArray< FLifetimeProperty >& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-	DOREPLIFETIME(ANetworkPlayerState, bIsReady);
+	//DOREPLIFETIME(ANetworkPlayerState, bIsReady);
 }

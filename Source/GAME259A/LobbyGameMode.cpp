@@ -61,6 +61,7 @@ void ALobbyGameMode::UpdatePlayerList()
 			TempLobbyPlayerInfo.bPlayerReadyState = false;
 
 		TempLobbyPlayerInfo.PlayerName = Player->PlayerState->GetPlayerName();
+
 		PlayerInfoArray.Add(TempLobbyPlayerInfo);
 	}
 

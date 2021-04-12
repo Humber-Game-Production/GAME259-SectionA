@@ -4,7 +4,6 @@
 #include "LobbyPlayerController.h"
 #include "LobbyGameMode.h"
 #include "NetworkPlayerState.h"
-#include "NetworkGameInstance.h"
 
 ALobbyPlayerController::ALobbyPlayerController()
 {
@@ -74,14 +73,14 @@ void ALobbyPlayerController::KickPlayer(int32 PlayerIndex)
 void ALobbyPlayerController::Client_GotKicked_Implementation()
 {
 	//get the game Instance to make the player destroy his session and leave game
-	UNetworkGameInstance* NetworkedGameInstance = Cast<UNetworkGameInstance>(GetWorld()->GetGameInstance());
-	if (NetworkedGameInstance)
-	{
-		//show the player that he got kicked in message in UMG
-		NetworkedGameInstance->ShowErrorMessage(FText::FromString("You got kicked from the server"));
-		//make the player call the game Instance to destroy his session
-		NetworkedGameInstance->DestroySessionAndLeaveGame();
-	}
+	//UNWGameInstance* NetworkedGameInstance = Cast<UNWGameInstance>(GetWorld()->GetGameInstance());
+	//if (NetworkedGameInstance)
+	//{
+	//	//show the player that he got kicked in message in UMG
+	//	NetworkedGameInstance->ShowErrorMessage(FText::FromString("You got kicked from the server"));
+	//	//make the player call the game Instance to destroy his session
+	//	NetworkedGameInstance->DestroySessionAndLeaveGame();
+	//}
 }
 
 //called from server and passes in an array of player infos

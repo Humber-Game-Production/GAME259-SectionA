@@ -47,8 +47,9 @@ ACTFGameMode::ACTFGameMode()
 void ACTFGameMode::BeginPlay()
 {
 	Super::BeginPlay();
-
-	maxPoints = (miniFlag.GetDefaultObject()->pointValue * requiredMiniFlags) + mainFlag.GetDefaultObject()->pointValue;
+	if (miniFlag && mainFlag){
+		maxPoints = (miniFlag.GetDefaultObject()->pointValue * requiredMiniFlags) + mainFlag.GetDefaultObject()->pointValue;
+	}
 	ctfGameState = Cast<ACTFGameState>(GameState);
 	TArray<AActor*> foundActors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACapturePoint::StaticClass(), foundActors);
@@ -172,20 +173,21 @@ void ACTFGameMode::SpawnMiniFlag()
 		if(spawnedMiniFlags < requiredMiniFlags)
 		{
 			spawnedMiniFlags++;
+			FVector spawnPoint;
 			UE_LOG(LogTemp, Warning, TEXT("Mini flag number %d was spawned"), spawnedMiniFlags);
 			if(spawnedMiniFlags % 2 == 0)
 			{
 				const int randomSpawn = FMath::RandRange(0, humanTeam->miniFlagSpawnPoints.Num() - 1);
-				FVector spawnPoint = humanTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
-				AFlag* flag = Cast<AFlag>(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
-				ctfGameState->activeFlags.Add(flag);
+				spawnPoint = humanTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
+
 			} else
 			{
 				const int randomSpawn = FMath::RandRange(0, alienTeam->miniFlagSpawnPoints.Num() - 1);
-				FVector spawnPoint = alienTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
-				AFlag* flag = Cast<AFlag>(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
-				ctfGameState->activeFlags.Add(flag);
+				spawnPoint = alienTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
 			}
+			AFlag* flag = Cast<AFlag>(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
+			ctfGameState->activeFlags.Add(flag);
+			ctfGameState->activeFlagsChangedDelegate.Broadcast(ctfGameState->activeFlags);
 		}
 		else
 		{
@@ -217,14 +219,22 @@ void ACTFGameMode::EndRound() {
 	//Checks to see if there is a winner. Prints out winner if it exists.
 	if (winner == ETeamIdentifier::None)
 	{
+		ctfGameState->OnRoundEnd();
 		RoundReset();
 	}
 	else if (winner == ETeamIdentifier::Human)
 	{
 		UE_LOG(LogTemp, Display, TEXT("Humans win"));
+		ctfGameState->OnGameEnd(winner);
+		EndGame();
 	}
-	else 
+	else
+	{
 		UE_LOG(LogTemp, Display, TEXT("Aliens win"));
+		ctfGameState->OnGameEnd(winner);
+		EndGame();
+	}
+	
 }
 
 //Resets all the actors in the rounds
@@ -252,6 +262,8 @@ void ACTFGameMode::RoundReset() {
 	{
 		capPoint->RoundReset();
 	}
+
+	ctfGameState->OnRoundStart();
 	
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Players respawn."));
 	GetWorldTimerManager().SetTimer(flagSpawnTimer, this, &ACTFGameMode::SpawnMiniFlag, timeBetweenFlagSpawns, true);
@@ -279,7 +291,7 @@ ETeamIdentifier ACTFGameMode::WinCheck()
 void ACTFGameMode::EndGame() {
 	/*on screen debug message*/
 	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("GAME ENDED!"));
-
+	
 	/*clear teams
 	reset teams list back to empty*/
 	ctfGameState->GetTeam(ETeamIdentifier::Alien)->players.Empty();

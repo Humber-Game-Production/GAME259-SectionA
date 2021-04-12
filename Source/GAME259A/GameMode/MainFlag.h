@@ -15,7 +15,11 @@ class GAME259A_API AMainFlag : public AFlag
 	GENERATED_BODY()
 
 public:
-
+	UFUNCTION(BlueprintImplementableEvent)
+	void BuildingMainFlag(int32 miniProgress_);
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void CompleteMainFlag();
 
 protected:
 	//Flag pickup when the capsule overlaps with the player(OtherActor)
