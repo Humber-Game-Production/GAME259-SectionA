@@ -19,6 +19,12 @@ AbilityOneCoolDown(8.0f), AbilityTwoCoolDown(12.0f), bRecentlyLaunched(false)
 	
 	bIsDead = false;
 
+	MeleeBox = CreateDefaultSubobject<UBoxComponent>(TEXT("Box"));
+	MeleeBox->SetupAttachment(RootComponent);
+
+	MeleeBox->InitBoxExtent(FVector(200.0f));
+	MeleeBox->SetCollisionResponseToAllChannels(ECR_Ignore);
+
 	//Set collision capsule.
 	GetCapsuleComponent()->InitCapsuleSize(42.0f, 96.0f);
 
@@ -51,11 +57,39 @@ void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &ABaseCharacter::MeleeSwing_Implementation);
+
 	CurrentMoveSpeed = MaxWalkSpeed;
 	//Set how fast the character jumps.
 	GetCharacterMovement()->JumpZVelocity = JumpVelocity;
 	GetCharacterMovement()->MaxWalkSpeed = MaxWalkSpeed;
 
+}
+
+void ABaseCharacter::MeleeSwing_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult){
+	//checks if the OtherComp is a Box
+	/*
+	UBoxComponent* isBox = Cast<UBoxComponent>(OtherComp);
+	if (isBox) {
+		AActor* CompActor = OtherComp->GetOwner();
+		ABaseCharacter* isCharacter = Cast<ABaseCharacter>(CompActor);
+		if (isCharacter != nullptr) {
+			ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+			ACTFPlayerState* CompctfPlayerState = isCharacter->GetPlayerState<ACTFPlayerState>();
+			if (CompctfPlayerState != nullptr && ctfPlayerState != nullptr) {
+
+				if (ctfPlayerState->teamID != CompctfPlayerState->teamID) {
+					
+					TakeDamage(25.0f);
+					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Non-Friendly Fire");
+				}
+				else {
+					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, "Friendly Fire");
+				}
+			}
+		}
+	}
+	*/
 }
 
 //Called when the player is supposed to move left (Axis = -1) or right (Axis = 1).
@@ -69,9 +103,8 @@ void ABaseCharacter::MoveRight(float Axis)
 	if (bIsSlowed) {
 		Axis = Axis * SlowMultiplier;
 	}
-	if (ctfPlayerState != nullptr) {
-		if (!ctfPlayerState->bIsSprinting)
-		{
+	if (ctfPlayerState) {
+		if (!ctfPlayerState->bIsSprinting)	{
 			Axis = Axis * 1 / SprintMultiplier;
 		}
 	}
@@ -95,8 +128,11 @@ void ABaseCharacter::Sprint() {
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	//CurrentMoveSpeed = MaxWalkSpeed * SprintMultiplier;
 	//GetCharacterMovement()->MaxWalkSpeed = CurrentMoveSpeed;
-	ctfPlayerState->bIsSprinting = true;
-	SetIsSprinting(ctfPlayerState->bIsSprinting);
+	if(ctfPlayerState)	{
+		ctfPlayerState->bIsSprinting = true;
+		SetIsSprinting(ctfPlayerState->bIsSprinting);
+	}
+	
 }
 
 void ABaseCharacter::StopSprinting()
@@ -104,8 +140,10 @@ void ABaseCharacter::StopSprinting()
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 //	CurrentMoveSpeed = MaxWalkSpeed;
 	//GetCharacterMovement()->MaxWalkSpeed = CurrentMoveSpeed;
-	ctfPlayerState->bIsSprinting = false;
-	SetIsSprinting(ctfPlayerState->bIsSprinting);
+	if (ctfPlayerState) {
+		ctfPlayerState->bIsSprinting = false;
+		SetIsSprinting(ctfPlayerState->bIsSprinting);
+	}
 }
 
 //Called when the "Jump" input is pressed. 
@@ -115,25 +153,22 @@ void ABaseCharacter::StartJump()
 		return;
 	}
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-	
-	if (!GetCharacterMovement()->IsFalling() && !GetWorld()->GetTimerManager().IsTimerActive(JumpTimer))
-	{
-		ctfPlayerState->bIsJumping = true;
-		SetIsJumping(ctfPlayerState->bIsJumping);
-		GetWorld()->GetTimerManager().SetTimer(JumpTimer, [this]()
-			{
-				if(this)
-				{
-					ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-					if(ctfPlayerState)
-					{
-						Jump();
-						ctfPlayerState->bIsJumping = false;
-						SetIsJumping(ctfPlayerState->bIsJumping);
+	if (ctfPlayerState) {
+		if (!GetCharacterMovement()->IsFalling() && !GetWorld()->GetTimerManager().IsTimerActive(JumpTimer)) {
+			ctfPlayerState->bIsJumping = true;
+			SetIsJumping(ctfPlayerState->bIsJumping);
+			GetWorld()->GetTimerManager().SetTimer(JumpTimer, [this]()	{
+					if (this)	{
+						ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+						if (ctfPlayerState)	{
+							Jump();
+							ctfPlayerState->bIsJumping = false;
+							SetIsJumping(ctfPlayerState->bIsJumping);
+						}
 					}
-				}
-			},
-			0.1f, false);
+				},
+				0.1f, false);
+		}
 	}
 }
 
@@ -195,19 +230,25 @@ void ABaseCharacter::UseAbilityOne_Implementation()
 	if (!this) {
 		return;
 	}
-	if (CanUseAbilityOne && !bIsDead) {
-	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-	//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, FString::Printf(TEXT("Can Use Ability In %f"), ForwardVector.X));
-
-	ctfPlayerState->bIsThrowing = true;
 	
-		if (ctfPlayerState->bIsThrowing)
+	if (CanUseAbilityOne && !bIsDead) 
+	{
+
+		ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+		//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, FString::Printf(TEXT("Can Use Ability In %f"), ForwardVector.X));
+		if (ctfPlayerState)	
 		{
-			GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, this, &ABaseCharacter::SetThrowAbilityOne,1.0f, false);
-			CanUseAbilityOne = false;
+			ctfPlayerState->bIsThrowing = true;
+
+			ctfPlayerState->bIsThrowing = true;
+	
+			if (ctfPlayerState->bIsThrowing)
+			{
+				GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, this, &ABaseCharacter::SetThrowAbilityOne,1.0f, false);
+				CanUseAbilityOne = false;
+			}
 		}
 	}
-	
 }
 
 void ABaseCharacter::SetThrowAbilityTwo_Implementation()
@@ -256,8 +297,7 @@ void ABaseCharacter::UseAbilityTwo_Implementation()
 	}
 }
 
-void ABaseCharacter::DropFlag()
-{
+void ABaseCharacter::DropFlag()	{
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	if(ctfPlayerState)
 	{
@@ -270,23 +310,31 @@ void ABaseCharacter::UseMeleeAttack()
 	if (!this) {
 		return;
 	}
+
+	MeleeBox->SetCollisionResponseToAllChannels(ECR_Overlap);
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "called melee attack");
+
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	//TODO (Combat)
-	if(!ctfPlayerState->bIsSprinting)
-	{
-		ctfPlayerState->bIsSwinging = true;
-		SetIsSwinging(ctfPlayerState->bIsSwinging);
-		bIsSwinging = true;
-		if (ctfPlayerState->bIsSwinging == true)
+	if (ctfPlayerState) {
+		if (!ctfPlayerState->bIsSprinting)
 		{
-			GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, [this]()
-            {
-                ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-                ctfPlayerState->bIsSwinging = false;
-                bIsSwinging = false;
-                SetIsSwinging(ctfPlayerState->bIsSwinging);
-            },
-                1.0f, false);
+			ctfPlayerState->bIsSwinging = true;
+			SetIsSwinging(ctfPlayerState->bIsSwinging);
+			bIsSwinging = true;
+			if (ctfPlayerState->bIsSwinging == true)
+			{
+				GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, [this]()	{
+					ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+					if (ctfPlayerState) {
+						ctfPlayerState->bIsSwinging = false;
+						bIsSwinging = false;
+						SetIsSwinging(ctfPlayerState->bIsSwinging);
+						MeleeBox->SetCollisionResponseToAllChannels(ECR_Ignore);
+					}
+				},
+					1.0f, false);
+			}
 		}
 	}
 }
@@ -423,5 +471,6 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	//Made by GameMode team
 	PlayerInputComponent->BindAction("KillBind", IE_Pressed, this, &ABaseCharacter::Death);
+	PlayerInputComponent->BindAction("MeleeSwing", IE_Pressed, this, &ABaseCharacter::UseMeleeAttack);
 	PlayerInputComponent->BindAction("DropFlag", IE_Pressed, this, &ABaseCharacter::DropFlag);
 }
