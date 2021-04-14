@@ -50,6 +50,11 @@ void ACTFPlayerState::ResetStats()
 	flagsCaptured = 0;
 }
 
+void ACTFPlayerState::UpdateObjective(AFlag* newFlag)
+{
+	currentObjectiveDelegate.Broadcast(newFlag);
+}
+
 void ACTFPlayerState::PlayerDropFlag_Implementation()
 {
 	PlayerCanPickupFlag = true;
@@ -57,6 +62,7 @@ void ACTFPlayerState::PlayerDropFlag_Implementation()
 	{
 		FlagHeld->Execute_Drop(FlagHeld);
 		FlagHeld = nullptr;
+		UpdateObjective(FlagHeld);
 	}
 }
 
@@ -69,6 +75,7 @@ void ACTFPlayerState::CaptureFlag_Implementation()
 		FlagHeld->Capture();
 		PlayerCanPickupFlag = true;
 		FlagHeld = nullptr;
+		UpdateObjective(FlagHeld);
 	}
 }
 
@@ -94,6 +101,7 @@ void ACTFPlayerState::SetTeam(ETeamIdentifier team)
 
 void ACTFPlayerState::SetFlagHeld(AFlag* FlagHeld_)	{
 	FlagHeld = FlagHeld_;
+	UpdateObjective(FlagHeld);
 }
 
 void ACTFPlayerState::SetCanPickupFlag(bool PlayerCanPickupFlag_)	{
@@ -133,13 +141,14 @@ void ACTFPlayerState::OnRespawn_Implementation()
 				//setup location, rotation and parameters for spawns
 				const FVector location = playersTeam->respawnPoints[0]->GetActorLocation();
 				const FRotator rotation = playersTeam->respawnPoints[0]->GetActorRotation();
-				const FTransform trans(rotation, location);
+
 				FActorSpawnParameters spawnP;
 				spawnP.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 			
 				//Spawn the new playerActor and get its pawn
 				AActor* playerActor = GetWorld()->SpawnActor(playersTeam->playerType, &location, &rotation, spawnP);
 				APawn* newPawn = Cast<APawn>(playerActor);
+				playerActor->SetActorRotation(rotation);
 				
 				//Get the original playerController and detach it from its pawn
 				AController* controller = originalPawn->GetController();
