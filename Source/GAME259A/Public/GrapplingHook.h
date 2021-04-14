@@ -9,23 +9,23 @@
 #include "NiagaraFunctionLibrary.h"
 #include "Components/AudioComponent.h"
 #include "Sound/SoundCue.h"
-#include "TeleportAbilityActor.generated.h"
+#include "GrapplingHook.generated.h"
 
 UCLASS()
-class GAME259A_API ATeleportAbilityActor : public AActor
+class GAME259A_API AGrapplingHook : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
-	ATeleportAbilityActor();
+	AGrapplingHook();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	UFUNCTION()
@@ -33,9 +33,6 @@ public:
 
 	UFUNCTION()
 		void OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
-
-	UPROPERTY(EditAnywhere)
-		USoundBase* TeleportAbilitySound;
 
 	UPROPERTY(BluePrintReadWrite, EditAnywhere)
 		UStaticMeshComponent* Mesh;
@@ -48,9 +45,20 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		USphereComponent* SphereCollider;
-	UPROPERTY(EditAnywhere, Category = "TeleportSound")
-		class USoundCue* TeleportSound;
 
+	UPROPERTY(EditAnywhere, Category = "Speeds")
+		float Speed;
+	UPROPERTY(EditAnywhere, Category = "Speeds")
+		float SpeedVertical;
+	UPROPERTY(EditAnywhere, Category = "Speeds")
+		float LaunchSpeed;
+	UPROPERTY(EditAnywhere, Category = "Speeds")
+		float Gravity;
+
+	UPROPERTY(EditAnywhere)
+		FTimerHandle GrappleTimer;
 private:
-	UAudioComponent* TeleportAudioComponent;
+
+	UFUNCTION()
+	void OnDestroy();
 };
