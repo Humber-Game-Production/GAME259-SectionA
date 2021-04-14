@@ -2,6 +2,7 @@
 #include "BaseAbilityClass.h"
 #include "../Public/TeleportAbilityActor.h"
 #include "Kismet/GameplayStatics.h"
+#include <GrapplingHook.h>
 
 
 // Sets default values for this component's properties
@@ -36,6 +37,8 @@ void UBaseAbilityClass::UseAbility(float CoolDown_, FTransform Transform_, float
 			AbilityActor->FindComponentByClass<UStaticMeshComponent>()->SetPhysicsLinearVelocity(Velocity_);
 			if(Cast<ATeleportAbilityActor>(AbilityActor))
 				Cast<ATeleportAbilityActor>(AbilityActor)->SetSpawner(Spawner_);
+			if (Cast<AGrapplingHook>(AbilityActor))
+				Cast<AGrapplingHook>(AbilityActor)->SetSpawner(Spawner_);
 		}
 	}
 }

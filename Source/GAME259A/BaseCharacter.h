@@ -44,9 +44,9 @@ protected:
 	float JumpVelocity;					//The velocity at which the character will jump.
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Throwing")
-	float TeleportThrowLength;
+	float MovementThrowLength;
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Throwing")
-	float TeleportThrowHeight;
+	float MovementThrowHeight;
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Throwing")
 	float SmokeThrowLength;
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Throwing")
@@ -82,7 +82,7 @@ protected:
 	
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Abilities")
-	UBaseAbilityClass* TeleportAbility;//
+	UBaseAbilityClass* MovementAbility;//
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Abilities")
 	UBaseAbilityClass* SecondAbility;
 	UPROPERTY()
