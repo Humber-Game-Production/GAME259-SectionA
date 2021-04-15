@@ -60,7 +60,8 @@ void ALobbyGameMode::UpdatePlayerList()
 		else
 			TempLobbyPlayerInfo.bPlayerReadyState = false;
 
-		//TempLobbyPlayerInfo.PlayerName = Player->PlayerState->PlayerName;
+		TempLobbyPlayerInfo.PlayerName = Player->PlayerState->GetPlayerName();
+
 		PlayerInfoArray.Add(TempLobbyPlayerInfo);
 	}
 
@@ -84,6 +85,11 @@ bool ALobbyGameMode::IsAllPlayerReady() const
 				return false;
 	}
 	return true;
+}
+
+bool ALobbyGameMode::CanWeStartGame() const
+{
+	return false;
 }
 
 
