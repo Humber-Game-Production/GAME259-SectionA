@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Components/SphereComponent.h"
+#include "Components/AudioComponent.h"
+#include "Sound/SoundCue.h"
 #include "NiagaraFunctionLibrary.h"
 #include "SlowField.generated.h"
 
@@ -41,7 +43,8 @@ public:
 	UPROPERTY(EditAnywhere)
 	UNiagaraSystem* SlowFieldEffect;
 
-
+	UPROPERTY(EditAnywhere, Category = "SmokeSound")
+	class USoundCue* SlowFieldSound;
 
 private:
 
@@ -53,5 +56,6 @@ private:
 	UFUNCTION()
 	void OnTimerFinish();
 
-
+private:
+	UAudioComponent* SlowFieldAudioComponent;
 };
