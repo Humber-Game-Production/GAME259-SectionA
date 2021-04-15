@@ -84,6 +84,7 @@ void ACTFPlayerState::OnDeath_Implementation(ACharacter* character, float respaw
 	deaths++;
 	//Rag doll if the player is dead.
 	character->GetMesh()->SetAllBodiesSimulatePhysics(true);
+	character->GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 
 	FTimerHandle UnusedTimerHandle;
 
@@ -147,7 +148,7 @@ void ACTFPlayerState::OnRespawn_Implementation()
 				//Spawn the new playerActor and get its pawn
 				AActor* playerActor = GetWorld()->SpawnActor(playersTeam->playerType, &location, &rotation, spawnP);
 				APawn* newPawn = Cast<APawn>(playerActor);
-				playerActor->SetActorRotation(rotation);
+				
 				
 				//Get the original playerController and detach it from its pawn
 				AController* controller = originalPawn->GetController();
@@ -155,7 +156,7 @@ void ACTFPlayerState::OnRespawn_Implementation()
 				//attach the playerState and playerController to the new pawn
 				newPawn->SetPlayerState(controller->GetPlayerState<ACTFPlayerState>());
 				controller->Possess(newPawn);
-				
+				controller->SetControlRotation(rotation);
 			
 				//Destroy original pawn
 				originalPawn->Destroy();

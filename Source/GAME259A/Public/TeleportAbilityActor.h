@@ -7,6 +7,8 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
 #include "NiagaraFunctionLibrary.h"
+#include "Components/AudioComponent.h"
+#include "Sound/SoundCue.h"
 #include "TeleportAbilityActor.generated.h"
 
 UCLASS()
@@ -32,6 +34,9 @@ public:
 	UFUNCTION()
 		void OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
+	UPROPERTY(EditAnywhere)
+		USoundBase* TeleportAbilitySound;
+
 	UPROPERTY(BluePrintReadWrite, EditAnywhere)
 		UStaticMeshComponent* Mesh;
 
@@ -43,4 +48,9 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		USphereComponent* SphereCollider;
+	UPROPERTY(EditAnywhere, Category = "TeleportSound")
+		class USoundCue* TeleportSound;
+
+private:
+	UAudioComponent* TeleportAudioComponent;
 };

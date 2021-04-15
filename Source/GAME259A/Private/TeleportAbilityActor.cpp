@@ -4,6 +4,9 @@
 #include "TeleportAbilityActor.h"
 #include "GameFramework/Character.h"
 #include "Net/UnrealNetwork.h"
+#include <concrt.h>
+#include "UObject/ConstructorHelpers.h"
+#include "Kismet/GameplayStatics.h"
 #include "Components/StaticMeshComponent.h"
 
 // Sets default values
@@ -20,15 +23,22 @@ ATeleportAbilityActor::ATeleportAbilityActor()
 	SphereCollider->SetSimulatePhysics(true);
 	SphereCollider->SetupAttachment(RootComponent);
 	SphereCollider->SetNotifyRigidBodyCollision(true);
+
+	static ConstructorHelpers::FObjectFinder< USoundCue>TeleportSoundObject(TEXT("SoundCue'/Game/VFX_Folder/SFX/AbilitySounds/TeleportAbilitySoundCue.TeleportAbilitySoundCue'"));
+	if (TeleportSoundObject.Succeeded()) {
+		TeleportSound = TeleportSoundObject.Object;
+		TeleportAudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("TeleportSoundObject"));
+		TeleportAudioComponent->SetupAttachment(RootComponent);
+	}
 }
 // Called when the game starts or when spawned
 void ATeleportAbilityActor::BeginPlay()
 {
 	Super::BeginPlay();
 	SphereCollider->OnComponentHit.AddDynamic(this, &ATeleportAbilityActor::OnCompHit);
-	//BaseCharacter = GetOwner();
-	//ThrowInDirection();
-	
+	if (TeleportAudioComponent && TeleportSound) {
+		TeleportAudioComponent->SetSound(TeleportSound);
+	}
 }
 
 void ATeleportAbilityActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -53,6 +63,7 @@ void ATeleportAbilityActor::SetSpawner(AActor* BaseCharacter_)
 void ATeleportAbilityActor::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	if(GEngine && OtherActor) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I Hit: %s"), *OtherActor->GetName()));
+
 	FRotator CharacterRotation = FRotator(BaseCharacter->GetActorRotation().Pitch, BaseCharacter->GetActorRotation().Yaw, BaseCharacter->GetActorRotation().Roll - 90);
 	FVector CharacterLocation = FVector(BaseCharacter->GetActorLocation().X, BaseCharacter->GetActorLocation().Y, BaseCharacter->GetActorLocation().Z-80);
 	FVector TpLocation = FVector(Mesh->GetComponentLocation().X + (Hit.ImpactNormal.X * 120), Mesh->GetComponentLocation().Y + (Hit.ImpactNormal.Y * 120), Mesh->GetComponentLocation().Z);
@@ -61,17 +72,24 @@ void ATeleportAbilityActor::OnCompHit(UPrimitiveComponent* HitComp, AActor* Othe
 			UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), SpawnEffect, CharacterLocation, CharacterRotation);
 			BaseCharacter->TeleportTo(GetActorLocation() + (Hit.ImpactNormal * 120), BaseCharacter->GetActorRotation());
 			UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), SpawnEffect, TpLocation, CharacterRotation);
+			
+			if (TeleportAudioComponent && TeleportSound) {
+				TeleportAudioComponent->Play(0.0f);
+			}
 		}
-		if (Mesh)
-		{
 
-			Mesh->UnregisterComponent();
-			Mesh->DestroyComponent(true);
-		}
-		if (SphereCollider) {
-			SphereCollider->UnregisterComponent();
-			SphereCollider->DestroyComponent(true);
-		}
-		MarkPendingKill();
+			if (Mesh)
+			{
+				Mesh->UnregisterComponent();
+				Mesh->DestroyComponent(true);
+			}
+		
+
+			if (SphereCollider) {
+				SphereCollider->UnregisterComponent();
+				SphereCollider->DestroyComponent(true);
+			}
+			MarkPendingKill();
+		
 	}
 }

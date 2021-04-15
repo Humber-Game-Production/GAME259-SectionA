@@ -14,6 +14,7 @@
 #include "MiniFlag.h"
 #include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
+#include "Particles/ParticleSystemComponent.h"
 
 // Sets default values
 ACapturePoint::ACapturePoint() : flagsCaptured(0), requiredFlags(6)
@@ -138,8 +139,6 @@ void ACapturePoint::CheckForFlagConstruction_Implementation()
 			
 			if(mainFlag)
 			{
-				UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), flagSpawnEffect, this->GetActorLocation());
-
 				GetWorldTimerManager().SetTimer(mainFlagActiveTimer, this, &ACapturePoint::SetMainFlagActive, flagInactivePeriod);
 			}
 			//main flag spawns on top of capture point
@@ -163,18 +162,20 @@ void ACapturePoint::RoundReset_Implementation()
 		
 		mainFlag->SetActorLocation(GetActorLocation() + FVector(0.0f, 0.0f, 60.0f));
 	}
+	
 	if(mainFlag)
 	{
 		mainFlag->Capsule->SetCollisionResponseToAllChannels(ECR_Ignore);
 		Cast<USkeletalMeshComponent>(mainFlag->GetComponentByClass(USkeletalMeshComponent::StaticClass()))->SetVisibility(false);
+		Cast<UParticleSystemComponent>(mainFlag->GetComponentByClass(UParticleSystemComponent::StaticClass()))->SetVisibility(false);
 	}
 	
 }
 
 void ACapturePoint::SetMainFlagActive_Implementation()	{
 	mainFlag->CompleteMainFlag();
-	//mainFlag->SetActorEnableCollision(true);
-	//mainFlag->Capsule->SetCollisionResponseToAllChannels(ECR_Overlap);
-	//Cast<USkeletalMeshComponent>(mainFlag->GetComponentByClass(USkeletalMeshComponent::StaticClass()))->SetVisibility(true);
+	mainFlag->Capsule->SetCollisionResponseToAllChannels(ECR_Overlap);
+	Cast<USkeletalMeshComponent>(mainFlag->GetComponentByClass(USkeletalMeshComponent::StaticClass()))->SetVisibility(true);
+	Cast<UParticleSystemComponent>(mainFlag->GetComponentByClass(UParticleSystemComponent::StaticClass()))->SetVisibility(true);
 }
 

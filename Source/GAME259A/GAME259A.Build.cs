@@ -8,9 +8,10 @@ public class GAME259A : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "Steamworks", "OnlineSubsystemUtils", "OnlineSubsystem" });
+		bEnableExceptions = true;
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "AdvancedSessions", "AdvancedSteamSessions" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "Steamworks", "OnlineSubsystemUtils", "OnlineSubsystem", "AdvancedSessions", "AdvancedSteamSessions" });
+
 		PrivateIncludePathModuleNames.AddRange(new string[] { "AdvancedSessions", "AdvancedSteamSessions" });
 	}
 }

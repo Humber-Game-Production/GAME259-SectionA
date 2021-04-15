@@ -146,8 +146,9 @@ void ACTFGameMode::PostLogin(APlayerController* NewPlayer)
             {
 				ctfGameState->ChooseTeam(ETeamIdentifier::Alien, playerState);
             }
-
-			playerState->OnRespawn();
+			FTimerHandle playerSpawn;
+			
+			GetWorldTimerManager().SetTimer(playerSpawn, playerState, &ACTFPlayerState::OnRespawn, 1.0f);
 		}
 	}
 }
