@@ -2,6 +2,8 @@
 
 
 #include "SlowField.h"
+#include <concrt.h>
+#include "UObject/ConstructorHelpers.h"
 #include "..//BaseCharacter.h"
 
 // Sets default values
@@ -18,6 +20,13 @@ ASlowField::ASlowField()
 	SphereCollider->SetSimulatePhysics(false);
 	SphereCollider->SetupAttachment(RootComponent);
 	SphereCollider->SetNotifyRigidBodyCollision(false);
+
+	static ConstructorHelpers::FObjectFinder< USoundCue> SlowFieldSoundObject(TEXT("SoundCue'/Game/VFX_Folder/SFX/AbilitySounds/SlowFieldSoundCue.SlowFieldSoundCue'"));
+	if (SlowFieldSoundObject.Succeeded()) {
+		SlowFieldSound = SlowFieldSoundObject.Object;
+		SlowFieldAudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("SmokeAudioComponent"));
+		SlowFieldAudioComponent->SetupAttachment(RootComponent);
+	}
 }
 
 // Called when the game starts or when spawned
@@ -29,6 +38,9 @@ void ASlowField::BeginPlay()
 	SlowFieldMesh->OnComponentHit.AddDynamic(this, &ASlowField::OnCompHit);
 	SlowFieldMesh->SetSimulatePhysics(true);
 
+	if (SlowFieldAudioComponent && SlowFieldSound) {
+		SlowFieldAudioComponent->SetSound(SlowFieldSound);
+	}
 }
 
 // Called every frame
@@ -58,6 +70,10 @@ void ASlowField::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPr
 	if (GEngine && OtherActor) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I Hit: %s"), *OtherActor->GetName()));
 	SphereCollider->SetSphereRadius(500.0f, true);
 	SphereCollider->SetNotifyRigidBodyCollision(true);
+	UNiagaraFunctionLibrary::SpawnSystemAttached(SlowFieldEffect, SlowFieldMesh, FName("SlowFieldFX"), FVector(0), FRotator(0),EAttachLocation::KeepRelativeOffset,false,true);
+	if (SlowFieldAudioComponent && SlowFieldSound) {
+		SlowFieldAudioComponent->Play(0.0f);
+	}
 	GetWorld()->GetTimerManager().SetTimer(SlowFieldTimer, this, &ASlowField::OnTimerFinish, 6.0f, false);
 	SlowFieldMesh->OnComponentHit.RemoveDynamic(this, &ASlowField::OnCompHit);
 
@@ -72,6 +88,9 @@ void ASlowField::OnTimerFinish()
 	SlowFieldMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	SphereCollider->OnComponentBeginOverlap.RemoveDynamic(this, &ASlowField::BeginOverlap);
 	SphereCollider->OnComponentEndOverlap.RemoveDynamic(this, &ASlowField::EndOverlap);
+	if (SlowFieldAudioComponent && SlowFieldSound) {
+		SlowFieldAudioComponent->Stop();
+	}
 	if (SlowFieldMesh != NULL)
 	{
 		SlowFieldMesh->UnregisterComponent();

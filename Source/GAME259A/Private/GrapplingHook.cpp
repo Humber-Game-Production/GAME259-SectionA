@@ -16,15 +16,18 @@ AGrapplingHook::AGrapplingHook()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	Mesh->SetSimulatePhysics(true);
 	Mesh->SetNotifyRigidBodyCollision(true);
 	SetRootComponent(Mesh);
+
 	SphereCollider = CreateDefaultSubobject<USphereComponent>(TEXT("SphereCollider"));
-	SphereCollider->SetSphereRadius(7.0f);
+	SphereCollider->SetSphereRadius(10.0f);
 	SphereCollider->SetSimulatePhysics(false);
-	SphereCollider->SetupAttachment(RootComponent);
 	SphereCollider->SetNotifyRigidBodyCollision(true);
+	SphereCollider->SetupAttachment(RootComponent);
+
 
 	/*static ConstructorHelpers::FObjectFinder< USoundCue>GrapplingHookSoundObject(TEXT("SoundCue'/Game/VFX_Folder/SFX/AbilitySounds/GrapplingHookAbilitySoundCue.GrapplingHookAbilitySoundCue'"));
 	if (GrapplingHookSoundObject.Succeeded()) {
