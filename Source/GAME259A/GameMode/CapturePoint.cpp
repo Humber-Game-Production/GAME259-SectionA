@@ -5,6 +5,7 @@
 
 
 #include "CTFGameMode.h"
+#include "CTFGameState.h"
 #include "CTFPlayerState.h"
 #include "GAME259A/GameMode/Team.h"
 #include "Components/StaticMeshComponent.h"
@@ -103,7 +104,6 @@ void ACapturePoint::OnHit_Implementation(UPrimitiveComponent* OverlappedComponen
 				if(Cast<AMiniFlag>(player->FlagHeld) && (MainFlagCreator == true))
 				{
 					flagsCaptured++;
-					GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Flags captured: " + FString::FromInt(flagsCaptured));
 					CheckForFlagConstruction();
 					player->FlagHeld->InitLocation = FVector(0, -1000, 0);
 					player->CaptureFlag();
@@ -113,6 +113,9 @@ void ACapturePoint::OnHit_Implementation(UPrimitiveComponent* OverlappedComponen
 					if(HasAuthority())
 					{
 						TestFunction();
+						ACTFGameState* gameState = GetWorld()->GetGameState<ACTFGameState>();
+						gameState->capturedFlags = flagsCaptured;
+						gameState->CapturedFlagDelegate.Broadcast(flagsCaptured);
 					}
 					
 				} //if the player's holding a main flag, this capture point is part of the same team as the player, and this is not the midPoint
@@ -122,13 +125,6 @@ void ACapturePoint::OnHit_Implementation(UPrimitiveComponent* OverlappedComponen
 					player->CaptureFlag();
 					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), teamWinEffect, this->GetActorLocation());
 					UE_LOG(LogTemp, Warning, TEXT("MainFlag captured at team %d's capture point"), teamID);
-					if (HasAuthority())
-					{
-						if (ACTFGameMode* ctfGameMode = GetWorld()->GetAuthGameMode<ACTFGameMode>())
-						{
-							ctfGameMode->RoundReset();
-						}
-					}
 				}
 			}
 		}
