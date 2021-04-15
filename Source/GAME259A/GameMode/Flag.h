@@ -59,9 +59,6 @@ public:
 	USceneComponent* Root;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	UStaticMeshComponent* Mesh;
-
-	UPROPERTY(EditAnywhere)
 	UCapsuleComponent* Capsule;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -82,6 +79,6 @@ public:
 	FUColourPair alienTeamColour;
 	
 protected:
-	UPROPERTY(Replicated)
+	UPROPERTY(Replicated, BlueprintReadWrite)
 	bool isHeld;
 };

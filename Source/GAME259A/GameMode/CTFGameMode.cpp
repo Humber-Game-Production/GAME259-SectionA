@@ -16,13 +16,6 @@
 
 ACTFGameMode::ACTFGameMode()
 {
-	// set default pawn class to our Blueprinted character
-	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/Game_BP/BaseCharacter_BP"));
-	if (PlayerPawnBPClass.Class != nullptr)
-	{
-		DefaultPawnClass = PlayerPawnBPClass.Class;
-	}
-
 	static ConstructorHelpers::FClassFinder<AHUD> gameHudClass(TEXT("/Game/Game_BP/GameMode/BP_CTFHUD"));
 	if(gameHudClass.Class != nullptr)
 	{
@@ -42,14 +35,21 @@ ACTFGameMode::ACTFGameMode()
 	miniFlag = AMiniFlag::StaticClass();
 	maxPoints = 0;
 	isGameStarted = false;
+	preGameStartTime = 15.0f;
+	timeBetweenRoundReset = 10.0f;
 }
 
 void ACTFGameMode::BeginPlay()
 {
 	Super::BeginPlay();
-
-	maxPoints = (miniFlag.GetDefaultObject()->pointValue * requiredMiniFlags) + mainFlag.GetDefaultObject()->pointValue;
+	if (miniFlag && mainFlag){
+		maxPoints = (miniFlag.GetDefaultObject()->pointValue * requiredMiniFlags) + mainFlag.GetDefaultObject()->pointValue;
+	}
 	ctfGameState = Cast<ACTFGameState>(GameState);
+
+	ctfGameState->capturedFlags = 0;
+	ctfGameState->requiredFlags = requiredMiniFlags;
+	
 	TArray<AActor*> foundActors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACapturePoint::StaticClass(), foundActors);
 
@@ -59,7 +59,7 @@ void ACTFGameMode::BeginPlay()
 		ctfGameState->capturePoints.Add(cp);
 	}
 	
-	GetWorldTimerManager().SetTimer(startGameTimer, this, &ACTFGameMode::BeginFirstRound, 10.0f);
+	GetWorldTimerManager().SetTimer(startGameTimer, this, &ACTFGameMode::BeginFirstRound, preGameStartTime);
 }
 
 void ACTFGameMode::BeginFirstRound()
@@ -146,8 +146,9 @@ void ACTFGameMode::PostLogin(APlayerController* NewPlayer)
             {
 				ctfGameState->ChooseTeam(ETeamIdentifier::Alien, playerState);
             }
-
-			playerState->OnRespawn();
+			FTimerHandle playerSpawn;
+			
+			GetWorldTimerManager().SetTimer(playerSpawn, playerState, &ACTFPlayerState::OnRespawn, 1.0f);
 		}
 	}
 }
@@ -159,7 +160,7 @@ void ACTFGameMode::Logout(AController* Exiting)
 
 void ACTFGameMode::UpdateGameStateTime()
 {
-	ctfGameState->timeLeft = FMath::RoundToInt(GetWorldTimerManager().GetTimerRemaining(roundTimerHandle));
+	ctfGameState->timeLeft = FMath::Max(0, FMath::RoundToInt(GetWorldTimerManager().GetTimerRemaining(roundTimerHandle)));
 }
 
 void ACTFGameMode::SpawnMiniFlag()
@@ -172,20 +173,21 @@ void ACTFGameMode::SpawnMiniFlag()
 		if(spawnedMiniFlags < requiredMiniFlags)
 		{
 			spawnedMiniFlags++;
+			FVector spawnPoint;
 			UE_LOG(LogTemp, Warning, TEXT("Mini flag number %d was spawned"), spawnedMiniFlags);
 			if(spawnedMiniFlags % 2 == 0)
 			{
 				const int randomSpawn = FMath::RandRange(0, humanTeam->miniFlagSpawnPoints.Num() - 1);
-				FVector spawnPoint = humanTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
-				AFlag* flag = Cast<AFlag>(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
-				ctfGameState->activeFlags.Add(flag);
+				spawnPoint = humanTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
+
 			} else
 			{
 				const int randomSpawn = FMath::RandRange(0, alienTeam->miniFlagSpawnPoints.Num() - 1);
-				FVector spawnPoint = alienTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
-				AFlag* flag = Cast<AFlag>(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
-				ctfGameState->activeFlags.Add(flag);
+				spawnPoint = alienTeam->miniFlagSpawnPoints[randomSpawn]->GetActorLocation();
 			}
+			AFlag* flag = Cast<AFlag>(GetWorld()->SpawnActor(miniFlag, &spawnPoint));
+			ctfGameState->activeFlags.Add(flag);
+			ctfGameState->activeFlagsChangedDelegate.Broadcast(ctfGameState->activeFlags);
 		}
 		else
 		{
@@ -213,18 +215,27 @@ void ACTFGameMode::EndRound() {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::FromInt(currentRound) + " rounds remaining");
 
 	ETeamIdentifier winner = WinCheck();
+
+	FTimerHandle nextRoundHandle;
 	
 	//Checks to see if there is a winner. Prints out winner if it exists.
 	if (winner == ETeamIdentifier::None)
 	{
-		RoundReset();
+		ctfGameState->OnRoundEnd();
+		GetWorldTimerManager().SetTimer(nextRoundHandle, this, &ACTFGameMode::RoundReset, timeBetweenRoundReset);
 	}
 	else if (winner == ETeamIdentifier::Human)
 	{
 		UE_LOG(LogTemp, Display, TEXT("Humans win"));
+		ctfGameState->OnGameEnd(winner);
+		GetWorldTimerManager().SetTimer(nextRoundHandle, this, &ACTFGameMode::EndGame, 8.0f);
 	}
-	else 
+	else
+	{
 		UE_LOG(LogTemp, Display, TEXT("Aliens win"));
+		ctfGameState->OnGameEnd(winner);
+		GetWorldTimerManager().SetTimer(nextRoundHandle, this, &ACTFGameMode::EndGame, 8.0f);
+	}
 }
 
 //Resets all the actors in the rounds
@@ -232,7 +243,6 @@ void ACTFGameMode::EndRound() {
 void ACTFGameMode::RoundReset() {
 
 	spawnedMiniFlags = 0;
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Flags respawn."));
 
 	for (int i = 0; i < ctfGameState->activeFlags.Num(); i++)
 	{
@@ -252,6 +262,10 @@ void ACTFGameMode::RoundReset() {
 	{
 		capPoint->RoundReset();
 	}
+
+	ctfGameState->capturedFlags = 0;
+	
+	ctfGameState->OnRoundStart();
 	
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Players respawn."));
 	GetWorldTimerManager().SetTimer(flagSpawnTimer, this, &ACTFGameMode::SpawnMiniFlag, timeBetweenFlagSpawns, true);
@@ -279,7 +293,7 @@ ETeamIdentifier ACTFGameMode::WinCheck()
 void ACTFGameMode::EndGame() {
 	/*on screen debug message*/
 	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("GAME ENDED!"));
-
+	
 	/*clear teams
 	reset teams list back to empty*/
 	ctfGameState->GetTeam(ETeamIdentifier::Alien)->players.Empty();
@@ -302,7 +316,10 @@ void ACTFGameMode::SpawnAllPlayersOnTeam(ETeamIdentifier team)
 	{
 		for(int i = 0; i < teamToSpawn->players.Num(); i++)
 		{
-			teamToSpawn->players[i]->OnRespawn();
+			if(IsValid(teamToSpawn->players[i]))
+			{
+				teamToSpawn->players[i]->OnRespawn();
+			}
 		}
 	} else
 	{

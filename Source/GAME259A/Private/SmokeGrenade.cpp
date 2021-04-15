@@ -2,10 +2,8 @@
 
 
 #include "SmokeGrenade.h"
-
 #include <concrt.h>
-
-
+#include "UObject/ConstructorHelpers.h"
 #include "Kismet/GameplayStatics.h"
 
 //Set defaults
@@ -20,6 +18,13 @@ ASmokeGrenade::ASmokeGrenade()
 	SmokeParticle = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("SmokeParticleSystem"));
 	SmokeParticle->SetSimulatePhysics(false);
 	SmokeParticle->SetupAttachment(RootComponent);
+	//Sets up sound for smoke
+	static ConstructorHelpers::FObjectFinder< USoundCue> SmokeSoundObject(TEXT("SoundCue'/Game/VFX_Folder/SFX/AbilitySounds/SmokeSoundCue.SmokeSoundCue'"));
+	if (SmokeSoundObject.Succeeded()) {
+		SmokeSound = SmokeSoundObject.Object;
+		SmokeAudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("SmokeAudioComponent"));
+		SmokeAudioComponent->SetupAttachment(RootComponent);
+	}
 }
 
 //Set smoke to not spawn and setup collision.
@@ -28,6 +33,10 @@ void ASmokeGrenade::BeginPlay()
 	Super::BeginPlay();
 	SmokeParticle->DeactivateSystem();
 	SmokeGrenadeMesh->OnComponentHit.AddDynamic(this, &ASmokeGrenade::OnCompHit);
+
+	if (SmokeAudioComponent && SmokeSound) {
+		SmokeAudioComponent->SetSound(SmokeSound);
+	}
 }
 
 void ASmokeGrenade::Tick(const float DeltaTime)
@@ -42,9 +51,11 @@ void ASmokeGrenade::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, 
 	if(!bIsSpawned)
 	{
 		SmokeParticle->ActivateSystem();
-		
-		bIsSpawned = true;
 
+		bIsSpawned = true;
+		if (SmokeAudioComponent && SmokeSound) {
+			SmokeAudioComponent->Play(0.0f);
+		}
 		GetWorld()->GetTimerManager().SetTimer(EndSmokeTimer, this, &ASmokeGrenade::OnEndSmokeTimerFinish, 10.0f, 0.0f);
 	}
 }
@@ -53,6 +64,8 @@ void ASmokeGrenade::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, 
 void ASmokeGrenade::OnEndSmokeTimerFinish()
 {
 	SmokeParticle->DeactivateSystem();
+	if (SmokeAudioComponent && SmokeSound) 
+		SmokeAudioComponent->Stop();
 	GetWorld()->GetTimerManager().SetTimer(DeleteTimer, this, &ASmokeGrenade::OnDeleteTimerFinish, 2.0f, 0.0f);
 }
 

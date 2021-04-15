@@ -24,7 +24,8 @@ void ACTFGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME( ACTFGameState, listOfTeams);
-	DOREPLIFETIME( ACTFGameState, flagHolders);
+	DOREPLIFETIME( ACTFGameState, capturedFlags);
+	DOREPLIFETIME( ACTFGameState, requiredFlags);
 	DOREPLIFETIME( ACTFGameState, activeFlags);
 	DOREPLIFETIME( ACTFGameState, capturePoints);
 	DOREPLIFETIME( ACTFGameState, timeLeft);
@@ -55,4 +56,29 @@ ATeam* ACTFGameState::GetTeam(ETeamIdentifier team) const
 		}
 	}
 	return nullptr;
+}
+
+void ACTFGameState::OnRep_capturedFlags_Implementation()
+{
+	CapturedFlagDelegate.Broadcast(capturedFlags);
+}
+
+void ACTFGameState::OnGameEnd_Implementation(ETeamIdentifier winningTeam)
+{
+	gameEndDelgate.Broadcast(winningTeam);
+}
+
+void ACTFGameState::OnRoundEnd_Implementation()
+{
+	roundEndDelegate.Broadcast();
+}
+
+void ACTFGameState::OnRoundStart_Implementation()
+{
+	roundStartDelegate.Broadcast();
+}
+
+void ACTFGameState::OnRep_activeFlags_Implementation()
+{
+	activeFlagsChangedDelegate.Broadcast(activeFlags);
 }
