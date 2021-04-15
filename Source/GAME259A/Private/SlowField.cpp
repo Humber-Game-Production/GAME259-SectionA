@@ -29,8 +29,6 @@ void ASlowField::BeginPlay()
 	SphereCollider->OnComponentEndOverlap.AddDynamic(this, &ASlowField::EndOverlap);
 	SlowFieldMesh->OnComponentHit.AddDynamic(this, &ASlowField::OnCompHit);
 	SlowFieldMesh->SetSimulatePhysics(true);
-
-
 }
 
 // Called every frame
@@ -60,7 +58,7 @@ void ASlowField::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPr
 	if (GEngine && OtherActor) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I Hit: %s"), *OtherActor->GetName()));
 	SphereCollider->SetSphereRadius(500.0f, true);
 	SphereCollider->SetNotifyRigidBodyCollision(true);
-	UNiagaraFunctionLibrary::SpawnSystemAttached(SlowFieldEffect, SlowFieldMesh, FName("SlowFieldFX"), FVector(0), SlowFieldMesh->GetComponentRotation(),EAttachLocation::KeepRelativeOffset,false,true);
+	UNiagaraFunctionLibrary::SpawnSystemAttached(SlowFieldEffect, SlowFieldMesh, FName("SlowFieldFX"), FVector(0), FRotator(0),EAttachLocation::KeepRelativeOffset,false,true);
 	GetWorld()->GetTimerManager().SetTimer(SlowFieldTimer, this, &ASlowField::OnTimerFinish, 6.0f, false);
 	SlowFieldMesh->OnComponentHit.RemoveDynamic(this, &ASlowField::OnCompHit);
 

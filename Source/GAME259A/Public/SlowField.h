@@ -41,6 +41,8 @@ public:
 	UPROPERTY(EditAnywhere)
 	UNiagaraSystem* SlowFieldEffect;
 
+
+
 private:
 
 	UPROPERTY(EditAnywhere)
