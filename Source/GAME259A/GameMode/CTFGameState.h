@@ -17,7 +17,10 @@ class ACapturePoint;
 class ACTFPlayerState;
 
 UDELEGATE()
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFlagDelegate, const TArray<AFlag*>&, flag);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMultiFlagsDelegate, const TArray<AFlag*>&, flags);
+
+UDELEGATE()
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSingleFlagDelegate, AFlag*, flag);
 
 UDELEGATE()
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FTeamDelegate, ETeamIdentifier, team);
@@ -66,8 +69,14 @@ public:
 	int32 maxRounds;
 
 	UPROPERTY(BlueprintAssignable)
-	FFlagDelegate activeFlagsChangedDelegate;
+	FMultiFlagsDelegate activeFlagsChangedDelegate;
 
+	UPROPERTY(BlueprintAssignable)
+	FSingleFlagDelegate flagPickupDelegate;
+
+	UPROPERTY(BlueprintAssignable)
+	FSingleFlagDelegate flagDropDelegate;
+	
 	UPROPERTY(BlueprintAssignable)
 	FRoundEventDelegate roundEndDelegate;
 
@@ -105,4 +114,10 @@ public:
 
 	UFUNCTION(NetMulticast, Reliable)
 	void OnGameEnd(ETeamIdentifier winningTeam);
+
+	UFUNCTION(NetMulticast, Reliable)
+    void FlagPickedUp(AFlag* flag);
+
+	UFUNCTION(NetMulticast, Reliable)
+	void FlagDropped(AFlag* flag);
 };

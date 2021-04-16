@@ -58,6 +58,16 @@ ATeam* ACTFGameState::GetTeam(ETeamIdentifier team) const
 	return nullptr;
 }
 
+void ACTFGameState::FlagDropped_Implementation(AFlag* flag)
+{
+	flagDropDelegate.Broadcast(flag);
+}
+
+void ACTFGameState::FlagPickedUp_Implementation(AFlag* flag)
+{
+	flagPickupDelegate.Broadcast(flag);
+}
+
 void ACTFGameState::OnRep_capturedFlags_Implementation()
 {
 	CapturedFlagDelegate.Broadcast(capturedFlags);
