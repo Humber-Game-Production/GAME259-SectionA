@@ -9,6 +9,7 @@
 #include "NiagaraFunctionLibrary.h"
 #include "Components/AudioComponent.h"
 #include "Sound/SoundCue.h"
+//#include "Components/CableComponent.h"
 #include "GrapplingHook.generated.h"
 
 UCLASS()
@@ -54,6 +55,12 @@ public:
 		float LaunchSpeed;
 	UPROPERTY(EditAnywhere, Category = "Speeds")
 		float Gravity;
+
+	UPROPERTY(EditAnywhere, Category = "Beam")
+		FVector BeamLocation;
+
+	//UPROPERTY(EditAnywhere, Category = "Rope")
+		//UCableComponent* cable;
 
 	UPROPERTY(EditAnywhere)
 		FTimerHandle GrappleTimer;
