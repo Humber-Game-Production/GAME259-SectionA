@@ -133,11 +133,6 @@ protected:
 	UFUNCTION(Category = "Abilities", Server, Reliable)
 	void UseAbilityTwo();
 
-	UFUNCTION(Category = "Abilities", BlueprintCallable)
-	float GetAbilityOneCooldown();
-	UFUNCTION(Category = "Abilities", BlueprintCallable)
-	float GetAbilityTwoCooldown();
-
 	UFUNCTION()
 	void DropFlag();
 	
@@ -187,6 +182,10 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UFUNCTION(Category = "Abilities", BlueprintCallable)
+		float GetAbilityOneCooldown();
+	UFUNCTION(Category = "Abilities", BlueprintCallable)
+		float GetAbilityTwoCooldown();
 
 	UPROPERTY(EditAnywhere)
 		UBoxComponent* MeleeBox;
