@@ -297,6 +297,16 @@ void ABaseCharacter::UseAbilityTwo_Implementation()
 	}
 }
 
+float ABaseCharacter::GetAbilityOneCooldown()
+{
+	return GetWorld()->GetTimerManager().GetTimerRemaining(AbilityOneTimerHandle);
+}
+
+float ABaseCharacter::GetAbilityTwoCooldown()
+{
+	return GetWorld()->GetTimerManager().GetTimerRemaining(AbilityTwoTimerHandle);
+}
+
 void ABaseCharacter::DropFlag()	{
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	if(ctfPlayerState)

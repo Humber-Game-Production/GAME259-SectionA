@@ -132,6 +132,12 @@ protected:
 	void UseAbilityOne();
 	UFUNCTION(Category = "Abilities", Server, Reliable)
 	void UseAbilityTwo();
+
+	UFUNCTION(Category = "Abilities", BlueprintCallable)
+	float GetAbilityOneCooldown();
+	UFUNCTION(Category = "Abilities", BlueprintCallable)
+	float GetAbilityTwoCooldown();
+
 	UFUNCTION()
 	void DropFlag();
 	
