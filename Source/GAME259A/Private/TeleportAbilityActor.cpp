@@ -4,6 +4,8 @@
 #include "TeleportAbilityActor.h"
 #include "GameFramework/Character.h"
 #include "Net/UnrealNetwork.h"
+#include <concrt.h>
+#include "UObject/ConstructorHelpers.h"
 #include "Kismet/GameplayStatics.h"
 #include "Components/StaticMeshComponent.h"
 
@@ -21,15 +23,22 @@ ATeleportAbilityActor::ATeleportAbilityActor()
 	SphereCollider->SetSimulatePhysics(true);
 	SphereCollider->SetupAttachment(RootComponent);
 	SphereCollider->SetNotifyRigidBodyCollision(true);
+
+	static ConstructorHelpers::FObjectFinder< USoundCue>TeleportSoundObject(TEXT("SoundCue'/Game/VFX_Folder/SFX/AbilitySounds/TeleportAbilitySoundCue.TeleportAbilitySoundCue'"));
+	if (TeleportSoundObject.Succeeded()) {
+		TeleportSound = TeleportSoundObject.Object;
+		TeleportAudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("TeleportSoundObject"));
+		TeleportAudioComponent->SetupAttachment(RootComponent);
+	}
 }
 // Called when the game starts or when spawned
 void ATeleportAbilityActor::BeginPlay()
 {
 	Super::BeginPlay();
 	SphereCollider->OnComponentHit.AddDynamic(this, &ATeleportAbilityActor::OnCompHit);
-	//BaseCharacter = GetOwner();
-	//ThrowInDirection();
-	
+	if (TeleportAudioComponent && TeleportSound) {
+		TeleportAudioComponent->SetSound(TeleportSound);
+	}
 }
 
 void ATeleportAbilityActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -63,18 +72,24 @@ void ATeleportAbilityActor::OnCompHit(UPrimitiveComponent* HitComp, AActor* Othe
 			UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), SpawnEffect, CharacterLocation, CharacterRotation);
 			BaseCharacter->TeleportTo(GetActorLocation() + (Hit.ImpactNormal * 120), BaseCharacter->GetActorRotation());
 			UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), SpawnEffect, TpLocation, CharacterRotation);
-			UGameplayStatics::PlaySoundAtLocation(this,TeleportAbilitySound, TpLocation, CharacterRotation, 2.0f,1.0f,0.0f);
+			
+			if (TeleportAudioComponent && TeleportSound) {
+				TeleportAudioComponent->Play(0.0f);
+			}
 		}
-		if (Mesh)
-		{
 
-			Mesh->UnregisterComponent();
-			Mesh->DestroyComponent(true);
-		}
-		if (SphereCollider) {
-			SphereCollider->UnregisterComponent();
-			SphereCollider->DestroyComponent(true);
-		}
-		MarkPendingKill();
+			if (Mesh)
+			{
+				Mesh->UnregisterComponent();
+				Mesh->DestroyComponent(true);
+			}
+		
+
+			if (SphereCollider) {
+				SphereCollider->UnregisterComponent();
+				SphereCollider->DestroyComponent(true);
+			}
+			MarkPendingKill();
+		
 	}
 }

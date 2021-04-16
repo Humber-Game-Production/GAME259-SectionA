@@ -16,11 +16,11 @@ class ACTFPlayerState;
 UDELEGATE()
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRespawnPlayer, ETeamIdentifier, Team, ACTFPlayerState*, Player);
 
-/**
- * 
- */
- 
- class AFlag;
+class AFlag;
+
+UDELEGATE()
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFlagDelegte, AFlag*, flag);
+
  
 UCLASS(Blueprintable)
 class GAME259A_API ACTFPlayerState : public APlayerState
@@ -60,6 +60,9 @@ public:
 	UPROPERTY(Replicated, BlueprintAssignable, Category = "EventDispatchers")
 	FRespawnPlayer respawnPlayerDelegate;
 
+	UPROPERTY(BlueprintAssignable, Category = "EventDispatchers")
+	FFlagDelegte currentObjectiveDelegate;
+
 	//Sets the player's team
 	UFUNCTION()
 	void SetTeam(ETeamIdentifier team);
@@ -94,6 +97,9 @@ public:
 	UFUNCTION(Server, Reliable)
 	void OnRespawn();
 
+	UFUNCTION()
+	void UpdateObjective(AFlag* newFlag);
+	
 	//Following is code to set the players animation state.
 	UPROPERTY(BlueprintReadOnly, Replicated, Category = "Movement")
 	bool bIsSprinting;					//True if the character is sprinting.
