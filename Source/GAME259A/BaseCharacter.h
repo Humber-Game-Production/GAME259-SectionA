@@ -103,9 +103,7 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Abilities")
 	FTimerHandle AbilityTwoTimerHandle;
 
-	//**THIS IS COMMENTED OUT UNTIL ABILITY BASE CLASS IS MADE**
-	//UPROPERTY(BlueprintReadWrite, Category = "Abilities")
-	//TArray<Ability> Abilities; //A list of abilities the character can use. This will be initialized to empty and filled by a blueprint that inherits from this class.
+	
 
 protected:
 	// Called when the game starts or when spawned
@@ -134,6 +132,12 @@ protected:
 	void UseAbilityOne();
 	UFUNCTION(Category = "Abilities", Server, Reliable)
 	void UseAbilityTwo();
+
+	UFUNCTION(Category = "Abilities", BlueprintCallable)
+	float GetAbilityOneCooldown();
+	UFUNCTION(Category = "Abilities", BlueprintCallable)
+	float GetAbilityTwoCooldown();
+
 	UFUNCTION()
 	void DropFlag();
 	
