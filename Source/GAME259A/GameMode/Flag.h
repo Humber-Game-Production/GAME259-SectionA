@@ -31,7 +31,7 @@ public:
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
-	UFUNCTION()
+	UFUNCTION(Server, Reliable)
 	virtual void Capture();
 protected:
 	// Called when the game starts or when spawned

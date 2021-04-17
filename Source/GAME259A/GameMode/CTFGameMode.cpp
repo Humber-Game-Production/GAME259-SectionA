@@ -6,6 +6,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "TimerManager.h"
 #include "MiniFlag.h"
+
 #include "Team.h"
 #include "CapturePoint.h"
 #include "GAME259A/GameMode/CTFGameState.h"
@@ -257,11 +258,11 @@ void ACTFGameMode::EndRound() {
 void ACTFGameMode::RoundReset() {
 
 	spawnedMiniFlags = 0;
-
-	for (int i = 0; i < ctfGameState->activeFlags.Num(); i++)
-	{
-		if(IsValid(ctfGameState->activeFlags[i]))
-		{
+	
+	
+	for (int i = 0; i < ctfGameState->activeFlags.Num(); i++)	{
+		if(IsValid(ctfGameState->activeFlags[i]))	{
+			
 			GetWorld()->DestroyActor(ctfGameState->activeFlags[i]);
 		}
 	}

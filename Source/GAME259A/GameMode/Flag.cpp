@@ -118,8 +118,7 @@ void AFlag::Drop_Implementation()	{
 	isHeld = false;
 }
 
-void AFlag::Capture()
-{
+void AFlag::Capture_Implementation()	{
 	Drop_Implementation();
 }
 

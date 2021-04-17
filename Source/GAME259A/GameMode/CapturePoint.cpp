@@ -40,7 +40,7 @@ void ACapturePoint::BeginPlay()
 
 	if(mainFlag)
 	{
-		mainFlag->SetActorLocation(GetActorLocation() + FVector(0.0f, 0.0f, 60.0f));
+		mainFlag->SetActorLocation(GetActorLocation() + FVector(0.0f, 0.0f, 100.0f));
 	}
 	
 	if(HasAuthority())
@@ -138,9 +138,7 @@ void ACapturePoint::OnHit_Implementation(UPrimitiveComponent* OverlappedComponen
 						}
 					
 					} //if the player's holding a main flag, this capture point is part of the same team as the player, and this is not the midPoint
-					else if(Cast<AMainFlag>(player->FlagHeld) && (playersTeam == teamID) && (MainFlagCreator == false))
-					{
-						player->FlagHeld->InitLocation = FVector(0, -1000, 0);
+					else if(Cast<AMainFlag>(player->FlagHeld) && (playersTeam == teamID) && (MainFlagCreator == false))	{
 						player->CaptureFlag();
 						UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), teamWinEffect, this->GetActorLocation());
 						UE_LOG(LogTemp, Warning, TEXT("MainFlag captured at team %d's capture point"), teamID);
@@ -186,11 +184,8 @@ void ACapturePoint::RoundReset_Implementation()
 		mainFlag->SetActorLocation(GetActorLocation() + FVector(0.0f, 0.0f, 60.0f));
 	}
 	
-	if(mainFlag)
-	{
-		mainFlag->Capsule->SetCollisionResponseToAllChannels(ECR_Ignore);
-		Cast<USkeletalMeshComponent>(mainFlag->GetComponentByClass(USkeletalMeshComponent::StaticClass()))->SetVisibility(false);
-		Cast<UParticleSystemComponent>(mainFlag->GetComponentByClass(UParticleSystemComponent::StaticClass()))->SetVisibility(false);
+	if(mainFlag)	{
+		mainFlag->ResetMainFlag();	
 	}
 	
 }
