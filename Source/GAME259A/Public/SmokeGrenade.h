@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "Components/SphereComponent.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "Components/AudioComponent.h"
+#include "Sound/SoundCue.h"
 #include "SmokeGrenade.generated.h"
 
 UCLASS()
@@ -30,17 +32,22 @@ public:
 	UStaticMeshComponent* SmokeGrenadeMesh;		//Static mesh.
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Smoke Visuals")
 	UParticleSystemComponent* SmokeParticle;	//Particle system to spawn.
+	UPROPERTY(EditAnywhere, Category = "SmokeSound")
+	class USoundCue* SmokeSound;
 	
 private:
 	UPROPERTY()
 	FTimerHandle EndSmokeTimer;	//Length of smoke
 	UPROPERTY()
 	FTimerHandle DeleteTimer;	//Length of actor
-
+	UPROPERTY()
+	FTimerHandle SmokeSoundTimer;
 	bool bIsSpawned = false;	//Toggle if the smoke has been emitted or not. Used so smoke system only starts once.
 	
 	UFUNCTION()
 	void OnEndSmokeTimerFinish();	//What happens when EndSmokeTimer is finished.
 	UFUNCTION()
 	void OnDeleteTimerFinish();		//What happens when DeleteTimer is finished.
+
+	UAudioComponent* SmokeAudioComponent;
 };

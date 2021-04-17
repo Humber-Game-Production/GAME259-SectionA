@@ -50,6 +50,11 @@ void ACTFPlayerState::ResetStats()
 	flagsCaptured = 0;
 }
 
+void ACTFPlayerState::UpdateObjective(AFlag* newFlag)
+{
+	currentObjectiveDelegate.Broadcast(newFlag);
+}
+
 void ACTFPlayerState::PlayerDropFlag_Implementation()
 {
 	PlayerCanPickupFlag = true;
@@ -57,6 +62,7 @@ void ACTFPlayerState::PlayerDropFlag_Implementation()
 	{
 		FlagHeld->Execute_Drop(FlagHeld);
 		FlagHeld = nullptr;
+		UpdateObjective(FlagHeld);
 	}
 }
 
@@ -69,6 +75,7 @@ void ACTFPlayerState::CaptureFlag_Implementation()
 		FlagHeld->Capture();
 		PlayerCanPickupFlag = true;
 		FlagHeld = nullptr;
+		UpdateObjective(FlagHeld);
 	}
 }
 
@@ -77,6 +84,7 @@ void ACTFPlayerState::OnDeath_Implementation(ACharacter* character, float respaw
 	deaths++;
 	//Rag doll if the player is dead.
 	character->GetMesh()->SetAllBodiesSimulatePhysics(true);
+	character->GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 
 	FTimerHandle UnusedTimerHandle;
 
@@ -93,6 +101,7 @@ void ACTFPlayerState::SetTeam(ETeamIdentifier team)
 
 void ACTFPlayerState::SetFlagHeld(AFlag* FlagHeld_)	{
 	FlagHeld = FlagHeld_;
+	UpdateObjective(FlagHeld);
 }
 
 void ACTFPlayerState::SetCanPickupFlag(bool PlayerCanPickupFlag_)	{
@@ -112,12 +121,12 @@ void ACTFPlayerState::AddScore(int32 amountOfPoints)
 
 void ACTFPlayerState::OnRespawn_Implementation()
 {
-	SetCanPickupFlag(true);
 	respawnPlayerDelegate.Broadcast(teamID, this);
 	UE_LOG(LogTemp, Warning, TEXT("Respawn player delegate should have played"));
 
 	APawn* originalPawn = GetPawn();
-	
+
+	PlayerDropFlag();
 	
 	if(ACTFGameState* gameState = GetWorld()->GetGameState<ACTFGameState>())
 	{
@@ -132,7 +141,7 @@ void ACTFPlayerState::OnRespawn_Implementation()
 				//setup location, rotation and parameters for spawns
 				const FVector location = playersTeam->respawnPoints[0]->GetActorLocation();
 				const FRotator rotation = playersTeam->respawnPoints[0]->GetActorRotation();
-				const FTransform trans(rotation, location);
+
 				FActorSpawnParameters spawnP;
 				spawnP.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 			
@@ -140,13 +149,14 @@ void ACTFPlayerState::OnRespawn_Implementation()
 				AActor* playerActor = GetWorld()->SpawnActor(playersTeam->playerType, &location, &rotation, spawnP);
 				APawn* newPawn = Cast<APawn>(playerActor);
 				
+				
 				//Get the original playerController and detach it from its pawn
 				AController* controller = originalPawn->GetController();
 				controller->UnPossess();
 				//attach the playerState and playerController to the new pawn
 				newPawn->SetPlayerState(controller->GetPlayerState<ACTFPlayerState>());
 				controller->Possess(newPawn);
-				
+				controller->SetControlRotation(rotation);
 			
 				//Destroy original pawn
 				originalPawn->Destroy();

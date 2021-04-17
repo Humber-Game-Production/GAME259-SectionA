@@ -2,10 +2,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-
+#include "CombatInterface.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "TimerManager.h"
@@ -15,7 +16,7 @@
 #include "BaseCharacter.generated.h"
 
 UCLASS()
-class GAME259A_API ABaseCharacter : public ACharacter
+class GAME259A_API ABaseCharacter : public ACharacter, public ICombatInterface
 {
 	GENERATED_BODY()
 
@@ -23,7 +24,7 @@ public:
 	// Sets default values for this character's properties
 	ABaseCharacter();
 
-	
+
 	//virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 protected:
@@ -41,10 +42,16 @@ protected:
 	
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Movement")
 	float JumpVelocity;					//The velocity at which the character will jump.
+
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Throwing")
-	float TeleportThrowLength;
+	float MovementThrowLength;
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Throwing")
-	float TeleportThrowHeight;
+	float MovementThrowHeight;
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Throwing")
+	float SmokeThrowLength;
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Throwing")
+	float SmokeThrowHeight;
+
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Health")
 	float MaxHealth;					//The character's maximum health. CurrentHealth will be set to this value on initialization and if the value ever exceeds this.
@@ -53,6 +60,16 @@ protected:
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Death")
 	float RespawnTime;					//The amount of time required for the character to respawn.
 	
+	UPROPERTY(BlueprintReadOnly, Category = "Abilities")
+	float AbilityOneCoolDown;
+	UPROPERTY(BlueprintReadOnly, Category = "Abilities")
+	float AbilityTwoCoolDown;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Abilities")
+	bool CanUseAbilityOne;
+	UPROPERTY(BlueprintReadOnly, Category = "Abilities")
+	bool CanUseAbilityTwo;
+
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "CCStatus")
 	bool bIsDead;						//True if the character is dead.
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "CCStatus")
@@ -62,9 +79,10 @@ protected:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "CCStatus")
 	bool bIsStunned;					//True if the character is stunned via crowd control.
 	
+	
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Abilities")
-	UBaseAbilityClass* TeleportAbility;
+	UBaseAbilityClass* MovementAbility;//
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Abilities")
 	UBaseAbilityClass* SecondAbility;
 	UPROPERTY()
@@ -79,14 +97,21 @@ protected:
 	FTimerHandle RespawnTimerHandle;
 	//Handle to manage the throwing animation timer.
 	FTimerHandle ThrowingTimer;
+	//Handle to manage ability cooldowns
+	UPROPERTY(BlueprintReadOnly, Category = "Abilities")
+	FTimerHandle AbilityOneTimerHandle;
+	UPROPERTY(BlueprintReadOnly, Category = "Abilities")
+	FTimerHandle AbilityTwoTimerHandle;
 
-	//**THIS IS COMMENTED OUT UNTIL ABILITY BASE CLASS IS MADE**
-	//UPROPERTY(BlueprintReadWrite, Category = "Abilities")
-	//TArray<Ability> Abilities; //A list of abilities the character can use. This will be initialized to empty and filled by a blueprint that inherits from this class.
+	
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UFUNCTION()
+		virtual void MeleeSwing_Implementation(UPrimitiveComponent* OverlappedComponent,
+			AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 
 	UFUNCTION(Category = "Movement")
 	void MoveRight(float Axis);
@@ -107,6 +132,7 @@ protected:
 	void UseAbilityOne();
 	UFUNCTION(Category = "Abilities", Server, Reliable)
 	void UseAbilityTwo();
+
 	UFUNCTION()
 	void DropFlag();
 	
@@ -118,7 +144,7 @@ protected:
 
 	UFUNCTION(Category = "Death", BlueprintCallable)
 	void TakeDamage(float damage_);
-	UFUNCTION(Server, Reliable, Category = "Death", BlueprintCallable)
+	UFUNCTION(NetMulticast, Reliable, Category = "Death", BlueprintCallable)
 	void Death();
 	UFUNCTION(Server, Reliable, Category = "Death", BlueprintCallable)
 	void Respawn();
@@ -156,8 +182,18 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UFUNCTION(Category = "Abilities", BlueprintCallable)
+		float GetAbilityOneCooldown();
+	UFUNCTION(Category = "Abilities", BlueprintCallable)
+		float GetAbilityTwoCooldown();
+
+	UPROPERTY(EditAnywhere)
+		UBoxComponent* MeleeBox;
+
 	UFUNCTION(Category = "Movement", BlueprintCallable)
 	void Slow();
 	UFUNCTION(Category = "Movement", BlueprintCallable)
 	void UnSlow();
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Movement")
+	bool bRecentlyLaunched;					//True if the character is stunned via crowd control.
 };

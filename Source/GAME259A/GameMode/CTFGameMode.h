@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
 #include "TeamIdentifier.h"
-
 #include "CTFGameMode.generated.h"
 
 class ACTFGameState;
@@ -86,6 +85,14 @@ public:
 	//Time left in the current round(FString)
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Game Rules")
 	FString timeLeft;
+
+	//Time left in the current round(FString)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Game Rules")
+	float preGameStartTime;
+
+	//Time left in the current round(FString)
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Game Rules")
+	float timeBetweenRoundReset;
 
 	//Total amount of rounds
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Game Rules")
