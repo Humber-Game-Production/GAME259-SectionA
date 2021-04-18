@@ -1,0 +1,1314 @@
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/S_Sequence1_DAOC.uasset" 0
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Rock/T_Rock_S_DAOC.uasset" 1
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Rock/T_Rock_N_DAOC.uasset" 2
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Rock/T_Rock_BaseColor_DAOC.uasset" 3
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Ground/T_Flooring_N_DAOC.uasset" 4
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Ground/T_Flooring_BC_DAOC.uasset" 5
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Ground/T_Flooring_AO_DAOC.uasset" 6
+"../../../Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/FlattenNormal.uasset" 7
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Materials/M_GeneralMat_RH.uasset" 8
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_SoftRock_DAOC.uasset" 9
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Railings/SM_RailCube_DAOC.uasset" 10
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Punch_JMF.uasset" 11
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Bow_JMF.uasset" 12
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Rock/T_MarbleCracks_AO_DAOC.uasset" 13
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Rock/T_Marble_N_DAOC.uasset" 14
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Rock/T_Marble_BC_DAOC.uasset" 15
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_Marble_DAOC.uasset" 16
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Car/MI_CarPaint_LE.uasset" 17
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Shiftknob_Knob.uasset" 18
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Weapons/BP_RockCOMBAT.uasset" 19
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Character/Character_BPI.uasset" 20
+"../../../Engine/Content/EditorBlueprintResources/StandardMacros.uasset" 21
+"../../../Engine/Content/EditorBlueprintResources/ActorMacros.uasset" 22
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/SlingShot/T_SlingShot_Rope_ORM_RK.uasset" 23
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/SlingShot/T_SlingShot_Rope_N_RK.uasset" 24
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/SlingShot/T_SlingShot_Rope_BC_RK.uasset" 25
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Materials/M_SubstanceMat_RH.uasset" 26
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Weapons/SlingShot/MI_SlingShot_Rope_RH.uasset" 27
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/SlingShot/SM_SlingShot_Rope_RK.uasset" 28
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/SlingShot/T_SlingShot_Band_ORM_RK.uasset" 29
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/SlingShot/T_SlingShot_Band_N_RK.uasset" 30
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/SlingShot/T_SlingShot_Band_BC_RK.uasset" 31
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Weapons/SlingShot/MI_SlingShot_Bands_RH.uasset" 32
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/SlingShot/SM_SlingShot_Band_RK.uasset" 33
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Weapons/BP_SlingShotSling.uasset" 34
+"../../../Engine/Content/BasicShapes/BasicShapeMaterial.uasset" 35
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Art/Environment/CubeMaterial.uasset" 36
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Art/Environment/1M_Cube.uasset" 37
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Abilities/BP_TestTeleportAbilityActor.uasset" 38
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Teleport_AMY.uasset" 39
+"../../Plugins/FX/Niagara/Content/DynamicInputs/ValueFromCurve/VectorFromCurve.uasset" 40
+"../../../Engine/Content/EngineMaterials/T_Default_Material_Grid_N.uasset" 41
+"../../../Engine/Content/EngineMaterials/T_Default_Material_Grid_M.uasset" 42
+"../../../Engine/Content/Functions/Engine_MaterialFunctions01/Opacity/CameraDepthFade.uasset" 43
+"../../../Engine/Content/EngineMaterials/WorldGridMaterial.uasset" 44
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Teleporter/SM_Disk2_ASU.uasset" 45
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Teleporter/T_Teleport_ASU.uasset" 46
+"../../../Engine/Content/MapTemplates/TilingNoise05.uasset" 47
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Teleporter/M_Teleport2_ASU.uasset" 48
+"../../Plugins/FX/Niagara/Content/Enums/ENiagara_SubUVLookupMode.uasset" 49
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraRandomnessMode.uasset" 50
+"../../Plugins/FX/Niagara/Content/Functions/GetRandomInfo.uasset" 51
+"../../Plugins/FX/Niagara/Content/Functions/RandomRangeInteger.uasset" 52
+"../../Plugins/FX/Niagara/Content/Modules/Update/SubUV/V2/SubUVAnimation.uasset" 53
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraScaleColorMode.uasset" 54
+"../../Plugins/FX/Niagara/Content/Modules/Update/Color/ScaleColor.uasset" 55
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraInactiveMode.uasset" 56
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraEmitterScalabilityMode_Limited.uasset" 57
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraEmitterLifeCycleMode.uasset" 58
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraCoordinateSpace.uasset" 59
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraChannelCorrelation.uasset" 60
+"../../Plugins/FX/Niagara/Content/Enums/ENiagara_UVFlippingMode.uasset" 61
+"../../Plugins/FX/Niagara/Content/Enums/ENiagara_SpriteRotationMode.uasset" 62
+"../../Plugins/FX/Niagara/Content/Enums/ENiagara_SizeScaleMode.uasset" 63
+"../../Plugins/FX/Niagara/Content/Enums/ENiagara_PositionInitializationMode.uasset" 64
+"../../Plugins/FX/Niagara/Content/Enums/ENiagara_MassInitializationMode.uasset" 65
+"../../Plugins/FX/Niagara/Content/Enums/ENiagara_LifetimeMode.uasset" 66
+"../../Plugins/FX/Niagara/Content/Enums/ENiagara_InfiniteLoopDuration.uasset" 67
+"../../Plugins/FX/Niagara/Content/Enums/ENiagara_ColorInitializationMode.uasset" 68
+"../../Plugins/FX/Niagara/Content/Modules/Update/Lifetime/ParticleState.uasset" 69
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraRandomnessEvaluation.uasset" 70
+"../../Plugins/FX/Niagara/Content/Functions/V2/CalculateRandomRangeInteger.uasset" 71
+"../../Plugins/FX/Niagara/Content/Functions/V2/CalculateRandomBool.uasset" 72
+"../../Plugins/FX/Niagara/Content/Functions/V2/CalculateRandomRange.uasset" 73
+"../../Plugins/FX/Niagara/Content/Functions/V2/CalculateRandomRangeFloat.uasset" 74
+"../../Plugins/FX/Niagara/Content/Functions/Localspace/TransformBase.uasset" 75
+"../../Plugins/FX/Niagara/Content/Functions/Localspace/TransformVector.uasset" 76
+"../../Plugins/FX/Niagara/Content/Functions/LinearColor/HueShiftLinearColor.uasset" 77
+"../../Plugins/FX/Niagara/Content/Functions/Localspace/SimulationPosition.uasset" 78
+"../../Plugins/FX/Niagara/Content/Modules/Spawn/Initialization/V2/InitializeParticle.uasset" 79
+"../../Plugins/FX/Niagara/Content/Functions/DirectionAndLengthSafe.uasset" 80
+"../../Plugins/FX/Niagara/Content/Modules/Solvers/SolveForcesAndVelocity.uasset" 81
+"../../Plugins/FX/Niagara/Content/Functions/RandomRangeFloat.uasset" 82
+"../../Plugins/FX/Niagara/Content/Modules/Emitter/SpawnRate.uasset" 83
+"../../Plugins/FX/Niagara/Content/Functions/Emitter/EmitterChangeState.uasset" 84
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraExecutionStateManagement.uasset" 85
+"../../Plugins/FX/Niagara/Content/Enums/ENiagara_EmitterStateOptions.uasset" 86
+"../../Plugins/FX/Niagara/Content/Modules/Emitter/EmitterState.uasset" 87
+"../../Plugins/FX/Niagara/Content/DynamicInputs/ValueFromCurve/FloatFromCurve.uasset" 88
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Teleporter/E_Teleport2_ASU.uasset" 89
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Teleporter/T_Smoke_Tiled_D_ASU.uasset" 90
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Teleporter/T_Smoke_SubUV_ASU.uasset" 91
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Teleporter/M_Smoke_ASU.uasset" 92
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraSphereDistributionMode.uasset" 93
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraExpansionMode.uasset" 94
+"../../Plugins/FX/Niagara/Content/Modules/Update/Size/ScaleSpriteSize.uasset" 95
+"../../Plugins/FX/Niagara/Content/Functions/SphericalToCartesianCoordinates.uasset" 96
+"../../Plugins/FX/Niagara/Content/Functions/V2/CalculateRandomPointInSphere.uasset" 97
+"../../Plugins/FX/Niagara/Content/Functions/Rotation/MultiplyVectorWithQuaternion.uasset" 98
+"../../Plugins/FX/Niagara/Content/Functions/Rotation/FindQuatBetween.uasset" 99
+"../../Plugins/FX/Niagara/Content/Modules/Spawn/Location/V2/SphereLocation.uasset" 100
+"../../Plugins/FX/Niagara/Content/Functions/RandomPointInBox.uasset" 101
+"../../Plugins/FX/Niagara/Content/Functions/IsolateLongestVectorComponent.uasset" 102
+"../../Plugins/FX/Niagara/Content/Functions/Rotation/RotateAngleOnAxis.uasset" 103
+"../../Plugins/FX/Niagara/Content/Modules/Spawn/Location/BoxLocation.uasset" 104
+"../../Plugins/FX/Niagara/Content/DynamicInputs/TypeConversions/Vector2DFromFloat.uasset" 105
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Teleporter/E_Smoke_ASU.uasset" 106
+"../../Plugins/FX/Niagara/Content/VectorFields/Assets/TilingCurl32.uasset" 107
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraCurlNoiseQuality.uasset" 108
+"../../Plugins/FX/Niagara/Content/VectorFields/Assets/TilingCurl64.uasset" 109
+"../../Plugins/FX/Niagara/Content/VectorFields/Assets/TilingCurl16.uasset" 110
+"../../Plugins/FX/Niagara/Content/Functions/V2/RemapRange.uasset" 111
+"../../Plugins/FX/Niagara/Content/Functions/FindAngleBetweenVectors.uasset" 112
+"../../Plugins/FX/Niagara/Content/Functions/V2/ConeMask.uasset" 113
+"../../Plugins/FX/Niagara/Content/Modules/Update/Forces/V2/CurlNoiseForce.uasset" 114
+"../../Plugins/FX/Niagara/Content/Modules/Update/Forces/Drag.uasset" 115
+"../../Plugins/FX/Niagara/Content/DynamicInputs/UniformRange/V2/RandomRangeFloat.uasset" 116
+"../../Plugins/FX/Niagara/Content/DefaultAssets/DefaultSpriteMaterial.uasset" 117
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Teleporter/E_Orbs_ASU.uasset" 118
+"../../Plugins/FX/Niagara/Content/Modules/Update/Size/ScaleMeshSize.uasset" 119
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraSystemInactiveMode.uasset" 120
+"../../Plugins/FX/Niagara/Content/Modules/Update/Color/Color.uasset" 121
+"../../Plugins/FX/Niagara/Content/Functions/System/SystemChangeState.uasset" 122
+"../../Plugins/FX/Niagara/Content/Modules/System/SystemState.uasset" 123
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Teleporter/PS_Teleport3_ASU.uasset" 124
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Grenade/T_Grenade_ORM_SW.uasset" 125
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Grenade/T_Grenade_N_SW.uasset" 126
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Grenade/T_Grenade_BC_SW.uasset" 127
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Weapons/MI_Grenade_RH.uasset" 128
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Abilities/Grenade.uasset" 129
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Abilities/BP_TeleportAbilityActor.uasset" 130
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Abilities/BP_SlowField.uasset" 131
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Mesh/Human/S_Human.uasset" 132
+"../../../Engine/Content/Animation/DefaultAnimCurveCompressionSettings.uasset" 133
+"../../../Engine/Content/Animation/DefaultAnimBoneCompressionSettings.uasset" 134
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/HumanJumpNOAnti02.uasset" 135
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/A_StandardWalk_JP.uasset" 136
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/A_HumanThrow_LL.uasset" 137
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/A_HumanRun_SY.uasset" 138
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/HumanArrow_Up.uasset" 139
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/HumanArrow_Down.uasset" 140
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/A_NEWBowDown_LL.uasset" 141
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/BlendSpaces/Move+ArrowDraw_BS.uasset" 142
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Bow_Up.uasset" 143
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Bow_Down.uasset" 144
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/A_HumanSlingshot_LH.uasset" 145
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/BlendSpaces/ArrowDraw_BS.uasset" 146
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/A_HumanMacheteSwing_JP.uasset" 147
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/A_HumanLanding_LL.uasset" 148
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/A_HumanIdle_LL.uasset" 149
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/A_HumanHit_DS.uasset" 150
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/A_HumanFall_LL.uasset" 151
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Character/AnimBP/Human_AnimBP.uasset" 152
+"../../../Engine/Content/EngineMaterials/DefaultMaterial.uasset" 153
+"../../../Engine/Content/BasicShapes/Sphere.uasset" 154
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Weapons/HitPointMaterial.uasset" 155
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Arrow/T_Arrow_Shaft_ORM.uasset" 156
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Arrow/T_Arrow_Shaft_N.uasset" 157
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Arrow/T_Arrow_Shaft_BC.uasset" 158
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Weapons/Arrow/MI_Arrow_Shaft_RH.uasset" 159
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/Arrow/SM_Arrow_Shaft_AS.uasset" 160
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/Arrow/SM_Arrow_Head_AS.uasset" 161
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Arrow/T_Arrow_Feather_ORM.uasset" 162
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Arrow/T_Arrow_Feather_N.uasset" 163
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Arrow/T_Arrow_Feather_BC.uasset" 164
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Weapons/Arrow/M_Arrow_Feather_RH.uasset" 165
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/Arrow/SM_Arrow_Feather02_AS.uasset" 166
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/Arrow/SM_Arrow_Feather01_AS.uasset" 167
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Weapons/BP_ArrowCOMBAT.uasset" 168
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Mesh/Human/PA_Human_AA.uasset" 169
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Human/T_HumanShoes_S.uasset" 170
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Human/T_HumanShoes_N.uasset" 171
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Human/T_HumanShoes_BC.uasset" 172
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Materials/Characters/Human/M_HumanShoes.uasset" 173
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Human/T_HumanMoustache_S.uasset" 174
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Human/T_HumanMoustache_N.uasset" 175
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Human/T_HumanMoustache_BC.uasset" 176
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Materials/Characters/Human/M_HumanMoustache.uasset" 177
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Human/T_HumanLegs_S.uasset" 178
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Human/T_HumanLegs_N.uasset" 179
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Human/T_HumanLegs_BC.uasset" 180
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Materials/Characters/Human/M_HumanLegs.uasset" 181
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Human/T_HumanBody_BC.uasset" 182
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Materials/Characters/Human/M_HumanLashes.uasset" 183
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Human/T_HumanHair_S.uasset" 184
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Human/T_HumanHair_N.uasset" 185
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Human/T_HumanHair_BC.uasset" 186
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Materials/Characters/Human/M_HumanHair.uasset" 187
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Human/T_HumanBody_N.uasset" 188
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Materials/Characters/Human/M_HumanEye01.uasset" 189
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Materials/Characters/Human/M_HumanBody.uasset" 190
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Mesh/Human/SK_Human_AA.uasset" 191
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Character/BaseCharacter_BP.uasset" 192
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Materials/M_DynamicMaterial_DAOC.uasset" 193
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Actor_BP/BP_Amulet_DORH.uasset" 194
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/BG_Buildings/MI_BGRock2_s_DAOC.uasset" 195
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Actor_BP/BP_BuildingGenerator_DAOC.uasset" 196
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_BarrierPost_DAOC.uasset" 197
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Rocks/SM_BarrierPost_DAOC.uasset" 198
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/SM_RoadPiece_LE.uasset" 199
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Actor_BP/BP_RoadGenerator_DAOC.uasset" 200
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Actor_BP/BP_RoadGenerator_DAOC_Child.uasset" 201
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Art/M_MaterialSphere.uasset" 202
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Water/T_Water_N_DAOC.uasset" 203
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Water/T_Water_H_DAOC.uasset" 204
+"../../../Engine/Content/Functions/Engine_MaterialFunctions02/Utility/BlendAngleCorrectedNormals.uasset" 205
+"../../../Engine/Content/Functions/Engine_MaterialFunctions02/Texturing/CustomRotator.uasset" 206
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Materials/M_Waterfall_DAOC.uasset" 207
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Water/MI_BottomPoolAlt_DAOC.uasset" 208
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Materials/Characters/Human/M_Phong.uasset" 209
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Assets/Textures/Metal/T_Iron_BC_RWH.uasset" 210
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Assets/Textures/Metal/T_Iron_N_RWH.uasset" 211
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Assets/Textures/Metal/T_Iron_R_RWH.uasset" 212
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_Rock_DAOC.uasset" 213
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Rock/T_Roof_N_DAOC.uasset" 214
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Rock/T_Roof_BC_DAOC.uasset" 215
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Rock/T_Roof_AO_DAOC.uasset" 216
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_HalfcircleRoof_DAOC.uasset" 217
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Block_Out/SM_Halfcircle_LE.uasset" 218
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Block_Out/SM_Tent_Blockout01_LE.uasset" 219
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Block_Out/SM_Tent_Blockout_LE.uasset" 220
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Block_Out/SM_Tent_Blockout02_LE.uasset" 221
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Block_Out/SM_Tent_Blockou_02_LE.uasset" 222
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_WallRockLong_DAOC.uasset" 223
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_WallRock_DAOC.uasset" 224
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_Beams_DAOC.uasset" 225
+"../../../Engine/Content/EngineMaterials/Good64x64TilingNoiseHighFreq.uasset" 226
+"../../../Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/SpiralBlur-SceneTexture.uasset" 227
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Materials/M_Glass_RH.uasset" 228
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Metal/MI_Glass_DAOC.uasset" 229
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Metal/MI_PaintedMetal_DAOC.uasset" 230
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/BG_Buildings/SM_NewBGWall01_RH.uasset" 231
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/BG_Buildings/SM_NewBGWall02_RH.uasset" 232
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_WallRock_s_DAOC.uasset" 233
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Metal/MI_GlassDome_DAOC.uasset" 234
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/BG_Buildings/SM_NewBGWall03_RH.uasset" 235
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_Flatroof_DAOC.uasset" 236
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/BG_Buildings/SM_SmallBD_Roof_DAOC.uasset" 237
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_Pilars_DAOC.uasset" 238
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/BG_Buildings/MI_BGRock1_s_DAOC.uasset" 239
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/BG_Buildings/SM_SmallBD_Wall_DAOC.uasset" 240
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/BG_Buildings/SM_WideBD_Roof_DAOC.uasset" 241
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/BG_Buildings/SM_WideBD_Wall_DAOC.uasset" 242
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Car/MI_CarTires_LE.uasset" 243
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Car/MI_CarRims_LE.uasset" 244
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Axle_Front.uasset" 245
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Metal/T_Dome_BC_DAOC.uasset" 246
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Metal/T_Dome_N_DAOC.uasset" 247
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Metal/T_Dome_AO_DAOC.uasset" 248
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Metal/MI_MetalPipes_DAOC.uasset" 249
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Car/MI_CarInterior_LE.uasset" 250
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Carpet.uasset" 251
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Car_Body.uasset" 252
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Dashboard.uasset" 253
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_DefenseBar_Back.uasset" 254
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_DefenseBar_Front.uasset" 255
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_DefenseSupport_Back.uasset" 256
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_DefenseSupport_Front.uasset" 257
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Car/MI_TalePipe_LE.uasset" 258
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Differential.uasset" 259
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_DoorHandles.uasset" 260
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Metal/MI_SmallDome_DAOC.uasset" 261
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_DoorInside.uasset" 262
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Exahust.uasset" 263
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_GasTank.uasset" 264
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_GasTank_cap.uasset" 265
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Headlight_Glass.uasset" 266
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Headlight_Shell.uasset" 267
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_HeadLight_Support.uasset" 268
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Pedal_Accelerator.uasset" 269
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Pedal_Brake.uasset" 270
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Seats_Back.uasset" 271
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Seats_Bottom.uasset" 272
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Shiftknob_Cover.uasset" 273
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Shiftknob_Stick.uasset" 274
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_ShockArm_Front.uasset" 275
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Shocks_Front.uasset" 276
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_SuspensionArm_Front.uasset" 277
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_SuspensionBar_Front.uasset" 278
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_SuspensionBolts_FrontBottom.uasset" 279
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_SuspensionBolts_FrontTop.uasset" 280
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_SuspensionElbow_Front.uasset" 281
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_SuspensionJoints_FrontBottom.uasset" 282
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_SuspensionJoints_FrontTop.uasset" 283
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Suspension_FrontBottom.uasset" 284
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Suspension_FrontTop.uasset" 285
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Suspension_Middle.uasset" 286
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Suspension_Rear_Back.uasset" 287
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Suspension_Rear_front.uasset" 288
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Suspension_Rear_Middle.uasset" 289
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Car/MI_CarTailLights_LE.uasset" 290
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Taillights.uasset" 291
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_TireBreaks_Front.uasset" 292
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_TireDiscBreaks_Back.uasset" 293
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_TireDiscBreaks_Front.uasset" 294
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_TireRimCaps_Back.uasset" 295
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_TireRimCaps_Front.uasset" 296
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_TireRims_Back.uasset" 297
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_TiresRims_Front.uasset" 298
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Tires_Back.uasset" 299
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Tires_Front.uasset" 300
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Transmission.uasset" 301
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Wheel.uasset" 302
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_WheelEdge.uasset" 303
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Wheelpost_Back.uasset" 304
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Wheelpost_Front.uasset" 305
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Windshield.uasset" 306
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Windshield_Posts.uasset" 307
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/CarPieces/SM_Car_Windshield_Topbar.uasset" 308
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Wood/T_TreeBark_N_LE.uasset" 309
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Wood/T_TreeBark_BC_LE.uasset" 310
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Wood/T_TreeBark_AO_LE.uasset" 311
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Wood/MI_TreeBark_LE.uasset" 312
+"../../../Engine/Content/Functions/Engine_MaterialFunctions01/WorldPositionOffset/SimpleGrassWind.uasset" 313
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Foliage/T_Leaves_DAOC.uasset" 314
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Materials/M_Leaves_DAOC.uasset" 315
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Foliage/MI_Leaves_DAOC.uasset" 316
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Foliage/SM_Tree01_LE.uasset" 317
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Foliage/SM_ExoticTree_01_LE.uasset" 318
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Foliage/SM_Tree02_LE.uasset" 319
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Foliage/SM_ExoticTree_02_LE.uasset" 320
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Food/SM_Fish_RWH.uasset" 321
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Food/SM_MixedFishPile_RWH.uasset" 322
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Food/SM_Orange_RWH_SM_Orange_RWH.uasset" 323
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Food/SM_Watermelon_RWH_SM_Watermelon_RWH.uasset" 324
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/Rope.uasset" 325
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/Newspaper1.uasset" 326
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/Newspaper.uasset" 327
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Ground/MI_CircleOuterflooringEdge_DAOC.uasset" 328
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/SM_CircleRoad_Edge_DAOC.uasset" 329
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/SM_CircleOuterflooringEdge_DAOC.uasset" 330
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Ground/MI_Outerflooring_DAOC.uasset" 331
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/SM_CircleRoad_Surface_DAOC.uasset" 332
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/SM_Circleroad_DAOC.uasset" 333
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/SM_HalfcircleFloor_DAOC.uasset" 334
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Ground/MI_RoundaboutEdge_DAOC.uasset" 335
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/SM_Roundabout_Edge_DAOC.uasset" 336
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/SM_RoundaboutEdge_DAOC.uasset" 337
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Ground/MI_Sidewalks_DAOC.uasset" 338
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/SM_Roundabout_Surface_DAOC.uasset" 339
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/SM_Roundabout_DAOC.uasset" 340
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Metal/SM_Door_Glass_DAOC.uasset" 341
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Metal/SM_DoorGlass_DAOC.uasset" 342
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Metal/SM_Door_Frame_DAOC.uasset" 343
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Metal/SM_Door_DAOC.uasset" 344
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Metal/SM_DoubleSignPost_RWH.uasset" 345
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Metal/SM_SquareWindow_Frame_DAOC.uasset" 346
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Metal/SM_SquareWindow_DAOC.uasset" 347
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Water/SM_Fountain_WaterFall_DAOC.uasset" 348
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Water/SM_WaterFallPiecew_DAOC.uasset" 349
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Water/MI_TopPool_DAOC.uasset" 350
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Water/SM_Fountain_SmSurface_DAOC.uasset" 351
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Water/SM_WaterFountainWaterTop_DAOC.uasset" 352
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Water/MI_BottomPool_DAOC.uasset" 353
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Water/SM_Fountain_LgSurface_DAOC.uasset" 354
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Water/SM_WaterFountainWater_DAOC.uasset" 355
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Axe/T_Axe_ORM_SZ.uasset" 356
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Axe/T_Axe_N_SZ.uasset" 357
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Axe/T_Axe_BC_SZ.uasset" 358
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Weapons/MI_Axe_RH.uasset" 359
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/SM_Axe_SZ.uasset" 360
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Bow/T_Bow_GoldDetails_ORM_AS.uasset" 361
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Bow/T_Bow_GoldDetails_N_AS.uasset" 362
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Bow/T_Bow_GoldDetails_BC_AS.uasset" 363
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Weapons/Bow/MI_Bow_GoldDetails_RH.uasset" 364
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/Bow/SM_Bow_GoldDetails01_AS.uasset" 365
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/Bow/SM_Bow_GoldDetails02_AS.uasset" 366
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/StunGun/SM_stunGun_SB_stunGun_body_LP.uasset" 367
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/StunGun/SM_stunGun_SB_stunGun_bullet01_LP.uasset" 368
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/StunGun/SM_stunGun_SB_stunGun_bullet02_LP.uasset" 369
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/StunGun/SM_stunGun_SB_stunGun_front_LP.uasset" 370
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/StunGun/SM_stunGun_SB_stunGun_glow01_LP.uasset" 371
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/StunGun/SM_stunGun_SB_stunGun_glow02_LP.uasset" 372
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/StunGun/SM_stunGun_SB_stunGun_handle_LP.uasset" 373
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/T_Pole_N_JPM.uasset" 374
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/T_Pole_BC_JPM.uasset" 375
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/T_Pole_AO_JPM.uasset" 376
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/Main_Poll_lowMat.uasset" 377
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/Pole_Bake_ready_low.uasset" 378
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/SM_Fence_RWH.uasset" 379
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/SM_LandscapeCanvas_SZ.uasset" 380
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/SM_LandscapeFrame_SZ.uasset" 381
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/SM_MarketTable_RWH.uasset" 382
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/SM_MarketTent_SB__2__cotton.uasset" 383
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/SM_MarketTent_SB__2__wood_01.uasset" 384
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/SM_MarketTent_SB__2__wood_02.uasset" 385
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/SM_MarketTent_SB__2__wood_03.uasset" 386
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/SM_MarketTent_SB__2__wood_04.uasset" 387
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/SM_MarketTent_SB__2__wood_05.uasset" 388
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/SM_MarketTent_SB__2__wood_06.uasset" 389
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/Ladders/SM_Ladder_PEN.uasset" 390
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Food/T_Fish_BC_RWH.uasset" 391
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Food/T_Fish_MT_RWH.uasset" 392
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Food/T_Fish_N_RWH.uasset" 393
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Food/T_Fish_R_RWH.uasset" 394
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Food/T_Orange_AO_RWH.uasset" 395
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Food/T_Orange_BC_RWH.uasset" 396
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Food/T_Orange_N_RWH.uasset" 397
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Food/T_Orange_R_RWH.uasset" 398
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Food/T_Watermelon_AO_RWH.uasset" 399
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Food/T_Watermelon_BC_RWH.uasset" 400
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Food/T_Watermelon_N_RWH.uasset" 401
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Food/T_Watermelon_R_RWH.uasset" 402
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Ground/T_Dirt_AO_LE.uasset" 403
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Ground/T_Dirt_BC_LE.uasset" 404
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Ground/T_Dirt_N_LE.uasset" 405
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Ground/T_FlooringLines1_AO_DAOC.uasset" 406
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Ground/T_FlooringLines1_BC_DAOC.uasset" 407
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Ground/T_FlooringLines1_N_DAOC.uasset" 408
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Ground/T_FlooringLines2_AO_DAOC.uasset" 409
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Ground/T_FlooringLInes2_BC_DAOC.uasset" 410
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Ground/T_FlooringLines2_N_DAOC.uasset" 411
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Mesh/UE4_Mannequin_Skeleton.uasset" 412
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/ThirdPersonWalk.uasset" 413
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/ThirdPersonRun.uasset" 414
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/ThirdPersonIdle.uasset" 415
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/ThirdPerson_IdleRun_2D.uasset" 416
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/ThirdPerson_Jump.uasset" 417
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/ThirdPersonJump_Start.uasset" 418
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/ThirdPersonJump_Loop.uasset" 419
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/ThirdPerson_AnimBP.uasset" 420
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Mesh/Alien/S_Alien.uasset" 421
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/AlienArrow_DOWN.uasset" 422
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/AlienArrow_UP.uasset" 423
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/AlienJumpNOAnti02.uasset" 424
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/A_AlienBowNEW_LL.uasset" 425
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/A_AlienBow_LL.uasset" 426
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/A_AlienClimbing_LL.uasset" 427
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/A_AlienDodge_SY_Anim.uasset" 428
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/A_AlienGun_LL.uasset" 429
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/A_AlienTaunt_AA.uasset" 430
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/A_HumanClimbingLadder_LL.uasset" 431
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/A_HumanDodge_SY_Anim.uasset" 432
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/A_HumanGunPlay_LH.uasset" 433
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/A_HumanJumping_DS.uasset" 434
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/A_HumanSwordSwing_JP.uasset" 435
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/A_HumanSwordSwing_JP_Montage.uasset" 436
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/A_HumanTaunt_AA.uasset" 437
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/NewAnimMontage.uasset" 438
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim/axe_DIF2.uasset" 439
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim/axe_NM2.uasset" 440
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim/axe_SPEC.uasset" 441
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim/MaleBruteA_Body_diffuse.uasset" 442
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim/MaleBruteA_Bottom_normal.uasset" 443
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim/MaleBruteA_Bottom_specular.uasset" 444
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim/MaleBruteA_Hair_diffuse.uasset" 445
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim/MaleBruteA_Hair_specular.uasset" 446
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim/MaleBruteA_Moustache_diffuse.uasset" 447
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim/MaleBruteA_Shoes_diffuse.uasset" 448
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/axe_DIF2.uasset" 449
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/axe_NM2.uasset" 450
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/axe_SPEC.uasset" 451
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/MaleBruteA_Body_diffuse.uasset" 452
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/MaleBruteA_Bottom_diffuse.uasset" 453
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/MaleBruteA_Hair_diffuse.uasset" 454
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/MaleBruteA_Hair_normal.uasset" 455
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/MaleBruteA_Moustache_normal.uasset" 456
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/MaleBruteA_Moustache_specular.uasset" 457
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/MaleBruteA_Shoes_normal.uasset" 458
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/MaleBruteA_Shoes_specular.uasset" 459
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/MaleBruteA_StdNM.uasset" 460
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/Heuvel_Lukas_Anim_SlingShot/axe_DIF2.uasset" 461
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/Heuvel_Lukas_Anim_SlingShot/axe_NM2.uasset" 462
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/Heuvel_Lukas_Anim_SlingShot/axe_SPEC.uasset" 463
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/Heuvel_Lukas_Anim_SlingShot/MaleBruteA_Body_diffuse.uasset" 464
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/Heuvel_Lukas_Anim_SlingShot/MaleBruteA_Bottom_diffuse.uasset" 465
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/Heuvel_Lukas_Anim_SlingShot/MaleBruteA_Hair_diffuse.uasset" 466
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/Heuvel_Lukas_Anim_SlingShot/MaleBruteA_Hair_normal.uasset" 467
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/Heuvel_Lukas_Anim_SlingShot/MaleBruteA_Moustache_normal.uasset" 468
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/Heuvel_Lukas_Anim_SlingShot/MaleBruteA_Moustache_specular.uasset" 469
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/Heuvel_Lukas_Anim_SlingShot/MaleBruteA_Shoes_normal.uasset" 470
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/Heuvel_Lukas_Anim_SlingShot/MaleBruteA_Shoes_specular.uasset" 471
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human/Heuvel_Lukas_Anim_SlingShot/MaleBruteA_StdNM.uasset" 472
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human_fbm/axe_DIF2.uasset" 473
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human_fbm/axe_NM2.uasset" 474
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human_fbm/axe_SPEC.uasset" 475
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human_fbm/MaleBruteA_Body_diffuse.uasset" 476
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human_fbm/MaleBruteA_Bottom_normal.uasset" 477
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human_fbm/MaleBruteA_Bottom_specular.uasset" 478
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human_fbm/MaleBruteA_Hair_diffuse.uasset" 479
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human_fbm/MaleBruteA_Hair_specular.uasset" 480
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human_fbm/MaleBruteA_Moustache_diffuse.uasset" 481
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Heuvel_Lukas_Anim_SlingShot_Human_fbm/MaleBruteA_Shoes_diffuse.uasset" 482
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Smith_David_Anim_JumpingUp_Human_fbm/axe_DIF2.uasset" 483
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Smith_David_Anim_JumpingUp_Human_fbm/axe_NM2.uasset" 484
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Smith_David_Anim_JumpingUp_Human_fbm/axe_SPEC.uasset" 485
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Smith_David_Anim_JumpingUp_Human_fbm/MaleBruteA_Bottom_diffuse.uasset" 486
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Smith_David_Anim_JumpingUp_Human_fbm/MaleBruteA_Bottom_normal.uasset" 487
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Smith_David_Anim_JumpingUp_Human_fbm/MaleBruteA_Bottom_specular.uasset" 488
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Smith_David_Anim_JumpingUp_Human_fbm/MaleBruteA_Hair_normal.uasset" 489
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Smith_David_Anim_JumpingUp_Human_fbm/MaleBruteA_Hair_specular.uasset" 490
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Smith_David_Anim_JumpingUp_Human_fbm/MaleBruteA_Moustache_diffuse.uasset" 491
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Smith_David_Anim_JumpingUp_Human_fbm/MaleBruteA_Moustache_normal.uasset" 492
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Smith_David_Anim_JumpingUp_Human_fbm/MaleBruteA_Moustache_specular.uasset" 493
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Smith_David_Anim_JumpingUp_Human_fbm/MaleBruteA_Shoes_diffuse.uasset" 494
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Smith_David_Anim_JumpingUp_Human_fbm/MaleBruteA_Shoes_normal.uasset" 495
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Smith_David_Anim_JumpingUp_Human_fbm/MaleBruteA_Shoes_specular.uasset" 496
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Human/Smith_David_Anim_JumpingUp_Human_fbm/MaleBruteA_StdNM.uasset" 497
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Mesh/Human/PA_Human.uasset" 498
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Materials/Characters/Human/M_HumanEye02.uasset" 499
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Mesh/Human/SK_Human.uasset" 500
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/Alien/T_AlienLegs_N.uasset" 501
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/Alien/T_AlienTorso_BC.uasset" 502
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/Alien/T_AlienTorso_N.uasset" 503
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/Human/T_HumanBody_BC.uasset" 504
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/Human/T_HumanBody_N.uasset" 505
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/Human/T_HumanHair_BC.uasset" 506
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/Human/T_HumanHair_N.uasset" 507
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/Human/T_HumanHair_S.uasset" 508
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/Human/T_HumanLegs_BC.uasset" 509
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/Human/T_HumanLegs_N.uasset" 510
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/Human/T_HumanLegs_S.uasset" 511
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/Human/T_HumanMoustache_BC.uasset" 512
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/Human/T_HumanMoustache_N.uasset" 513
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/Human/T_HumanMoustache_S.uasset" 514
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/Human/T_HumanShoes_BC.uasset" 515
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/Human/T_HumanShoes_N.uasset" 516
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/Human/T_HumanShoes_S.uasset" 517
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Core/Systems/BP_ArcadePhysicsComponent.uasset" 518
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Bow/T_Bow_String_ORM_AS.uasset" 519
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Bow/T_Bow_String_N_AS.uasset" 520
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Bow/T_Bow_String_BC_AS.uasset" 521
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Weapons/Bow/MI_Bow_String_RH.uasset" 522
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/Bow/SM_Bow_String_AS.uasset" 523
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Bow/T_Bow_Body_ORM_AS.uasset" 524
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Bow/T_Bow_Body_N_AS.uasset" 525
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/Bow/T_Bow_Body_BC_AS.uasset" 526
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Weapons/Bow/MI_Bow_Body_RH.uasset" 527
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/Bow/SM_Bow_Frame_AS.uasset" 528
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Weapons/SM_Bow_AD.uasset" 529
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/Axe/SM_Axe_Wrap_SZ.uasset" 530
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/Axe/SM_Axe_Tail_SZ.uasset" 531
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/Axe/SM_Axe_Ring_SZ.uasset" 532
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/Axe/SM_Axe_Head_SZ.uasset" 533
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/Axe/SM_Axe_Handle_SZ.uasset" 534
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Weapons/SM_Axe_COMBAT.uasset" 535
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/BaseCharacter_BPCOMBAT.uasset" 536
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Metal/T_FireHydrant_OR_JPM.uasset" 537
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Metal/T_FireHydrant_JPM.uasset" 538
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Metal/T_FireHydrant_BC_JPM.uasset" 539
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Metal/MI_FireHydrant_RH.uasset" 540
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Metal/FireHydrant/SM_FireHydrantMerged_JPM.uasset" 541
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Attenuations/HydrantAttenuation.uasset" 542
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_ASU_Sound_FireHydrant_ASU.uasset" 543
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/BlownFireHydrant_BP.uasset" 544
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Clock/SM_ClockBigHand_DAOC.uasset" 545
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/GameMode/BP_Flag.uasset" 546
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/BP_Flag.uasset" 547
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Human_AnimBPCOMBAT.uasset" 548
+"../../../Engine/Content/BasicShapes/Cube.uasset" 549
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/TestCube.uasset" 550
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Abilities/BP_TeleportAbilityComponent.uasset" 551
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/GrapplingHook/T_GrapplingHook_ORM_LE.uasset" 552
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/GrapplingHook/T_GrapplingHook_N_LE.uasset" 553
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/GrapplingHook/T_GrapplingHook_BC_LE.uasset" 554
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Weapons/MI_GrapplingHook_RH.uasset" 555
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Abilities/GrappleHook.uasset" 556
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Abilities/GrappleHookHook.uasset" 557
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Abilities/SlowField_BP.uasset" 558
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Character/BP_Character_PEN.uasset" 559
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Widgets/Timer.uasset" 560
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/HUDArt/HUD_RedTeamScoreCard_ENW.uasset" 561
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/HUDArt/HUD_BlueTeamScoreCard_ENW.uasset" 562
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Widgets/Score.uasset" 563
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Widgets/Round.uasset" 564
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Widgets/HealthBar.uasset" 565
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/HUDArt/Skill2.uasset" 566
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/HUDArt/Skill1.uasset" 567
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Widgets/Ability.uasset" 568
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Widgets/HUD.uasset" 569
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/T_UE4Logo_Mask.uasset" 570
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/GameMode/BP_FlagIndicator.uasset" 571
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/GameMode/GameModeHUDWidget.uasset" 572
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/GameMode/BP_CTFHUD.uasset" 573
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Weapons/SM_Arrow_AD.uasset" 574
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Weapons/SM_Axe_SZ.uasset" 575
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/BearTrap/T_BearTrap_ORM_LE.uasset" 576
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/BearTrap/T_BearTrap_N_LE.uasset" 577
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/BearTrap/T_BearTrap_BC_LE.uasset" 578
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Weapons/MI_BearTrap_RH.uasset" 579
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/BearTrap/SM_BearTrap_Trigger_LE.uasset" 580
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/BearTrap/SM_BearTrap_TrapBase_LE.uasset" 581
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/BearTrap/SM_BearTrap_Teeth02_LE.uasset" 582
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/BearTrap/SM_BearTrap_Teeth01_LE.uasset" 583
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/BearTrap/SM_BearTrap_Springs_LE.uasset" 584
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/BearTrap/SM_BearTrap_RotatorCuff04_LE.uasset" 585
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/BearTrap/SM_BearTrap_RotatorCuff03_LE.uasset" 586
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/BearTrap/SM_BearTrap_RotatorCuff02_LE.uasset" 587
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/BearTrap/SM_BearTrap_RotatorCuff01_LE.uasset" 588
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/BearTrap/SM_BearTrap_Joint_LE.uasset" 589
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/BearTrap/SM_BearTrap_Handle_LE.uasset" 590
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/BearTrap/SM_BearTrap_HandleJoint02_LE.uasset" 591
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/BearTrap/SM_BearTrap_HandleJoint01_LE.uasset" 592
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/BearTrap/SM_BearTrap_Frame02_LE.uasset" 593
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/BearTrap/SM_BearTrap_Frame01_LE.uasset" 594
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/BearTrap/SM_BearTrap_Connector_LE.uasset" 595
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Weapons/SM_BearTrap_LE.uasset" 596
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/Grenade/SM_Grenade_Ring02_SW.uasset" 597
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/Grenade/SM_Grenade_Ring01_SW.uasset" 598
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/Grenade/SM_Grenade_Head_SW.uasset" 599
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/Grenade/SM_Grenade_Handle_SW.uasset" 600
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/Grenade/SM_Grenade_Body_SW.uasset" 601
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Weapons/SM_Granade_SW.uasset" 602
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Wrap07_LE.uasset" 603
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Wrap06_LE.uasset" 604
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Wrap05_LE.uasset" 605
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Wrap03_LE.uasset" 606
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Wrap02_LE.uasset" 607
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Wrap01_LE.uasset" 608
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Tube_LE.uasset" 609
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Trigger_LE.uasset" 610
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Tank_LE.uasset" 611
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Spindle02_LE.uasset" 612
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Spindle01_LE.uasset" 613
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Spikes02_LE.uasset" 614
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Spikes01_LE.uasset" 615
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_RopeBundle_LE.uasset" 616
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Rope02_LE.uasset" 617
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Rope01_LE.uasset" 618
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Rod_LE.uasset" 619
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_PressureValve_LE.uasset" 620
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_HandleStock_LE.uasset" 621
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Hammer_LE.uasset" 622
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Grip_LE.uasset" 623
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Wrap04_LE.uasset" 624
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Gauge_LE.uasset" 625
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Frame_LE.uasset" 626
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Brace_LE.uasset" 627
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Bolt_LE.uasset" 628
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/GrapplingHook/SM_GrapplingHook_Barrel_LE.uasset" 629
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Weapons/SM_GrapplingHook_LE.uasset" 630
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/KukriBlade/T_KukriBlade_ORM_PM.uasset" 631
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/KukriBlade/T_KukriBlade_N_PM.uasset" 632
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/KukriBlade/T_KukriBlade_BC_PM.uasset" 633
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Weapons/MI_KukriBlade_RH.uasset" 634
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/KukriBlade/SM_KukriBlade_Hilt_PM.uasset" 635
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/KukriBlade/SM_KukriBlade_Blade_PM.uasset" 636
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Weapons/SM_KukriBlade_PM.uasset" 637
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/SlingShot/T_SlingShot_Rings_ORM_RK.uasset" 638
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/SlingShot/T_SlingShot_Rings_N_RK.uasset" 639
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/SlingShot/T_SlingShot_Rings_BC_RK.uasset" 640
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Weapons/SlingShot/MI_SlingShot_Rings_RH.uasset" 641
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/SlingShot/SM_SlingShot_Rings_LE.uasset" 642
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/SlingShot/T_SlingShot_Body_ORM_RK.uasset" 643
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/SlingShot/T_SlingShot_Body_N_RK.uasset" 644
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Weapons/SlingShot/T_SlingShot_Body_BC_RK.uasset" 645
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Weapons/SlingShot/MI_SlingShot_Body_RH.uasset" 646
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Weapons/SlingShot/SM_SlingShot_Body_RK.uasset" 647
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Weapons/SM_SlingShot_RK.uasset" 648
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Materials/M_Basic_Floor.uasset" 649
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Architecture/Floor_400x400.uasset" 650
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Collapse01.uasset" 651
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Collapse02.uasset" 652
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Collapse_Cue.uasset" 653
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Explosion01.uasset" 654
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Explosion02.uasset" 655
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Explosion_Cue.uasset" 656
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Fire01.uasset" 657
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Fire01_Cue.uasset" 658
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Fire_Sparks01.uasset" 659
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Fire_Sparks01_Cue.uasset" 660
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Light01.uasset" 661
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Light01_Cue.uasset" 662
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Light02.uasset" 663
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Light02_Cue.uasset" 664
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Smoke01.uasset" 665
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Smoke01_Cue.uasset" 666
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Starter_Background_Cue.uasset" 667
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Starter_Birds01.uasset" 668
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Starter_Music01.uasset" 669
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Starter_Music_Cue.uasset" 670
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Starter_Wind05.uasset" 671
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Starter_Wind06.uasset" 672
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Steam01.uasset" 673
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Audio/Steam01_Cue.uasset" 674
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Particles/Materials/M_Burst.uasset" 675
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Particles/Materials/M_Dust_Particle.uasset" 676
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/UI_Test/MenuTestBG.uasset" 677
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/UI_Test/Fonts/aAgreementSignature_0.uasset" 678
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/UI_Test/Fonts/aAgreementSignature_0_Font.uasset" 679
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/UI_Test/Fonts/aAgreementSignature.uasset" 680
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/UI_Test/Fonts/aAgreementSignature_Font.uasset" 681
+"../../Plugins/FX/Niagara/Content/Functions/NormalizeDistanceRange.uasset" 682
+"../../Plugins/FX/Niagara/Content/Modules/Update/Velocity/VortexVelocity.uasset" 683
+"../../Plugins/FX/Niagara/Content/Functions/Localspace/TransformPosition.uasset" 684
+"../../Plugins/FX/Niagara/Content/DynamicInputs/Multiply/Multiply_VectorByFloat.uasset" 685
+"../../Plugins/FX/Niagara/Content/DynamicInputs/Helpers/SimulationPosition.uasset" 686
+"../../Plugins/FX/Niagara/Content/Modules/Beams/BeamEmitterSetup.uasset" 687
+"../../Plugins/FX/Niagara/Content/DynamicInputs/ValueFromCurve/ColorFromCurve.uasset" 688
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Amulet/T_Star_BC_AMY.uasset" 689
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Amulet/M_Star_AMY.uasset" 690
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Amulet/PS_Amulet_AMY.uasset" 691
+"../../Plugins/FX/Niagara/Content/Functions/RandomUnitVector.uasset" 692
+"../../Plugins/FX/Niagara/Content/Functions/RandomVector.uasset" 693
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraOrientationAxis.uasset" 694
+"../../Plugins/FX/Niagara/Content/Modules/Spawn/Location/CylinderLocation.uasset" 695
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Beartrap/SM_BeartrapParticle_TEY.uasset" 696
+"../../Plugins/FX/Niagara/Content/Modules/Spawn/Initialization/InitializeParticle.uasset" 697
+"../../Plugins/FX/Niagara/Content/DynamicInputs/UniformRange/UniformRangedFloat.uasset" 698
+"../../Plugins/FX/Niagara/Content/DynamicInputs/ScaleByCurve/ScaleFloatByCurve.uasset" 699
+"../../Plugins/FX/Niagara/Content/DynamicInputs/Angles/NormalizedAngleToDegrees.uasset" 700
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Beartrap/M_BeartrapParticles_TEY.uasset" 701
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Beartrap/E_Beartrap3_TEY.uasset" 702
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Beartrap/T_BeartrapVFX_TEY.uasset" 703
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Beartrap/M_BeartrapVFX_TEY.uasset" 704
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Beartrap/SM_BeartrapBarrier_TEY.uasset" 705
+"../../Plugins/FX/Niagara/Content/Modules/Emitter/SpawnBurst_Instantaneous.uasset" 706
+"../../Plugins/FX/Niagara/Content/Modules/Update/Forces/PointAttractionForce.uasset" 707
+"../../Plugins/FX/Niagara/Content/Modules/Solvers/ApplyInitialForces.uasset" 708
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Beartrap/E_Beartrap2_TEY.uasset" 709
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Beartrap/E_Beartrap1_TEY.uasset" 710
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Beartrap/PS_Beartrap_TEY.uasset" 711
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraVector3_Channels.uasset" 712
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraMeshTransforms.uasset" 713
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraLinearColor_Channels.uasset" 714
+"../../Plugins/FX/Niagara/Content/Functions/Rotation/MultiplyQuaternion.uasset" 715
+"../../Plugins/FX/Niagara/Content/Functions/Rotation/AxisAngleToQuaternion.uasset" 716
+"../../Plugins/FX/Niagara/Content/Modules/Solvers/ApplyRotationVector.uasset" 717
+"../../Plugins/FX/Niagara/Content/Modules/Update/Orientation/V3/UpdateMeshOrientation.uasset" 718
+"../../Plugins/FX/Niagara/Content/Modules/Update/Material/DynamicMaterialParameters.uasset" 719
+"../../Plugins/FX/Niagara/Content/Modules/Update/Forces/GravityForce.uasset" 720
+"../../Plugins/FX/Niagara/Content/Modules/Spawn/Orientation/V3/InitialMeshOrientation.uasset" 721
+"../../Plugins/FX/Niagara/Content/DynamicInputs/ValueFromCurve/Vector2DFromCurve.uasset" 722
+"../../Plugins/FX/Niagara/Content/DynamicInputs/UniformRange/V2/RandomRangeVector.uasset" 723
+"../../Plugins/FX/Niagara/Content/DynamicInputs/TypeConversions/VectorFromFloat.uasset" 724
+"../../Plugins/FX/Niagara/Content/DynamicInputs/TypeConversions/MakeVector.uasset" 725
+"../../Plugins/FX/Niagara/Content/Functions/ChannelMasks/SelectV3Channel.uasset" 726
+"../../Plugins/FX/Niagara/Content/DynamicInputs/TypeConversions/MakeFloatFromVector.uasset" 727
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraVector4_Channels.uasset" 728
+"../../Plugins/FX/Niagara/Content/Functions/ChannelMasks/SelectV4Channel.uasset" 729
+"../../Plugins/FX/Niagara/Content/DynamicInputs/TypeConversions/MakeFloatFromLinearColor.uasset" 730
+"../../Plugins/FX/Niagara/Content/Functions/V2/CalculateRandomUnitVector.uasset" 731
+"../../Plugins/FX/Niagara/Content/DynamicInputs/Random/V2/RandomVector.uasset" 732
+"../../Plugins/FX/Niagara/Content/Functions/DistanceBasedFalloff.uasset" 733
+"../../Plugins/FX/Niagara/Content/Modules/Spawn/Velocity/AddVelocityFromPoint.uasset" 734
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Crystal_Completion/Texture/Alpha_Sparks_PED.uasset" 735
+"../../../Engine/Content/Functions/Engine_MaterialFunctions02/HueShift.uasset" 736
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Crystal_Completion/Material/M_sparks_PED.uasset" 737
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Crystal_Completion/Material_instance/MI_sparks_PED.uasset" 738
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Crystal_Completion/Texture/Alpha_Flash_PED.uasset" 739
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Crystal_Completion/Material/M_flash_PED.uasset" 740
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Crystal_Completion/Material_instance/MI_flash_PED.uasset" 741
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Crystal_Completion/Texture/Alpha_Noise_FX_PED.uasset" 742
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Crystal_Completion/Texture/Alpha_FX_PED.uasset" 743
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Crystal_Completion/Material/M_Energy_Effect_PED.uasset" 744
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Crystal_Completion/Material_instance/MI_Energy_Effect_PED.uasset" 745
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Asset/Trail_FX_PED.uasset" 746
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Crystal_Completion/Material/M_Rays_light_PED.uasset" 747
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Crystal_Completion/Material_instance/MI_Rays_light_PED.uasset" 748
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Asset/light_glow_PED.uasset" 749
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Crystal_Completion/Niagara/Cristal_effect_PED.uasset" 750
+"../../Plugins/FX/Niagara/Content/Modules/Spawn/Velocity/AddVelocity.uasset" 751
+"../../Plugins/FX/Niagara/Content/DynamicInputs/Subtract/Subtract_Vector.uasset" 752
+"../../Plugins/FX/Niagara/Content/DynamicInputs/Multiply/Multiply_Vector.uasset" 753
+"../../Plugins/FX/Niagara/Content/DynamicInputs/LinearColor/LerpLinearColors.uasset" 754
+"../../Plugins/FX/Niagara/Content/DynamicInputs/Helpers/NormalizeVector.uasset" 755
+"../../Plugins/FX/Niagara/Content/DynamicInputs/Add/Add_Float.uasset" 756
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Dust/T_Dust_BC_JMF.uasset" 757
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Dust/M_Dust_JMF.uasset" 758
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Dust/PS_Dust_JMF.uasset" 759
+"../../../Engine/Content/Functions/Engine_MaterialFunctions01/Density/ExponentialDensity.uasset" 760
+"../../../Engine/Content/Functions/Engine_MaterialFunctions01/Gradient/RadialGradientExponential.uasset" 761
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Fireworks/M_Fireworks_BC_Copy_AMY.uasset" 762
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Fireworks/M_Fireworks_BC_AMY.uasset" 763
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Fireworks/PS_Fireworks_AMY.uasset" 764
+"../../Plugins/FX/Niagara/Content/Functions/PolarToCartesianCoordinates.uasset" 765
+"../../Plugins/FX/Niagara/Content/Functions/RandomVectorInCone.uasset" 766
+"../../Plugins/FX/Niagara/Content/Functions/Math/RemapValueRange.uasset" 767
+"../../Plugins/FX/Niagara/Content/Modules/Spawn/Velocity/AddVelocityInCone.uasset" 768
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Fountain/PS_Fire_Hydrant.uasset" 769
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Fountain/PS_Fountain.uasset" 770
+"../../Plugins/FX/Niagara/Content/DefaultAssets/Structs/LocationEvent.uasset" 771
+"../../Plugins/FX/Niagara/Content/Modules/Events/ReceiveLocationEvent.uasset" 772
+"../../Plugins/FX/Niagara/Content/Functions/Helpers/AdvancePositionWithAcceleration.uasset" 773
+"../../Plugins/FX/Niagara/Content/Modules/Events/GenerateLocationEvent.uasset" 774
+"../../Plugins/FX/Niagara/Content/DynamicInputs/TypeConversions/MakeVector4_FromFloat.uasset" 775
+"../../Plugins/FX/Niagara/Content/DynamicInputs/LinearColor/MultiplyLinearColor.uasset" 776
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Grenade/T_Grenade_BC_AMY.uasset" 777
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Grenade/M_Grenade_AMY.uasset" 778
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Grenade/PS_Grenade_AMY.uasset" 779
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Hatchet/T_HatchetVFX2_TEY.uasset" 780
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Hatchet/T_HatcherVFX1_TEY.uasset" 781
+"../../../Engine/Content/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat2Components.uasset" 782
+"../../../Engine/Content/Functions/Engine_MaterialFunctions01/Texturing/ScaleUVsByCenter.uasset" 783
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Hatchet/M_HatchetVFX2_TEY.uasset" 784
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Hatchet/SM_Hatchet1_TEY.uasset" 785
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Hatchet/E_Hatchet2_TEY.uasset" 786
+"../../../Engine/Content/Functions/Engine_MaterialFunctions01/ImageAdjustment/DeriveHDRfromLDR.uasset" 787
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Hatchet/M_HatchetVFX1_TEY.uasset" 788
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Hatchet/E_Hatchet1_TEY.uasset" 789
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Hatchet/PS_Hatchet_TEY.uasset" 790
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Hit_Damage/T_Flash_BC_JMF.uasset" 791
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Hit_Damage/T__Noise01_BC_JMF.uasset" 792
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Hit_Damage/M_Flash_JMF.uasset" 793
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Hit_Damage/MI_Flash_JMF.uasset" 794
+"../../Plugins/FX/Niagara/Content/Enums/ENiagaraTorusDistributionMode.uasset" 795
+"../../Plugins/FX/Niagara/Content/Functions/Masks/ConeMask.uasset" 796
+"../../Plugins/FX/Niagara/Content/Modules/Update/Forces/CurlNoiseForce.uasset" 797
+"../../Plugins/FX/Niagara/Content/Functions/RandomPointInSphere.uasset" 798
+"../../Plugins/FX/Niagara/Content/Modules/Spawn/Location/SphereLocation.uasset" 799
+"../../Plugins/FX/Niagara/Content/DynamicInputs/UniformRange/UniformRangedVector.uasset" 800
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Hit_Damage/PS_Flash_JMF.uasset" 801
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Hit_Damage/PS_Flash02_JMF.uasset" 802
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Hit_Damage/T_Noise02_BC_JMF.uasset" 803
+"../../Plugins/FX/Niagara/Content/Modules/Update/Position/JitterPosition.uasset" 804
+"../../Plugins/FX/Niagara/Content/Functions/Spline/FindPositionOnBezierSpline.uasset" 805
+"../../Plugins/FX/Niagara/Content/Functions/NormalizedExecutionIndex.uasset" 806
+"../../Plugins/FX/Niagara/Content/Modules/Beams/SpawnBeam.uasset" 807
+"../../Plugins/FX/Niagara/Content/Modules/Beams/BeamWidth.uasset" 808
+"../../Plugins/FX/Niagara/Content/DefaultAssets/DefaultRIbbonMaterial.uasset" 809
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Niagara_Lightning/E_Lightning_ASU.uasset" 810
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Niagara_Lightning/PS_TaserVFX_ASU.uasset" 811
+"../../Plugins/FX/Niagara/Content/Modules/Update/Orientation/AlignSpriteToMeshOrientation.uasset" 812
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Respawn/T_RespawnCircle_GB.uasset" 813
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Respawn/M_RespawnCircle_GB.uasset" 814
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Respawn/M_Radial_GB.uasset" 815
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Respawn/M_Cylinder_GB.uasset" 816
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Respawn/SM_Cylinder_GB.uasset" 817
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Respawn/PS_Respawn_GB.uasset" 818
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Badali_Gina_SFX_Sound_Clank_GB.uasset" 819
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Badali_Gina_SFX_Sound_Dash_GB.uasset" 820
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Badali_Gina_SFX_Sound_Dizzy_GB.uasset" 821
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Badali_Gina_SFX_Sound_Glow_GB.uasset" 822
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Badali_Gina_SFX_Sound_HitMarker_GB.uasset" 823
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Badali_Gina_SFX_Sound_Swoosh_GB.uasset" 824
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Badali_Gina_SFX_Sound_Wind_GB.uasset" 825
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Ambience_GB.uasset" 826
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Amulet001_TEY.uasset" 827
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Amulet002_TEY.uasset" 828
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Amulet003_TEY.uasset" 829
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Arrow_JMF.uasset" 830
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_ASU_Sound_Fireworks_ASU.uasset" 831
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_ASU_Sound_Hit_ASU.uasset" 832
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_ASU_Sound_WaterFountain_ASU.uasset" 833
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Bomb_ASU.uasset" 834
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Bomb_JMF.uasset" 835
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Button_ASU.uasset" 836
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Death_AMY.uasset" 837
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Dizzy_GB.uasset" 838
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_FlagSnatched_AMY.uasset" 839
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Footsteps_JF.uasset" 840
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_GruntAlien_GB.uasset" 841
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Lose_AMY.uasset" 842
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_MarketAmbience_JF.uasset" 843
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Menu_02_GB.uasset" 844
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Menu_03_GB.uasset" 845
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Menu_ASU.uasset" 846
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_MusicAmbience_GB.uasset" 847
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_OOF_GB.uasset" 848
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_ShackleShot_JMF.uasset" 849
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_SlowField_GB.uasset" 850
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Taser_AMY.uasset" 851
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/SFX/Sound_Wind_AMY.uasset" 852
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Slow_Field/SM_SlownessRipple_TEY.uasset" 853
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Slow_Field/M_SlownessBase_TEY.uasset" 854
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Slow_Field/T_SlownessRipple_TEY.uasset" 855
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Slow_Field/M_SlownessRipple_TEY.uasset" 856
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Slow_Field/SM_SlownessBorder_TEY.uasset" 857
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Slow_Field/E_SlownessRipple_TEY.uasset" 858
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Slow_Field/M_SlownessBorder_TEY.uasset" 859
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Slow_Field/SM_SlownessBase_TEY.uasset" 860
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Slow_Field/E_SlownessBorder_TEY.uasset" 861
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Slow_Field/E_SlownessBase_TEY.uasset" 862
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Slow_Field/PS_Slowness_TEY.uasset" 863
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Smoke_Footsteps/SM_Smoke_AMY.uasset" 864
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Smoke_Footsteps/T_Cloud_BC_AMY.uasset" 865
+"../../../Engine/Content/Functions/Engine_MaterialFunctions01/Gradient/LinearGradient.uasset" 866
+"../../../Engine/Content/Functions/Engine_MaterialFunctions02/ValueStep.uasset" 867
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Smoke_Footsteps/M_smoke_AMY.uasset" 868
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Smoke_Footsteps/P_Smoke_AMY.uasset" 869
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Smoke_Footsteps/T_smoke_BC_AMY.uasset" 870
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Tornado/M_Rocks_GB.uasset" 871
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Tornado/SM_Rock_GB.uasset" 872
+"../../Plugins/FX/Niagara/Content/Modules/Solvers/SolveRotationalForcesAndVelocity.uasset" 873
+"../../Plugins/FX/Niagara/Content/Functions/Rotation/InvertQuaternion.uasset" 874
+"../../Plugins/FX/Niagara/Content/Modules/Collision/AddRotationalVelocity.uasset" 875
+"../../Plugins/FX/Niagara/Content/Modules/Update/Forces/VortexForce.uasset" 876
+"../../Plugins/FX/Niagara/Content/DynamicInputs/Angles/Sine.uasset" 877
+"../../Plugins/FX/Niagara/Content/DynamicInputs/Angles/Cosine.uasset" 878
+"../../Plugins/FX/Niagara/Content/DynamicInputs/Add/Add_Vector.uasset" 879
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Tornado/T_Tornado_GB.uasset" 880
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Tornado/BP_WorldGridMaterial_GB.uasset" 881
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Tornado/SM_TornadoCylinder_GB.uasset" 882
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Tornado/PS_Tornado_GB.uasset" 883
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Tornado/M_Ring_GB.uasset" 884
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Tornado/SM_Ring_GB.uasset" 885
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_SFX/Stun_Concussion/T_StunnedCircle_ASU.uasset" 886
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_SFX/Stun_Concussion/T_Noise_ASU.uasset" 887
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_SFX/Stun_Concussion/M_StunnedCircle_ASU.uasset" 888
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_SFX/Stun_Concussion/PS_Stunned_ASU.uasset" 889
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Widgets/FlagCarry.uasset" 890
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Widgets/LowHealth.uasset" 891
+"../../../Engine/Content/ArtTools/RenderToTexture/Meshes/S_1_Unit_Plane.uasset" 892
+"../../../Engine/Content/BasicShapes/Cone.uasset" 893
+"../../../Engine/Content/EditorLandscapeResources/DataLayer.uasset" 894
+"../../../Engine/Content/EditorLandscapeResources/DefaultAlphaTexture.uasset" 895
+"../../../Engine/Content/EditorMaterials/MAT_Groups_Toggle.uasset" 896
+"../../../Engine/Content/EditorMaterials/MAT_Groups_Visibility.uasset" 897
+"../../../Engine/Content/EditorMaterials/PreviewShadowIndicator.uasset" 898
+"../../../Engine/Content/EditorMaterials/PreviewShadowIndicatorMaterial.uasset" 899
+"../../../Engine/Content/EditorMaterials/MatineeGroups/MAT_ColorTrack.uasset" 900
+"../../../Engine/Content/EditorMaterials/MatineeGroups/MAT_Groups_Anim.uasset" 901
+"../../../Engine/Content/EditorMaterials/MatineeGroups/MAT_Groups_AudioMaster.uasset" 902
+"../../../Engine/Content/EditorMaterials/MatineeGroups/MAT_Groups_Director.uasset" 903
+"../../../Engine/Content/EditorMaterials/MatineeGroups/MAT_Groups_Event.uasset" 904
+"../../../Engine/Content/EditorMaterials/MatineeGroups/MAT_Groups_Fade.uasset" 905
+"../../../Engine/Content/EditorMaterials/MatineeGroups/MAT_Groups_Float.uasset" 906
+"../../../Engine/Content/EditorMaterials/MatineeGroups/MAT_Groups_Move.uasset" 907
+"../../../Engine/Content/EditorMaterials/MatineeGroups/MAT_Groups_Slomo.uasset" 908
+"../../../Engine/Content/EditorMaterials/MatineeGroups/MAT_Groups_Sound.uasset" 909
+"../../../Engine/Content/EditorMaterials/MatineeGroups/MAT_Groups_Vector.uasset" 910
+"../../../Engine/Content/EditorMaterials/ParticleSystems/PSysThumbnail_NoImage.uasset" 911
+"../../../Engine/Content/EditorMaterials/ParticleSystems/PSysThumbnail_OOD.uasset" 912
+"../../../Engine/Content/EditorMaterials/Camera/CineMat.uasset" 913
+"../../../Engine/Content/EditorMaterials/Camera/MI_CineMat_Rig.uasset" 914
+"../../../Engine/Content/EditorMeshes/Camera/SM_CraneRig_Arm.uasset" 915
+"../../../Engine/Content/EditorMeshes/Camera/SM_CraneRig_Base.uasset" 916
+"../../../Engine/Content/EditorMeshes/Camera/SM_CraneRig_Body.uasset" 917
+"../../../Engine/Content/EditorMeshes/Camera/SM_CraneRig_Mount.uasset" 918
+"../../../Engine/Content/EditorMeshes/Camera/SM_RailRig_Mount.uasset" 919
+"../../../Engine/Content/EditorMeshes/Camera/SM_RailRig_Track.uasset" 920
+"../../../Engine/Content/EditorResources/BSPVertex.uasset" 921
+"../../../Engine/Content/EditorResources/EmptyActor.uasset" 922
+"../../../Engine/Content/EditorResources/S_Actor.uasset" 923
+"../../../Engine/Content/EditorResources/S_Note.uasset" 924
+"../../../Engine/Content/EditorResources/S_Solver.uasset" 925
+"../../../Engine/Content/EditorResources/S_Terrain.uasset" 926
+"../../../Engine/Content/EditorResources/S_Trigger.uasset" 927
+"../../../Engine/Content/EditorResources/LightIcons/S_LightError.uasset" 928
+"../../../Engine/Content/EditorResources/SequenceRecorder/Countdown.uasset" 929
+"../../../Engine/Content/EditorResources/SequenceRecorder/RecordingIndicator.uasset" 930
+"../../../Engine/Content/EngineDamageTypes/DmgTypeBP_Environmental.uasset" 931
+"../../../Engine/Content/EngineDebugMaterials/DebugEditorMaterial.uasset" 932
+"../../../Engine/Content/EngineDebugMaterials/DebugMeshMaterial.uasset" 933
+"../../../Engine/Content/EngineDebugMaterials/M_SimpleUnlitTranslucent.uasset" 934
+"../../../Engine/Content/EngineDebugMaterials/VolumeToRender.uasset" 935
+"../../../Engine/Content/Functions/Engine_MaterialFunctions02/Utility/CameraDirectionVector.uasset" 936
+"../../../Engine/Content/EngineDebugMaterials/M_VolumeRenderSphereTracePP.uasset" 937
+"../../../Engine/Content/Functions/Engine_MaterialFunctions01/Shading/ConvertFromDiffSpec.uasset" 938
+"../../../Engine/Content/EngineDebugMaterials/VertexColorMaterial.uasset" 939
+"../../../Engine/Content/EngineDebugMaterials/WireframeMaterial.uasset" 940
+"../../../Engine/Content/EngineMaterials/BaseFlattenNormalMap.uasset" 941
+"../../../Engine/Content/EngineMaterials/BaseFlattenGrayscaleMap.uasset" 942
+"../../../Engine/Content/EngineMaterials/BaseFlattenEmissiveMap.uasset" 943
+"../../../Engine/Content/EngineMaterials/BaseFlattenDiffuseMap.uasset" 944
+"../../../Engine/Content/EngineMaterials/BaseFlattenMaterial.uasset" 945
+"../../../Engine/Content/EngineMaterials/BlueNoise.uasset" 946
+"../../../Engine/Content/EngineMaterials/DefaultBloomKernel.uasset" 947
+"../../../Engine/Content/EngineMaterials/DefaultBokeh.uasset" 948
+"../../../Engine/Content/EngineMaterials/DefaultDiffuse.uasset" 949
+"../../../Engine/Content/EngineMaterials/DefaultDeferredDecalMaterial.uasset" 950
+"../../../Engine/Content/EngineMaterials/DefaultLightFunctionMaterial.uasset" 951
+"../../../Engine/Content/EngineMaterials/DefaultPhysicalMaterial.uasset" 952
+"../../../Engine/Content/EngineMaterials/DefaultPostProcessMaterial.uasset" 953
+"../../../Engine/Content/EngineFonts/RobotoDistanceField.uasset" 954
+"../../../Engine/Content/EngineMaterials/DefaultTextMaterialOpaque.uasset" 955
+"../../../Engine/Content/EngineMaterials/DefaultWhiteGrid.uasset" 956
+"../../../Engine/Content/EngineMaterials/DefaultWhiteGrid_Low.uasset" 957
+"../../../Engine/Content/EngineMaterials/EmissiveMeshMaterial.uasset" 958
+"../../../Engine/Content/EngineMaterials/GizmoMaterial.uasset" 959
+"../../../Engine/Content/EngineMaterials/MiniFont.uasset" 960
+"../../../Engine/Content/EngineMaterials/InvalidLightmapSettings.uasset" 961
+"../../../Engine/Content/EngineMaterials/M_InvalidLightmapSettings.uasset" 962
+"../../../Engine/Content/Functions/Engine_MaterialFunctions02/WorldPositionOffset/CameraOffset.uasset" 963
+"../../../Engine/Content/EngineMaterials/PhAT_JointLimitMaterial.uasset" 964
+"../../../Engine/Content/EngineMaterials/PreintegratedSkinBRDF.uasset" 965
+"../../../Engine/Content/EngineMaterials/RemoveSurfaceMaterial.uasset" 966
+"../../../Engine/Content/EngineMaterials/WeightMapPlaceholderTexture.uasset" 967
+"../../../Engine/Content/EngineResources/WhiteSquareTexture.uasset" 968
+"../../../Engine/Content/EngineMaterials/Widget3DPassThrough.uasset" 969
+"../../../Engine/Content/EngineMaterials/Widget3DPassThrough_Masked.uasset" 970
+"../../../Engine/Content/EngineMaterials/Widget3DPassThrough_Opaque.uasset" 971
+"../../../Engine/Content/EngineMaterials/Widget3DPassThrough_Masked_OneSided.uasset" 972
+"../../../Engine/Content/EngineMaterials/Widget3DPassThrough_Opaque_OneSided.uasset" 973
+"../../../Engine/Content/EngineMaterials/Widget3DPassThrough_Translucent.uasset" 974
+"../../../Engine/Content/EngineMaterials/Widget3DPassThrough_Translucent_OneSided.uasset" 975
+"../../../Engine/Content/EngineMeshes/Cylinder.uasset" 976
+"../../../Engine/Content/EngineMeshes/Sphere.uasset" 977
+"../../../Engine/Content/EngineResources/Black.uasset" 978
+"../../../Engine/Content/EngineResources/DefaultTextureCube.uasset" 979
+"../../../Engine/Content/EngineResources/DefaultVolumeTexture2D.uasset" 980
+"../../../Engine/Content/EngineResources/DefaultVolumeTexture.uasset" 981
+"../../../Engine/Content/EngineResources/GradientTexture0.uasset" 982
+"../../../Engine/Content/EngineSky/VolumetricClouds/T_NoiseShape64.uasset" 983
+"../../../Engine/Content/EngineSky/VolumetricClouds/T_VolumeNoiseShape64.uasset" 984
+"../../../Engine/Content/EngineSky/VolumetricClouds/T_NoiseErosion.uasset" 985
+"../../../Engine/Content/EngineSky/VolumetricClouds/T_VolumeNoiseErosion32.uasset" 986
+"../../../Engine/Content/EngineSky/VolumetricClouds/CloudWeatherTexture.uasset" 987
+"../../../Engine/Content/EngineSky/VolumetricClouds/CloudGradientTexture.uasset" 988
+"../../../Engine/Content/Functions/Engine_MaterialFunctions02/Utility/MakeFloat2.uasset" 989
+"../../../Engine/Content/EngineSky/VolumetricClouds/m_SimpleVolumetricCloud.uasset" 990
+"../../../Engine/Content/EngineSky/VolumetricClouds/m_SimpleVolumetricCloud_Inst.uasset" 991
+"../../../Engine/Content/EngineSounds/Master.uasset" 992
+"../../../Engine/Content/Functions/Engine_MaterialFunctions01/Shading/PowerToRoughness.uasset" 993
+"../../../Engine/Content/Maps/Templates/Thumbnails/Default.uasset" 994
+"../../../Engine/Content/Maps/Templates/Thumbnails/TimeOfDay.uasset" 995
+"../../../Engine/Content/Maps/Templates/Thumbnails/VR-Basic.uasset" 996
+"../../../Engine/Content/MobileResources/T_MobileControls_texture.uasset" 997
+"../../../Engine/Content/MobileResources/T_MobileMenu2.uasset" 998
+"../../../Engine/Content/MobileResources/HUD/AnalogHat.uasset" 999
+"../../../Engine/Content/MobileResources/HUD/VirtualJoystick_Thumb.uasset" 1000
+"../../../Engine/Content/MobileResources/HUD/VirtualJoystick_Background.uasset" 1001
+"../../../Engine/Content/MobileResources/HUD/DefaultVirtualJoysticks.uasset" 1002
+"../../../Engine/Content/MobileResources/HUD/LeftVirtualJoystickOnly.uasset" 1003
+"../../../Engine/Content/MobileResources/HUD/MobileHUDButton1_off.uasset" 1004
+"../../../Engine/Content/MobileResources/HUD/MobileHUDButton1_on.uasset" 1005
+"../../../Engine/Content/MobileResources/HUD/MobileHUDButton2_off.uasset" 1006
+"../../../Engine/Content/MobileResources/HUD/MobileHUDButton2_on.uasset" 1007
+"../../../Engine/Content/MobileResources/HUD/MobileHUDButton3.uasset" 1008
+"../../../Engine/Content/MobileResources/HUD/MobileHUDButtonFire.uasset" 1009
+"../../../Engine/Content/MobileResources/HUD/MobileHUDDirectionPad.uasset" 1010
+"../../../Engine/Content/MobileResources/HUD/MobileHUDDirectionPad2.uasset" 1011
+"../../../Engine/Content/MobileResources/HUD/MobileHUDDirectionPad3.uasset" 1012
+"../../../Engine/Content/MobileResources/HUD/MobileHUDDirectionStick.uasset" 1013
+"../../../Engine/Content/MobileResources/HUD/T_Castle_ThumbstickInner.uasset" 1014
+"../../../Engine/Content/MobileResources/HUD/T_Castle_ThumbstickOutter.uasset" 1015
+"../../../Engine/Content/Tutorial/ContentIntroCurve.uasset" 1016
+"../../../Engine/Content/Tutorial/Basics/LevelEditorAttract.uasset" 1017
+"../../../Engine/Content/Tutorial/Basics/TutorialAssets/icon_tab_Levels_40x.uasset" 1018
+"../../../Engine/Content/Tutorial/Basics/LevelEditorOverview.uasset" 1019
+"../../../Engine/Content/Tutorial/BlueprintTutorials/TutorialAssets/Blueprint_64x.uasset" 1020
+"../../../Engine/Content/Tutorial/BlueprintTutorials/BlueprintEditorTutorial.uasset" 1021
+"../../../Engine/Content/VREditor/TransformGizmo/TranslucentTransformGizmoMaterial.uasset" 1022
+"../../../Engine/Content/VREditor/LaserPointer/VR_LaserPower_01.uasset" 1023
+"../../../Engine/Content/VREditor/TransformGizmo/TransformGizmoMaterial.uasset" 1024
+"../../../Engine/Content/VREditor/TransformGizmo/BoundingBoxCorner.uasset" 1025
+"../../../Engine/Content/VREditor/TransformGizmo/BoundingBoxEdge.uasset" 1026
+"../../../Engine/Content/VREditor/TransformGizmo/PlaneTranslationHandle.uasset" 1027
+"../../../Engine/Content/VREditor/TransformGizmo/Xray.uasset" 1028
+"../../../Engine/Content/VREditor/TransformGizmo/Main.uasset" 1029
+"../../../Engine/Content/VREditor/TransformGizmo/SM_Sequencer_Key.uasset" 1030
+"../../../Engine/Content/VREditor/TransformGizmo/SM_Sequencer_Node.uasset" 1031
+"../../Plugins/2D/Paper2D/Content/PlaceholderTextures/DummySpriteTexture.uasset" 1032
+"../../Plugins/2D/Paper2D/Content/DummySprite.uasset" 1033
+"../../Plugins/2D/Paper2D/Content/DefaultPaperTerrainMaterial.uasset" 1034
+"../../Plugins/2D/Paper2D/Content/DefaultSpriteMaterial.uasset" 1035
+"../../Plugins/2D/Paper2D/Content/MaskedUnlitSpriteMaterial.uasset" 1036
+"../../Plugins/2D/Paper2D/Content/OpaqueUnlitSpriteMaterial.uasset" 1037
+"../../../Engine/Content/BasicShapes/Cylinder.uasset" 1038
+"../../../Engine/Content/ArtTools/RenderToTexture/Materials/Debug/M_Emissive_Color.uasset" 1039
+"../../Plugins/Lumin/MagicLeapPassableWorld/Content/MagicLeapARPinInfoActor.uasset" 1040
+"../../../Engine/Content/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat3Components.uasset" 1041
+"../../Plugins/Editor/SpeedTreeImporter/Content/SpeedTree9/UnpackInteger3.uasset" 1042
+"../../Plugins/Editor/SpeedTreeImporter/Content/SpeedTree9/UnpackDirection.uasset" 1043
+"../../Plugins/Editor/SpeedTreeImporter/Content/SpeedTree9/game_wind_noise.uasset" 1044
+"../../../Engine/Content/Functions/Engine_MaterialFunctions02/SafeNormalize.uasset" 1045
+"../../Plugins/Editor/SpeedTreeImporter/Content/SpeedTree9/SpeedTreeWindMotion.uasset" 1046
+"../../Plugins/Editor/SpeedTreeImporter/Content/SpeedTree9/SpeedTreeBranchMotion.uasset" 1047
+"../../../Engine/Content/Functions/Engine_MaterialFunctions02/ObjectLocalBounds.uasset" 1048
+"../../../Engine/Content/Functions/Engine_MaterialFunctions02/UVs/BoundingBoxBased_0-1_UVW.uasset" 1049
+"../../Plugins/Editor/SpeedTreeImporter/Content/SpeedTree9/SpeedTreeWind.uasset" 1050
+"../../Plugins/Editor/SpeedTreeImporter/Content/SpeedTree9/SpeedTreeBillboard.uasset" 1051
+"../../../Engine/Content/EngineResources/DefaultTexture.uasset" 1052
+"../../Plugins/Editor/SpeedTreeImporter/Content/SpeedTree9/SpeedTreeBillboardMaster.uasset" 1053
+"../../Plugins/Editor/SpeedTreeImporter/Content/SpeedTree9/SpeedTreeCameraFacing.uasset" 1054
+"../../Plugins/Editor/SpeedTreeImporter/Content/SpeedTree9/SpeedTreeMaster.uasset" 1055
+"../../../Engine/Content/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat4Components.uasset" 1056
+"../../../Engine/Content/Functions/Engine_MaterialFunctions02/Utility/MakeFloat3.uasset" 1057
+"../../Plugins/Runtime/Oculus/OculusVR/Content/Materials/OculusMR_ChromaKey.uasset" 1058
+"../../Plugins/Runtime/Oculus/OculusVR/Content/Materials/OculusMR_OpaqueColoredMaterial.uasset" 1059
+"../../Plugins/Runtime/Oculus/OculusVR/Content/Materials/PokeAHoleMaterial.uasset" 1060
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Walls/SM_Arch_DAOC.uasset" 1061
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Triangle/SM_DoorTriangle_DAOC.uasset" 1062
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_SmallDomeTube_DAOC.uasset" 1063
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Ground/MI_InsideTilesLong_DAOC.uasset" 1064
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/SM_Tunnels_DAOC.uasset" 1065
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_TreeBase_DAOC.uasset" 1066
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/SM_TreeBase_DAOC.uasset" 1067
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/SM_StepBlock_DAOC.uasset" 1068
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Wood/T_WoodPlanks_N_DAOC.uasset" 1069
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Wood/T_WoodPlanks_BC_DAOC.uasset" 1070
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Wood/T_WoodPlanks_AO_DAOC.uasset" 1071
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Wood/MI_WoodPlank_DAOC.uasset" 1072
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/SM_Scafolds_DAOC.uasset" 1073
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/SM_Roundstep_DAOC.uasset" 1074
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_RockAlt_DAOC.uasset" 1075
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/SM_Rashamon_DAOC.uasset" 1076
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/SM_Obelisk_DAOC.uasset" 1077
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_BigRoof_DAOC.uasset" 1078
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/SM_BigRoof_DAOC.uasset" 1079
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Railings/SM_RailingShort_DAOC.uasset" 1080
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Railings/SM_RailingPost_DAOC.uasset" 1081
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Railings/SM_RailingLong_DAOC.uasset" 1082
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Railings/SM_RailColumn_DAOC.uasset" 1083
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Railings/SM_LongRails_DAOC.uasset" 1084
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Halfcircle/SM_Halfcirlce_Large.uasset" 1085
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Rock/T_MarbleCracks_BC_DAOC.uasset" 1086
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Rock/T_Marble_AO_DAOC.uasset" 1087
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_Fountain_DAOC.uasset" 1088
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Fountain/SM_FountainSecondTier_DAOC.uasset" 1089
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Fountain/SM_FountainBlockw_DAOC.uasset" 1090
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Fountain/SM_FountainBlockBase_DAOC.uasset" 1091
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Domes/SM_SmallDomeTube_DAOC.uasset" 1092
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Domes/SM_SmallDomeEdge_DAOC.uasset" 1093
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Domes/SM_SmallDome_DAOC.uasset" 1094
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Metal/MI_BigDome_DAOC.uasset" 1095
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Domes/SM_MediumDomePieceComplete_DAOC.uasset" 1096
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Domes/SM_MediumDomePiece_DAOC.uasset" 1097
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Domes/SM_DomeWindowSmall_DAOC.uasset" 1098
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Domes/SM_DomeWindow_DAOC.uasset" 1099
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_DomeTop_DAOC.uasset" 1100
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Domes/SM_DomeSmallCylinder_DAOC.uasset" 1101
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Domes/SM_BigDomePieceComplete_DAOC.uasset" 1102
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Domes/SM_BigDomePiece_DAOC.uasset" 1103
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Domes/SM_BigDomeBeam_DAOC.uasset" 1104
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Columns/SM_LargeSquareColumn_DAOC.uasset" 1105
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Columns/SM_HalfcircleRoof_DAOC.uasset" 1106
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Columns/SM_ColumnTop_DAOC.uasset" 1107
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Columns/SM_Column_DAOC.uasset" 1108
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Clock/SM_ClockTrim_DAOC.uasset" 1109
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_ClockRoof_DAOC.uasset" 1110
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Clock/SM_ClockRoof_DAOC.uasset" 1111
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Clock/SM_ClockLittleHand_DAOC.uasset" 1112
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Clock/SM_ClockFace_DAOC.uasset" 1113
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Clock/SM_ClockCenter_DAOC.uasset" 1114
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_ClockBody_DAOC.uasset" 1115
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Clock/SM_ClockBody_DAOC.uasset" 1116
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/BG_Buildings/SM_BGBuildingWide_DAOC.uasset" 1117
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/BG_Buildings/SM_BGBuildingSmall_Wall_DAOC.uasset" 1118
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/BG_Buildings/SM_BGBuildingSmall_DAOC.uasset" 1119
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/BG_Buildings/SM_BGBuildingLarge_DAOC.uasset" 1120
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Block_Out/SM_BlockOut_LE.uasset" 1121
+"../../../Engine/Content/EngineSky/T_Sky_Stars.uasset" 1122
+"../../../Engine/Content/EngineSky/T_Sky_Clouds_M.uasset" 1123
+"../../../Engine/Content/EngineSky/T_Sky_Blue.uasset" 1124
+"../../../Engine/Content/BasicShapes/Plane.uasset" 1125
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Water/MI_SacredPool_DAOC.uasset" 1126
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_YellowMarble_DAOC.uasset" 1127
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_ClockBase_DAOC.uasset" 1128
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/BG_Buildings/MI_BGRock3_s_DAOC.uasset" 1129
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Ground/MI_RoadBricks_DAOC.uasset" 1130
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Ground/MI_OuterflooringEdge_DAOC.uasset" 1131
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Ground/MI_Flooring_DAOC.uasset" 1132
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Ground/T_Dirt_BC_DAOC.uasset" 1133
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Ground/T_Dirt_N_DAOC.uasset" 1134
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Ground/T_Dirt_AO_DAOC.uasset" 1135
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Ground/MI_Dirt_DAOC.uasset" 1136
+"../../../Engine/Content/EngineSky/M_Sky_Panning_Clouds2.uasset" 1137
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Materials/M_Basic_Wall.uasset" 1138
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Architecture/Wall_400x200.uasset" 1139
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/SM_WoodPlank_DAOC.uasset" 1140
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/SM_WoodenScafold_LE.uasset" 1141
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/SM_WoodCrate_DAOC.uasset" 1142
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/SM_Tent_SB.uasset" 1143
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/SM_LandscapePainting_SZ.uasset" 1144
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/SM_LadderStep_DAOC.uasset" 1145
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/SM_FruitStand_AD.uasset" 1146
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Metal/SM_TrafficLight_SB.uasset" 1147
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Metal/SM_Lamp_Frame_DAOC.uasset" 1148
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Metal/default.uasset" 1149
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Metal/SM_GarbageCan_SW.uasset" 1150
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/SM_Island_DAOC.uasset" 1151
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/SM_Ground_DAOC.uasset" 1152
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/SM_Dirt_DAOC.uasset" 1153
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Car/SM_Car_LE.uasset" 1154
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Walls/SM_SideWallSmallPiece_DAOC.uasset" 1155
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Walls/SM_SideWallMedium_DAOC.uasset" 1156
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Walls/SM_SideWallLarge_DAOC.uasset" 1157
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Walls/SM_RoundedWindow_DAOC.uasset" 1158
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Walls/SM_DomeWindow_DAOC.uasset" 1159
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Walls/SM_DomeWall_DAOC.uasset" 1160
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Walls/SM_Beam_DAOC.uasset" 1161
+"../../../Engine/Content/MapTemplates/Materials/BasicAsset03.uasset" 1162
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/GameMode/BP_MidCapturePoint.uasset" 1163
+"../../../Engine/Content/Tutorial/SubEditors/TutorialAssets/T_soft_smoke.uasset" 1164
+"../../../Engine/Content/Tutorial/SubEditors/TutorialAssets/T_SmokeSubUV_8X8.uasset" 1165
+"../../../Engine/Content/Tutorial/SubEditors/TutorialAssets/M_smoke_subUV_blackbody.uasset" 1166
+"../../../Engine/Content/Tutorial/SubEditors/TutorialAssets/TutorialParticleSystem.uasset" 1167
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Crystal/SM_CrystalPiece_07_LE.uasset" 1168
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Crystal/SM_CrystalPiece_06_LE.uasset" 1169
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Crystal/SM_CrystalPiece_05_LE.uasset" 1170
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Crystal/SM_CrystalPiece_04_LE.uasset" 1171
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Crystal/SM_CrystalPiece_03_LE.uasset" 1172
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Crystal/SM_CrystalPiece_02_LE.uasset" 1173
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Crystal/SM_CrystalPiece_01_LE.uasset" 1174
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Crystal/AM_Crystal_LH_Skeleton.uasset" 1175
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Crystal/AM_Crystal_LH_PhysicsAsset.uasset" 1176
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Crystal/lambert1.uasset" 1177
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Crystal/AM_Crystal_LH.uasset" 1178
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/GameMode/BP_MainFlag.uasset" 1179
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/GameMode/BP_FlagCapturePoint.uasset" 1180
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/GameMode/BP_MiniFlag.uasset" 1181
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/GameMode/BP_CTFGameMode.uasset" 1182
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/VFX_Folder/Smoke_Footsteps/P_LONGSmoke.uasset" 1183
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Abilities/SmokeGrenade_BP.uasset" 1184
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Character/HumanCharacter_BP.uasset" 1185
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Weapons/BP_SlingShotCOMBAT.uasset" 1186
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Weapons/BP_KukriBladeCOMBAT.uasset" 1187
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/A_AlienBowUpNEW_LL.uasset" 1188
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/A_AlienBowDownNEW_LL.uasset" 1189
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/BlendSpaces/AlienArrowDraw+Move_BS.uasset" 1190
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/A_AlienWalk_JP.uasset" 1191
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/A_AlienRun_SY.uasset" 1192
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/A_AlienMelee-LL.uasset" 1193
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/A_AlienLanding_LL.uasset" 1194
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/A_AlienJump_DS.uasset" 1195
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/A_AlienIdle_LL.uasset" 1196
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/A_AlienHit_DS.uasset" 1197
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/A_AlienFall_LL.uasset" 1198
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Animations/Alien/A_AlienThrow_AA.uasset" 1199
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Character/AnimBP/Alien_AnimBP.uasset" 1200
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Mesh/Alien/PA_Alien_PhysicsAsset.uasset" 1201
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Alien/T_AlienTorso_R.uasset" 1202
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Alien/T_AlienTorso_E.uasset" 1203
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Materials/Characters/Alien/M_AlienTorso.uasset" 1204
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Alien/T_AlienLegsR.uasset" 1205
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Alien/T_AlienLegs_S.uasset" 1206
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Characters/Alien/T_AlienLegs_E.uasset" 1207
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Materials/Characters/Alien/M_AlienLegs.uasset" 1208
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Mesh/Alien/SK_Alien.uasset" 1209
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/Character/AlienCharacter_BP.uasset" 1210
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Actor_BP/BP_ObjectOnSplineGenerator_DAOC.uasset" 1211
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Metal/SM_Lamp_Glass_DAOC.uasset" 1212
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Actor_BP/BP_Lantern_DAOC.uasset" 1213
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Actor_BP/BP_Ladder_PEN.uasset" 1214
+"../../../Engine/Content/EngineSky/SM_SkySphere.uasset" 1215
+"../../../Engine/Content/EngineSky/C_Sky_Zenith_Color.uasset" 1216
+"../../../Engine/Content/EngineSky/C_Sky_Horizon_Color.uasset" 1217
+"../../../Engine/Content/EngineSky/C_Sky_Cloud_Color.uasset" 1218
+"../../../Engine/Content/EngineSky/BP_Sky_Sphere.uasset" 1219
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Actor_BP/BP_Scattering_DAOC.uasset" 1220
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Maps/FinalMaps/L_AdvenctureV2_BlockOut1.umap" 1221
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Domes/SM_MedRotunda_RH.uasset" 1222
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Block_Out/SM_TentSloped_LE.uasset" 1223
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Maps/FinalMaps/L_Adventure_DAOC.umap" 1224
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Art/Environment/TemplateFloor.uasset" 1225
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Art/Environment/RampMaterial.uasset" 1226
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Art/Environment/RightArm_StaticMesh.uasset" 1227
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Art/Environment/Ramp_StaticMesh.uasset" 1228
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Art/Environment/Linear_Stair_StaticMesh.uasset" 1229
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Art/Environment/LeftArm_StaticMesh.uasset" 1230
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Art/Environment/Bump_StaticMesh.uasset" 1231
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Art/Environment/1M_Cube_Chamfer.uasset" 1232
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/GameMode/PlayerTestGameMode.uasset" 1233
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Maps/TestMaps/COMBAT_TestMap.umap" 1234
+"../../../Engine/Content/MapTemplates/SM_Template_Map_Floor.uasset" 1235
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Maps/TestMaps/GameModeTestMap_BuiltData.uasset" 1236
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Actor_BP/DM_Amulet_DAOC.uasset" 1237
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Maps/TestMaps/GameModeTestMap.umap" 1238
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Materials/MaterialLayers/T_ML_Aluminum01_N.uasset" 1239
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Materials/MaterialLayers/T_ML_Aluminum01.uasset" 1240
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Materials/MaterialLayers/ML_SoftMetal_UE4.uasset" 1241
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Materials/MaterialLayers/ML_Plastic_Shiny_Beige_LOGO.uasset" 1242
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Materials/MaterialLayers/ML_Plastic_Shiny_Beige.uasset" 1243
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Materials/MaterialLayers/T_ML_Rubber_Blue_01_N.uasset" 1244
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Materials/MaterialLayers/T_ML_Rubber_Blue_01_D.uasset" 1245
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Materials/MaterialLayers/ML_GlossyBlack_Latex_UE4.uasset" 1246
+"../../../Engine/Content/Functions/MaterialLayerFunctions/MatLayerBlend_Simple.uasset" 1247
+"../../../Engine/Content/Functions/MaterialLayerFunctions/MatLayerBlend_NormalBlend.uasset" 1248
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/T_Male_N.uasset" 1249
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/T_Male_Mask.uasset" 1250
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Materials/M_Male_Body.uasset" 1251
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Mesh/SK_Mannequin_PhysicsAsset.uasset" 1252
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Textures/T_UE4Logo_N.uasset" 1253
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Materials/M_UE4Man_ChestLogo.uasset" 1254
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Characters/Mannequin/Character/Mesh/SK_Mannequin.uasset" 1255
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/ElecLine_lowMat.uasset" 1256
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Wood/ElecWire_low.uasset" 1257
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/SM_Bldg_Floor_JPM.uasset" 1258
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/SM_Spawn_Point.uasset" 1259
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Maps/TestMaps/InvisibleWallsForLorenzo.umap" 1260
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Ground/MI_RoadBricksCircle_DAOC.uasset" 1261
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/SM_Roadtrack_DAOC.uasset" 1262
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Maps/TestMaps/LobbyGameMode_TestMap_BuiltData.uasset" 1263
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Maps/TestMaps/LobbyGameMode_TestMap.umap" 1264
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Maps/TestMaps/L_AdvenctureV2_BlockOut_BuiltData.uasset" 1265
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Maps/TestMaps/L_AdvenctureV2_BlockOut.umap" 1266
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_GraniteTriangle_DAOC.uasset" 1267
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Walls/SM_RoofTriangle_DAOC.uasset" 1268
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Halfcircle/SM_HalfcircleRoofTiles_DAOC.uasset" 1269
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Halfcircle/SM_HalfcirclePiece_DAOC.uasset" 1270
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Halfcircle/SM_HalfcircleCompletePiece_DAOC.uasset" 1271
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Fountain/SM_FountainTopBase_DAOC.uasset" 1272
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Fountain/SM_FountainTop_DAOC.uasset" 1273
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Fountain/SM_FountainPool_DAOC.uasset" 1274
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Fountain/SM_FountainMiddleBlock_DAOC.uasset" 1275
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Water/MI_Waterfall_DAOC.uasset" 1276
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Water/MI_SmallWaterfall_DAOC.uasset" 1277
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_GranitePilars_DAOC.uasset" 1278
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_GraniteBeams_DAOC.uasset" 1279
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Rock/MI_Granite_DAOC.uasset" 1280
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Materials/M_Ceramic_Tile_Checker.uasset" 1281
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/StarterContent/Architecture/Wall_400x300.uasset" 1282
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Maps/TestMaps/L_Adventure_DAOC_BlockOut_LightingTest.umap" 1283
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Metal/SM_StreetLight_RWH.uasset" 1284
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Metal/T_Iron_R_RWH.uasset" 1285
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Metal/T_Iron_N_RWH.uasset" 1286
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/Textures/Metal/T_Iron_BC_RWH.uasset" 1287
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/MaterialInstances/Metal/MI_FireEscape_RH.uasset" 1288
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Metal/SM_MetalGrate_RWH.uasset" 1289
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Metal/SM_IronPole_RWH.uasset" 1290
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Ground/SM_GrassIsland_RH.uasset" 1291
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Foliage/SM_Hedges_LE.uasset" 1292
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/Halfcircle/SM_HalfCircle_Large_NewCollisions_RH.uasset" 1293
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/BG_Buildings/SM_NewBG03_RH.uasset" 1294
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/BG_Buildings/SM_NewBG02_RH.uasset" 1295
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Assets/StaticMesh/Buildings/BG_Buildings/SM_NewBG01_RH.uasset" 1296
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Maps/TestMaps/L_ExteriorBlockOut_RH.umap" 1297
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/UI_Test/Fonts/paperdaisy-demo.uasset" 1298
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/UI_Test/Fonts/paperdaisy-demo_Font.uasset" 1299
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/UI_Test/OptionsMenu/Graphics_Settings.uasset" 1300
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/UI_Test/OptionsMenu/Audio_Settings.uasset" 1301
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/UI_Test/Mungroo_Christopher_HostGame_01_TempBackground.uasset" 1302
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/UI_Test/OptionsMenu/OptionsMenu.uasset" 1303
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Widgets/SteamGameInstance.uasset" 1304
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/UI_Test/JoinMenu.uasset" 1305
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/UI_Test/HostMenu.uasset" 1306
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/UI_Test/MainMenu.uasset" 1307
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Maps/TestMaps/MainMenuMap.umap" 1308
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Game_BP/BaseCharacter_BP.uasset" 1309
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/Test/Untitled.umap" 1310
+"../../../../../../Users/Tremaine/Desktop/Programming/Humber/Unreal Engine/GAME259-SectionA/Content/UI_Test/UI_Test.umap" 1311
+"../../../Engine/Content/Maps/Entry_BuiltData.uasset" 1312
+"../../../Engine/Content/Maps/Entry.umap" 1313
