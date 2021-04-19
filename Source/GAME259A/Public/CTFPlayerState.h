@@ -112,7 +112,8 @@ public:
 	bool bIsThrowing;					//True if the player just input to melee attack.
 	UPROPERTY(BlueprintReadWrite, Replicated, Category = "AnimControl")
 	bool bIsDrawingBow;					//True if the player just input to melee attack.
-
+	UPROPERTY(BlueprintReadWrite, Replicated, Category = "animControl")
+	bool bIsGrappleHook;
 protected:
 
 	//Player should only pickup flags if they are Alive and have no other flags
