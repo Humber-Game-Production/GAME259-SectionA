@@ -40,7 +40,7 @@ void ACapturePoint::BeginPlay()
 
 	if(mainFlag)
 	{
-		mainFlag->SetActorLocation(GetActorLocation() + FVector(0.0f, 0.0f, 60.0f));
+		mainFlag->SetActorLocation(GetActorLocation() + FVector(0.0f, 0.0f, 100.0f));
 	}
 	
 	if(HasAuthority())
@@ -48,6 +48,13 @@ void ACapturePoint::BeginPlay()
 		if(ACTFGameMode* ctfGameMode = GetWorld()->GetAuthGameMode<ACTFGameMode>())
 		{
 			requiredFlags = ctfGameMode->requiredMiniFlags;
+		}
+
+		if(ACTFGameState* ctfGameState = GetWorld()->GetGameState<ACTFGameState>())
+		{
+			ctfGameState->roundStartDelegate.AddDynamic(this, &ACapturePoint::SetCapActive);
+			ctfGameState->roundEndDelegate.AddDynamic(this, &ACapturePoint::SetCapInactive);
+			ctfGameState->gameEndDelegate.AddDynamic(this, &ACapturePoint::SetCapInactiveEnd);
 		}
 	}
 }
@@ -60,6 +67,7 @@ void ACapturePoint::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 	DOREPLIFETIME(ACapturePoint, requiredFlags);
 	DOREPLIFETIME(ACapturePoint, flagInactivePeriod);
 	DOREPLIFETIME(ACapturePoint, teamID);
+	DOREPLIFETIME(ACapturePoint, capturePointActive);
 }
 
 // Called every frame
@@ -71,6 +79,22 @@ void ACapturePoint::Tick(float DeltaTime)
 void ACapturePoint::OnRep_flagsCaptured()
 {
 	TestFunction();
+}
+
+void ACapturePoint::SetCapInactiveEnd(ETeamIdentifier team)
+{
+	capturePointActive = false;
+}
+
+
+void ACapturePoint::SetCapActive()
+{
+	capturePointActive = true;
+}
+
+void ACapturePoint::SetCapInactive()
+{
+	capturePointActive = false;
 }
 
 void ACapturePoint::TestFunction_Implementation()	{
@@ -86,45 +110,46 @@ void ACapturePoint::OnHit_Implementation(UPrimitiveComponent* OverlappedComponen
 	bool bFromSweep,
 	const FHitResult& SweepResult)
 {
-	APawn* playerC = Cast<APawn>(OtherActor);
-	if(playerC)
+	if(capturePointActive)
 	{
-		ACTFPlayerState* player = playerC->GetPlayerState<ACTFPlayerState>();
-
-		//If the other actor has a ACTFPlayerState then we're able to do a check for their team
-		if(player)
+		APawn* playerC = Cast<APawn>(OtherActor);
+		if(playerC)
 		{
-			const ETeamIdentifier playersTeam = player->teamID;	
+			ACTFPlayerState* player = playerC->GetPlayerState<ACTFPlayerState>();
 
-			//If the player's holding a flag
-			if(player->FlagHeld)
+			//If the other actor has a ACTFPlayerState then we're able to do a check for their team
+			if(player)
 			{
-				UE_LOG(LogTemp, Warning, TEXT("CapPoint Entered"));
-				//if this is the midpoint and the player's holding a miniflag
-				if(Cast<AMiniFlag>(player->FlagHeld) && (MainFlagCreator == true))
+				const ETeamIdentifier playersTeam = player->teamID;	
+
+				//If the player's holding a flag
+				if(player->FlagHeld)
 				{
-					flagsCaptured++;
-					CheckForFlagConstruction();
-					player->FlagHeld->InitLocation = FVector(0, -1000, 0);
-					player->CaptureFlag();
-					UE_LOG(LogTemp, Warning, TEXT("MiniFlag number %d captured at Midpoint"), flagsCaptured);
-					
-					//Main Flag building in here
-					if(HasAuthority())
+					UE_LOG(LogTemp, Warning, TEXT("CapPoint Entered"));
+					//if this is the midpoint and the player's holding a miniflag
+					if(Cast<AMiniFlag>(player->FlagHeld) && (MainFlagCreator == true))
 					{
-						TestFunction();
-						ACTFGameState* gameState = GetWorld()->GetGameState<ACTFGameState>();
-						gameState->capturedFlags = flagsCaptured;
-						gameState->CapturedFlagDelegate.Broadcast(flagsCaptured);
-					}
+						flagsCaptured++;
+						CheckForFlagConstruction();
+						player->FlagHeld->InitLocation = FVector(0, -1000, 0);
+						player->CaptureFlag();
+						UE_LOG(LogTemp, Warning, TEXT("MiniFlag number %d captured at Midpoint"), flagsCaptured);
 					
-				} //if the player's holding a main flag, this capture point is part of the same team as the player, and this is not the midPoint
-				else if(Cast<AMainFlag>(player->FlagHeld) && (playersTeam == teamID) && (MainFlagCreator == false))
-				{
-					player->FlagHeld->InitLocation = FVector(0, -1000, 0);
-					player->CaptureFlag();
-					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), teamWinEffect, this->GetActorLocation());
-					UE_LOG(LogTemp, Warning, TEXT("MainFlag captured at team %d's capture point"), teamID);
+						//Main Flag building in here
+						if(HasAuthority())
+						{
+							TestFunction();
+							ACTFGameState* gameState = GetWorld()->GetGameState<ACTFGameState>();
+							gameState->capturedFlags = flagsCaptured;
+							gameState->CapturedFlagDelegate.Broadcast(flagsCaptured);
+						}
+					
+					} //if the player's holding a main flag, this capture point is part of the same team as the player, and this is not the midPoint
+					else if(Cast<AMainFlag>(player->FlagHeld) && (playersTeam == teamID) && (MainFlagCreator == false))	{
+						player->CaptureFlag();
+						UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), teamWinEffect, this->GetActorLocation());
+						UE_LOG(LogTemp, Warning, TEXT("MainFlag captured at team %d's capture point"), teamID);
+					}
 				}
 			}
 		}
@@ -153,29 +178,26 @@ void ACapturePoint::RoundReset_Implementation()
 	
 	if(MainFlagCreator && !IsValid(mainFlag))
 	{
-		FVector spawnPoint;
-		spawnPoint = this->GetActorLocation() + FVector(0.0f, 0.0f, 60.0f);
-		mainFlag = Cast<AMainFlag>(GetWorld()->SpawnActor(AMainFlag::StaticClass(), &spawnPoint));
-		
+		if(HasAuthority())
+		{
+			const auto& mainFlagType = GetWorld()->GetAuthGameMode<ACTFGameMode>()->mainFlag;
+			FVector spawnPoint;
+			spawnPoint = this->GetActorLocation() + FVector(0.0f, 0.0f, 100.0f);
+			mainFlag = Cast<AMainFlag>(GetWorld()->SpawnActor(mainFlagType, &spawnPoint));
+		}
 	}
 	else if (MainFlagCreator && (mainFlag != nullptr))	{
 		
-		mainFlag->SetActorLocation(GetActorLocation() + FVector(0.0f, 0.0f, 60.0f));
+		mainFlag->SetActorLocation(GetActorLocation() + FVector(0.0f, 0.0f, 100.0f));
 	}
 	
-	if(mainFlag)
-	{
-		mainFlag->Capsule->SetCollisionResponseToAllChannels(ECR_Ignore);
-		Cast<USkeletalMeshComponent>(mainFlag->GetComponentByClass(USkeletalMeshComponent::StaticClass()))->SetVisibility(false);
-		Cast<UParticleSystemComponent>(mainFlag->GetComponentByClass(UParticleSystemComponent::StaticClass()))->SetVisibility(false);
+	if(mainFlag)	{
+		mainFlag->ResetMainFlag();	
 	}
 	
 }
 
 void ACapturePoint::SetMainFlagActive_Implementation()	{
 	mainFlag->CompleteMainFlag();
-	mainFlag->Capsule->SetCollisionResponseToAllChannels(ECR_Overlap);
-	Cast<USkeletalMeshComponent>(mainFlag->GetComponentByClass(USkeletalMeshComponent::StaticClass()))->SetVisibility(true);
-	Cast<UParticleSystemComponent>(mainFlag->GetComponentByClass(UParticleSystemComponent::StaticClass()))->SetVisibility(true);
 }
 

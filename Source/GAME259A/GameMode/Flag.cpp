@@ -82,7 +82,10 @@ void AFlag::PickUp_Implementation(UPrimitiveComponent* OverlappedComponent,
 			USceneComponent* PlayerMesh = OtherActor->FindComponentByClass<USkeletalMeshComponent>();
 
 			owningTeam = hasPlayerState->teamID;
-			ChangeColour();
+			if(HasAuthority())
+			{
+				ChangeColour();
+			}
 			
 			//attach the flag to the socket "FlagHolder" on the character mesh
 			this->AttachToComponent(PlayerMesh, FAttachmentTransformRules::SnapToTargetIncludingScale, (TEXT("FlagHolder")));
@@ -118,8 +121,12 @@ void AFlag::Drop_Implementation()	{
 	isHeld = false;
 }
 
-void AFlag::Capture()
+void AFlag::OnRep_owningTeam()
 {
+	ChangeColour();
+}
+
+void AFlag::Capture_Implementation()	{
 	Drop_Implementation();
 }
 

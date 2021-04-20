@@ -30,6 +30,7 @@ void ACTFPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 	DOREPLIFETIME( ACTFPlayerState, PlayerCanPickupFlag);
 	DOREPLIFETIME( ACTFPlayerState, teamScoreDelegate);
 	DOREPLIFETIME( ACTFPlayerState, respawnPlayerDelegate);
+	DOREPLIFETIME( ACTFPlayerState, currentObjectiveDelegate);
 	
 	DOREPLIFETIME( ACTFPlayerState, bIsSwinging);
 	DOREPLIFETIME( ACTFPlayerState, bIsSprinting);
@@ -60,6 +61,7 @@ void ACTFPlayerState::PlayerDropFlag_Implementation()
 	PlayerCanPickupFlag = true;
 	if(FlagHeld)
 	{
+		GetWorld()->GetGameState<ACTFGameState>()->FlagDropped(FlagHeld);
 		FlagHeld->Execute_Drop(FlagHeld);
 		FlagHeld = nullptr;
 		UpdateObjective(FlagHeld);
@@ -101,6 +103,7 @@ void ACTFPlayerState::SetTeam(ETeamIdentifier team)
 
 void ACTFPlayerState::SetFlagHeld(AFlag* FlagHeld_)	{
 	FlagHeld = FlagHeld_;
+	GetWorld()->GetGameState<ACTFGameState>()->FlagPickedUp(FlagHeld);
 	UpdateObjective(FlagHeld);
 }
 
@@ -125,7 +128,7 @@ void ACTFPlayerState::OnRespawn_Implementation()
 	UE_LOG(LogTemp, Warning, TEXT("Respawn player delegate should have played"));
 
 	APawn* originalPawn = GetPawn();
-
+	
 	PlayerDropFlag();
 	
 	if(ACTFGameState* gameState = GetWorld()->GetGameState<ACTFGameState>())

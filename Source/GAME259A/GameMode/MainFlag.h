@@ -21,6 +21,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void CompleteMainFlag();
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void ResetMainFlag();
+
 protected:
 	//Flag pickup when the capsule overlaps with the player(OtherActor)
 	AMainFlag();
@@ -30,7 +33,8 @@ protected:
 
 	virtual void Drop_Implementation() override;
 
-	virtual void Capture() override;
+
+	virtual void Capture_Implementation() override;
 
 	UFUNCTION(NetMulticast, Reliable)
 	void ReserveFlag();
