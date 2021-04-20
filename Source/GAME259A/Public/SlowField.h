@@ -5,6 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Components/SphereComponent.h"
+#include "Components/AudioComponent.h"
+#include "Sound/SoundCue.h"
+#include "NiagaraFunctionLibrary.h"
 #include "SlowField.generated.h"
 
 UCLASS()
@@ -34,11 +37,18 @@ public:
 	UFUNCTION()
 	void OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* SlowFieldMesh;
 
+	UPROPERTY(EditAnywhere)
+	UNiagaraSystem* SlowFieldEffect;
+
+	UPROPERTY(EditAnywhere, Category = "SmokeSound")
+	class USoundCue* SlowFieldSound;
+
 private:
-	UPROPERTY()
+
+	UPROPERTY(EditAnywhere)
 	USphereComponent* SphereCollider;
 	UPROPERTY()
 	FTimerHandle SlowFieldTimer;
@@ -46,5 +56,6 @@ private:
 	UFUNCTION()
 	void OnTimerFinish();
 
-
+private:
+	UAudioComponent* SlowFieldAudioComponent;
 };

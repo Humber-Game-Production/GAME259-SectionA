@@ -7,8 +7,8 @@
 
 // Sets default values
 ABaseCharacter::ABaseCharacter() : MaxWalkSpeed(1200.0f), SprintMultiplier(1.5f), JumpVelocity(800.0f), MovementThrowLength(1200.0f), MovementThrowHeight(500.0f), SmokeThrowLength(1200.0f), SmokeThrowHeight(500.0f),
-MaxHealth(100.0f), CurrentHealth(MaxHealth), RespawnTime(3.0f), bIsDead(false), bIsSlowed(false), SlowMultiplier(0.25f), bIsStunned(false), CanUseAbilityOne(true), CanUseAbilityTwo(true),
-AbilityOneCoolDown(8.0f), AbilityTwoCoolDown(12.0f), bRecentlyLaunched(false)
+MaxHealth(100.0f), CurrentHealth(MaxHealth), RespawnTime(3.0f), AbilityOneCoolDown(8.0f), AbilityTwoCoolDown(12.0f), CanUseAbilityOne(true), CanUseAbilityTwo(true), bIsDead(false), bIsSlowed(false),
+SlowMultiplier(0.25f), bIsStunned(false), bRecentlyLaunched(false)
 {
 	this->Tags.Add(FName("Player"));
 	
@@ -22,6 +22,9 @@ AbilityOneCoolDown(8.0f), AbilityTwoCoolDown(12.0f), bRecentlyLaunched(false)
 	MeleeBox = CreateDefaultSubobject<UBoxComponent>(TEXT("Box"));
 	MeleeBox->SetupAttachment(RootComponent);
 
+	respawnEffect = CreateDefaultSubobject<UNiagaraComponent>(TEXT("RespawnEffectComponent"));
+	respawnEffect->SetupAttachment(RootComponent);
+	
 	MeleeBox->InitBoxExtent(FVector(200.0f));
 	MeleeBox->SetCollisionResponseToAllChannels(ECR_Ignore);
 
@@ -64,6 +67,7 @@ void ABaseCharacter::BeginPlay()
 	GetCharacterMovement()->JumpZVelocity = JumpVelocity;
 	GetCharacterMovement()->MaxWalkSpeed = MaxWalkSpeed;
 
+	respawnEffect->ActivateSystem();
 }
 
 void ABaseCharacter::MeleeSwing_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult){
@@ -167,7 +171,7 @@ void ABaseCharacter::StartJump()
 						}
 					}
 				},
-				0.1f, false);
+				0.00001f, false);
 		}
 	}
 }
@@ -209,7 +213,7 @@ void ABaseCharacter::SetThrowAbilityOne_Implementation()
 		ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 
 		FVector tmpLoc = FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 100);
-		location = FTransform(tmpLoc + GetActorRightVector() * 40.0f);
+		location = FTransform(tmpLoc + GetActorRightVector() * 40.0f + GetActorForwardVector() * 40.0f);
 		FVector ThrowDistance = ThirdPersonCamera->GetForwardVector() * MovementThrowLength + ThirdPersonCamera->GetUpVector() * MovementThrowHeight;
 		if (ACTFPlayerState * StateOfPlayer = GetPlayerState<ACTFPlayerState>())
 			MovementAbility->UseAbility(3.0f, location, 0.0f, StateOfPlayer->teamID, 0.0f, ThrowDistance, this);
@@ -244,7 +248,7 @@ void ABaseCharacter::UseAbilityOne_Implementation()
 	
 			if (ctfPlayerState->bIsThrowing)
 			{
-				GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, this, &ABaseCharacter::SetThrowAbilityOne,1.0f, false);
+				GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, this, &ABaseCharacter::SetThrowAbilityOne,0.5f, false);
 				CanUseAbilityOne = false;
 			}
 		}
@@ -295,6 +299,16 @@ void ABaseCharacter::UseAbilityTwo_Implementation()
 			CanUseAbilityTwo = false;
 		}
 	}
+}
+
+float ABaseCharacter::GetAbilityOneCooldown()
+{
+	return GetWorld()->GetTimerManager().GetTimerRemaining(AbilityOneTimerHandle);
+}
+
+float ABaseCharacter::GetAbilityTwoCooldown()
+{
+	return GetWorld()->GetTimerManager().GetTimerRemaining(AbilityTwoTimerHandle);
 }
 
 void ABaseCharacter::DropFlag()	{
