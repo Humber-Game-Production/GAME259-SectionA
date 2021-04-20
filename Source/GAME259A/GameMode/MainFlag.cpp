@@ -49,9 +49,10 @@ void AMainFlag::Capture_Implementation()	{
 	this->SetActorLocation(FVector(0, 0, -100000));
 	this->InitLocation = this->GetActorLocation();
 	owningTeam = ETeamIdentifier::None;
-	AFlag::ChangeColour();
+	
 	if(HasAuthority())
 	{
+		ChangeColour();
 		if(ACTFGameMode* gameMode = GetWorld()->GetAuthGameMode<ACTFGameMode>())
 		{
 			gameMode->EndRound();
@@ -62,5 +63,8 @@ void AMainFlag::Capture_Implementation()	{
 
 void AMainFlag::ReserveFlag_Implementation()	{
 	owningTeam = ETeamIdentifier::None;
-	AFlag::ChangeColour();
+	if(HasAuthority())
+	{
+		ChangeColour();
+	}
 }

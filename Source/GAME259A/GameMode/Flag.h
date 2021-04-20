@@ -41,15 +41,18 @@ protected:
 	void ChangeColour();
 
 	//Flag pickup when the capsule overlaps with the player(OtherActor)
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	virtual void PickUp_Implementation(UPrimitiveComponent* OverlappedComponent,
 		AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 	UFUNCTION()
 	virtual void Drop_Implementation() override;
 
 
-	UPROPERTY(Replicated, BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(ReplicatedUsing = OnRep_owningTeam, BlueprintReadWrite, EditAnywhere)
 	ETeamIdentifier owningTeam;
+
+	UFUNCTION()
+	void OnRep_owningTeam();
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UMaterialInstanceDynamic* matInstance;
@@ -79,6 +82,9 @@ public:
 	FUColourPair alienTeamColour;
 	
 protected:
-	UPROPERTY(Replicated, BlueprintReadWrite)
+	UPROPERTY(ReplicatedUsing = OnRep_isHeld, BlueprintReadWrite)
 	bool isHeld;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnRep_isHeld();
 };

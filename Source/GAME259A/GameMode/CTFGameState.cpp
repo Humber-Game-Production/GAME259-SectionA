@@ -75,7 +75,7 @@ void ACTFGameState::OnRep_capturedFlags_Implementation()
 
 void ACTFGameState::OnGameEnd_Implementation(ETeamIdentifier winningTeam)
 {
-	gameEndDelgate.Broadcast(winningTeam);
+	gameEndDelegate.Broadcast(winningTeam);
 }
 
 void ACTFGameState::OnRoundEnd_Implementation()
