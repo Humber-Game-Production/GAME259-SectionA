@@ -322,7 +322,6 @@ void ABaseCharacter::UseMeleeAttack()
 	}
 
 	MeleeBox->SetCollisionResponseToAllChannels(ECR_Overlap);
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "called melee attack");
 
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	//TODO (Combat)
