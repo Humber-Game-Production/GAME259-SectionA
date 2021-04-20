@@ -52,5 +52,7 @@ public:
 		class USoundCue* TeleportSound;
 
 private:
+	FVector VHit;
 	UAudioComponent* TeleportAudioComponent;
+	FTimerHandle TeleportTImerHandler;
 };
