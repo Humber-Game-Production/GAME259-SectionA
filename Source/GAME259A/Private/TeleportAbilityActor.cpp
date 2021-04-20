@@ -63,16 +63,20 @@ void ATeleportAbilityActor::SetSpawner(AActor* BaseCharacter_)
 void ATeleportAbilityActor::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	if(GEngine && OtherActor) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I Hit: %s"), *OtherActor->GetName()));
-
+	VHit = Hit.ImpactNormal * 120;
 	FRotator CharacterRotation = FRotator(BaseCharacter->GetActorRotation().Pitch, BaseCharacter->GetActorRotation().Yaw, BaseCharacter->GetActorRotation().Roll - 90);
-	FVector CharacterLocation = FVector(BaseCharacter->GetActorLocation().X, BaseCharacter->GetActorLocation().Y, BaseCharacter->GetActorLocation().Z-80);
+	FVector CharacterLocation = FVector(BaseCharacter->GetRootComponent()->GetComponentLocation().X, BaseCharacter->GetRootComponent()->GetComponentLocation().Y, BaseCharacter->GetRootComponent()->GetComponentLocation().Z-80);
 	FVector TpLocation = FVector(Mesh->GetComponentLocation().X + (Hit.ImpactNormal.X * 120), Mesh->GetComponentLocation().Y + (Hit.ImpactNormal.Y * 120), Mesh->GetComponentLocation().Z);
 	if (this) {
 		if (BaseCharacter) {
-			UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), SpawnEffect, CharacterLocation, CharacterRotation);
-			BaseCharacter->TeleportTo(GetActorLocation() + (Hit.ImpactNormal * 120), BaseCharacter->GetActorRotation());
-			UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), SpawnEffect, TpLocation, CharacterRotation);
-			
+			UNiagaraFunctionLibrary::SpawnSystemAttached(SpawnEffect, BaseCharacter->GetRootComponent(), FName("SpawnEffect"), FVector(0,0,-90), CharacterRotation, EAttachLocation::KeepRelativeOffset, false, true);
+			//UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), SpawnEffect, CharacterLocation, CharacterRotation);
+			//UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), SpawnEffect, TpLocation, CharacterRotation);
+			GetWorld()->GetTimerManager().SetTimer(TeleportTImerHandler, [this]()
+				{
+					BaseCharacter->TeleportTo(GetActorLocation() + (VHit), BaseCharacter->GetActorRotation());
+
+				}, 1.0, false);
 			if (TeleportAudioComponent && TeleportSound) {
 				TeleportAudioComponent->Play(0.0f);
 			}
