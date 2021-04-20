@@ -10,6 +10,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "TimerManager.h"
+#include "Niagara/Public/NiagaraComponent.h"
 #include "Public/BaseAbilityClass.h"
 
 
@@ -103,6 +104,8 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Abilities")
 	FTimerHandle AbilityTwoTimerHandle;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Death")
+	UNiagaraComponent* respawnEffect;
 	
 
 protected:
