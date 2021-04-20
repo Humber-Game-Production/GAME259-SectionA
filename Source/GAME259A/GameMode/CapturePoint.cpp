@@ -192,8 +192,5 @@ void ACapturePoint::RoundReset_Implementation()
 
 void ACapturePoint::SetMainFlagActive_Implementation()	{
 	mainFlag->CompleteMainFlag();
-	mainFlag->Capsule->SetCollisionResponseToAllChannels(ECR_Overlap);
-	Cast<USkeletalMeshComponent>(mainFlag->GetComponentByClass(USkeletalMeshComponent::StaticClass()))->SetVisibility(true);
-	Cast<UParticleSystemComponent>(mainFlag->GetComponentByClass(UParticleSystemComponent::StaticClass()))->SetVisibility(true);
 }
 
