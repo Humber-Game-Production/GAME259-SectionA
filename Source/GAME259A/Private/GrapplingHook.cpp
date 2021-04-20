@@ -41,7 +41,16 @@ void AGrapplingHook::BeginPlay()
 {
 	Super::BeginPlay();
 	SphereCollider->OnComponentHit.AddDynamic(this, &AGrapplingHook::OnCompHit);
-	Mesh->AddImpulse(LaunchSpeed * GetActorForwardVector());
+	//Mesh->SetPhysicsLinearVelocity(FVector(0.0f, 0.0f, 0.0f));
+	//if (Cast<ABaseCharacter>(BaseCharacter)) 
+	//{
+	//	Mesh->AddImpulse(LaunchSpeed * Cast<ABaseCharacter>(BaseCharacter)->ThirdPersonCamera->GetForwardVector());
+	//}
+	//else 
+	//{
+		Mesh->AddImpulse(LaunchSpeed * GetActorForwardVector());
+
+	//}
 	/*if (GrapplingHookAudioComponent && GrapplingHookSound) {
 		GrapplingHookAudioComponent->SetSound(GrapplingHookSound);
 	}*/
@@ -78,12 +87,12 @@ void AGrapplingHook::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
 
 		FVector GrappleHorizontalVelocity = FVector(GrappleLocation.X - CharacterLocation.X, GrappleLocation.Y - CharacterLocation.Y, GrappleLocation.Z + 200.0f - CharacterLocation.Z);
 		GrappleHorizontalVelocity *= Speed;
-		FVector GrappleVerticalVelocity = FVector(0.0f, 0.0f, (float)sqrt((GrappleLocation.Z - CharacterLocation.Z) * SpeedVertical / 2) * SpeedVertical + pow(GrappleHorizontalVelocity.Size() / Speed / Speed, 2) * Gravity);
+	//	FVector GrappleVerticalVelocity = FVector(0.0f, 0.0f, (float)sqrt((GrappleLocation.Z - CharacterLocation.Z) * SpeedVertical / 2) * SpeedVertical + pow(GrappleHorizontalVelocity.Size() / Speed / Speed, 2) * Gravity);
 		//FVector GrappleVerticalVelocity = FVector(0.0f, 0.0f, (GrappleLocation.Z - CharacterLocation.Z) * SpeedVertical * );
-		if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("GrappleVVel: %f"), GrappleVerticalVelocity.Z));
-		if (FGenericPlatformMath::IsNaN(GrappleVerticalVelocity.Z)) {
-			GrappleVerticalVelocity.Z = 200;
-		}
+		//if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("GrappleVVel: %f"), GrappleVerticalVelocity.Z));
+		//if (FGenericPlatformMath::IsNaN(GrappleVerticalVelocity.Z)) {
+		//	GrappleVerticalVelocity.Z = 200;
+		//}
 
 		otherPlayer->LaunchCharacter(GrappleHorizontalVelocity, true, true);
 	}

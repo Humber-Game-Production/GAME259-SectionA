@@ -209,7 +209,7 @@ void ABaseCharacter::SetThrowAbilityOne_Implementation()
 		ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 
 		FVector tmpLoc = FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 100);
-		location = FTransform(tmpLoc + GetActorRightVector() * 40.0f);
+		location = FTransform(tmpLoc + GetActorRightVector() * 40.0f + GetActorForwardVector() * 40.0f);
 		FVector ThrowDistance = ThirdPersonCamera->GetForwardVector() * MovementThrowLength + ThirdPersonCamera->GetUpVector() * MovementThrowHeight;
 		if (ACTFPlayerState * StateOfPlayer = GetPlayerState<ACTFPlayerState>())
 			MovementAbility->UseAbility(3.0f, location, 0.0f, StateOfPlayer->teamID, 0.0f, ThrowDistance, this);

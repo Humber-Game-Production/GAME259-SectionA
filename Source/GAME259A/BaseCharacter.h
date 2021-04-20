@@ -30,8 +30,7 @@ public:
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 	USpringArmComponent* CameraBoom;	//The boom stick for the camera. Controls how far away the camera is from the character.
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
-	UCameraComponent* ThirdPersonCamera;//The camera that will follow the character.
+
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Movement")
 	float MaxWalkSpeed;					//The maximum speed at which the character can move while not sprinting.
@@ -128,9 +127,9 @@ protected:
 	void StartJump();
 
 	//Abilities
-	UFUNCTION(Category = "Abilities", Server, Reliable)
+	UFUNCTION(Category = "Abilities", BlueprintCallable, Server, Reliable)
 	void UseAbilityOne();
-	UFUNCTION(Category = "Abilities", Server, Reliable)
+	UFUNCTION(Category = "Abilities", BlueprintCallable, Server, Reliable)
 	void UseAbilityTwo();
 
 	UFUNCTION()
@@ -149,9 +148,9 @@ protected:
 	UFUNCTION(Server, Reliable, Category = "Death", BlueprintCallable)
 	void Respawn();
 
-	UFUNCTION(Server, Reliable)
+	UFUNCTION(Server, Reliable, BlueprintCallable)
 	void SetThrowAbilityOne();
-	UFUNCTION(Server, Reliable)
+	UFUNCTION(Server, Reliable, BlueprintCallable)
 	void SetThrowAbilityTwo();
 
 	//Functions to send animation booleans to server.
@@ -176,6 +175,10 @@ protected:
 	//UPROPERTY(BlueprintReadWrite, Replicated, Category = "AnimControl")
 	//bool bIsDrawingBow;					//True if the player just input to melee attack.
 public:	
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
+		UCameraComponent* ThirdPersonCamera;//The camera that will follow the character.
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
