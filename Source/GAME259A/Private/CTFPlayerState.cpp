@@ -37,7 +37,7 @@ void ACTFPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 	DOREPLIFETIME( ACTFPlayerState, bIsJumping);
 	DOREPLIFETIME( ACTFPlayerState, bIsThrowing);
 	DOREPLIFETIME( ACTFPlayerState, bIsDrawingBow);
-	
+	DOREPLIFETIME( ACTFPlayerState, bIsGrappleHook);
 }
 
 void ACTFPlayerState::ResetStats()
