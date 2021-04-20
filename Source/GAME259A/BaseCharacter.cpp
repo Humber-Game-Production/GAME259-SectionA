@@ -7,8 +7,8 @@
 
 // Sets default values
 ABaseCharacter::ABaseCharacter() : MaxWalkSpeed(1200.0f), SprintMultiplier(1.5f), JumpVelocity(800.0f), MovementThrowLength(1200.0f), MovementThrowHeight(500.0f), SmokeThrowLength(1200.0f), SmokeThrowHeight(500.0f),
-MaxHealth(100.0f), CurrentHealth(MaxHealth), RespawnTime(3.0f), bIsDead(false), bIsSlowed(false), SlowMultiplier(0.25f), bIsStunned(false), CanUseAbilityOne(true), CanUseAbilityTwo(true),
-AbilityOneCoolDown(8.0f), AbilityTwoCoolDown(12.0f), bRecentlyLaunched(false)
+MaxHealth(100.0f), CurrentHealth(MaxHealth), RespawnTime(3.0f), AbilityOneCoolDown(8.0f), AbilityTwoCoolDown(12.0f), CanUseAbilityOne(true), CanUseAbilityTwo(true), bIsDead(false), bIsSlowed(false),
+SlowMultiplier(0.25f), bIsStunned(false), bRecentlyLaunched(false)
 {
 	this->Tags.Add(FName("Player"));
 	
@@ -22,6 +22,9 @@ AbilityOneCoolDown(8.0f), AbilityTwoCoolDown(12.0f), bRecentlyLaunched(false)
 	MeleeBox = CreateDefaultSubobject<UBoxComponent>(TEXT("Box"));
 	MeleeBox->SetupAttachment(RootComponent);
 
+	respawnEffect = CreateDefaultSubobject<UNiagaraComponent>(TEXT("RespawnEffectComponent"));
+	respawnEffect->SetupAttachment(RootComponent);
+	
 	MeleeBox->InitBoxExtent(FVector(200.0f));
 	MeleeBox->SetCollisionResponseToAllChannels(ECR_Ignore);
 
@@ -64,6 +67,7 @@ void ABaseCharacter::BeginPlay()
 	GetCharacterMovement()->JumpZVelocity = JumpVelocity;
 	GetCharacterMovement()->MaxWalkSpeed = MaxWalkSpeed;
 
+	respawnEffect->ActivateSystem();
 }
 
 void ABaseCharacter::MeleeSwing_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult){
@@ -322,7 +326,6 @@ void ABaseCharacter::UseMeleeAttack()
 	}
 
 	MeleeBox->SetCollisionResponseToAllChannels(ECR_Overlap);
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "called melee attack");
 
 	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 	//TODO (Combat)

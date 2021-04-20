@@ -11,7 +11,10 @@ void AMiniFlag::Drop_Implementation()
 {
 	AFlag::Drop_Implementation();
 	owningTeam = ETeamIdentifier::None;
-	ChangeColour();
+	if(HasAuthority())
+	{
+		ChangeColour();
+	}
 }
 
 void AMiniFlag::Capture()	{
@@ -25,7 +28,6 @@ void AMiniFlag::Capture()	{
 				if(gameState->activeFlags.Contains(this))
 				{
 					gameState->activeFlags.Remove(this);
-					gameState->activeFlagsChangedDelegate.Broadcast(gameState->activeFlags);
 				}
 			}
 		}

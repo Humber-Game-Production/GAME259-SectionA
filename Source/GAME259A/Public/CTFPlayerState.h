@@ -60,7 +60,7 @@ public:
 	UPROPERTY(Replicated, BlueprintAssignable, Category = "EventDispatchers")
 	FRespawnPlayer respawnPlayerDelegate;
 
-	UPROPERTY(BlueprintAssignable, Category = "EventDispatchers")
+	UPROPERTY(Replicated, BlueprintAssignable, Category = "EventDispatchers")
 	FFlagDelegte currentObjectiveDelegate;
 
 	//Sets the player's team
