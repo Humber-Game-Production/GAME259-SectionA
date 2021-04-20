@@ -22,6 +22,9 @@ struct FPlayerInfo
 		FString MyPlayerStatus;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Info")
+		ACharacter* MyPlayerCharacter;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Info")
 		FString MyPlayerName;
 };
 
