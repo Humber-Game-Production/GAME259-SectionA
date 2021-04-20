@@ -167,7 +167,7 @@ void ABaseCharacter::StartJump()
 						}
 					}
 				},
-				0.1f, false);
+				0.00001f, false);
 		}
 	}
 }
@@ -244,7 +244,7 @@ void ABaseCharacter::UseAbilityOne_Implementation()
 	
 			if (ctfPlayerState->bIsThrowing)
 			{
-				GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, this, &ABaseCharacter::SetThrowAbilityOne,1.0f, false);
+				GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, this, &ABaseCharacter::SetThrowAbilityOne,0.5f, false);
 				CanUseAbilityOne = false;
 			}
 		}
@@ -295,6 +295,16 @@ void ABaseCharacter::UseAbilityTwo_Implementation()
 			CanUseAbilityTwo = false;
 		}
 	}
+}
+
+float ABaseCharacter::GetAbilityOneCooldown()
+{
+	return GetWorld()->GetTimerManager().GetTimerRemaining(AbilityOneTimerHandle);
+}
+
+float ABaseCharacter::GetAbilityTwoCooldown()
+{
+	return GetWorld()->GetTimerManager().GetTimerRemaining(AbilityTwoTimerHandle);
 }
 
 void ABaseCharacter::DropFlag()	{
