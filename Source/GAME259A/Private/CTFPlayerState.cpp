@@ -150,17 +150,21 @@ void ACTFPlayerState::OnRespawn_Implementation()
 			
 				//Spawn the new playerActor and get its pawn
 				AActor* playerActor = GetWorld()->SpawnActor(playersTeam->playerType, &location, &rotation, spawnP);
-				APawn* newPawn = Cast<APawn>(playerActor);
-				
-				
-				//Get the original playerController and detach it from its pawn
-				AController* controller = originalPawn->GetController();
-				controller->UnPossess();
-				//attach the playerState and playerController to the new pawn
-				newPawn->SetPlayerState(controller->GetPlayerState<ACTFPlayerState>());
-				controller->Possess(newPawn);
-				controller->SetControlRotation(rotation);
-			
+				if (playerActor) {
+					APawn* newPawn = Cast<APawn>(playerActor);
+					if (newPawn) {
+
+						//Get the original playerController and detach it from its pawn
+						AController* controller = originalPawn->GetController();
+						controller->UnPossess();
+						//attach the playerState and playerController to the new pawn
+						newPawn->SetPlayerState(controller->GetPlayerState<ACTFPlayerState>());
+						if (controller) {
+							controller->Possess(newPawn);
+							controller->SetControlRotation(rotation);
+						}
+					}
+				}
 				//Destroy original pawn
 				originalPawn->Destroy();
 
