@@ -91,4 +91,7 @@ public:
 
 	UFUNCTION()
 	void SetCapInactive();
+
+	UFUNCTION()
+	void SetCapInactiveEnd(ETeamIdentifier team);
 };

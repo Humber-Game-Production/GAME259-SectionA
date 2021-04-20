@@ -84,7 +84,7 @@ public:
 	FRoundEventDelegate roundStartDelegate;
 
 	UPROPERTY(BlueprintAssignable)
-	FTeamDelegate gameEndDelgate;
+	FTeamDelegate gameEndDelegate;
 
 	UPROPERTY(BlueprintAssignable)
 	FIntegerDelegate CapturedFlagDelegate;

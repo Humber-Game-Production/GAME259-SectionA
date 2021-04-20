@@ -54,6 +54,7 @@ void ACapturePoint::BeginPlay()
 		{
 			ctfGameState->roundStartDelegate.AddDynamic(this, &ACapturePoint::SetCapActive);
 			ctfGameState->roundEndDelegate.AddDynamic(this, &ACapturePoint::SetCapInactive);
+			ctfGameState->gameEndDelegate.AddDynamic(this, &ACapturePoint::SetCapInactiveEnd);
 		}
 	}
 }
@@ -79,6 +80,12 @@ void ACapturePoint::OnRep_flagsCaptured()
 {
 	TestFunction();
 }
+
+void ACapturePoint::SetCapInactiveEnd(ETeamIdentifier team)
+{
+	capturePointActive = false;
+}
+
 
 void ACapturePoint::SetCapActive()
 {
@@ -175,13 +182,13 @@ void ACapturePoint::RoundReset_Implementation()
 		{
 			const auto& mainFlagType = GetWorld()->GetAuthGameMode<ACTFGameMode>()->mainFlag;
 			FVector spawnPoint;
-			spawnPoint = this->GetActorLocation() + FVector(0.0f, 0.0f, 60.0f);
+			spawnPoint = this->GetActorLocation() + FVector(0.0f, 0.0f, 100.0f);
 			mainFlag = Cast<AMainFlag>(GetWorld()->SpawnActor(mainFlagType, &spawnPoint));
 		}
 	}
 	else if (MainFlagCreator && (mainFlag != nullptr))	{
 		
-		mainFlag->SetActorLocation(GetActorLocation() + FVector(0.0f, 0.0f, 60.0f));
+		mainFlag->SetActorLocation(GetActorLocation() + FVector(0.0f, 0.0f, 100.0f));
 	}
 	
 	if(mainFlag)	{
