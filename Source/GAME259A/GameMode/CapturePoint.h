@@ -30,6 +30,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	bool MainFlagCreator;
 
+	UPROPERTY(Replicated, BlueprintReadWrite, VisibleAnywhere)
+	bool capturePointActive;
+
 	UPROPERTY(EditAnywhere)
 	AMainFlag* mainFlag;
 
@@ -83,5 +86,12 @@ public:
 	UFUNCTION()
 	void OnRep_flagsCaptured();
 
+	UFUNCTION()
+	void SetCapActive();
 
+	UFUNCTION()
+	void SetCapInactive();
+
+	UFUNCTION()
+	void SetCapInactiveEnd(ETeamIdentifier team);
 };
