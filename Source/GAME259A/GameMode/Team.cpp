@@ -40,6 +40,7 @@ void ATeam::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimePro
 	DOREPLIFETIME( ATeam, capturePoint );
 	DOREPLIFETIME( ATeam, miniFlagSpawnPoints );
 	DOREPLIFETIME( ATeam, teamID );
+	DOREPLIFETIME( ATeam, miniFlagsCollected);
 }
 
 void ATeam::AddPlayer(ACTFPlayerState* player_)
