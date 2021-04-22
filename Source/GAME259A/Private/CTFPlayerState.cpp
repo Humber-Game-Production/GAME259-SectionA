@@ -161,7 +161,8 @@ void ACTFPlayerState::OnRespawn_Implementation()
 						newPawn->SetPlayerState(controller->GetPlayerState<ACTFPlayerState>());
 						if (controller) {
 							controller->Possess(newPawn);
-							controller->SetControlRotation(rotation);
+							//controller->SetControlRotation(rotation);
+							controller->ClientSetRotation(rotation);
 						}
 					}
 				}

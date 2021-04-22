@@ -152,6 +152,12 @@ void ACTFGameMode::PostLogin(APlayerController* NewPlayer)
 			FTimerHandle playerSpawn;
 			
 			GetWorldTimerManager().SetTimer(playerSpawn, playerState, &ACTFPlayerState::OnRespawn, 1.0f);
+			
+		}
+
+		if(ctfGameState)
+		{
+			ctfGameState->OnPlayerJoined(playerState);
 		}
 	}
 }
@@ -170,6 +176,8 @@ void ACTFGameMode::Logout(AController* Exiting)
 				team->players.Remove(playerState);
 			}
 		}
+
+		ctfGameState->OnPlayerLeft(playerState);
 	}
 }
 

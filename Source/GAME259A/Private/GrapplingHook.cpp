@@ -96,7 +96,7 @@ void AGrapplingHook::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
 
 		otherPlayer->LaunchCharacter(GrappleHorizontalVelocity, true, true);
 	}
-	else {
+	else if(BaseCharacter){
 		FVector CharacterLocation = BaseCharacter->GetActorLocation();
 		FVector GrappleLocation = Mesh->GetComponentLocation();
 
