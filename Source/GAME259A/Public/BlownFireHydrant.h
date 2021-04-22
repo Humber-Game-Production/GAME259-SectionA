@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GAME259A/BaseCharacter.h"
+#include "NiagaraFunctionLibrary.h"
 #include "BlownFireHydrant.generated.h"
 
 UCLASS()
@@ -26,6 +27,8 @@ protected:
 	UCapsuleComponent* collider;
 	UPROPERTY(EditAnywhere, Category = "Sound")
 	USoundBase* soundFX;
+	UPROPERTY(EditAnywhere, Category = "FX")
+	UNiagaraSystem* waterSpew;
 
 public:	
 	// Called every frame
