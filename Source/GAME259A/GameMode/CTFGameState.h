@@ -26,6 +26,9 @@ UDELEGATE()
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FTeamDelegate, ETeamIdentifier, team);
 
 UDELEGATE()
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerStateDelegate, APlayerState*, player);
+
+UDELEGATE()
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FRoundEventDelegate);
 
 UDELEGATE()
@@ -88,6 +91,12 @@ public:
 
 	UPROPERTY(BlueprintAssignable)
 	FIntegerDelegate CapturedFlagDelegate;
+
+	UPROPERTY(BlueprintAssignable)
+	FPlayerStateDelegate playerJoinedDelegate;
+
+	UPROPERTY(BlueprintAssignable)
+	FPlayerStateDelegate playerLeftDelegate;
 	
 	//Adds a CTFPlayerState to the specified team
 	UFUNCTION(BlueprintCallable)
@@ -99,6 +108,12 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	ATeam* GetTeam(ETeamIdentifier team) const;
+
+	UFUNCTION(NetMulticast, Reliable)
+    void OnPlayerJoined(APlayerState* player);
+
+	UFUNCTION(NetMulticast, Reliable)
+    void OnPlayerLeft(APlayerState* player);
 	
 	UFUNCTION(NetMulticast, Reliable)
 	void OnRep_activeFlags();
