@@ -58,6 +58,16 @@ ATeam* ACTFGameState::GetTeam(ETeamIdentifier team) const
 	return nullptr;
 }
 
+void ACTFGameState::OnPlayerLeft_Implementation(APlayerState* player)
+{
+	playerLeftDelegate.Broadcast(player);
+}
+
+void ACTFGameState::OnPlayerJoined_Implementation(APlayerState* player)
+{
+	playerJoinedDelegate.Broadcast(player);
+}
+
 void ACTFGameState::FlagDropped_Implementation(AFlag* flag)
 {
 	flagDropDelegate.Broadcast(flag);
