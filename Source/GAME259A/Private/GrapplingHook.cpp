@@ -71,6 +71,17 @@ void AGrapplingHook::Tick(float DeltaTime)
 void AGrapplingHook::SetSpawner(AActor* BaseCharacter_)
 {
 	BaseCharacter = BaseCharacter_;
+	Mesh->SetPhysicsLinearVelocity(FVector(0.0f, 0.0f, 0.0f));
+if (Cast<ABaseCharacter>(BaseCharacter)) 
+{
+	Mesh->AddImpulse(LaunchSpeed * Cast<ABaseCharacter>(BaseCharacter)->ThirdPersonCamera->GetForwardVector());
+}
+else 
+{
+	Mesh->AddImpulse(LaunchSpeed * GetActorForwardVector());
+
+}
+
 }
 
 //sets objects velocity
