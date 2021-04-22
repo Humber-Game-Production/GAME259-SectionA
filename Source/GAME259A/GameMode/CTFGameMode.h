@@ -74,6 +74,7 @@ public:
 	TSubclassOf<AFlag> miniFlag;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Flags")
 	TSubclassOf<AFlag> mainFlag;
+
 	
 	//Time left in the current round(float)
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Game Rules")

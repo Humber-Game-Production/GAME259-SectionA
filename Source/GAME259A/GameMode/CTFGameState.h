@@ -17,10 +17,16 @@ class ACapturePoint;
 class ACTFPlayerState;
 
 UDELEGATE()
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFlagDelegate, const TArray<AFlag*>&, flag);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMultiFlagsDelegate, const TArray<AFlag*>&, flags);
+
+UDELEGATE()
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSingleFlagDelegate, AFlag*, flag);
 
 UDELEGATE()
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FTeamDelegate, ETeamIdentifier, team);
+
+UDELEGATE()
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerStateDelegate, APlayerState*, player);
 
 UDELEGATE()
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FRoundEventDelegate);
@@ -66,8 +72,14 @@ public:
 	int32 maxRounds;
 
 	UPROPERTY(BlueprintAssignable)
-	FFlagDelegate activeFlagsChangedDelegate;
+	FMultiFlagsDelegate activeFlagsChangedDelegate;
 
+	UPROPERTY(BlueprintAssignable)
+	FSingleFlagDelegate flagPickupDelegate;
+
+	UPROPERTY(BlueprintAssignable)
+	FSingleFlagDelegate flagDropDelegate;
+	
 	UPROPERTY(BlueprintAssignable)
 	FRoundEventDelegate roundEndDelegate;
 
@@ -75,10 +87,16 @@ public:
 	FRoundEventDelegate roundStartDelegate;
 
 	UPROPERTY(BlueprintAssignable)
-	FTeamDelegate gameEndDelgate;
+	FTeamDelegate gameEndDelegate;
 
 	UPROPERTY(BlueprintAssignable)
 	FIntegerDelegate CapturedFlagDelegate;
+
+	UPROPERTY(BlueprintAssignable)
+	FPlayerStateDelegate playerJoinedDelegate;
+
+	UPROPERTY(BlueprintAssignable)
+	FPlayerStateDelegate playerLeftDelegate;
 	
 	//Adds a CTFPlayerState to the specified team
 	UFUNCTION(BlueprintCallable)
@@ -90,6 +108,12 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	ATeam* GetTeam(ETeamIdentifier team) const;
+
+	UFUNCTION(NetMulticast, Reliable)
+    void OnPlayerJoined(APlayerState* player);
+
+	UFUNCTION(NetMulticast, Reliable)
+    void OnPlayerLeft(APlayerState* player);
 	
 	UFUNCTION(NetMulticast, Reliable)
 	void OnRep_activeFlags();
@@ -105,4 +129,10 @@ public:
 
 	UFUNCTION(NetMulticast, Reliable)
 	void OnGameEnd(ETeamIdentifier winningTeam);
+
+	UFUNCTION(NetMulticast, Reliable)
+    void FlagPickedUp(AFlag* flag);
+
+	UFUNCTION(NetMulticast, Reliable)
+	void FlagDropped(AFlag* flag);
 };

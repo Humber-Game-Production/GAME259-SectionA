@@ -6,6 +6,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "TimerManager.h"
 #include "MiniFlag.h"
+
 #include "Team.h"
 #include "CapturePoint.h"
 #include "GAME259A/GameMode/CTFGameState.h"
@@ -125,6 +126,8 @@ void ACTFGameMode::InitTeams()
 	GetWorldTimerManager().SetTimer(flagSpawnTimer, this, &ACTFGameMode::SpawnMiniFlag, timeBetweenFlagSpawns, true);
 	GetWorldTimerManager().SetTimer(roundTimerHandle, this, &ACTFGameMode::EndRound, roundTimerTime);
 	GetWorldTimerManager().SetTimer(updateTimerHandle, this, &ACTFGameMode::UpdateGameStateTime, 1.0f, true);
+
+	ctfGameState->OnRoundStart();
 }
 
 void ACTFGameMode::PostLogin(APlayerController* NewPlayer)
@@ -149,6 +152,12 @@ void ACTFGameMode::PostLogin(APlayerController* NewPlayer)
 			FTimerHandle playerSpawn;
 			
 			GetWorldTimerManager().SetTimer(playerSpawn, playerState, &ACTFPlayerState::OnRespawn, 1.0f);
+			
+		}
+
+		if(ctfGameState)
+		{
+			ctfGameState->OnPlayerJoined(playerState);
 		}
 	}
 }
@@ -156,6 +165,20 @@ void ACTFGameMode::PostLogin(APlayerController* NewPlayer)
 void ACTFGameMode::Logout(AController* Exiting)
 {
 	Super::Logout(Exiting);
+
+	ACTFPlayerState* playerState = Exiting->GetPlayerState<ACTFPlayerState>();
+	if(playerState)
+	{
+		if(ATeam* team = ctfGameState->GetTeam(playerState->teamID))
+		{
+			if(team->players.Contains(playerState))
+			{
+				team->players.Remove(playerState);
+			}
+		}
+
+		ctfGameState->OnPlayerLeft(playerState);
+	}
 }
 
 void ACTFGameMode::UpdateGameStateTime()
@@ -243,11 +266,11 @@ void ACTFGameMode::EndRound() {
 void ACTFGameMode::RoundReset() {
 
 	spawnedMiniFlags = 0;
-
-	for (int i = 0; i < ctfGameState->activeFlags.Num(); i++)
-	{
-		if(IsValid(ctfGameState->activeFlags[i]))
-		{
+	
+	
+	for (int i = 0; i < ctfGameState->activeFlags.Num(); i++)	{
+		if(IsValid(ctfGameState->activeFlags[i]))	{
+			
 			GetWorld()->DestroyActor(ctfGameState->activeFlags[i]);
 		}
 	}
@@ -314,11 +337,14 @@ void ACTFGameMode::SpawnAllPlayersOnTeam(ETeamIdentifier team)
 	ATeam* teamToSpawn = ctfGameState->GetTeam(team);
 	if(teamToSpawn)
 	{
-		for(int i = 0; i < teamToSpawn->players.Num(); i++)
+		for(int i = teamToSpawn->players.Num() - 1; i >= 0; i--)
 		{
 			if(IsValid(teamToSpawn->players[i]))
 			{
 				teamToSpawn->players[i]->OnRespawn();
+			} else
+			{
+				teamToSpawn->players.RemoveAt(i);
 			}
 		}
 	} else

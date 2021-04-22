@@ -58,6 +58,26 @@ ATeam* ACTFGameState::GetTeam(ETeamIdentifier team) const
 	return nullptr;
 }
 
+void ACTFGameState::OnPlayerLeft_Implementation(APlayerState* player)
+{
+	playerLeftDelegate.Broadcast(player);
+}
+
+void ACTFGameState::OnPlayerJoined_Implementation(APlayerState* player)
+{
+	playerJoinedDelegate.Broadcast(player);
+}
+
+void ACTFGameState::FlagDropped_Implementation(AFlag* flag)
+{
+	flagDropDelegate.Broadcast(flag);
+}
+
+void ACTFGameState::FlagPickedUp_Implementation(AFlag* flag)
+{
+	flagPickupDelegate.Broadcast(flag);
+}
+
 void ACTFGameState::OnRep_capturedFlags_Implementation()
 {
 	CapturedFlagDelegate.Broadcast(capturedFlags);
@@ -65,7 +85,7 @@ void ACTFGameState::OnRep_capturedFlags_Implementation()
 
 void ACTFGameState::OnGameEnd_Implementation(ETeamIdentifier winningTeam)
 {
-	gameEndDelgate.Broadcast(winningTeam);
+	gameEndDelegate.Broadcast(winningTeam);
 }
 
 void ACTFGameState::OnRoundEnd_Implementation()

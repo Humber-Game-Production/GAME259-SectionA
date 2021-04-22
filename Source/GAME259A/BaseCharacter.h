@@ -10,6 +10,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "TimerManager.h"
+#include "Niagara/Public/NiagaraComponent.h"
 #include "Public/BaseAbilityClass.h"
 
 
@@ -30,8 +31,7 @@ public:
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 	USpringArmComponent* CameraBoom;	//The boom stick for the camera. Controls how far away the camera is from the character.
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
-	UCameraComponent* ThirdPersonCamera;//The camera that will follow the character.
+
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Movement")
 	float MaxWalkSpeed;					//The maximum speed at which the character can move while not sprinting.
@@ -103,6 +103,8 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Abilities")
 	FTimerHandle AbilityTwoTimerHandle;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Death")
+	UNiagaraComponent* respawnEffect;
 	
 
 protected:
@@ -128,10 +130,11 @@ protected:
 	void StartJump();
 
 	//Abilities
-	UFUNCTION(Category = "Abilities", Server, Reliable)
+	UFUNCTION(Category = "Abilities", BlueprintCallable, Server, Reliable)
 	void UseAbilityOne();
-	UFUNCTION(Category = "Abilities", Server, Reliable)
+	UFUNCTION(Category = "Abilities", BlueprintCallable, Server, Reliable)
 	void UseAbilityTwo();
+
 	UFUNCTION()
 	void DropFlag();
 	
@@ -148,9 +151,9 @@ protected:
 	UFUNCTION(Server, Reliable, Category = "Death", BlueprintCallable)
 	void Respawn();
 
-	UFUNCTION(Server, Reliable)
+	UFUNCTION(Server, Reliable, BlueprintCallable)
 	void SetThrowAbilityOne();
-	UFUNCTION(Server, Reliable)
+	UFUNCTION(Server, Reliable, BlueprintCallable)
 	void SetThrowAbilityTwo();
 
 	//Functions to send animation booleans to server.
@@ -175,12 +178,20 @@ protected:
 	//UPROPERTY(BlueprintReadWrite, Replicated, Category = "AnimControl")
 	//bool bIsDrawingBow;					//True if the player just input to melee attack.
 public:	
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
+		UCameraComponent* ThirdPersonCamera;//The camera that will follow the character.
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UFUNCTION(Category = "Abilities", BlueprintCallable)
+		float GetAbilityOneCooldown();
+	UFUNCTION(Category = "Abilities", BlueprintCallable)
+		float GetAbilityTwoCooldown();
 
 	UPROPERTY(EditAnywhere)
 		UBoxComponent* MeleeBox;

@@ -30,13 +30,14 @@ void ACTFPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 	DOREPLIFETIME( ACTFPlayerState, PlayerCanPickupFlag);
 	DOREPLIFETIME( ACTFPlayerState, teamScoreDelegate);
 	DOREPLIFETIME( ACTFPlayerState, respawnPlayerDelegate);
+	DOREPLIFETIME( ACTFPlayerState, currentObjectiveDelegate);
 	
 	DOREPLIFETIME( ACTFPlayerState, bIsSwinging);
 	DOREPLIFETIME( ACTFPlayerState, bIsSprinting);
 	DOREPLIFETIME( ACTFPlayerState, bIsJumping);
 	DOREPLIFETIME( ACTFPlayerState, bIsThrowing);
 	DOREPLIFETIME( ACTFPlayerState, bIsDrawingBow);
-	
+	DOREPLIFETIME( ACTFPlayerState, bIsGrappleHook);
 }
 
 void ACTFPlayerState::ResetStats()
@@ -60,6 +61,7 @@ void ACTFPlayerState::PlayerDropFlag_Implementation()
 	PlayerCanPickupFlag = true;
 	if(FlagHeld)
 	{
+		GetWorld()->GetGameState<ACTFGameState>()->FlagDropped(FlagHeld);
 		FlagHeld->Execute_Drop(FlagHeld);
 		FlagHeld = nullptr;
 		UpdateObjective(FlagHeld);
@@ -101,6 +103,7 @@ void ACTFPlayerState::SetTeam(ETeamIdentifier team)
 
 void ACTFPlayerState::SetFlagHeld(AFlag* FlagHeld_)	{
 	FlagHeld = FlagHeld_;
+	GetWorld()->GetGameState<ACTFGameState>()->FlagPickedUp(FlagHeld);
 	UpdateObjective(FlagHeld);
 }
 
@@ -125,7 +128,7 @@ void ACTFPlayerState::OnRespawn_Implementation()
 	UE_LOG(LogTemp, Warning, TEXT("Respawn player delegate should have played"));
 
 	APawn* originalPawn = GetPawn();
-
+	
 	PlayerDropFlag();
 	
 	if(ACTFGameState* gameState = GetWorld()->GetGameState<ACTFGameState>())
@@ -147,17 +150,22 @@ void ACTFPlayerState::OnRespawn_Implementation()
 			
 				//Spawn the new playerActor and get its pawn
 				AActor* playerActor = GetWorld()->SpawnActor(playersTeam->playerType, &location, &rotation, spawnP);
-				APawn* newPawn = Cast<APawn>(playerActor);
-				
-				
-				//Get the original playerController and detach it from its pawn
-				AController* controller = originalPawn->GetController();
-				controller->UnPossess();
-				//attach the playerState and playerController to the new pawn
-				newPawn->SetPlayerState(controller->GetPlayerState<ACTFPlayerState>());
-				controller->Possess(newPawn);
-				controller->SetControlRotation(rotation);
-			
+				if (playerActor) {
+					APawn* newPawn = Cast<APawn>(playerActor);
+					if (newPawn) {
+
+						//Get the original playerController and detach it from its pawn
+						AController* controller = originalPawn->GetController();
+						controller->UnPossess();
+						//attach the playerState and playerController to the new pawn
+						newPawn->SetPlayerState(controller->GetPlayerState<ACTFPlayerState>());
+						if (controller) {
+							controller->Possess(newPawn);
+							//controller->SetControlRotation(rotation);
+							controller->ClientSetRotation(rotation);
+						}
+					}
+				}
 				//Destroy original pawn
 				originalPawn->Destroy();
 
