@@ -16,7 +16,7 @@ ABlownFireHydrant::ABlownFireHydrant()
 	HydrantMesh->SetNotifyRigidBodyCollision(true);
 	SetRootComponent(HydrantMesh);
 	collider = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleCollider"));
-	collider->SetCapsuleSize(50.0f, 100.0f);
+	collider->SetCapsuleSize(50.0f, 70.0f);
 	collider->SetSimulatePhysics(false);
 	collider->SetupAttachment(RootComponent);
 	collider->SetNotifyRigidBodyCollision(false);
@@ -30,8 +30,8 @@ void ABlownFireHydrant::BeginPlay()
 	Super::BeginPlay();
 	collider->OnComponentBeginOverlap.AddDynamic(this, &ABlownFireHydrant::BeginOverlap);
 
-	//Uncomment this code to enable sound to play on the hydrants.
-	//UGameplayStatics::PlaySoundAtLocation(this, soundFX, this->GetActorLocation(),this->GetActorRotation(), 0.5f, 1.0, 0.0f);
+	UGameplayStatics::PlaySoundAtLocation(this, soundFX, this->GetActorLocation(),this->GetActorRotation(), 0.2f, 1.0, 0.0f, nullptr, nullptr, this);
+	UNiagaraFunctionLibrary::SpawnSystemAttached(waterSpew, RootComponent, "WaterEffects", FVector(0.0f, 0.0f, 100.0f), FRotator(0), EAttachLocation::KeepRelativeOffset, false, true);
 }
 
 // Called every frame
