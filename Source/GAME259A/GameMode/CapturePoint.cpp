@@ -175,6 +175,15 @@ void ACapturePoint::CheckForFlagConstruction_Implementation()
 void ACapturePoint::RoundReset_Implementation()
 {
 	flagsCaptured = 0;
+
+	if(HasAuthority())
+	{
+		ACTFGameState* gameState = GetWorld()->GetGameState<ACTFGameState>();
+		if (gameState->activeFlags.Contains(mainFlag))
+		{
+			gameState->activeFlags.Remove(mainFlag);
+		}
+	}
 	
 	if(MainFlagCreator && !IsValid(mainFlag))
 	{
@@ -199,5 +208,13 @@ void ACapturePoint::RoundReset_Implementation()
 
 void ACapturePoint::SetMainFlagActive_Implementation()	{
 	mainFlag->CompleteMainFlag();
+	if (mainFlag){
+		if (HasAuthority())
+		{
+			ACTFGameState* gameState = GetWorld()->GetGameState<ACTFGameState>();
+			gameState->activeFlags.Add(mainFlag);
+			gameState->activeFlagsChangedDelegate.Broadcast(gameState->activeFlags);
+		}
+	}
 }
 
