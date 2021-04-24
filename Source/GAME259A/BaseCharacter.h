@@ -188,10 +188,10 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UFUNCTION(Category = "Abilities", BlueprintCallable)
-		float GetAbilityOneCooldown();
-	UFUNCTION(Category = "Abilities", BlueprintCallable)
-		float GetAbilityTwoCooldown();
+	UFUNCTION(Category = "Abilities", Server, Reliable, BlueprintCallable)
+	void AbilityOneCooldownRemaining();
+	UFUNCTION(Category = "Abilities", Server, Reliable, BlueprintCallable)
+	void AbilityTwoCooldownRemaining();
 
 	UPROPERTY(EditAnywhere)
 		UBoxComponent* MeleeBox;
@@ -203,3 +203,4 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Movement")
 	bool bRecentlyLaunched;					//True if the character is stunned via crowd control.
 };
+

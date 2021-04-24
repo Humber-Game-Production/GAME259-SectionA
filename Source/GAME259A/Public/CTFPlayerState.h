@@ -99,6 +99,12 @@ public:
 
 	UFUNCTION()
 	void UpdateObjective(AFlag* newFlag);
+
+	UPROPERTY(BlueprintReadOnly, Replicated, Category = "Abilities")
+	float AbilityOneCooldownRemaining;
+
+	UPROPERTY(BlueprintReadOnly, Replicated, Category = "Abilities")
+	float AbilityTwoCooldownRemaining;
 	
 	//Following is code to set the players animation state.
 	UPROPERTY(BlueprintReadOnly, Replicated, Category = "Movement")
