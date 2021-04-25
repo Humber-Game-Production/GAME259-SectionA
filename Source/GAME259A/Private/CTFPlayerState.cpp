@@ -32,6 +32,10 @@ void ACTFPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 	DOREPLIFETIME( ACTFPlayerState, respawnPlayerDelegate);
 	DOREPLIFETIME( ACTFPlayerState, currentObjectiveDelegate);
 	
+	DOREPLIFETIME(ACTFPlayerState, AbilityOneCooldownRemaining);
+	DOREPLIFETIME(ACTFPlayerState, AbilityTwoCooldownRemaining);
+
+	
 	DOREPLIFETIME( ACTFPlayerState, bIsSwinging);
 	DOREPLIFETIME( ACTFPlayerState, bIsSprinting);
 	DOREPLIFETIME( ACTFPlayerState, bIsJumping);
