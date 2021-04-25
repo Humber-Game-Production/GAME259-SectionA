@@ -212,8 +212,9 @@ void ABaseCharacter::SetThrowAbilityOne_Implementation()
 	if (!bIsDead) {
 		ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
 
-		FVector tmpLoc = FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 100);
-		location = FTransform(tmpLoc + GetActorRightVector() * 40.0f + GetActorForwardVector() * 40.0f);
+		//FVector tmpLoc = FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 100);
+		//location = FTransform(tmpLoc + GetActorRightVector() * 40.0f + GetActorForwardVector() * 40.0f);
+		location = FTransform(ThirdPersonCamera->GetRelativeLocation() + CameraBoom->GetRelativeLocation() + RootComponent->GetRelativeLocation() + ThirdPersonCamera->GetForwardVector() * 80.0f);
 		FVector ThrowDistance = ThirdPersonCamera->GetForwardVector() * MovementThrowLength + ThirdPersonCamera->GetUpVector() * MovementThrowHeight;
 		if (ACTFPlayerState * StateOfPlayer = GetPlayerState<ACTFPlayerState>())
 			MovementAbility->UseAbility(3.0f, location, 0.0f, StateOfPlayer->teamID, 0.0f, ThrowDistance, this);
@@ -263,8 +264,10 @@ void ABaseCharacter::SetThrowAbilityTwo_Implementation()
 	if (!bIsDead) {
 		if (SecondAbility) {
 			ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-			FVector tmpLoc = FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 100);
-			location = FTransform(tmpLoc + GetActorRightVector() * 40.0f);
+	//		FVector tmpLoc = FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 100);
+//			location = FTransform(tmpLoc + GetActorRightVector() * 40.0f);
+			location = FTransform(ThirdPersonCamera->GetRelativeLocation() + CameraBoom->GetRelativeLocation() + RootComponent->GetRelativeLocation() + ThirdPersonCamera->GetForwardVector() * 40.0f);
+
 			FVector ThrowDistance = ThirdPersonCamera->GetForwardVector() * SmokeThrowLength + ThirdPersonCamera->GetUpVector() * SmokeThrowHeight;
 			if (ACTFPlayerState * StateOfPlayer = GetPlayerState<ACTFPlayerState>())
 				SecondAbility->UseAbility(3.0f, location, 0.0f, StateOfPlayer->teamID, 0.0f, ThrowDistance, this);
@@ -301,14 +304,22 @@ void ABaseCharacter::UseAbilityTwo_Implementation()
 	}
 }
 
-float ABaseCharacter::GetAbilityOneCooldown()
+void ABaseCharacter::AbilityOneCooldownRemaining_Implementation()
 {
-	return GetWorld()->GetTimerManager().GetTimerRemaining(AbilityOneTimerHandle);
+	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+	if (ctfPlayerState)
+	{
+		ctfPlayerState->AbilityOneCooldownRemaining = GetWorld()->GetTimerManager().GetTimerRemaining(AbilityOneTimerHandle);
+	}
 }
 
-float ABaseCharacter::GetAbilityTwoCooldown()
+void ABaseCharacter::AbilityTwoCooldownRemaining_Implementation()
 {
-	return GetWorld()->GetTimerManager().GetTimerRemaining(AbilityTwoTimerHandle);
+	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+	if (ctfPlayerState)
+	{
+		ctfPlayerState->AbilityTwoCooldownRemaining = GetWorld()->GetTimerManager().GetTimerRemaining(AbilityTwoTimerHandle);
+	}
 }
 
 void ABaseCharacter::DropFlag()	{

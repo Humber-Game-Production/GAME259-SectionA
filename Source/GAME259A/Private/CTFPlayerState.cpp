@@ -32,6 +32,10 @@ void ACTFPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 	DOREPLIFETIME( ACTFPlayerState, respawnPlayerDelegate);
 	DOREPLIFETIME( ACTFPlayerState, currentObjectiveDelegate);
 	
+	DOREPLIFETIME(ACTFPlayerState, AbilityOneCooldownRemaining);
+	DOREPLIFETIME(ACTFPlayerState, AbilityTwoCooldownRemaining);
+
+	
 	DOREPLIFETIME( ACTFPlayerState, bIsSwinging);
 	DOREPLIFETIME( ACTFPlayerState, bIsSprinting);
 	DOREPLIFETIME( ACTFPlayerState, bIsJumping);
@@ -161,7 +165,8 @@ void ACTFPlayerState::OnRespawn_Implementation()
 						newPawn->SetPlayerState(controller->GetPlayerState<ACTFPlayerState>());
 						if (controller) {
 							controller->Possess(newPawn);
-							controller->SetControlRotation(rotation);
+							//controller->SetControlRotation(rotation);
+							controller->ClientSetRotation(rotation);
 						}
 					}
 				}
