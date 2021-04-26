@@ -11,14 +11,18 @@ ABlownFireHydrant::ABlownFireHydrant()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	RootComponent = Root;
+	
 	HydrantMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("HydrantMesh"));
 	HydrantMesh->SetSimulatePhysics(true);
 	HydrantMesh->SetNotifyRigidBodyCollision(true);
-	SetRootComponent(HydrantMesh);
+	HydrantMesh->SetupAttachment(Root);
+	
 	collider = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleCollider"));
 	collider->SetCapsuleSize(50.0f, 70.0f);
 	collider->SetSimulatePhysics(false);
-	collider->SetupAttachment(RootComponent);
+	collider->SetupAttachment(Root);
 	collider->SetNotifyRigidBodyCollision(false);
 	
 	HydrantMesh->SetSimulatePhysics(false);
@@ -31,7 +35,7 @@ void ABlownFireHydrant::BeginPlay()
 	collider->OnComponentBeginOverlap.AddDynamic(this, &ABlownFireHydrant::BeginOverlap);
 
 	UGameplayStatics::PlaySoundAtLocation(this, soundFX, this->GetActorLocation(),this->GetActorRotation(), 0.2f, 1.0, 0.0f, nullptr, nullptr, this);
-	UNiagaraFunctionLibrary::SpawnSystemAttached(waterSpew, RootComponent, "WaterEffects", FVector(0.0f, 0.0f, 100.0f), FRotator(0), EAttachLocation::KeepRelativeOffset, false, true);
+	UNiagaraFunctionLibrary::SpawnSystemAttached(waterSpew, Root, "WaterEffects", FVector(0.0f, 0.0f, 100.0f), FRotator(0), EAttachLocation::KeepRelativeOffset, false, true);
 }
 
 // Called every frame
