@@ -304,14 +304,22 @@ void ABaseCharacter::UseAbilityTwo_Implementation()
 	}
 }
 
-float ABaseCharacter::GetAbilityOneCooldown()
+void ABaseCharacter::AbilityOneCooldownRemaining_Implementation()
 {
-	return GetWorld()->GetTimerManager().GetTimerRemaining(AbilityOneTimerHandle);
+	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+	if (ctfPlayerState)
+	{
+		ctfPlayerState->AbilityOneCooldownRemaining = GetWorld()->GetTimerManager().GetTimerRemaining(AbilityOneTimerHandle);
+	}
 }
 
-float ABaseCharacter::GetAbilityTwoCooldown()
+void ABaseCharacter::AbilityTwoCooldownRemaining_Implementation()
 {
-	return GetWorld()->GetTimerManager().GetTimerRemaining(AbilityTwoTimerHandle);
+	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+	if (ctfPlayerState)
+	{
+		ctfPlayerState->AbilityTwoCooldownRemaining = GetWorld()->GetTimerManager().GetTimerRemaining(AbilityTwoTimerHandle);
+	}
 }
 
 void ABaseCharacter::DropFlag()	{
