@@ -266,7 +266,12 @@ void ACTFGameMode::EndRound() {
 void ACTFGameMode::RoundReset() {
 
 	spawnedMiniFlags = 0;
-	
+
+	//Moved to here so the mainflag can be removed from the activeflags before it destroys the flags in it
+	for(auto capPoint : ctfGameState->capturePoints)
+	{
+		capPoint->RoundReset();
+	}
 	
 	for (int i = 0; i < ctfGameState->activeFlags.Num(); i++)	{
 		if(IsValid(ctfGameState->activeFlags[i]))	{
@@ -279,11 +284,6 @@ void ACTFGameMode::RoundReset() {
 	for (auto team : ctfGameState->listOfTeams)
 	{
 		SpawnAllPlayersOnTeam(team->teamID);
-	}
-
-	for(auto capPoint : ctfGameState->capturePoints)
-	{
-		capPoint->RoundReset();
 	}
 
 	ctfGameState->capturedFlags = 0;
