@@ -48,7 +48,7 @@ void AGrapplingHook::BeginPlay()
 	//}
 	//else 
 	//{
-		Mesh->AddImpulse(LaunchSpeed * GetActorForwardVector());
+		//Mesh->AddImpulse(LaunchSpeed * GetActorForwardVector());
 
 	//}
 	/*if (GrapplingHookAudioComponent && GrapplingHookSound) {
@@ -71,7 +71,7 @@ void AGrapplingHook::Tick(float DeltaTime)
 void AGrapplingHook::SetSpawner(AActor* BaseCharacter_)
 {
 	BaseCharacter = BaseCharacter_;
-	Mesh->SetPhysicsLinearVelocity(FVector(0.0f, 0.0f, 0.0f));
+	/*Mesh->SetPhysicsLinearVelocity(FVector(0.0f, 0.0f, 0.0f));
 if (Cast<ABaseCharacter>(BaseCharacter)) 
 {
 	Mesh->AddImpulse(LaunchSpeed * Cast<ABaseCharacter>(BaseCharacter)->ThirdPersonCamera->GetForwardVector());
@@ -81,6 +81,7 @@ else
 	Mesh->AddImpulse(LaunchSpeed * GetActorForwardVector());
 
 }
+*/
 
 }
 
@@ -92,8 +93,8 @@ void AGrapplingHook::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
 	SphereCollider->SetSimulatePhysics(false);
 	SphereCollider->SetNotifyRigidBodyCollision(false);
 	ABaseCharacter* otherPlayer = Cast<ABaseCharacter>(OtherActor);
-	if (otherPlayer) {
-		FVector CharacterLocation = otherPlayer->GetActorLocation();
+	if (otherPlayer && BaseCharacter) {
+		FVector CharacterLocation = BaseCharacter->GetActorLocation();
 		FVector GrappleLocation = Mesh->GetComponentLocation();
 
 		FVector GrappleHorizontalVelocity = FVector(GrappleLocation.X - CharacterLocation.X, GrappleLocation.Y - CharacterLocation.Y, GrappleLocation.Z + 200.0f - CharacterLocation.Z);
@@ -105,7 +106,7 @@ void AGrapplingHook::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
 		//	GrappleVerticalVelocity.Z = 200;
 		//}
 
-		otherPlayer->LaunchCharacter(GrappleHorizontalVelocity, true, true);
+		otherPlayer->LaunchCharacter(-GrappleHorizontalVelocity, true, true);
 	}
 	else if(BaseCharacter){
 		FVector CharacterLocation = BaseCharacter->GetActorLocation();
