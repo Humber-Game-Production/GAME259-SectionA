@@ -89,7 +89,7 @@ else
 
 void AGrapplingHook::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	if (GEngine && OtherActor) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I Hit: %s"), *OtherActor->GetName()));
+	//if (GEngine && OtherActor) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I Hit: %s"), *OtherActor->GetName()));
 	SphereCollider->SetSimulatePhysics(false);
 	SphereCollider->SetNotifyRigidBodyCollision(false);
 	ABaseCharacter* otherPlayer = Cast<ABaseCharacter>(OtherActor);
