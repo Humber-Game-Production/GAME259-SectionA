@@ -99,7 +99,7 @@ void AFlag::PickUp_Implementation(UPrimitiveComponent* OverlappedComponent,
 
 void AFlag::Drop_Implementation()	{
 	//print message
-	if(GEngine)	GEngine->UEngine::AddOnScreenDebugMessage(0, 2.0f, FColor::Blue, TEXT("Flag Dropped"));
+	//if(GEngine)	GEngine->UEngine::AddOnScreenDebugMessage(0, 2.0f, FColor::Blue, TEXT("Flag Dropped"));
 	this->DetachFromActor(FDetachmentTransformRules(EDetachmentRule::KeepWorld,EDetachmentRule::KeepRelative,EDetachmentRule::KeepRelative,false));
 
 	FHitResult Hit;
@@ -109,7 +109,7 @@ void AFlag::Drop_Implementation()	{
 	TraceParams.AddIgnoredActor(this);
 	GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
 
-	DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 10.0f, 0, 2.0f);
+	//DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 10.0f, 0, 2.0f);
 	
 	if(Hit.IsValidBlockingHit())	{
 		FVector NewLocation(Hit.ImpactPoint + DistanceFromGround);

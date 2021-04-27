@@ -22,8 +22,10 @@ protected:
 	virtual void BeginPlay() override;
 
 	FTimerHandle resetLaunchTimer;
-
+	
 	UPROPERTY()
+	USceneComponent* Root;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UCapsuleComponent* collider;
 	UPROPERTY(EditAnywhere, Category = "Sound")
 	USoundBase* soundFX;
@@ -34,7 +36,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UStaticMeshComponent* HydrantMesh;
 	
 	UFUNCTION()

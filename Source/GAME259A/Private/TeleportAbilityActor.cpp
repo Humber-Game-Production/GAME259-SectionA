@@ -62,7 +62,7 @@ void ATeleportAbilityActor::SetSpawner(AActor* BaseCharacter_)
 
 void ATeleportAbilityActor::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	if(GEngine && OtherActor) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I Hit: %s"), *OtherActor->GetName()));
+	//if(GEngine && OtherActor) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I Hit: %s"), *OtherActor->GetName()));
 	VHit = Hit.ImpactNormal * 120;
 	FRotator CharacterRotation = FRotator(BaseCharacter->GetActorRotation().Pitch, BaseCharacter->GetActorRotation().Yaw, BaseCharacter->GetActorRotation().Roll - 90);
 	FVector CharacterLocation = FVector(BaseCharacter->GetRootComponent()->GetComponentLocation().X, BaseCharacter->GetRootComponent()->GetComponentLocation().Y, BaseCharacter->GetRootComponent()->GetComponentLocation().Z-80);

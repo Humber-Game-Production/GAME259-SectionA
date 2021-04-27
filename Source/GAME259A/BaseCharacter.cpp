@@ -16,20 +16,20 @@ SlowMultiplier(0.25f), bIsStunned(false), bRecentlyLaunched(false)
  	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationYaw = false;
+
+	bIsAttacking = false;
 	
 	bIsDead = false;
 
-	MeleeBox = CreateDefaultSubobject<UBoxComponent>(TEXT("Box"));
-	MeleeBox->SetupAttachment(RootComponent);
-
 	respawnEffect = CreateDefaultSubobject<UNiagaraComponent>(TEXT("RespawnEffectComponent"));
 	respawnEffect->SetupAttachment(RootComponent);
-	
-	MeleeBox->InitBoxExtent(FVector(200.0f));
-	MeleeBox->SetCollisionResponseToAllChannels(ECR_Ignore);
 
 	//Set collision capsule.
-	GetCapsuleComponent()->InitCapsuleSize(42.0f, 96.0f);
+	Hurtbox = GetCapsuleComponent();
+	Hurtbox->InitCapsuleSize(42.0f, 96.0f);
+
+	MeleeSwingHitbox = CreateDefaultSubobject<UBoxComponent>(TEXT("Hitbox"));
+	MeleeSwingHitbox->SetupAttachment(GetMesh());
 
 	//Set this so the character does not turn to look in the direction they are moving.
 	GetCharacterMovement()->bOrientRotationToMovement = true;
@@ -60,7 +60,7 @@ void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &ABaseCharacter::MeleeSwing_Implementation);
+	MeleeSwingHitbox->OnComponentBeginOverlap.AddDynamic(this, &ABaseCharacter::MeleeSwing_Implementation);
 
 	CurrentMoveSpeed = MaxWalkSpeed;
 	//Set how fast the character jumps.
@@ -70,30 +70,35 @@ void ABaseCharacter::BeginPlay()
 	respawnEffect->ActivateSystem();
 }
 
-void ABaseCharacter::MeleeSwing_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult){
-	//checks if the OtherComp is a Box
-	/*
-	UBoxComponent* isBox = Cast<UBoxComponent>(OtherComp);
-	if (isBox) {
-		AActor* CompActor = OtherComp->GetOwner();
-		ABaseCharacter* isCharacter = Cast<ABaseCharacter>(CompActor);
-		if (isCharacter != nullptr) {
-			ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-			ACTFPlayerState* CompctfPlayerState = isCharacter->GetPlayerState<ACTFPlayerState>();
-			if (CompctfPlayerState != nullptr && ctfPlayerState != nullptr) {
+void ABaseCharacter::MeleeSwing_Implementation(UPrimitiveComponent* OverlappedComponent, 
+	AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	bIsAttacking = true;
+	//check if overlap is pawn
+	APawn* isPawn = Cast<APawn>(OtherActor);
+	
 
-				if (ctfPlayerState->teamID != CompctfPlayerState->teamID) {
-					
-					TakeDamage(25.0f);
-					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Non-Friendly Fire");
-				}
-				else {
-					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, "Friendly Fire");
+	if (isPawn) {
+		//if it is, it checks if it has a playerState
+		ACTFPlayerState* hasPlayerState = isPawn->GetPlayerState<ACTFPlayerState>();
+		ACTFPlayerState* myPlayerState = this->GetPlayerState<ACTFPlayerState>();
+
+		if (hasPlayerState && myPlayerState) {
+			if (myPlayerState->teamID != hasPlayerState->teamID) {
+				UCapsuleComponent* enemyHurtbox = isPawn->FindComponentByClass<UCapsuleComponent>();
+
+				if (enemyHurtbox) {
+					if (MeleeSwingHitbox->IsOverlappingComponent(enemyHurtbox)) {
+						ABaseCharacter* enemyChar = Cast<ABaseCharacter>(isPawn);
+						enemyChar->TakeDamage(20.0f);
+					}
+
 				}
 			}
 		}
 	}
-	*/
+
+	bIsAttacking = false;
 }
 
 //Called when the player is supposed to move left (Axis = -1) or right (Axis = 1).
@@ -304,14 +309,22 @@ void ABaseCharacter::UseAbilityTwo_Implementation()
 	}
 }
 
-float ABaseCharacter::GetAbilityOneCooldown()
+void ABaseCharacter::AbilityOneCooldownRemaining_Implementation()
 {
-	return GetWorld()->GetTimerManager().GetTimerRemaining(AbilityOneTimerHandle);
+	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+	if (ctfPlayerState)
+	{
+		ctfPlayerState->AbilityOneCooldownRemaining = GetWorld()->GetTimerManager().GetTimerRemaining(AbilityOneTimerHandle);
+	}
 }
 
-float ABaseCharacter::GetAbilityTwoCooldown()
+void ABaseCharacter::AbilityTwoCooldownRemaining_Implementation()
 {
-	return GetWorld()->GetTimerManager().GetTimerRemaining(AbilityTwoTimerHandle);
+	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
+	if (ctfPlayerState)
+	{
+		ctfPlayerState->AbilityTwoCooldownRemaining = GetWorld()->GetTimerManager().GetTimerRemaining(AbilityTwoTimerHandle);
+	}
 }
 
 void ABaseCharacter::DropFlag()	{
@@ -320,44 +333,6 @@ void ABaseCharacter::DropFlag()	{
 	{
 		ctfPlayerState->PlayerDropFlag();
 	}
-}
-
-void ABaseCharacter::UseMeleeAttack()
-{
-	if (!this) {
-		return;
-	}
-
-	MeleeBox->SetCollisionResponseToAllChannels(ECR_Overlap);
-
-	ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-	//TODO (Combat)
-	if (ctfPlayerState) {
-		if (!ctfPlayerState->bIsSprinting)
-		{
-			ctfPlayerState->bIsSwinging = true;
-			SetIsSwinging(ctfPlayerState->bIsSwinging);
-			bIsSwinging = true;
-			if (ctfPlayerState->bIsSwinging == true)
-			{
-				GetWorld()->GetTimerManager().SetTimer(ThrowingTimer, [this]()	{
-					ACTFPlayerState* ctfPlayerState = this->GetPlayerState<ACTFPlayerState>();
-					if (ctfPlayerState) {
-						ctfPlayerState->bIsSwinging = false;
-						bIsSwinging = false;
-						SetIsSwinging(ctfPlayerState->bIsSwinging);
-						MeleeBox->SetCollisionResponseToAllChannels(ECR_Ignore);
-					}
-				},
-					1.0f, false);
-			}
-		}
-	}
-}
-
-void ABaseCharacter::UseRangedAttack()
-{
-	//TODO (Combat)
 }
 
 void ABaseCharacter::Slow()
@@ -479,14 +454,12 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	//Binding ability and attacks
 	PlayerInputComponent->BindAction("AbilityOne", IE_Pressed, this, &ABaseCharacter::UseAbilityOne);
 	PlayerInputComponent->BindAction("AbilityTwo", IE_Pressed, this, &ABaseCharacter::UseAbilityTwo);
-	PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, this, &ABaseCharacter::UseMeleeAttack);
-	PlayerInputComponent->BindAction("RangedAttack", IE_Pressed, this, &ABaseCharacter::UseRangedAttack);
+	
 		
 	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 
 	//Made by GameMode team
 	PlayerInputComponent->BindAction("KillBind", IE_Pressed, this, &ABaseCharacter::Death);
-	PlayerInputComponent->BindAction("MeleeSwing", IE_Pressed, this, &ABaseCharacter::UseMeleeAttack);
 	PlayerInputComponent->BindAction("DropFlag", IE_Pressed, this, &ABaseCharacter::DropFlag);
 }
