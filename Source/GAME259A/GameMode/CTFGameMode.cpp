@@ -82,7 +82,6 @@ void ACTFGameMode::InitTeams()
 
 	if(teamsInLevel.Num() == 0)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, "There are no teams in the current level, GameMode will not run");
 		UE_LOG(LogTemp, Error, TEXT("There are no teams in the current level, GameMode will not run"));
 		return;
 	}
@@ -225,7 +224,6 @@ void ACTFGameMode::SpawnMiniFlag()
 
 void ACTFGameMode::EndRound() {
 	//Displays the round that just finished
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Round " + FString::FromInt(currentRound) + " over");
 	GetWorldTimerManager().ClearTimer(flagSpawnTimer);
 	GetWorldTimerManager().ClearTimer(roundTimerHandle);
 	
@@ -233,9 +231,6 @@ void ACTFGameMode::EndRound() {
 	currentRound++;
 	ctfGameState->currentRound = currentRound;
 	
-
-	//Prints out how many rounds are left
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::FromInt(currentRound) + " rounds remaining");
 
 	ETeamIdentifier winner = WinCheck();
 
@@ -266,7 +261,12 @@ void ACTFGameMode::EndRound() {
 void ACTFGameMode::RoundReset() {
 
 	spawnedMiniFlags = 0;
-	
+
+	//Moved to here so the mainflag can be removed from the activeflags before it destroys the flags in it
+	for(auto capPoint : ctfGameState->capturePoints)
+	{
+		capPoint->RoundReset();
+	}
 	
 	for (int i = 0; i < ctfGameState->activeFlags.Num(); i++)	{
 		if(IsValid(ctfGameState->activeFlags[i]))	{
@@ -281,16 +281,10 @@ void ACTFGameMode::RoundReset() {
 		SpawnAllPlayersOnTeam(team->teamID);
 	}
 
-	for(auto capPoint : ctfGameState->capturePoints)
-	{
-		capPoint->RoundReset();
-	}
-
 	ctfGameState->capturedFlags = 0;
 	
 	ctfGameState->OnRoundStart();
 	
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Players respawn."));
 	GetWorldTimerManager().SetTimer(flagSpawnTimer, this, &ACTFGameMode::SpawnMiniFlag, timeBetweenFlagSpawns, true);
 	GetWorldTimerManager().SetTimer(roundTimerHandle, this, &ACTFGameMode::EndRound, roundTimerTime);
 }
@@ -314,8 +308,6 @@ ETeamIdentifier ACTFGameMode::WinCheck()
 }
 
 void ACTFGameMode::EndGame() {
-	/*on screen debug message*/
-	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("GAME ENDED!"));
 	
 	/*clear teams
 	reset teams list back to empty*/

@@ -43,13 +43,13 @@ protected:
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Movement")
 	float JumpVelocity;					//The velocity at which the character will jump.
 
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Throwing")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Throwing")
 	float MovementThrowLength;
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Throwing")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Throwing")
 	float MovementThrowHeight;
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Throwing")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Throwing")
 	float SmokeThrowLength;
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Throwing")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Throwing")
 	float SmokeThrowHeight;
 
 
@@ -137,12 +137,6 @@ protected:
 
 	UFUNCTION()
 	void DropFlag();
-	
-	//Combat Actions
-	UFUNCTION(Category = "Combat", BlueprintCallable)
-	void UseMeleeAttack();
-	UFUNCTION(Category = "Combat", BlueprintCallable)
-	void UseRangedAttack();
 
 	UFUNCTION(Category = "Death", BlueprintCallable)
 	void TakeDamage(float damage_);
@@ -193,8 +187,14 @@ public:
 	UFUNCTION(Category = "Abilities", Server, Reliable, BlueprintCallable)
 	void AbilityTwoCooldownRemaining();
 
-	UPROPERTY(EditAnywhere)
-		UBoxComponent* MeleeBox;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UBoxComponent* MeleeSwingHitbox;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UCapsuleComponent* Hurtbox;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bIsAttacking;
 
 	UFUNCTION(Category = "Movement", BlueprintCallable)
 	void Slow();

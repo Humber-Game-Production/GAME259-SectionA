@@ -67,7 +67,7 @@ void ASlowField::EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 
 void ASlowField::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	if (GEngine && OtherActor) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I Hit: %s"), *OtherActor->GetName()));
+	//if (GEngine && OtherActor) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I Hit: %s"), *OtherActor->GetName()));
 	SphereCollider->SetSphereRadius(500.0f, true);
 	SphereCollider->SetNotifyRigidBodyCollision(true);
 	UNiagaraFunctionLibrary::SpawnSystemAttached(SlowFieldEffect, SlowFieldMesh, FName("SlowFieldFX"), FVector(0), FRotator(0),EAttachLocation::KeepRelativeOffset,false,true);

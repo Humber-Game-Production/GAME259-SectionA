@@ -48,7 +48,7 @@ void AGrapplingHook::BeginPlay()
 	//}
 	//else 
 	//{
-		Mesh->AddImpulse(LaunchSpeed * GetActorForwardVector());
+		//Mesh->AddImpulse(LaunchSpeed * GetActorForwardVector());
 
 	//}
 	/*if (GrapplingHookAudioComponent && GrapplingHookSound) {
@@ -71,7 +71,7 @@ void AGrapplingHook::Tick(float DeltaTime)
 void AGrapplingHook::SetSpawner(AActor* BaseCharacter_)
 {
 	BaseCharacter = BaseCharacter_;
-	Mesh->SetPhysicsLinearVelocity(FVector(0.0f, 0.0f, 0.0f));
+	/*Mesh->SetPhysicsLinearVelocity(FVector(0.0f, 0.0f, 0.0f));
 if (Cast<ABaseCharacter>(BaseCharacter)) 
 {
 	Mesh->AddImpulse(LaunchSpeed * Cast<ABaseCharacter>(BaseCharacter)->ThirdPersonCamera->GetForwardVector());
@@ -81,6 +81,7 @@ else
 	Mesh->AddImpulse(LaunchSpeed * GetActorForwardVector());
 
 }
+*/
 
 }
 
@@ -88,56 +89,60 @@ else
 
 void AGrapplingHook::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	if (GEngine && OtherActor) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I Hit: %s"), *OtherActor->GetName()));
+	//if (GEngine && OtherActor) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I Hit: %s"), *OtherActor->GetName()));
 	SphereCollider->SetSimulatePhysics(false);
 	SphereCollider->SetNotifyRigidBodyCollision(false);
 	ABaseCharacter* otherPlayer = Cast<ABaseCharacter>(OtherActor);
-	if (otherPlayer) {
-		FVector CharacterLocation = otherPlayer->GetActorLocation();
-		FVector GrappleLocation = Mesh->GetComponentLocation();
+	if (otherPlayer != Cast<ABaseCharacter>(BaseCharacter)) {
+		if (otherPlayer && BaseCharacter) {
+			FVector CharacterLocation = BaseCharacter->GetActorLocation();
+			FVector GrappleLocation = Mesh->GetComponentLocation();
 
-		FVector GrappleHorizontalVelocity = FVector(GrappleLocation.X - CharacterLocation.X, GrappleLocation.Y - CharacterLocation.Y, GrappleLocation.Z + 200.0f - CharacterLocation.Z);
-		GrappleHorizontalVelocity *= Speed;
-	//	FVector GrappleVerticalVelocity = FVector(0.0f, 0.0f, (float)sqrt((GrappleLocation.Z - CharacterLocation.Z) * SpeedVertical / 2) * SpeedVertical + pow(GrappleHorizontalVelocity.Size() / Speed / Speed, 2) * Gravity);
-		//FVector GrappleVerticalVelocity = FVector(0.0f, 0.0f, (GrappleLocation.Z - CharacterLocation.Z) * SpeedVertical * );
-		//if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("GrappleVVel: %f"), GrappleVerticalVelocity.Z));
-		//if (FGenericPlatformMath::IsNaN(GrappleVerticalVelocity.Z)) {
-		//	GrappleVerticalVelocity.Z = 200;
-		//}
+			FVector GrappleHorizontalVelocity = FVector(GrappleLocation.X - CharacterLocation.X, GrappleLocation.Y - CharacterLocation.Y, GrappleLocation.Z + 200.0f - CharacterLocation.Z);
+			GrappleHorizontalVelocity *= Speed;
+			//	FVector GrappleVerticalVelocity = FVector(0.0f, 0.0f, (float)sqrt((GrappleLocation.Z - CharacterLocation.Z) * SpeedVertical / 2) * SpeedVertical + pow(GrappleHorizontalVelocity.Size() / Speed / Speed, 2) * Gravity);
+				//FVector GrappleVerticalVelocity = FVector(0.0f, 0.0f, (GrappleLocation.Z - CharacterLocation.Z) * SpeedVertical * );
+				//if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("GrappleVVel: %f"), GrappleVerticalVelocity.Z));
+				//if (FGenericPlatformMath::IsNaN(GrappleVerticalVelocity.Z)) {
+				//	GrappleVerticalVelocity.Z = 200;
+				//}
 
-		otherPlayer->LaunchCharacter(GrappleHorizontalVelocity, true, true);
-	}
-	else if(BaseCharacter){
-		FVector CharacterLocation = BaseCharacter->GetActorLocation();
-		FVector GrappleLocation = Mesh->GetComponentLocation();
-
-		FVector GrappleHorizontalVelocity = FVector(GrappleLocation.X - CharacterLocation.X, GrappleLocation.Y - CharacterLocation.Y, GrappleLocation.Z + 200.0f - CharacterLocation.Z);
-		GrappleHorizontalVelocity *= Speed;
-		//FVector GrappleVerticalVelocity = FVector(0.0f, 0.0f, (float)sqrt((GrappleLocation.Z - CharacterLocation.Z) * SpeedVertical / 2) * SpeedVertical + pow(GrappleHorizontalVelocity.Size() / Speed / Speed, 2) * Gravity);
-		//FVector GrappleVerticalVelocity = FVector(0.0f, 0.0f, (GrappleLocation.Z - CharacterLocation.Z) * SpeedVertical * );
-		//if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("GrappleVVel: %f"), GrappleVerticalVelocity.Z));
-	//	if (FGenericPlatformMath::IsNaN(GrappleVerticalVelocity.Z)) {
-		//	GrappleVerticalVelocity.Z = 200;
-		//}
-		if (this) {
-			if (BaseCharacter) {
-				//	UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), SpawnEffect, CharacterLocation, CharacterRotation);
-				if (Cast<ABaseCharacter>(BaseCharacter))
-					Cast<ABaseCharacter>(BaseCharacter)->LaunchCharacter(GrappleHorizontalVelocity, true, true);
-				//	UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), SpawnEffect, TpLocation, CharacterRotation);
-
-					/*if (GrapplingHookAudioComponent && GrapplingHookSound) {
-						GrapplingHookAudioComponent->Play(0.0f);
-					}*/
-			}
-
-
+			otherPlayer->LaunchCharacter(-GrappleHorizontalVelocity, true, true);
 		}
+		else if (BaseCharacter) {
+			FVector CharacterLocation = BaseCharacter->GetActorLocation();
+			FVector GrappleLocation = Mesh->GetComponentLocation();
+
+			FVector GrappleHorizontalVelocity = FVector(GrappleLocation.X - CharacterLocation.X, GrappleLocation.Y - CharacterLocation.Y, GrappleLocation.Z + 200.0f - CharacterLocation.Z);
+			GrappleHorizontalVelocity *= Speed;
+			//FVector GrappleVerticalVelocity = FVector(0.0f, 0.0f, (float)sqrt((GrappleLocation.Z - CharacterLocation.Z) * SpeedVertical / 2) * SpeedVertical + pow(GrappleHorizontalVelocity.Size() / Speed / Speed, 2) * Gravity);
+			//FVector GrappleVerticalVelocity = FVector(0.0f, 0.0f, (GrappleLocation.Z - CharacterLocation.Z) * SpeedVertical * );
+			//if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("GrappleVVel: %f"), GrappleVerticalVelocity.Z));
+		//	if (FGenericPlatformMath::IsNaN(GrappleVerticalVelocity.Z)) {
+			//	GrappleVerticalVelocity.Z = 200;
+			//}
+			if (this) {
+				if (BaseCharacter) {
+					//	UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), SpawnEffect, CharacterLocation, CharacterRotation);
+					if (Cast<ABaseCharacter>(BaseCharacter))
+						Cast<ABaseCharacter>(BaseCharacter)->LaunchCharacter(GrappleHorizontalVelocity, true, true);
+					//	UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), SpawnEffect, TpLocation, CharacterRotation);
+
+						/*if (GrapplingHookAudioComponent && GrapplingHookSound) {
+							GrapplingHookAudioComponent->Play(0.0f);
+						}*/
+				}
+
+
+			}
+		}
+		SphereCollider->OnComponentHit.RemoveDynamic(this, &AGrapplingHook::OnCompHit);
+		GetWorld()->GetTimerManager().SetTimer(GrappleTimer, this, &AGrapplingHook::OnDestroy, 3.0f, false);
 	}
-	otherPlayer = nullptr;
-	SphereCollider->OnComponentHit.RemoveDynamic(this, &AGrapplingHook::OnCompHit);
-	GetWorld()->GetTimerManager().SetTimer(GrappleTimer, this, &AGrapplingHook::OnDestroy, 3.0f, false);
+		otherPlayer = nullptr;
 }
+
+
 
 void AGrapplingHook::OnDestroy()
 {
