@@ -32,7 +32,7 @@ void AMainFlag::PickUp_Implementation(UPrimitiveComponent* OverlappedComponent, 
 				GetWorldTimerManager().ClearAllTimersForObject(this);
 			}
 			else	{
-				if (GEngine) GEngine->UEngine::AddOnScreenDebugMessage(0, 2.0f, FColor::Blue, TEXT("Flag is reserved for Enemy"));
+				//if (GEngine) GEngine->UEngine::AddOnScreenDebugMessage(0, 2.0f, FColor::Blue, TEXT("Flag is reserved for Enemy"));
 			}
 		}
 	}
